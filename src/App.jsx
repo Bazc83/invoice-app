@@ -1,7 +1,9 @@
+import { DesignSystem } from "./pages/DesignSystem";
+
 function App() {
   return <div className='App'>
 
-    <h1>App Home</h1>
+    <DesignSystem />
   </div>;
 }
 
