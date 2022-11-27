@@ -1,8 +1,11 @@
+import { Button } from '@/ui/Button';
 import styles from '@styles/DesignSystem.module.css';
-
+import { FaPlus } from 'react-icons/fa';
 export const DesignSystem = () => {
   return (
     <div>
+      <h1>Text</h1>
+      <br />
       <h1>Aliquam porttitor mauris sit amet orci Aenean</h1>
       <h2>Aliquam porttitor mauris sit amet orci Aenean</h2>
       <h3>Aliquam porttitor mauris sit amet orci Aenean</h3>
@@ -23,6 +26,15 @@ export const DesignSystem = () => {
         laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu
         nibh.
       </p>
+
+      <br />
+
+      <h1>Buttons</h1>
+
+      <p className='text'>Button default</p>
+      <Button>
+        <FaPlus /> New Invoice
+      </Button>
     </div>
   );
 };

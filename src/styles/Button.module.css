@@ -1,0 +1,8 @@
+.btn {
+  border-radius: 24px;
+  padding-block: 1rem;
+  padding-inline: 1.5rem;
+  font-size: var(--fs-sm);
+  line-height: 15px;
+  letter-spacing: -0.25px;
+}

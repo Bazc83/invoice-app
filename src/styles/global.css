@@ -7,6 +7,12 @@
   --text-dark: #0c0e16;
   --text-dark-faded: #888eb0;
   --orange-600: #ec5757;
+
+  --fs-xl: 2rem;
+  --fs-lg: 1.25rem;
+  --fs-md: 1rem;
+  --fs-sm: 0.75rem;
+  --fs-xs: 0.6875rem;
 }
 
 body {
@@ -22,38 +28,38 @@ h5 {
   font-weight: 700;
 }
 h1 {
-  font-size: 2rem;
+  font-size: var(--fs-xl);
   line-height: 36px;
-  letter-spacing: -1;
+  letter-spacing: -1px;
 }
 
 h2 {
-  font-size: 1.25rem;
+  font-size: var(--fs-lg);
   line-height: 22px;
-  letter-spacing: -0.63;
+  letter-spacing: -0.63px;
 }
 
 h3 {
-  font-size: 1rem;
+  font-size: var(--fs-md);
   line-height: 24px;
-  letter-spacing: -0.8;
+  letter-spacing: -0.8px;
 }
 
 h4 {
-  font-size: 0.75rem;
+  font-size: var(--fs-sm);
   line-height: 15px;
-  letter-spacing: -0.25;
+  letter-spacing: -0.25px;
 }
 
 .text {
   font-weight: 400;
-  font-size: 0.75rem;
+  font-size: var(--fs-sm);
   line-height: 15px;
-  letter-spacing: -0.25;
+  letter-spacing: -0.25px;
 }
 .text-sm {
   font-weight: 400;
-  font-size: 0.6875rem;
+  font-size: var(--fs-xs);
   line-height: 18px;
-  letter-spacing: -0.23;
+  letter-spacing: -0.23px;
 }
