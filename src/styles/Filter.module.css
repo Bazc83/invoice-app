@@ -29,3 +29,35 @@
   background-color: var(--filterModalLight-bg);
   box-shadow: 0px 10px 20px 0px #48549f40;
 }
+
+
+.filterModalForm{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.filterModalFormItem{
+  display: flex;
+  gap: 0.75rem;
+}
+
+
+/* .filterModalFormItem input[type="checkbox"]{
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+} */
+
+/* Create a custom checkbox */
+/* .filterModalCheckMark{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+} */
+
