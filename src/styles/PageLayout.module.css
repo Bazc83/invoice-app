@@ -1,0 +1,12 @@
+@media (min-width: 1100px) {
+  .pageLayout {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 1rem;
+  }
+
+  .outletDiv {
+    grid-column-start: 2;
+  }
+}
+

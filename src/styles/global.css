@@ -16,9 +16,12 @@
   --fs-xs: 0.6875rem;
 }
 
+
 body {
   font-family: 'League Spartan', sans-serif;
   color: var(--text-dark);
+  margin: 0;
+  padding: 0;
 }
 
 h1,
