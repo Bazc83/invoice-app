@@ -1,6 +1,5 @@
 import { Button } from '@/ui/Button';
 import styles from '@styles/DesignSystem.module.css';
-import { FaPlus } from 'react-icons/fa';
 export const DesignSystem = () => {
   return (
     <div>
@@ -30,11 +29,20 @@ export const DesignSystem = () => {
       <br />
 
       <h1>Buttons</h1>
-
       <p className='text'>Button default</p>
-      <Button>
-        <FaPlus /> New Invoice
-      </Button>
+
+      <div className={styles.btnWrapper}>
+        <Button plusIcon> New</Button>
+        <Button>New</Button>
+
+        <Button btnStyle='btnThree'>Edit</Button>
+
+        <Button btnStyle='btnFour'>Save as Draft</Button>
+
+        <Button btnStyle='btnFive'>Delete</Button>
+
+        <Button btnStyle='btnSix'>+ Delete</Button>
+      </div>
     </div>
   );
 };
