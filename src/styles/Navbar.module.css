@@ -1,0 +1,37 @@
+:root {
+  --navbarBg: #1e2139;
+  --logoBg: #7c5dfa;
+  --logoBgLight: #9277ff;
+}
+
+.navbar {
+  height: 72px;
+  width: 100vw;
+  background-color: var(--navbarBg);
+  display: flex;
+  align-items: center;
+}
+
+.navLogo {
+  background: var(--logoBg);
+  height: 72px;
+  width: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 20px 20px 0;
+  position: relative;
+}
+.navLogo img{
+  z-index: 10;
+}
+.navLogo:after{
+  content: "";
+  position: absolute;
+  top: 32px;
+  border-radius: 20px 0 20px 0;
+  z-index: 5;
+  background-color: var(--logoBgLight);
+  height: 40px;
+  width: 100%;
+}

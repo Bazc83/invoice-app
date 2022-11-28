@@ -1,10 +1,13 @@
+import { DarkModeContext } from '@/App';
 import styles from '@styles/Button.module.css';
+import { useContext } from 'react';
 import { FaPlus } from 'react-icons/fa';
 
 export const Button = (props) => {
-  const { children, onClick, type, plusIcon, btnStyle, plusIconWide } = props;
+  const { light } = useContext(DarkModeContext);
+  const { children, onClick, type, plusIcon, btnStyle } = props;
 
-  const light = false;
+
 
   // If light set css to light variant
   const btnStyling = light
