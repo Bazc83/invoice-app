@@ -8,7 +8,6 @@ export const Button = (props) => {
   const { children, onClick, type, plusIcon, btnStyle } = props;
 
 
-
   // If light set css to light variant
   const btnStyling = light
     ? `${styles[btnStyle] ? styles[`${btnStyle}Light`] : styles.btnPrimary}`

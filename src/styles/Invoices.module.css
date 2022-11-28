@@ -1,0 +1,14 @@
+.invoicesPagesController {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding-block: 2rem;
+}
+
+.invoicesControllerRightSide{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.125rem;
+}

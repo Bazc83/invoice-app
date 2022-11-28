@@ -13,7 +13,7 @@ export const Navbar = () => {
         </div>
 
         <div className={styles.navbarRightSide}>
-          <div onClick={toggleDarkMode}>
+          <div onClick={toggleDarkMode} className={styles.darkModeToggle}>
             {light ? (
               <img src='images/icon-sun.svg' />
             ) : (

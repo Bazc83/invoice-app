@@ -2,6 +2,7 @@ import { Navbar } from '@/components/Navbar';
 import { DesignSystem } from '@/pages/DesignSystem';
 import { createContext, useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Invoices } from './pages/Invoices/Invoices';
 import { PageLayout } from './pages/PageLayout';
 
 export const DarkModeContext = createContext();
@@ -18,7 +19,9 @@ function App() {
       <DarkModeContext.Provider value={{ light, toggleDarkMode }}>
         <BrowserRouter>
           <Routes>
-            <Route path='/' element={<PageLayout />}>
+            <Route  element={<PageLayout />}>
+              <Route index element={<Invoices />} />
+              <Route path="/invoices" element={<Invoices />} />
               <Route path='design' element={<DesignSystem />} />
             </Route>
           </Routes>

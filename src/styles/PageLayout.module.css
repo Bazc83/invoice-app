@@ -1,12 +1,36 @@
+:root {
+  --dark-bg: #141625;
+  --light-bg: #f2f2f2;
+}
+.pageLayout,
+.pageLayoutLight {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.pageLayout {
+  background-color: var(--dark-bg);
+  color: var(--text-light);
+}
+
+.pageLayoutLight {
+  background-color: var(--light-bg);
+  color: var(--text-dark);
+}
+
 @media (min-width: 1100px) {
-  .pageLayout {
+  .pageLayout,
+  .pageLayoutLight {
     display: grid;
     grid-template-columns: 72px 1fr;
     gap: 1rem;
+    min-height: 100vh;
   }
 
   .outletDiv {
+    width: 100%;
     grid-column-start: 2;
   }
 }
-
