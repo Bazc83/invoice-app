@@ -9,44 +9,20 @@
 
 .invoicePreview {
   background-color: var(--invoicePreview-bg);
-  border-radius: 8px;
-  padding: 1.5rem;
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(12, 8px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
 }
 
 .invoiceRefHash {
   color: var(--invoiceRef-hashtag);
 }
 
-.invoiceRef {
-  grid-column: 1 / 5;
-  grid-row: 1 / 2;
-  padding-bottom: 1.5rem;
-}
-
-.dueDate {
-  grid-column: 1 / 8;
-  grid-row: 5 / 7;
-  font-size: 1rem;
-}
-.name {
-  grid-column: 7 / -1;
-  grid-row: 1 / 2;
-  font-size: 1rem;
-  justify-self: end;
-}
-
-.amount {
-  grid-column: 1 / 5;
-  grid-row: 9 / 13;
-}
-
 .paymentStatusPaid {
-  width: 105px;
+  
   height: max-content;
-  padding: 0.75rem 1.75rem;
+  padding: 0.75rem clamp(1.5rem, 5vw, 1.75rem);
   text-transform: capitalize;
   border-radius: 8px;
   position: relative;
@@ -54,8 +30,6 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  grid-column: 9 / -1;
-  grid-row: 6/ 13;
 }
 
 .paymentStatusPaid:before {
@@ -87,4 +61,41 @@
 
 .customBulletPaid {
   background-color: var(--invoicePaid);
+}
+
+@media (max-width: 640px) {
+  .invoicePreview {
+    background-color: var(--invoicePreview-bg);
+    border-radius: 8px;
+    padding: 1.5rem clamp(1rem, 10vw, 1.5rem);
+    display: grid;
+    grid-template-areas:
+      'invoiceRef invoiceRef invoiceRef name'
+      'dueDate dueDate  dueDate paymentStatus'
+      'amount amount amount  paymentStatus';
+    gap: 0.5rem;
+  }
+
+  .invoiceRef {
+    grid-area: invoiceRef;
+    padding-bottom: 1.5rem;
+  }
+
+  .dueDate {
+    grid-area: dueDate;
+  }
+  .name {
+    justify-self: end;
+    grid-area: name;
+    padding-bottom: 1.5rem;
+  }
+
+  .amount {
+    grid-area: amount;
+  }
+
+  .paymentStatusPaid {
+    justify-self: end;
+    grid-area: paymentStatus;
+  }
 }
