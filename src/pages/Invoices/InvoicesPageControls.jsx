@@ -1,6 +1,6 @@
 import { Button } from '@/components/Button';
 import { Filter } from '@/components/Filter';
-import styles from './styles/Invoices.module.css';
+import styles from './styles/InvoicesPageController.module.css';
 export const InvoicesPageControls = ({ light }) => {
   return (
     <div className={styles.invoicesPageController}>

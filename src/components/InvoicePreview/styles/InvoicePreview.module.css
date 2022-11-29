@@ -1,0 +1,90 @@
+:root {
+  --invoicePreview-bg: #1e2139;
+  --invoicePreview-bg-light: #ffffff;
+  --invoiceRef-hashtag: #7e88c3;
+  --invoicePaid: #33d69f;
+  --invoicePending: #ff8f00;
+  --invoiceDraft: #dfe3fa;
+}
+
+.invoicePreview {
+  background-color: var(--invoicePreview-bg);
+  border-radius: 8px;
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 8px);
+}
+
+.invoiceRefHash {
+  color: var(--invoiceRef-hashtag);
+}
+
+.invoiceRef {
+  grid-column: 1 / 5;
+  grid-row: 1 / 2;
+  padding-bottom: 1.5rem;
+}
+
+.dueDate {
+  grid-column: 1 / 8;
+  grid-row: 5 / 7;
+  font-size: 1rem;
+}
+.name {
+  grid-column: 7 / -1;
+  grid-row: 1 / 2;
+  font-size: 1rem;
+  justify-self: end;
+}
+
+.amount {
+  grid-column: 1 / 5;
+  grid-row: 9 / 13;
+}
+
+.paymentStatusPaid {
+  width: 105px;
+  height: max-content;
+  padding: 0.75rem 1.75rem;
+  text-transform: capitalize;
+  border-radius: 8px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  grid-column: 9 / -1;
+  grid-row: 6/ 13;
+}
+
+.paymentStatusPaid:before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+
+.paymentStatusPaid:before {
+  background-color: var(--invoicePaid);
+  mix-blend-mode: normal;
+  opacity: 0.06;
+}
+
+.paymentStatusTextPaid {
+  color: var(--invoicePaid);
+}
+.customBulletPaid {
+  height: 8px;
+  width: 8px;
+  border-radius: 100%;
+  position: relative;
+  top: -1px;
+}
+
+.customBulletPaid {
+  background-color: var(--invoicePaid);
+}
