@@ -1,0 +1,17 @@
+:root {
+  --filterPrimary: var(--primary-600);
+}
+
+.filterWrapper{
+  position: relative;
+}
+.filter {
+  display: flex;
+  gap: 0.75rem;
+  cursor: pointer;
+  position: relative;
+}
+
+.filterIcon {
+  color: var(--filterPrimary);
+}

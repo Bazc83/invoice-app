@@ -1,25 +1,15 @@
-import styles from '@styles/Filter.module.css';
+import { FilterModalItem } from './FilterModalItem';
+import styles from './styles/FilterModal.module.css';
+
 export const FilterModal = ({ light }) => {
-  const handleModalClick = (e) => {
-    e.stopPropagation();
-  };
   return (
-    <div
-      className={`${light ? styles.filterModalLight : styles.filterModal}`}
-      onClick={handleModalClick}>
-      <form className={styles.filterModalForm}>
-        <div className={styles.filterModalFormItem}>
-          <input type='checkbox' name='draft' />
-          <label htmlFor='draft'>Draft</label>
-        </div>
-        <div className={styles.filterModalFormItem}>
-          <input type='checkbox' name='pending' />
-          <label htmlFor='pending'>Pending</label>
-        </div>
-        <div className={styles.filterModalFormItem}>
-          <input type='checkbox' name='paid' />
-          <label htmlFor='paid'>Paid</label>
-        </div>
+    <div className={`${light ? styles.modalLight : styles.modal}`}>
+      <form className={styles.modalForm}>
+        <FilterModalItem checkboxLabel={'draft'} light={light} />
+
+        <FilterModalItem checkboxLabel={'pending'} light={light} />
+
+        <FilterModalItem checkboxLabel={'paid'} light={light} />
       </form>
     </div>
   );

@@ -1,4 +1,4 @@
-import { Button } from '@/ui/Button';
+import { Button } from '@/components/Button';
 import styles from '@styles/DesignSystem.module.css';
 export const DesignSystem = () => {
   return (

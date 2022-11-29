@@ -1,5 +1,5 @@
 import { DarkModeContext } from '@/App';
-import styles from '@styles/Invoices.module.css';
+import styles from './styles/Invoices.module.css';
 import { useContext } from 'react';
 import { InvoicesPageControls } from './InvoicesPageControls';
 export const Invoices = () => {
