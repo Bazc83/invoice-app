@@ -8,14 +8,12 @@
   --text-dark-faded: #888eb0;
   --text-light-faded: #dfe3fa;
   --text-light: #ffffff;
-
   --orange-600: #ec5757;
-
   --fs-xl: clamp(2rem, 5vw, 2.25rem);
   --fs-lg: clamp(1.25rem, 5vw, 1.5rem);
-  --fs-md: clamp(1rem, 5vw, 1.25rem);
-  --fs-sm: clamp(0.75rem, 5vw, 1rem);
-  --fs-xs: clamp(0.687rem, 5vw, 0.75rem);
+  --fs-md: 1rem;
+  --fs-sm: 0.8125rem;
+  --fs-xs: 0.75rem;
 }
 
 body {
@@ -41,25 +39,25 @@ h5 {
 h1 {
   font-size: var(--fs-xl);
   line-height: 36px;
-  letter-spacing: -1px;
+  letter-spacing: 1px;
 }
 
 h2 {
   font-size: var(--fs-lg);
   line-height: 22px;
-  letter-spacing: -0.63px;
+  letter-spacing: 0.63px;
 }
 
 h3 {
   font-size: var(--fs-md);
   line-height: 24px;
-  letter-spacing: -0.8px;
+  letter-spacing: 0.8px;
 }
 
 h4 {
   font-size: var(--fs-sm);
   line-height: 15px;
-  letter-spacing: -0.25px;
+  letter-spacing: 0.25px;
 }
 
 .text,
@@ -68,7 +66,7 @@ h4 {
   font-weight: 500;
   font-size: var(--fs-sm);
   line-height: 15px;
-  letter-spacing: -0.25px;
+  letter-spacing: 0.25px;
 }
 
 .text-xs {

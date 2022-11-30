@@ -2,9 +2,6 @@
   --invoicePreview-bg: #1e2139;
   --invoicePreview-bg-light: #ffffff;
   --invoiceRef-hashtag: #7e88c3;
-  --invoicePaid: #33d69f;
-  --invoicePending: #ff8f00;
-  --invoiceDraft: #dfe3fa;
 }
 
 .invoicePreview {
@@ -27,11 +24,9 @@
   top: -1px;
 }
 
-.paymentStatusPaid,
-.paymentStatusPending,
-.paymentStatusDraft {
-  height: max-content;
-  padding: 0.75rem clamp(1.5rem, 5vw, 1.75rem);
+.paymentStatus {
+  width: 110px;
+  padding: 0.8125rem 1rem;
   text-transform: capitalize;
   border-radius: 8px;
   position: relative;
@@ -41,9 +36,7 @@
   gap: 0.5rem;
 }
 
-.paymentStatusPaid:before,
-.paymentStatusPending:before,
-.paymentStatusDraft:before {
+.paymentStatus:before {
   content: '';
   position: absolute;
   inset: 0;
@@ -53,41 +46,15 @@
   border-radius: 8px;
   mix-blend-mode: normal;
   opacity: 0.06;
+  background: var(--paymentStatusColor);
 }
 
-.paymentStatusPaid:before {
-  background-color: var(--invoicePaid);
+.paymentStatus .customBullet {
+  background-color: var(--paymentStatusColor);
 }
 
-.paymentStatusPaid .customBullet {
-  background-color: var(--invoicePaid);
-}
-
-.paymentStatusPaid p {
-  color: var(--invoicePaid);
-}
-
-
-.paymentStatusPending:before {
-  background-color: var(--invoicePending);
-}
-
-.paymentStatusPending .customBullet {
-  background-color: var(--invoicePending);
-}
-.paymentStatusPending p {
-  color: var(--invoicePending);
-}
-
-.paymentStatusDraft:before {
-  background-color: var(--invoiceDraft);
-}
-
-.paymentStatusDraft .customBullet {
-  background-color: var(--invoiceDraft);
-}
-.paymentStatusDraft p {
-  color: var(--invoiceDraft);
+.paymentStatus h4 {
+  color: var(--paymentStatusColor);
 }
 
 @media (max-width: 640px) {
@@ -112,7 +79,7 @@
     grid-area: dueDate;
   }
   .name {
-    justify-self: end;
+    justify-self: center;
     grid-area: name;
     padding-bottom: 1.5rem;
   }
@@ -121,8 +88,8 @@
     grid-area: amount;
   }
 
-  .paymentStatusPaid, .paymentStatusDraft, .paymentStatusPending {
-    justify-self: end;
+  .paymentStatus {
+    justify-self: center;
     grid-area: paymentStatus;
   }
 }

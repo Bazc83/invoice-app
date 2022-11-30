@@ -1,5 +1,5 @@
 import { DarkModeContext } from '@/App';
-import { InvoicePreview } from '@/components/InvoicePreview';
+import { InvoicePreview } from './InvoicePreview';
 import { useContext } from 'react';
 import { InvoicesPageControls } from './InvoicesPageControls';
 

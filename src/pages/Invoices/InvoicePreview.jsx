@@ -1,15 +1,15 @@
-import { useEffect } from 'react';
 import styles from './styles/InvoicePreview.module.css';
 export const InvoicePreview = (props) => {
   const { invoiceRef, name, dueDate, amount, paymentStatus } = props;
 
-  let paymentStatusStyling;
+  // sets --paymentStatusColor CSS variable/custom property
+  let paymentStatusColor;
   if (paymentStatus === 'paid') {
-    paymentStatusStyling = styles.paymentStatusPaid;
+    paymentStatusColor = '#33d69f';
   } else if (paymentStatus === 'pending') {
-    paymentStatusStyling = styles.paymentStatusPending;
+    paymentStatusColor = '#ff8f00';
   } else if (paymentStatus === 'draft') {
-    paymentStatusStyling = styles.paymentStatusDraft;
+    paymentStatusColor = '#dfe3fa';
   }
 
   return (
@@ -25,9 +25,12 @@ export const InvoicePreview = (props) => {
 
       <h3 className={`${styles.amount}`}>£ {amount}</h3>
 
-      <div className={paymentStatusStyling}>
+      <div
+        className={styles.paymentStatus}
+        // --paymentStatusColor set from paymentStatusColor variable above
+        style={{ '--paymentStatusColor': `${paymentStatusColor}` }}>
         <div className={styles.customBullet}></div>
-        <p>{paymentStatus}</p>
+        <h4>{paymentStatus}</h4>
       </div>
     </div>
   );
