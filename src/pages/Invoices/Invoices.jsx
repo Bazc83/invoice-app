@@ -18,6 +18,7 @@ export const Invoices = () => {
           dueDate={'Due  20 Sep 2021'}
           amount={'1,800.90'}
           paymentStatus={'paid'}
+          light={light}
         />
         <InvoicePreview
           invoiceRef={'XM9141'}
@@ -25,6 +26,7 @@ export const Invoices = () => {
           dueDate={'Due 20 Sep 2021'}
           amount={'556.00'}
           paymentStatus={'pending'}
+          light={light}
         />
         <InvoicePreview
           invoiceRef={'RG0314'}
@@ -32,6 +34,7 @@ export const Invoices = () => {
           dueDate={'Due 01 Oct 2021'}
           amount={'14,002.33'}
           paymentStatus={'paid'}
+          light={light}
         />
         <InvoicePreview
           invoiceRef={'RT2080'}
@@ -39,6 +42,7 @@ export const Invoices = () => {
           dueDate={'Due 12 Oct 2021'}
           amount={'102.04'}
           paymentStatus={'pending'}
+          light={light}
         />
         <InvoicePreview
           invoiceRef={'FV2353'}
@@ -46,6 +50,7 @@ export const Invoices = () => {
           dueDate={'Due 12 Nov 2021'}
           amount={'3,102.04'}
           paymentStatus={'draft'}
+          light={light}
         />
       </div>
     </div>

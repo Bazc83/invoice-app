@@ -1,6 +1,6 @@
 import styles from './styles/InvoicePreview.module.css';
 export const InvoicePreview = (props) => {
-  const { invoiceRef, name, dueDate, amount, paymentStatus } = props;
+  const { invoiceRef, name, dueDate, amount, paymentStatus, light } = props;
 
   // sets --paymentStatusColor CSS variable/custom property
   let paymentStatusColor;
@@ -9,19 +9,26 @@ export const InvoicePreview = (props) => {
   } else if (paymentStatus === 'pending') {
     paymentStatusColor = '#ff8f00';
   } else if (paymentStatus === 'draft') {
-    paymentStatusColor = '#dfe3fa';
+    paymentStatusColor = light ? '#373b53' : '#dfe3fa';
   }
 
   return (
-    <div className={styles.invoicePreview}>
+    <div
+      className={styles.invoicePreview}
+      style={{ '--invoicePreview-bg': `${light ? '#ffffff' : '#1e2139'}` }}>
       <h4 className={styles.invoiceRef}>
         <span className={styles.invoiceRefHash}>#</span>
         {invoiceRef}
       </h4>
 
-      <p className={`text ${styles.dueDate}`}>{dueDate}</p>
+      <p
+        className={`${light ? 'faded-text-dark' : 'faded-text-light'} ${
+          styles.dueDate
+        }`}>
+        {dueDate}
+      </p>
 
-      <p className={`text ${styles.name}`}>{name}</p>
+      <p className={`text ${styles.name}`} style={{color: `${light ?"#858BB2" : "#ffffff"}`}}>{name}</p>
 
       <h3 className={`${styles.amount}`}>£ {amount}</h3>
 
