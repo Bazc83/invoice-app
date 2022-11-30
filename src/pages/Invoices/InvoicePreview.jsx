@@ -6,13 +6,6 @@ export const InvoicePreview = (props) => {
 const {status, id, clientName, total, paymentDue} = invoice;
 
 
-  // invoiceRef={'RT3080'}
-  // name={invoice.clientName}
-  // dueDate={invoice.paymentDue}
-  // amount={'1,800.90'}
-  // paymentStatus={invoice.status}
-  // sets --paymentStatusColor CSS variable/custom property
-
 
   let paymentStatusColor;
   if (status === 'paid') {
