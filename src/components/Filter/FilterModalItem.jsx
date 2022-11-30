@@ -5,31 +5,11 @@ import styles from './styles/FilterModalItem.module.css';
 export const FilterModalItem = ({ checkboxLabel, light }) => {
   const [checked, setChecked] = useState(false);
 
-  if (light) {
-    return (
-      <div
-        className={
-          checked ? styles.modalFormItemCheckedLight : styles.modalFormItemLight
-        }
-        onClick={() => setChecked((prev) => !prev)}>
-        <input
-          type='checkbox'
-          name={checkboxLabel}
-          className={styles.modalFormCheckboxLight}
-          value={checked}
-        />
-        {checked && <FaCheck className={styles.modalFormIconLight} />}
-        <label htmlFor={checkboxLabel} className={styles.modalFormItemLabel}>
-          {checkboxLabel}
-        </label>
-      </div>
-    );
-  }
-
   return (
     <div
       className={checked ? styles.modalFormItemChecked : styles.modalFormItem}
-      onClick={() => setChecked((prev) => !prev)}>
+      onClick={() => setChecked((prev) => !prev)}
+      style={{ '--filterModalItem-bg': `${light ? '#dfe3fa' : '#1e2139'}` }}>
       <input
         type='checkbox'
         name={checkboxLabel}

@@ -8,7 +8,7 @@ export const Invoices = () => {
   const { light } = useContext(DarkModeContext);
 
   return (
-    <div className='container'>
+    <div className={`container `} style={{"--invoices-bg": `${light? "#f2f2f2" : "#141625"}`}}>
       <InvoicesPageControls light={light} />
 
       <div className={styles.invoicesWrapper}>

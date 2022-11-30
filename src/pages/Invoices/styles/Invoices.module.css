@@ -1,5 +1,8 @@
+.invoices {
+  background-color: var(--invoices-bg);
+}
 
-.invoicesWrapper{
+.invoicesWrapper {
   display: flex;
   flex-direction: column;
   gap: 1rem;

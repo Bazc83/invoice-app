@@ -1,7 +1,5 @@
 :root {
-  --modalCheckbox-primary: #7c5dfa;
-  --modalCheckboxBg: #1e2139;
-  --modalCheckboxBg-light: #dfe3fa;
+  --filterModalCheckbox-primary: #7c5dfa;
 }
 
 .modalFormItemLabel {
@@ -10,9 +8,7 @@
 }
 
 .modalFormItem,
-.modalFormItemChecked,
-.modalFormItemLight,
-.modalFormItemCheckedLight {
+.modalFormItemChecked {
   display: flex;
   gap: 0.75rem;
   position: relative;
@@ -20,30 +16,26 @@
   cursor: pointer;
 }
 
-.modalFormCheckbox,
-.modalFormCheckboxLight {
+.modalFormCheckbox {
   position: absolute;
   opacity: 0;
   top: 0;
   left: 0px;
 }
 
-.modalFormIcon,
-.modalFormIconLight {
+.modalFormIcon {
   position: absolute;
   top: 2px;
   left: 2px;
   z-index: 101;
 }
 
-.modalFormIconLight {
+.modalFormIcon {
   color: #ffffff;
 }
 
 .modalFormItem:after,
-.modalFormItemChecked:after,
-.modalFormItemLight:after,
-.modalFormItemCheckedLight:after {
+.modalFormItemChecked:after {
   position: absolute;
   top: 0;
   left: 0;
@@ -54,19 +46,14 @@
   z-index: 100;
 }
 
-.modalFormItem:hover:after,
-.modalFormItemLight:hover:after {
+.modalFormItem:hover:after {
   border: 1px solid var(--filterModalCheckbox-primary);
 }
 
 .modalFormItem:after {
-  background-color: var(--modalCheckboxBg);
-}
-.modalFormItemLight:after {
-  background-color: var(--modalCheckboxBg-light);
+  background-color: var(--filterModalItem-bg);
 }
 
-.modalFormItemChecked:after,
-.modalFormItemCheckedLight:after {
-  background-color: var(--modalCheckbox-primary);
+.modalFormItemChecked:after {
+  background-color: var(--filterModalCheckbox-primary);
 }
