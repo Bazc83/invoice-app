@@ -1,0 +1,68 @@
+:root {
+  --invoiceRefHash-color: #7e88c3;
+}
+
+.invoiceWrapper {
+  padding-block: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.invoiceContent{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.goBackLinkWrapper {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  height: max-content;
+}
+
+.goBackLink {
+  text-decoration: none;
+  color: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  position: relative;
+  top: 1px;
+}
+
+.iconLeft {
+  color: var(--primary-600);
+  font-size: 0.9rem;
+}
+
+.invoiceStatus {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--invoiceBackgroundColor);
+  padding: 1.75rem;
+  border-radius: 8px;
+}
+
+.invoiceStatus p {
+  color: var(--invoiceStatus-color);
+}
+
+.invoiceMain {
+  display: grid;
+  border-radius: 8px;
+  gap: 1rem;
+  padding: 1.75rem;
+  background-color: var(--invoiceBackgroundColor);
+
+  
+}
+.invoiceRefHash {
+  color: var(--invoiceRefHash-color);
+}
+
+.amountDue{
+  background-color: #0C0E16;
+  padding: 1.75rem;
+}
