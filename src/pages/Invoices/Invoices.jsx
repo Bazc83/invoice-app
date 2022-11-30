@@ -1,18 +1,31 @@
 import { DarkModeContext } from '@/App';
-import { InvoicePreview } from './InvoicePreview';
 import { useContext } from 'react';
+import data from '../../data/data.json';
+import { InvoicePreview } from './InvoicePreview';
 import { InvoicesPageControls } from './InvoicesPageControls';
-
 import styles from './styles/Invoices.module.css';
 export const Invoices = () => {
   const { light } = useContext(DarkModeContext);
 
   return (
-    <div className={`container `} style={{"--invoices-bg": `${light? "#f2f2f2" : "#141625"}`}}>
+    <div
+      className={`container `}
+      style={{ '--invoices-bg': `${light ? '#f2f2f2' : '#141625'}` }}>
       <InvoicesPageControls light={light} />
 
       <div className={styles.invoicesWrapper}>
-        <InvoicePreview
+        {data.map((invoice) => {
+          return (
+            <InvoicePreview
+            invoice={invoice}
+              key={invoice.id}
+ 
+              light={light}
+            />
+          );
+        })}
+      </div>
+      {/* <InvoicePreview
           invoiceRef={'RT3080'}
           name={'Jensen Huang'}
           dueDate={'Due  20 Sep 2021'}
@@ -51,8 +64,7 @@ export const Invoices = () => {
           amount={'3,102.04'}
           paymentStatus={'draft'}
           light={light}
-        />
-      </div>
+        /> */}
     </div>
   );
 };
