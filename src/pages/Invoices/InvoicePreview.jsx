@@ -1,7 +1,7 @@
 import { PaymentStatus } from '@/components/PaymentStatus';
 import styles from './styles/InvoicePreview.module.css';
 export const InvoicePreview = (props) => {
-  const { invoice, light, onClick } = props;
+  const { invoice, onClick } = props;
 
   const { status, id, clientName, total, paymentDue } = invoice;
 
@@ -28,29 +28,15 @@ export const InvoicePreview = (props) => {
 
   const dueDate = `Due ${day} ${month} ${year}`;
   return (
-    <div
-      onClick={onClick}
-      className={styles.invoicePreview}
-      style={{ '--invoicePreview-bg': `${light ? '#ffffff' : '#1e2139'}` }}>
-
-        
+    <div onClick={onClick} className={`secondary-bg ${styles.invoicePreview}`}>
       <h4 className={styles.invoiceRef}>
         <span className={styles.invoiceRefHash}>#</span>
         {id}
       </h4>
 
-      <p
-        className={`${light ? 'faded-text-dark' : 'faded-text-light'} ${
-          styles.dueDate
-        }`}>
-        {dueDate}
-      </p>
+      <p className={`${styles.dueDate}`}>{dueDate}</p>
 
-      <p
-        className={`text ${styles.name}`}
-        style={{ color: `${light ? '#858BB2' : '#ffffff'}` }}>
-        {clientName}
-      </p>
+      <p className={`text ${styles.name}`}>{clientName}</p>
 
       <h3 className={`${styles.amount}`}>
         {new Intl.NumberFormat('en', {
@@ -59,7 +45,7 @@ export const InvoicePreview = (props) => {
         }).format(total)}
       </h3>
 
-      <PaymentStatus status={status} light={light} className={styles.paymentStatus}/>
+      <PaymentStatus status={status} className={styles.paymentStatus} />
     </div>
   );
 };

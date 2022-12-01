@@ -4,7 +4,7 @@ import styles from './styles/Filter.module.css';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { FilterModal } from './FilterModal';
 
-export const Filter = ({ light }) => {
+export const Filter = () => {
   const [filterIsOpen, setFilterIsOpen] = useState(false);
 
   return (
@@ -19,7 +19,7 @@ export const Filter = ({ light }) => {
           <FaChevronDown className={styles.filterIcon} />
         )}
       </div>
-      {filterIsOpen && <FilterModal light={light} />}
+      {filterIsOpen && <FilterModal  />}
     </div>
   );
 };

@@ -1,16 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=League+Spartan&display=swap');
 
 :root {
-  --main-bg-light: #f2f2f2;
-  --main-bg-dark: #141625;
+  --white: #ffffff;
+  --main-bg: #141625;
+  --secondary-bg: #1e2139;
   --primary-600: #7c5dfa;
   --primary-400: #9277ff;
-  --dark: #373b53;
-  --text-dark: #0c0e16;
-  --text-dark-faded: #888eb0;
-  --text-light-faded: #dfe3fa;
-  --text-light: #ffffff;
-  --orange-600: #ec5757;
+  --accent: #7e88c3;
+  --text-faded: #dfe3fa;
+  --text: #ffffff;
+  --orange: #ec5757;
+  --btnThree: #252945;
+  --btnThreeText: #dfe3fa;
+  --btnThreeHover: #ffffff;
+  --btnFour: #373b53;
+  --btnFourHover: #1e2139;
+  --btnFiveHover: #ff9797;
+  --btnSix: #f9fafe;
+  --btnSixText: #7e88c3;
+  --btnSixHover: #dfe3fa;
+  --filterModalBg: #252945;
+  --filterModalShadow: 0px 10px 20px 0px #00000040;
+  --filterModalItemBg: #1e2139;
+ 
+
+  /* font sizes */
   --fs-xl: clamp(2rem, 5vw, 2.25rem);
   --fs-lg: clamp(1.25rem, 5vw, 1.5rem);
   --fs-md: 1rem;
@@ -18,9 +32,26 @@
   --fs-xs: 0.75rem;
 }
 
+[data-theme='light'] {
+  --main-bg: #f8f8fb;
+  --secondary-bg: #ffffff;
+  --primary-600: #7c5dfa;
+  --primary-400: #9277ff;
+  --text: #0c0e16;
+  --text-faded: #888eb0;
+  --btnThree: #f9fafe;
+  --btnThreeText: #7e88c3;
+  --btnThreeHover: #dfe3fa;
+  --btnFourHover: #0c0e16;
+  --filterModalBg: #ffffff;
+  --filterModalShadow: 0px 10px 20px 0px #48549f40;
+  --filterModalItemBg: #dfe3fa;
+
+}
+
 body {
   font-family: 'League Spartan', sans-serif;
-  color: var(--text-dark);
+  color: var(--text);
   margin: 0;
   padding: 0;
 }
@@ -78,28 +109,13 @@ h4 {
   letter-spacing: -0.23px;
 }
 
-.light-text {
-  color: var(--text-dark);
-}
-
-.dark-text {
-  color: var(--text-light);
-}
-
-.faded-text-dark {
-  color: var(--text-dark-faded);
-}
-
-.faded-text-light {
-  color: var(--text-light-faded);
-}
-
 .main-bg {
-  background-color: var(--main-bg-dark);
-  color: var(--text-light);
+  background-color: var(--main-bg);
+  color: var(--text);
 }
 
-.main-bg[light="true"] {
-  background-color: var(--main-bg-light);
-  color: var(--text-dark);
+.secondary-bg {
+  background-color: var(--secondary-bg);
+  color: var(--text);
+  border-radius: 8px;
 }

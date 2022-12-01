@@ -1,6 +1,7 @@
 import { DesignSystem } from '@/pages/DesignSystem';
-import { createContext, useState } from 'react';
+import { createContext } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import useLocalStorage from 'use-local-storage';
 import { Invoice } from './pages/Invoices/Invoice';
 import { Invoices } from './pages/Invoices/Invoices';
 import { NotFoundPage } from './pages/NotFoundPage';
@@ -9,18 +10,19 @@ import { PageLayout } from './pages/PageLayout';
 export const DarkModeContext = createContext();
 
 function App() {
-  const [light, setLight] = useState(false);
+  const [theme, setTheme] = useLocalStorage('theme' ? 'dark' : 'light');
 
   const toggleDarkMode = () => {
-    setLight((prev) => !prev);
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
   };
 
   return (
-    <div className='App'>
-      <DarkModeContext.Provider value={{ light, toggleDarkMode }}>
+    <div className='App' data-theme={theme}>
+      <DarkModeContext.Provider value={{ theme, toggleDarkMode }}>
         <BrowserRouter>
           <Routes>
-            <Route element={<PageLayout />}>
+            <Route element={<PageLayout/>}>
               <Route index element={<Invoices />} />
               <Route path='/invoices' element={<Invoices />} />
               <Route path='/invoices/:invoiceId' element={<Invoice />} />

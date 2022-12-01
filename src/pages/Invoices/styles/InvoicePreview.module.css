@@ -1,9 +1,5 @@
-:root {
-  --invoiceRef-hashtag: #7e88c3;
-}
-
 .invoicePreview {
-  background-color: var(--invoicePreview-bg);
+  background-color: var(--secondary-bg);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -11,13 +7,11 @@
 }
 
 .invoiceRefHash {
-  color: var(--invoiceRef-hashtag);
+  color: var(--accent);
 }
 
 @media (max-width: 640px) {
   .invoicePreview {
-    background-color: var(--invoicePreview-bg);
-    border-radius: 8px;
     padding: 1.5rem clamp(1rem, 10vw, 1.5rem);
     display: grid;
     grid-template-areas:

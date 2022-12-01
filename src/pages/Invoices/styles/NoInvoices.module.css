@@ -24,7 +24,7 @@
 
 .noInvoices p {
   font-size: 0.9rem;
-  color: var(--noInvoices-color);
+  color: var(--text-faded);
   font-weight: 500;
   letter-spacing: .25px;
   line-height: 20px;

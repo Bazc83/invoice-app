@@ -1,15 +1,12 @@
-:root {
-  --invoiceRefHash-color: #7e88c3;
-}
-
 .invoiceWrapper {
   padding-block: 2rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  background-color: var(--main-bg);
 }
 
-.invoiceContent{
+.invoiceContent {
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -24,7 +21,7 @@
 
 .goBackLink {
   text-decoration: none;
-  color: inherit;
+  color: var(--text);
   font-size: 0.9rem;
   font-weight: 700;
   position: relative;
@@ -55,14 +52,12 @@
   gap: 1rem;
   padding: 1.75rem;
   background-color: var(--invoiceBackgroundColor);
-
-  
 }
 .invoiceRefHash {
-  color: var(--invoiceRefHash-color);
+  color: var(--accent);
 }
 
-.amountDue{
-  background-color: #0C0E16;
+.amountDue {
+  background-color: #0c0e16;
   padding: 1.75rem;
 }

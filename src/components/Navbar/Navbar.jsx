@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import styles from './styles/Navbar.module.css';
 
 export const Navbar = () => {
-  const { light, toggleDarkMode } = useContext(DarkModeContext);
+  const { theme, toggleDarkMode } = useContext(DarkModeContext);
   return (
     <nav className={styles.navbar}>
       <div className={styles.navLogo}>
@@ -12,7 +12,7 @@ export const Navbar = () => {
 
       <div className={styles.navbarRightSide}>
         <div onClick={toggleDarkMode} className={styles.darkModeToggle}>
-          {light ? (
+          {theme === 'dark' ? (
             <img src='/images/icon-sun.svg' />
           ) : (
             <img src='/images/icon-moon.svg' />

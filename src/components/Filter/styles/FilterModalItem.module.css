@@ -1,6 +1,4 @@
-:root {
-  --filterModalCheckbox-primary: #7c5dfa;
-}
+
 
 .modalFormItemLabel {
   cursor: pointer;
@@ -47,13 +45,13 @@
 }
 
 .modalFormItem:hover:after {
-  border: 1px solid var(--filterModalCheckbox-primary);
+  border: 1px solid var(--primary-600);
 }
 
 .modalFormItem:after {
-  background-color: var(--filterModalItem-bg);
+  background-color: var(--filterModalItemBg);
 }
 
 .modalFormItemChecked:after {
-  background-color: var(--filterModalCheckbox-primary);
+  background-color: var(--primary-600);
 }

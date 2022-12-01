@@ -1,18 +1,16 @@
 import { Button } from '@/components/Button';
 import { Filter } from '@/components/Filter';
 import styles from './styles/InvoicesPageController.module.css';
-export const InvoicesPageControls = ({ light, invoicesData }) => {
+export const InvoicesPageControls = ({ invoicesData }) => {
   return (
     <div className={styles.invoicesPageController}>
       <div className={styles.invoicesControllerLeftSide}>
-        <h2 className={`${light ? 'text-dark' : 'text-light'}`}>Invoices</h2>
-        <p className={`${light ? 'faded-text-dark' : 'faded-text-light'}`}>
-          {invoicesData === 0 ? 'No' : invoicesData} invoices
-        </p>
+        <h2>Invoices</h2>
+        <p>{invoicesData === 0 ? 'No' : invoicesData} invoices</p>
       </div>
 
       <div className={styles.invoicesControllerRightSide}>
-        <Filter light={light} />
+        <Filter />
         <Button plusIcon>New</Button>
       </div>
     </div>

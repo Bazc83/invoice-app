@@ -1,21 +1,14 @@
-import { DarkModeContext } from '@/App';
 import { PaymentStatus } from '@/components/PaymentStatus';
 import data from '@data/data.json';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaChevronLeft } from 'react-icons/fa';
 import { Link, useParams } from 'react-router-dom';
 import { InvoiceItem } from './InvoiceItem';
 import styles from './styles/Invoice.module.css';
 
 export const Invoice = () => {
-  const { light } = useContext(DarkModeContext);
   const { invoiceId } = useParams();
   const [invoiceState, setInvoiceState] = useState();
-  const invoiceBackgroundColor = {
-    '--invoiceBackgroundColor': `${light ? '#FFFFFF' : '#1E2139'}`,
-  };
-
-  const fadedText = { color: `${light ? '#7E88C3' : '#DFE3FA'}` };
 
   useEffect(() => {
     setInvoiceState(data.filter((invoice) => invoice.id === invoiceId)[0]);
@@ -31,15 +24,15 @@ export const Invoice = () => {
         </Link>
       </div>
 
-      <div className={styles.invoiceContent}>
+      <div className={`secondary-bg ${styles.invoiceContent}`}>
         {/* Invoice status */}
-        <div className={styles.invoiceStatus} style={invoiceBackgroundColor}>
+        <div className={styles.invoiceStatus}>
           <p>Status</p>
-          <PaymentStatus status={invoiceState?.status} light={light} />
+          <PaymentStatus status={invoiceState?.status} />
         </div>
 
         {/* Invoice main content */}
-        <div className={styles.invoiceMain} style={invoiceBackgroundColor}>
+        <div className={styles.invoiceMain}>
           {/* reference */}
           <h4>
             <span className={styles.invoiceRefHash}>#</span>
@@ -47,19 +40,17 @@ export const Invoice = () => {
           </h4>
 
           {/* description */}
-          <p className='text' style={fadedText}>
-            {invoiceState?.description}
-          </p>
+          <p className='text'>{invoiceState?.description}</p>
 
           {/* sender address */}
-          <div className={`text-xs`} style={fadedText}>
+          <div className={`text-xs`}>
             <p>{invoiceState?.senderAddress.street}</p>
             <p>{invoiceState?.senderAddress.city}</p>
             <p>{invoiceState?.senderAddress.postCode}</p>
             <p>{invoiceState?.senderAddress.country}</p>
           </div>
 
-          <div className='text' style={fadedText}>
+          <div className='text'>
             {/* created at date */}
             <div>
               <p>Invoice Date</p>
@@ -75,13 +66,11 @@ export const Invoice = () => {
 
           <div>
             {/* clients name */}
-            <p className='text' style={fadedText}>
-              Bill To
-            </p>
+            <p className='text'>Bill To</p>
             <h3>{invoiceState?.clientName}</h3>
 
             {/* clients address */}
-            <div className={`text-xs`} style={fadedText}>
+            <div className={`text-xs`}>
               <p>{invoiceState?.clientAddress.street}</p>
               <p>{invoiceState?.clientAddress.city}</p>
               <p>{invoiceState?.clientAddress.postCode}</p>
@@ -91,9 +80,7 @@ export const Invoice = () => {
 
           {/* clients email */}
           <div>
-            <p className={`text-xs`} style={fadedText}>
-              Sent to
-            </p>
+            <p className={`text-xs`}>Sent to</p>
             <h3>{invoiceState?.clientEmail}</h3>
           </div>
 

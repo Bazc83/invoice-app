@@ -5,8 +5,8 @@
   padding: 1.5rem;
 }
 .modal {
-  background-color: var(--filterModal-color);
-  box-shadow: var(--filterModal-shadow);
+  background-color: var(--filterModalBg);
+  box-shadow: var(--filterModalShadow);
   z-index: 100;
 }
 

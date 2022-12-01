@@ -1,30 +1,3 @@
-:root {
-  --btnPrimaryText: #ffffff;
-  --btnPrimary: #7c5dfa;
-  --btnPrimaryHover: #9277ff;
-  --btnThreeDark: #252945;
-  --btnThreeDarkText: #dfe3fa;
-  --btnThreeDarkHover: #ffffff;
-  --btnThreeLightText: #7e88c3;
-  --btnThreeLight: #f9fafe;
-  --btnThreeLightHover: #dfe3fa;
-  --btnThreeLightHoverText: #7e88c3;
-
-  --btnFourLightDark: #373b53;
-  --btnFourLightText: #888eb0;
-  --btnFourLightHover: #0c0e16;
-  --btnFourDarkText: #dfe3fa;
-  --btnFourDarkHover: #1e2139;
-
-  --btnFive: #ec5757;
-  --btnFiveText: #ffffff;
-  --btnFiveHover: #ff9797;
-
-  --btnSix: #f9fafe;
-  --btnSixText: #7e88c3;
-  --btnSixHover: #dfe3fa;
-}
-
 .btn {
   border-radius: 24px;
   padding-block: 0.8rem;
@@ -39,78 +12,55 @@
 }
 
 .btnPrimary {
-  background-color: var(--btnPrimary);
-  color: var(--btnPrimaryText);
+  background-color: var(--primary-600);
+  color: var(--white);
   width: max-content;
 }
 
 .btnPrimary:hover {
-  background-color: var(--btnPrimaryHover);
+  background-color: var(--primary-400);
 }
 
 .btnThree {
-  background: var(--btnThreeDark);
-  color: var(--btnThreeDarkText);
+  background: var(--btnThree);
+  color: var(--btnThreeText);
   width: max-content;
 }
 
 .btnThree:hover {
-  background-color: var(--btnThreeDarkHover);
+  background-color: var(--btnThreeHover);
+  color: var(--btnThreeText);
 }
 
-.btnThreeLight {
-  background-color: var(--btnThreeLight);
-  color: var(--btnThreeLightText);
-  width: max-content;
-}
-
-.btnThreeLight:hover {
-  background-color: var(--btnThreeLightHover);
-  color: var(--btnThreeLightHoverText);
-}
-
-.btnFour,
-.btnFourLight {
-  background: var(--btnFourLightDark);
+.btnFour {
+  background: var(--text-faded);
   width: max-content;
 }
 
 .btnFour {
-  color: var(--btnFourDarkText);
+  color: var(--btnFourText);
 }
 
 .btnFour:hover {
-  background-color: var(--btnFourDarkHover);
+  background-color: var(--btnFourHover);
 }
 
-.btnFourLight {
-  color: var(--btnFourLightText);
-}
-
-.btnFourLight:hover {
-  background-color: var(--btnFourLightHover);
-}
-
-.btnFive,
-.btnFiveLight {
-  background-color: var(--btnFive);
-  color: var(--btnFiveText);
+.btnFive {
+  background-color: var(--orange);
+  color: var(--white);
   width: max-content;
 }
 
-.btnFive:hover,
-.btnFiveLight:hover {
+.btnFive:hover {
   background-color: var(--btnFiveHover);
 }
 
-.btnSix,
-.btnSixLight {
+.btnSix {
   background-color: var(--btnSix);
   color: var(--btnSixText);
 }
 
-.btnSix:hover,
-.btnSixLight:hover {
+.btnSix:hover {
   background-color: var(--btnSixHover);
 }
 
@@ -126,8 +76,8 @@
 }
 
 .btnIcon {
-  background-color: var(--text-light);
-  color: var(--btnPrimary);
+  background-color: var(--white);
+  color: var(--primary-600);
   border-radius: 100%;
   text-align: center;
   padding: 0.6875rem;
@@ -138,5 +88,5 @@
 }
 
 .btnPrimary:hover .btnIcon {
-  color: var(--btnPrimaryHover);
+  color: var(--primary-400);
 }
