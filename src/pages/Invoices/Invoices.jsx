@@ -8,6 +8,7 @@ import { NoInvoices } from './NoInvoices';
 import styles from './styles/Invoices.module.css';
 
 export const Invoices = () => {
+
   const { light } = useContext(DarkModeContext);
   // const data = [];
   const navigate = useNavigate();
@@ -17,8 +18,7 @@ export const Invoices = () => {
 
   return (
     <div
-      className={`container `}
-      style={{ '--invoices-bg': `${light ? '#f2f2f2' : '#141625'}` }}>
+      className={`container main-bg`} light={`${light}`}>
       <Outlet />
       <InvoicesPageControls light={light} invoicesData={data.length} />
 

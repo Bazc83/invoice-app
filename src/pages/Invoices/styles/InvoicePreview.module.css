@@ -1,5 +1,4 @@
 :root {
-
   --invoiceRef-hashtag: #7e88c3;
 }
 
@@ -14,8 +13,6 @@
 .invoiceRefHash {
   color: var(--invoiceRef-hashtag);
 }
-
-
 
 @media (max-width: 640px) {
   .invoicePreview {

@@ -1,13 +1,9 @@
-import { DarkModeContext } from '@/App';
 import { Navbar } from '@/components/Navbar';
-import styles from './styles/PageLayout.module.css';
-import { useContext } from 'react';
 import { Outlet } from 'react-router-dom';
+import styles from './styles/PageLayout.module.css';
 export const PageLayout = () => {
-  const { light } = useContext(DarkModeContext);
-
   return (
-    <div className={`${light ? styles.pageLayoutLight : styles.pageLayout}`}>
+    <div className={styles.pageLayout}>
       <Navbar />
       <div className={styles.outletDiv}>
         <Outlet />

@@ -1,6 +1,3 @@
-.invoices {
-  background-color: var(--invoices-bg);
-}
 
 .invoicesWrapper {
   display: flex;

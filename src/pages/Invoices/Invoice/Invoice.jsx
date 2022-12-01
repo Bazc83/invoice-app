@@ -99,7 +99,7 @@ export const Invoice = () => {
 
           {/* items container */}
           <div className={styles.invoiceItemsWrapper}>
-            {invoiceState?.map((item, i) => {
+            {invoiceState?.items?.map((item, i) => {
               return <InvoiceItem item={item} key={`item${i}`} />;
             })}
 
