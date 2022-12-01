@@ -37,22 +37,72 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--invoiceBackgroundColor);
   padding: 1.75rem;
-  border-radius: 8px;
-}
-
-.invoiceStatus p {
-  color: var(--invoiceStatus-color);
 }
 
 .invoiceMain {
   display: grid;
-  border-radius: 8px;
   gap: 1rem;
   padding: 1.75rem;
-  background-color: var(--invoiceBackgroundColor);
+
+  grid-template-areas:
+    'invoiceRef ...'
+    'invoiceDescription ...'
+    'invoiceAddress ...'
+    'invoiceDates invoiceClientDetails'
+    'invoiceClientEmail invoiceClientEmail'
+    'items items'
+    'items items';
 }
+
+.invoiceRef {
+  outline: 2px solid yellow;
+  grid-area: invoiceRef;
+}
+
+.invoiceDescription {
+  outline: 2px solid blue;
+  grid-area: invoiceDescription;
+}
+
+.invoiceAddress {
+  outline: 2px solid red;
+  grid-area: invoiceAddress;
+}
+
+.invoiceDates {
+  outline: 2px solid white;
+  grid-area: invoiceDates;
+}
+
+.invoiceCreatedAt {
+  outline: 2px solid purple;
+  grid-area: invoiceCreatedAt;
+}
+
+.invoicePaymentDue {
+  outline: 2px solid coral;
+  grid-area: invoicePaymentDue;
+}
+
+.invoiceClientDetails {
+  outline: 2px solid lightgrey;
+  grid-area: invoiceClientDetails;
+}
+
+.invoiceClientName {
+  outline: 2px solid green;
+}
+
+.invoiceClientAddress {
+  outline: 2px solid pink;
+}
+
+.invoiceClientEmail {
+  outline: 2px solid lightskyblue;
+  grid-area: invoiceClientEmail;
+}
+
 .invoiceRefHash {
   color: var(--accent);
 }
@@ -60,4 +110,8 @@
 .amountDue {
   background-color: #0c0e16;
   padding: 1.75rem;
+}
+
+.invoiceItemsWrapper {
+  grid-area: items;
 }

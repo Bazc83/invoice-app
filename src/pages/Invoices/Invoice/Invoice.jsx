@@ -24,53 +24,55 @@ export const Invoice = () => {
         </Link>
       </div>
 
-      <div className={`secondary-bg ${styles.invoiceContent}`}>
+      <div className={`${styles.invoiceContent}`}>
         {/* Invoice status */}
-        <div className={styles.invoiceStatus}>
+        <div className={`secondary-bg ${styles.invoiceStatus}`}>
           <p>Status</p>
           <PaymentStatus status={invoiceState?.status} />
         </div>
 
         {/* Invoice main content */}
-        <div className={styles.invoiceMain}>
+        <div className={`secondary-bg ${styles.invoiceMain}`}>
           {/* reference */}
-          <h4>
+          <h4 className={styles.invoiceRef}>
             <span className={styles.invoiceRefHash}>#</span>
             {invoiceState?.id}
           </h4>
 
           {/* description */}
-          <p className='text'>{invoiceState?.description}</p>
+          <p className={`text ${styles.invoiceDescription}`}>
+            {invoiceState?.description}
+          </p>
 
           {/* sender address */}
-          <div className={`text-xs`}>
+          <div className={`text-xs ${styles.invoiceAddress}`}>
             <p>{invoiceState?.senderAddress.street}</p>
             <p>{invoiceState?.senderAddress.city}</p>
             <p>{invoiceState?.senderAddress.postCode}</p>
             <p>{invoiceState?.senderAddress.country}</p>
           </div>
 
-          <div className='text'>
+          <div className={`text ${styles.invoiceDates}`}>
             {/* created at date */}
-            <div>
+            <div className={styles.invoiceCreatedAt}>
               <p>Invoice Date</p>
               <h2>{invoiceState?.createdAt}</h2>
             </div>
 
             {/* payment due date */}
-            <div>
+            <div className={styles.invoicePaymentDue}>
               <p>Payment Due</p>
               <h2>{invoiceState?.paymentDue}</h2>
             </div>
           </div>
 
-          <div>
+          <div className={styles.invoiceClientDetails}>
             {/* clients name */}
-            <p className='text'>Bill To</p>
+            <p className={`text  ${styles.invoiceClientName}`}>Bill To</p>
             <h3>{invoiceState?.clientName}</h3>
 
             {/* clients address */}
-            <div className={`text-xs`}>
+            <div className={`text-xs ${styles.invoiceClientAddress}`}>
               <p>{invoiceState?.clientAddress.street}</p>
               <p>{invoiceState?.clientAddress.city}</p>
               <p>{invoiceState?.clientAddress.postCode}</p>
@@ -79,7 +81,7 @@ export const Invoice = () => {
           </div>
 
           {/* clients email */}
-          <div>
+          <div className={styles.invoiceClientEmail}>
             <p className={`text-xs`}>Sent to</p>
             <h3>{invoiceState?.clientEmail}</h3>
           </div>
