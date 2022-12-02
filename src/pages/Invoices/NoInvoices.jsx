@@ -8,7 +8,7 @@ export const NoInvoices = () => {
         <div>
           <h2>There is nothing here</h2>
 
-          <p>
+          <p >
             Create invoice by clicking the
              <span className={styles.textNew}> New</span> <span> invoice </span>
             button and get started

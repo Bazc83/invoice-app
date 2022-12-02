@@ -1,16 +1,13 @@
 import styles from './styles/PaymentStatus.module.css';
-export const PaymentStatus = ({status,  className}) => {
+export const PaymentStatus = ({ status, className }) => {
   let paymentStatusColor;
   if (status === 'paid') {
     paymentStatusColor = '#33d69f';
   } else if (status === 'pending') {
     paymentStatusColor = '#ff8f00';
-  } 
-
-
-  // else if (status === 'draft') {
-  //   paymentStatusColor = light ? '#373b53' : '#dfe3fa';
-  // }
+  } else if (status === 'draft') {
+    paymentStatusColor = 'var(--paymentStatusDraft)';
+  }
   return (
     <div
       className={`${styles.paymentStatus} ${className}`}

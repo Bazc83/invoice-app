@@ -6,7 +6,7 @@ export const InvoicesPageControls = ({ invoicesData }) => {
     <div className={styles.invoicesPageController}>
       <div className={styles.invoicesControllerLeftSide}>
         <h2>Invoices</h2>
-        <p>{invoicesData === 0 ? 'No' : invoicesData} invoices</p>
+        <p className='text-faded'>{invoicesData === 0 ? 'No' : invoicesData} invoices</p>
       </div>
 
       <div className={styles.invoicesControllerRightSide}>

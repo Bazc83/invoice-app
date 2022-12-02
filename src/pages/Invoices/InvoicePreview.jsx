@@ -1,4 +1,4 @@
-import { PaymentStatus } from '@/components/PaymentStatus';
+import { PaymentStatus } from '@/pages/Invoices/PaymentStatus';
 import styles from './styles/InvoicePreview.module.css';
 export const InvoicePreview = (props) => {
   const { invoice, onClick } = props;
@@ -34,7 +34,7 @@ export const InvoicePreview = (props) => {
         {id}
       </h4>
 
-      <p className={`${styles.dueDate}`}>{dueDate}</p>
+      <p className={`text-faded ${styles.dueDate}`}>{dueDate}</p>
 
       <p className={`text ${styles.name}`}>{clientName}</p>
 

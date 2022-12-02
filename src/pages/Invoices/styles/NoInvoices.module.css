@@ -9,7 +9,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-width: 217px;
+  max-width: clamp(217px, 40vw, 250px);
   gap: 2.5rem;
   padding-top: 6.25rem;
 }

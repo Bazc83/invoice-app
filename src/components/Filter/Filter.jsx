@@ -12,7 +12,7 @@ export const Filter = () => {
       <div
         className={styles.filter}
         onClick={() => setFilterIsOpen((prev) => !prev)}>
-        <p className='text'>Filter</p>
+        <h4>Filter</h4>
         {filterIsOpen ? (
           <FaChevronUp className={styles.filterIcon} />
         ) : (

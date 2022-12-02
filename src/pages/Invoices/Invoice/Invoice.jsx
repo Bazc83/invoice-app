@@ -1,4 +1,4 @@
-import { PaymentStatus } from '@/components/PaymentStatus';
+import { PaymentStatus } from '@/pages/Invoices/PaymentStatus';
 import data from '@data/data.json';
 import { useEffect, useState } from 'react';
 import { FaChevronLeft } from 'react-icons/fa';

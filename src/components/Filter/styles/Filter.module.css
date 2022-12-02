@@ -1,6 +1,3 @@
-:root {
-  --filterPrimary: var(--primary-600);
-}
 
 .filterWrapper{
   position: relative;
@@ -13,5 +10,5 @@
 }
 
 .filterIcon {
-  color: var(--filterPrimary);
+  color: var(--primary-600);
 }

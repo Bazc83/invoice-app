@@ -1,12 +1,12 @@
 import { Outlet, useNavigate } from 'react-router-dom';
-import data from '../../data/data.json';
+// import data from '../../data/data.json';
 import { InvoicePreview } from './InvoicePreview';
 import { InvoicesPageControls } from './InvoicesPageControls';
 import { NoInvoices } from './NoInvoices';
 import styles from './styles/Invoices.module.css';
 
 export const Invoices = () => {
-  // const data = [];
+  const data = [];
   const navigate = useNavigate();
   const showFullInvoice = (invoiceId) => {
     navigate(`/invoices/${invoiceId}`);

@@ -26,12 +26,13 @@
   --filterModalItemBg: #1e2139;
   --invoiceItemsBg: #252945;
   --invoiceItemsTotal: #0c0e16;
+  --paymentStatusDraft: #dfe3fa;
 
   /* font sizes */
   --fs-xl: clamp(2rem, 5vw, 2.25rem);
   --fs-lg: clamp(1.25rem, 5vw, 1.5rem);
   --fs-md: 1rem;
-  --fs-sm: 0.8125rem;
+  --fs-sm: clamp(0.8125rem, 5vw, 0.9rem);
   --fs-xs: 0.75rem;
 }
 
@@ -49,6 +50,7 @@
   --filterModalItemBg: #dfe3fa;
   --invoiceItemsBg: #f9fafe;
   --invoiceItemsTotal: #373b53;
+  --paymentStatusDraft: #373b53;
 }
 
 body {
@@ -92,23 +94,33 @@ h3 {
 h4 {
   font-size: var(--fs-sm);
   line-height: 15px;
-  letter-spacing: 0.25px;
+  letter-spacing: .9px;
 }
 
 .text,
-.faded-text-dark,
-.faded-text-light {
+.text-faded {
   font-weight: 500;
   font-size: var(--fs-sm);
   line-height: 15px;
   letter-spacing: 0.25px;
 }
 
+.text,
 .text-xs {
+  color: var(--text);
+}
+
+.text-faded,
+.text-faded-xs {
+  color: var(--text-faded);
+}
+
+.text-xs,
+.text-faded-xs {
   font-weight: 500;
   font-size: var(--fs-xs);
   line-height: 18px;
-  letter-spacing: -0.23px;
+  letter-spacing: 0.23px;
 }
 
 .main-bg {
