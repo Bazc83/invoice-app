@@ -33,8 +33,9 @@
   /* font sizes */
   --fs-xl: clamp(2rem, 5vw, 2.25rem);
   --fs-lg: clamp(1.25rem, 5vw, 1.5rem);
-  --fs-md: 0.9rem;
-  --fs-sm: clamp(0.8125rem, 5vw, 0.9rem);
+  --fs-md: 1rem;
+  --fs-h4: clamp(0.8125rem, 5vw, 1rem);
+  --fs-sm: 0.8125rem;
   --fs-xs: 0.75rem;
 }
 
@@ -95,7 +96,7 @@ h3 {
 }
 
 h4 {
-  font-size: var(--fs-sm);
+  font-size: var(--fs-h4);
   line-height: 15px;
   letter-spacing: .9px;
  

@@ -1,4 +1,5 @@
 import { Button } from '@/components/Button';
+import { useFormatDate } from '@/hooks/useFormatDate';
 import { PaymentStatus } from '@/pages/Invoices/PaymentStatus';
 import data from '@data/data.json';
 import { useEffect, useState } from 'react';
@@ -15,6 +16,8 @@ export const Invoice = () => {
     setInvoiceState(data.filter((invoice) => invoice.id === invoiceId)[0]);
   }, [invoiceId]);
 
+  const { getDate } = useFormatDate();
+
   return (
     <>
       <div className={` container ${styles.invoiceWrapper}`}>
@@ -27,11 +30,17 @@ export const Invoice = () => {
         </div>
 
         <div className={`${styles.invoiceContent} text`}>
-          <div className={`secondary-bg ${styles.invoiceStatus}`}>
-            <p>Status</p>
-            <PaymentStatus status={invoiceState?.status} />
+          <div className={`container secondary-bg ${styles.statusAndButtons}`}>
+            <div className={`secondary-bg ${styles.status}`}>
+              <p>Status</p>
+              <PaymentStatus status={invoiceState?.status} />
+            </div>
+            <div className={`${styles.buttonWrapperTop}`}>
+              <Button btnStyle='btnThree'>Edit</Button>
+              <Button btnStyle='btnFive'>Delete</Button>
+              <Button>Mark as Paid</Button>
+            </div>
           </div>
-
           <div className={`secondary-bg ${styles.invoiceMain}`}>
             <div className={styles.refAndDescription}>
               <h4 className={styles.ref}>
@@ -54,12 +63,16 @@ export const Invoice = () => {
             <div className={styles.dates}>
               <div className={styles.createdAt}>
                 <p className='text-faded'>Invoice Date</p>
-                <h3>{invoiceState?.createdAt}</h3>
+                <h3>
+                  {invoiceState?.createdAt && getDate(invoiceState.createdAt)}
+                </h3>
               </div>
 
               <div className={styles.paymentDue}>
                 <p className='text-faded'>Payment Due</p>
-                <h3>{invoiceState?.paymentDue}</h3>
+                <h3>
+                  {invoiceState?.paymentDue && getDate(invoiceState.paymentDue)}
+                </h3>
               </div>
             </div>
 
@@ -95,7 +108,7 @@ export const Invoice = () => {
           </div>
         </div>
       </div>
-      <div className={`secondary-bg container ${styles.buttonWrapper}`}>
+      <div className={`secondary-bg container ${styles.buttonWrapperBottom}`}>
         <Button btnStyle='btnThree'>Edit</Button>
         <Button btnStyle='btnFive'>Delete</Button>
         <Button>Mark as Paid</Button>
