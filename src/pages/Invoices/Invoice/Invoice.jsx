@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { FaChevronLeft } from 'react-icons/fa';
 import { Link, useParams } from 'react-router-dom';
 import { InvoiceItem } from './InvoiceItem';
+import { InvoiceItems } from './InvoiceItems';
 import styles from './styles/Invoice.module.css';
 
 export const Invoice = () => {
@@ -95,9 +96,7 @@ export const Invoice = () => {
 
             <div className={styles.itemsWrapper}>
               <div className={styles.items}>
-                {invoiceState?.items?.map((item, i) => {
-                  return <InvoiceItem item={item} key={`item${i}`} />;
-                })}
+                <InvoiceItems items={invoiceState?.items}/>
               </div>
 
               <div className={styles.amountDue}>
