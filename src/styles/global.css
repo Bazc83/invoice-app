@@ -25,13 +25,15 @@
   --filterModalShadow: 0px 10px 20px 0px #00000040;
   --filterModalItemBg: #1e2139;
   --invoiceItemsBg: #252945;
-  --invoiceItemsTotal: #0c0e16;
+  --invoiceAmountDue: #0c0e16;
   --paymentStatusDraft: #dfe3fa;
+  --invoiceItemQuantityXPrice: #888EB0;
+  --invoiceItemsBg: #252945;
 
   /* font sizes */
   --fs-xl: clamp(2rem, 5vw, 2.25rem);
   --fs-lg: clamp(1.25rem, 5vw, 1.5rem);
-  --fs-md: 1rem;
+  --fs-md: 0.9rem;
   --fs-sm: clamp(0.8125rem, 5vw, 0.9rem);
   --fs-xs: 0.75rem;
 }
@@ -49,8 +51,10 @@
   --filterModalShadow: 0px 10px 20px 0px #48549f40;
   --filterModalItemBg: #dfe3fa;
   --invoiceItemsBg: #f9fafe;
-  --invoiceItemsTotal: #373b53;
+  --invoiceAmountDue: #373b53;
   --paymentStatusDraft: #373b53;
+  --invoiceItemQuantityXPrice: #7E88C3;
+  --invoiceItemsBg: #F9FAFE;
 }
 
 body {
@@ -68,10 +72,8 @@ body {
 
 h1,
 h2,
-h3,
-h4,
-h5 {
-  font-weight: 700;
+h3 {
+  font-weight: 600;
 }
 h1 {
   font-size: var(--fs-xl);
@@ -89,12 +91,14 @@ h3 {
   font-size: var(--fs-md);
   line-height: 24px;
   letter-spacing: 0.8px;
+  
 }
 
 h4 {
   font-size: var(--fs-sm);
   line-height: 15px;
   letter-spacing: .9px;
+ 
 }
 
 .text,

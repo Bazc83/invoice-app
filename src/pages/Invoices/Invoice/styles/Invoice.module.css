@@ -42,76 +42,88 @@
 
 .invoiceMain {
   display: grid;
-  gap: 1rem;
   padding: 1.75rem;
-
+  row-gap: 1.75rem;
   grid-template-areas:
-    'invoiceRef ...'
-    'invoiceDescription ...'
-    'invoiceAddress ...'
-    'invoiceDates invoiceClientDetails'
-    'invoiceClientEmail invoiceClientEmail'
-    'items items'
-    'items items';
+    'refAndDesc refAndDesc refAndDesc ...'
+    'address ... ... ... '
+    'dates ... clientDetails  clientDetails'
+    'clientEmail clientEmail ... ...'
+    'items items items items';
 }
 
-.invoiceRef {
-  outline: 2px solid yellow;
-  grid-area: invoiceRef;
+.refAndDescription {
+  grid-area: refAndDesc;
+}
+.address {
+  grid-area: address;
 }
 
-.invoiceDescription {
-  outline: 2px solid blue;
-  grid-area: invoiceDescription;
+.dates {
+  grid-area: dates;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
-.invoiceAddress {
-  outline: 2px solid red;
-  grid-area: invoiceAddress;
+.createdAt, .paymentDue{
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
-.invoiceDates {
-  outline: 2px solid white;
-  grid-area: invoiceDates;
+.ref {
+  grid-area: ref;
+  padding-bottom: 0.25rem;
 }
 
-.invoiceCreatedAt {
-  outline: 2px solid purple;
-  grid-area: invoiceCreatedAt;
+.description {
+  grid-area: description;
 }
 
-.invoicePaymentDue {
-  outline: 2px solid coral;
-  grid-area: invoicePaymentDue;
+.clientDetails {
+  grid-area: clientDetails;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
-.invoiceClientDetails {
-  outline: 2px solid lightgrey;
-  grid-area: invoiceClientDetails;
+.clientEmail {
+  grid-area: clientEmail;
 }
 
-.invoiceClientName {
-  outline: 2px solid green;
+.itemsWrapper {
+  grid-area: items;
 }
 
-.invoiceClientAddress {
-  outline: 2px solid pink;
-}
-
-.invoiceClientEmail {
-  outline: 2px solid lightskyblue;
-  grid-area: invoiceClientEmail;
-}
-
-.invoiceRefHash {
+.refHash {
   color: var(--accent);
 }
 
-.amountDue {
-  background-color: #0c0e16;
+.items {
+  background-color: var(--invoiceItemsBg);
   padding: 1.75rem;
+  border-radius: 8px 8px 0 0;
 }
 
-.invoiceItemsWrapper {
-  grid-area: items;
+.amountDue {
+  background-color: var(--invoiceAmountDue);
+  color: var(--white);
+  padding: 1.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0 0 8px 8px;
+}
+
+.amountDue p {
+  color: var(--white);
+}
+
+
+.buttonWrapper{
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 1.75rem 1.5rem;
 }

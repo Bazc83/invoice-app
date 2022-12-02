@@ -1,0 +1,15 @@
+.invoiceItem{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.invoiceItem div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.quantityXPrice{
+  color: var(--invoiceItemQuantityXPrice);
+}

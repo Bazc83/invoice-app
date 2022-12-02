@@ -1,14 +1,15 @@
 import styles from './styles/InvoiceItem.module.css';
 export const InvoiceItem = ({ item }) => {
   return (
-    <div>
-      <h2>{item?.name}</h2>
+    <div className={styles.invoiceItem}>
+      <div>
+        <h4>{item?.name}</h4>
 
-      <p className='text'>
-        {item?.quantity} x £{item?.price}
-      </p>
-
-      <h2>£ {item?.total}</h2>
+        <p className={`text ${styles.quantityXPrice}`}>
+          {item?.quantity} x £{item?.price}
+        </p>
+      </div>
+      <h4>£ {item?.total}</h4>
     </div>
   );
 };

@@ -1,3 +1,4 @@
+import { Button } from '@/components/Button';
 import { PaymentStatus } from '@/pages/Invoices/PaymentStatus';
 import data from '@data/data.json';
 import { useEffect, useState } from 'react';
@@ -15,91 +16,90 @@ export const Invoice = () => {
   }, [invoiceId]);
 
   return (
-    <div className={`container ${styles.invoiceWrapper}`}>
-      {/* Go back to invoices page link */}
-      <div className={styles.goBackLinkWrapper}>
-        <FaChevronLeft className={styles.iconLeft} />
-        <Link to='/invoices' className={styles.goBackLink}>
-          Go back
-        </Link>
-      </div>
-
-      <div className={`${styles.invoiceContent}`}>
-        {/* Invoice status */}
-        <div className={`secondary-bg ${styles.invoiceStatus}`}>
-          <p>Status</p>
-          <PaymentStatus status={invoiceState?.status} />
+    <>
+      <div className={` container ${styles.invoiceWrapper}`}>
+        {/* Go back to invoices page link */}
+        <div className={styles.goBackLinkWrapper}>
+          <FaChevronLeft className={styles.iconLeft} />
+          <Link to='/invoices' className={styles.goBackLink}>
+            Go back
+          </Link>
         </div>
 
-        {/* Invoice main content */}
-        <div className={`secondary-bg ${styles.invoiceMain}`}>
-          {/* reference */}
-          <h4 className={styles.invoiceRef}>
-            <span className={styles.invoiceRefHash}>#</span>
-            {invoiceState?.id}
-          </h4>
-
-          {/* description */}
-          <p className={`text ${styles.invoiceDescription}`}>
-            {invoiceState?.description}
-          </p>
-
-          {/* sender address */}
-          <div className={`text-xs ${styles.invoiceAddress}`}>
-            <p>{invoiceState?.senderAddress.street}</p>
-            <p>{invoiceState?.senderAddress.city}</p>
-            <p>{invoiceState?.senderAddress.postCode}</p>
-            <p>{invoiceState?.senderAddress.country}</p>
+        <div className={`${styles.invoiceContent} text`}>
+          <div className={`secondary-bg ${styles.invoiceStatus}`}>
+            <p>Status</p>
+            <PaymentStatus status={invoiceState?.status} />
           </div>
 
-          <div className={`text ${styles.invoiceDates}`}>
-            {/* created at date */}
-            <div className={styles.invoiceCreatedAt}>
-              <p>Invoice Date</p>
-              <h2>{invoiceState?.createdAt}</h2>
+          <div className={`secondary-bg ${styles.invoiceMain}`}>
+            <div className={styles.refAndDescription}>
+              <h4 className={styles.ref}>
+                <span className={styles.refHash}>#</span>
+                {invoiceState?.id}
+              </h4>
+
+              <p className={`text-faded ${styles.description}`}>
+                {invoiceState?.description}
+              </p>
             </div>
 
-            {/* payment due date */}
-            <div className={styles.invoicePaymentDue}>
-              <p>Payment Due</p>
-              <h2>{invoiceState?.paymentDue}</h2>
+            <div className={`text-faded-xs ${styles.address}`}>
+              <p>{invoiceState?.senderAddress.street}</p>
+              <p>{invoiceState?.senderAddress.city}</p>
+              <p>{invoiceState?.senderAddress.postCode}</p>
+              <p>{invoiceState?.senderAddress.country}</p>
             </div>
-          </div>
 
-          <div className={styles.invoiceClientDetails}>
-            {/* clients name */}
-            <p className={`text  ${styles.invoiceClientName}`}>Bill To</p>
-            <h3>{invoiceState?.clientName}</h3>
+            <div className={styles.dates}>
+              <div className={styles.createdAt}>
+                <p className='text-faded'>Invoice Date</p>
+                <h3>{invoiceState?.createdAt}</h3>
+              </div>
 
-            {/* clients address */}
-            <div className={`text-xs ${styles.invoiceClientAddress}`}>
-              <p>{invoiceState?.clientAddress.street}</p>
-              <p>{invoiceState?.clientAddress.city}</p>
-              <p>{invoiceState?.clientAddress.postCode}</p>
-              <p>{invoiceState?.clientAddress.country}</p>
+              <div className={styles.paymentDue}>
+                <p className='text-faded'>Payment Due</p>
+                <h3>{invoiceState?.paymentDue}</h3>
+              </div>
             </div>
-          </div>
 
-          {/* clients email */}
-          <div className={styles.invoiceClientEmail}>
-            <p className={`text-xs`}>Sent to</p>
-            <h3>{invoiceState?.clientEmail}</h3>
-          </div>
+            <div className={styles.clientDetails}>
+              <p className={`text-faded`}>Bill To</p>
+              <h3>{invoiceState?.clientName}</h3>
 
-          {/* items container */}
-          <div className={styles.invoiceItemsWrapper}>
-            {invoiceState?.items?.map((item, i) => {
-              return <InvoiceItem item={item} key={`item${i}`} />;
-            })}
+              <div className={`text-faded-xs ${styles.clientAddress}`}>
+                <p>{invoiceState?.clientAddress.street}</p>
+                <p>{invoiceState?.clientAddress.city}</p>
+                <p>{invoiceState?.clientAddress.postCode}</p>
+                <p>{invoiceState?.clientAddress.country}</p>
+              </div>
+            </div>
 
-            {/* Total values of items */}
-            <div className={styles.amountDue}>
-              <p>Amount Due</p>
-              <h2>£ {invoiceState?.total}</h2>
+            <div className={styles.clientEmail}>
+              <p className={`text-faded-xs`}>Sent to</p>
+              <h3>{invoiceState?.clientEmail}</h3>
+            </div>
+
+            <div className={styles.itemsWrapper}>
+              <div className={styles.items}>
+                {invoiceState?.items?.map((item, i) => {
+                  return <InvoiceItem item={item} key={`item${i}`} />;
+                })}
+              </div>
+
+              <div className={styles.amountDue}>
+                <p className='text-xs'>Amount Due</p>
+                <h2>£ {invoiceState?.total}</h2>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+      <div className={`secondary-bg container ${styles.buttonWrapper}`}>
+        <Button btnStyle='btnThree'>Edit</Button>
+        <Button btnStyle='btnFive'>Delete</Button>
+        <Button>Mark as Paid</Button>
+      </div>
+    </>
   );
 };
