@@ -95,9 +95,8 @@ export const Invoice = () => {
             </div>
 
             <div className={styles.itemsWrapper}>
-              <div className={styles.items}>
-                <InvoiceItems items={invoiceState?.items}/>
-              </div>
+              
+              <InvoiceItems items={invoiceState?.items} />
 
               <div className={styles.amountDue}>
                 <p className='text-xs'>Amount Due</p>

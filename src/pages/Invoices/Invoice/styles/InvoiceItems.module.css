@@ -1,0 +1,11 @@
+.invoiceItems{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+  background-color: var(--invoiceItemsBg);
+  padding: 1.75rem;
+  border-radius: 8px 8px 0 0;
+}
+
+
