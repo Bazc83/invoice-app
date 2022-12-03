@@ -11,6 +11,7 @@
   --btnSix: #f9fafe;
   --btnSixText: #7e88c3;
   --btnSixHover: #dfe3fa;
+  --invoiceShadow: 0px 10px 10px -10px #48549f1a;
 
   /* Variables to change dark/light */
   --main-bg: #141625;
@@ -27,7 +28,7 @@
   --invoiceItemsBg: #252945;
   --invoiceAmountDue: #0c0e16;
   --paymentStatusDraft: #dfe3fa;
-  --invoiceItemQuantityXPrice: #888EB0;
+  --invoiceItemQuantityXPrice: #888eb0;
   --invoiceItemsBg: #252945;
 
   /* font sizes */
@@ -54,8 +55,8 @@
   --invoiceItemsBg: #f9fafe;
   --invoiceAmountDue: #373b53;
   --paymentStatusDraft: #373b53;
-  --invoiceItemQuantityXPrice: #7E88C3;
-  --invoiceItemsBg: #F9FAFE;
+  --invoiceItemQuantityXPrice: #7e88c3;
+  --invoiceItemsBg: #f9fafe;
 }
 
 body {
@@ -92,14 +93,12 @@ h3 {
   font-size: var(--fs-md);
   line-height: 24px;
   letter-spacing: 0.8px;
-  
 }
 
 h4 {
   font-size: var(--fs-h4);
   line-height: 15px;
-  letter-spacing: .9px;
- 
+  letter-spacing: 0.9px;
 }
 
 .text,
