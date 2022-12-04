@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FaCheck } from 'react-icons/fa';
-import styles from './styles/FilterModalItem.module.css';
+import styles from './FilterModalItem.module.css';
 
 export const FilterModalItem = ({ checkboxLabel }) => {
   const [checked, setChecked] = useState(false);

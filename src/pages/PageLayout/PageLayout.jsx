@@ -1,6 +1,6 @@
 import { Navbar } from '@/components/Navbar';
 import { Outlet } from 'react-router-dom';
-import styles from './styles/PageLayout.module.css';
+import styles from './PageLayout.module.css';
 export const PageLayout = () => {
   return (
     <div className={styles.pageLayout}>

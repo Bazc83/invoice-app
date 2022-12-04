@@ -1,6 +1,6 @@
 import { DarkModeContext } from '@/App';
 import { useContext } from 'react';
-import styles from './styles/Navbar.module.css';
+import styles from './Navbar.module.css';
 
 export const Navbar = () => {
   const { theme, toggleDarkMode } = useContext(DarkModeContext);

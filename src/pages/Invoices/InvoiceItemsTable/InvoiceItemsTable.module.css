@@ -1,0 +1,38 @@
+.invoiceItemsTable {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .invoiceItemsTable {
+    display: revert;
+    background-color: var(--invoiceItemsBg);
+    border-radius: 8px 8px 0 0;
+    width: 100%;
+    padding: 2rem;
+  }
+
+  .invoiceItemsTable th {
+    text-align: end;
+    font-weight: 500;
+    font-size: var(--fs-sm);
+    line-height: 15px;
+    letter-spacing: 0.25px;
+    color: var(--text-faded);
+  }
+
+  .invoiceItemsTable th:first-child {
+    text-align: start;
+  }
+
+  .invoiceItemsTable tr td:first-child {
+    text-align: start;
+  }
+  .invoiceItemsTable tr td {
+    text-align: end;
+    font-weight: 500;
+    font-size: 0.75rem;
+    line-height: 15px;
+    letter-spacing: 0.25px;
+    color: var(--text);
+  }
+}

@@ -1,4 +1,4 @@
-import styles from './styles/NoInvoices.module.css';
+import styles from './NoInvoices.module.css';
 
 export const NoInvoices = () => {
   return (

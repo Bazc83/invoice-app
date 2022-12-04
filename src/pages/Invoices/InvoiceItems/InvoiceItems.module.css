@@ -1,4 +1,4 @@
-.invoiceItems{
+.invoiceItems {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -8,4 +8,8 @@
   border-radius: 8px 8px 0 0;
 }
 
-
+@media (max-width: 767.9999px) {
+  .invoiceItems {
+    display: none;
+  }
+}

@@ -1,11 +1,9 @@
-import { FilterModalItem } from './FilterModalItem';
-import styles from './styles/FilterModal.module.css';
+import { FilterModalItem } from '../FilterModalItem/FilterModalItem';
+import styles from './FilterModal.module.css';
 
 export const FilterModal = () => {
-
-
   return (
-    <div className={styles.modal} >
+    <div className={styles.modal}>
       <form className={styles.modalForm}>
         <FilterModalItem checkboxLabel={'draft'} />
 

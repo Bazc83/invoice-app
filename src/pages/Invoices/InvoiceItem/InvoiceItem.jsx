@@ -1,4 +1,4 @@
-import styles from './styles/InvoiceItem.module.css';
+import styles from './InvoiceItem.module.css';
 export const InvoiceItem = ({ item }) => {
   return (
     <div className={styles.invoiceItem}>

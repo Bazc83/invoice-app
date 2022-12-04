@@ -1,6 +1,6 @@
 import { Button } from '@/components/Button';
 import { Filter } from '@/components/Filter';
-import styles from './styles/InvoicesPageController.module.css';
+import styles from './InvoicesPageControls.module.css';
 export const InvoicesPageControls = ({ invoicesData }) => {
   return (
     <div className={styles.invoicesPageController}>

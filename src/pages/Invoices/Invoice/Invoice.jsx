@@ -5,9 +5,9 @@ import data from '@data/data.json';
 import { useEffect, useState } from 'react';
 import { FaChevronLeft } from 'react-icons/fa';
 import { Link, useParams } from 'react-router-dom';
-import { InvoiceItem } from './InvoiceItem';
-import { InvoiceItems } from './InvoiceItems';
-import styles from './styles/Invoice.module.css';
+import { InvoiceItems } from '../InvoiceItems/InvoiceItems';
+import { InvoiceItemsTable } from '../InvoiceItemsTable';
+import styles from './Invoice.module.css';
 
 export const Invoice = () => {
   const { invoiceId } = useParams();
@@ -95,7 +95,9 @@ export const Invoice = () => {
             </div>
 
             <div className={styles.itemsWrapper}>
-              
+
+              <InvoiceItemsTable items={invoiceState?.items} />
+
               <InvoiceItems items={invoiceState?.items} />
 
               <div className={styles.amountDue}>

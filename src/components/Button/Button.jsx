@@ -1,5 +1,5 @@
 import { FaPlus } from 'react-icons/fa';
-import styles from './styles/Button.module.css';
+import styles from './Button.module.css';
 
 export const Button = (props) => {
   const { children, onClick, type, plusIcon, btnStyle } = props;

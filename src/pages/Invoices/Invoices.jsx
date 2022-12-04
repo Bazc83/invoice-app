@@ -1,9 +1,9 @@
 import { Outlet, useNavigate } from 'react-router-dom';
 import data from '../../data/data.json';
 import { InvoicePreview } from './InvoicePreview';
-import { InvoicesPageControls } from './InvoicesPageControls';
-import { NoInvoices } from './NoInvoices';
-import styles from './styles/Invoices.module.css';
+import { InvoicesPageControls } from './InvoicesPageControls/InvoicesPageControls';
+import { NoInvoices } from './NoInvoices/NoInvoices';
+import styles from './Invoices.module.css';
 
 export const Invoices = () => {
   // const data = [];

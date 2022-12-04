@@ -1,6 +1,6 @@
 import { useFormatDate } from '@/hooks/useFormatDate';
 import { PaymentStatus } from '@/pages/Invoices/PaymentStatus';
-import styles from './styles/InvoicePreview.module.css';
+import styles from './InvoicePreview.module.css';
 export const InvoicePreview = (props) => {
   const { invoice, onClick } = props;
 
