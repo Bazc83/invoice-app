@@ -2,7 +2,7 @@ import styles from './InvoiceItemsTable.module.css';
 export const InvoiceItemsTable = ({ items }) => {
   return (
     <table className={styles.invoiceItemsTable}>
-      <tr >
+      <tr  className='text-faded-xs'>
         <th>Item Name</th>
         <th>QTY</th>
         <th>Price</th>
@@ -10,7 +10,7 @@ export const InvoiceItemsTable = ({ items }) => {
       </tr>
       {items?.map((item, i) => {
         return (
-          <tr key={`tableItem${i}`} >
+          <tr key={`tableItem${i}`} className="text">
             <td >{item?.name}</td>
             <td>{item?.quantity}</td>
             <td>{item?.price}</td>
