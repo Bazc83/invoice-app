@@ -1,10 +1,10 @@
 import { Button } from '@/components/Button';
+import { GoBackLink } from '@/components/GoBackLink';
 import { useFormatDate } from '@/hooks/useFormatDate';
 import { PaymentStatus } from '@/pages/Invoices/PaymentStatus';
 import data from '@data/data.json';
 import { useEffect, useState } from 'react';
-import { FaChevronLeft } from 'react-icons/fa';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { InvoiceItems } from '../InvoiceItems/InvoiceItems';
 import { InvoiceItemsTable } from '../InvoiceItemsTable';
 import styles from './Invoice.module.css';
@@ -23,12 +23,7 @@ export const Invoice = () => {
     <>
       <div className={` container ${styles.invoiceWrapper}`}>
         {/* Go back to invoices page link */}
-        <div className={styles.goBackLinkWrapper}>
-          <FaChevronLeft className={styles.iconLeft} />
-          <Link to='/invoices' className={styles.goBackLink}>
-            Go back
-          </Link>
-        </div>
+        <GoBackLink linkPath={"/invoices"}/>
 
         <div className={`${styles.invoiceContent} text`}>
           <div className={`container secondary-bg ${styles.statusAndButtons}`}>
@@ -95,7 +90,6 @@ export const Invoice = () => {
             </div>
 
             <div className={styles.itemsWrapper}>
-
               <InvoiceItemsTable items={invoiceState?.items} />
 
               <InvoiceItems items={invoiceState?.items} />

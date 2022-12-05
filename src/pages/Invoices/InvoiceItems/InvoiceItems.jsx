@@ -1,4 +1,4 @@
-import { InvoiceItem } from '../InvoiceItem/InvoiceItem';
+import { InvoiceItem } from './InvoiceItem/InvoiceItem';
 import styles from './InvoiceItems.module.css';
 export const InvoiceItems = ({ items }) => {
   return (

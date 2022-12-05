@@ -1,4 +1,5 @@
 import styles from './InvoiceItemsTable.module.css';
+import { InvoiceTableItem } from './InvoiceTableItem/InvoiceTableItem';
 export const InvoiceItemsTable = ({ items }) => {
   return (
     <table className={styles.invoiceItemsTable}>
@@ -12,19 +13,7 @@ export const InvoiceItemsTable = ({ items }) => {
       </thead>
       <tbody>
         {items?.map((item, i) => {
-          return (
-            <tr key={`tableItem${i}`} className='text'>
-              <td>{item?.name}</td>
-              <td>{item?.quantity}</td>
-              <td>{item?.price}</td>
-              <td>
-                {new Intl.NumberFormat('en', {
-                  style: 'currency',
-                  currency: 'GBP',
-                }).format(item?.total)}
-              </td>
-            </tr>
-          );
+          return <InvoiceTableItem key={`tableItem${i}`} item={item} />;
         })}
       </tbody>
     </table>
