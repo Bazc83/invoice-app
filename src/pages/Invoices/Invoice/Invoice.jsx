@@ -23,7 +23,7 @@ export const Invoice = () => {
     <>
       <div className={` container ${styles.invoiceWrapper}`}>
         {/* Go back to invoices page link */}
-        <GoBackLink linkPath={"/invoices"}/>
+        <GoBackLink linkPath={'/invoices'} />
 
         <div className={`${styles.invoiceContent} text`}>
           <div className={`container secondary-bg ${styles.statusAndButtons}`}>
@@ -90,13 +90,21 @@ export const Invoice = () => {
             </div>
 
             <div className={styles.itemsWrapper}>
+              {/* hidden screens smaller than 678px */}
               <InvoiceItemsTable items={invoiceState?.items} />
 
+              {/* Hidden screens bigger than 678px */}
               <InvoiceItems items={invoiceState?.items} />
 
               <div className={styles.amountDue}>
                 <p className='text-xs'>Amount Due</p>
-                <h2>£ {invoiceState?.total}</h2>
+                <h2>
+                  {' '}
+                  {new Intl.NumberFormat('en', {
+                    style: 'currency',
+                    currency: 'GBP',
+                  }).format(invoiceState?.total)}
+                </h2>
               </div>
             </div>
           </div>
