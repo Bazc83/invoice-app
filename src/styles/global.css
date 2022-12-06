@@ -27,9 +27,9 @@
   --invoiceItemsBg: #252945;
   --invoiceAmountDue: #0c0e16;
   --paymentStatusDraft: #dfe3fa;
-  --invoiceItemQuantityXPrice: #888eb0;
+  --text-faded-secondary: #888eb0;
   --invoiceItemsBg: #252945;
-
+  --invoiceFormHeaderAccent: #777f98;
   /* font sizes */
   --fs-xl: clamp(2rem, 5vw, 2.25rem);
   --fs-lg: clamp(1.25rem, 5vw, 1.5rem);
@@ -54,8 +54,9 @@
   --invoiceItemsBg: #f9fafe;
   --invoiceAmountDue: #373b53;
   --paymentStatusDraft: #373b53;
-  --invoiceItemQuantityXPrice: #7e88c3;
+  --text-faded-secondary: #7e88c3;
   --invoiceItemsBg: #f9fafe;
+  --invoiceFormHeaderAccent: #888eb0;
 }
 
 body {

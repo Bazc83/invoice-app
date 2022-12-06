@@ -1,5 +1,6 @@
 import { Button } from '@/components/Button';
 import { GoBackLink } from '@/components/GoBackLink';
+import { InvoiceForm } from '@/components/InvoiceForm';
 import { useFormatDate } from '@/hooks/useFormatDate';
 import { PaymentStatus } from '@/pages/Invoices/PaymentStatus';
 import data from '@data/data.json';
@@ -25,7 +26,9 @@ export const Invoice = () => {
         {/* Go back to invoices page link */}
         <GoBackLink linkPath={'/invoices'} />
 
+      
         <div className={`${styles.invoiceContent} text`}>
+        <InvoiceForm />
           <div className={`container secondary-bg ${styles.statusAndButtons}`}>
             <div className={`secondary-bg ${styles.status}`}>
               <p>Status</p>
