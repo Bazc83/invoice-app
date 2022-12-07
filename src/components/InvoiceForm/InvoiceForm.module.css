@@ -29,20 +29,3 @@
   gap: 1.5rem;
   padding-bottom: 2.5rem;
 }
-
-.formItem {
-  display: flex;
-  flex-direction: column;
-  gap: 0.625rem;
-}
-
-.formItem label {
-  color: var(--text-faded-secondary);
-}
-
-.formItem input {
-  background-color: var(--secondary-bg);
-  border: 1 solid var(--secondary-bg);
-  padding: 1rem 1.5rem;
-  color: var(--text);
-}

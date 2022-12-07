@@ -1,5 +1,5 @@
-import React from 'react';
 import styles from './InvoiceForm.module.css';
+import { InvoiceFormItem } from './InvoiceFormItem';
 export const InvoiceForm = ({ newInvoice }) => {
   return (
     <div className={styles.invoiceForm}>
@@ -14,29 +14,24 @@ export const InvoiceForm = ({ newInvoice }) => {
       <form className={styles.form}>
         <div className={styles.formSection}>
           <h4 className={styles.formSectionHeader}>Bill From</h4>
-
-
-          <div className={styles.formItem}>
-            <label htmlFor="streetAddress" className='text-faded'>Street Address</label>
-            <input type="text" name="streetAddress"   className={`text`}/>
-          </div>
-          <div className={styles.formItem}>
-            <label htmlFor="city" className='text-faded'>City</label>
-            <input type="text" name="city"   className={`text`}/>
-          </div>
-          <div className={styles.formItem}>
-            <label htmlFor="postCode" className='text-faded'>Post Code</label>
-            <input type="text" name="postCode"   className={`text`}/>
-          </div>
-          <div className={styles.formItem}>
-            <label htmlFor="country" className='text-faded'>Country</label>
-            <input type="text" name="country"  className={`text`} />
-          </div>
+          <InvoiceFormItem
+            type='text'
+            itemName='streetAddress'
+            itemLabel='Street Address'
+          />
+          <InvoiceFormItem type='text' itemName='city' itemLabel='City' />
+          <InvoiceFormItem
+            type='text'
+            itemName='postCode'
+            itemLabel='Post Code'
+          />
+          <InvoiceFormItem type='text' itemName='country' itemLabel='Country' />
         </div>
-
 
         <div className={styles.formSection}>
           <h4 className={styles.formSectionHeader}>Bill To</h4>
+
+          
         </div>
       </form>
     </div>
