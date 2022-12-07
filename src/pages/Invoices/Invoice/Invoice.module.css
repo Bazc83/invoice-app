@@ -1,3 +1,31 @@
+.invoice {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  position: relative;
+}
+
+.mainWrapper {
+  grid-column: 1/-1;
+  grid-row: 1/-1;
+}
+
+.mainWrapperOverlay:after {
+  content: '';
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 20;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  inset: 0;
+}
+@media (min-width: 768px) {
+  .invoice {
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 1fr;
+  }
+}
+
 .invoiceWrapper {
   padding-block: 2rem;
   display: flex;
@@ -6,36 +34,20 @@
   background-color: var(--main-bg);
   max-width: 715px;
   position: relative;
+  grid-row: 1/-1;
+  grid-column: 1/-1;
 }
-
-
-
-/* .invoiceContent {
+.invoiceContent {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  position: relative;
-} */
-
+  gap: 1.75rem;
+}
 .status {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding-block: 1.75rem;
   gap: 1rem;
-  box-shadow: var(--invoiceShadow);
-}
-
-.invoiceMain {
-  display: grid;
-  padding: 1.75rem;
-  gap: 1.75rem 0.5rem;
-  grid-template-areas:
-    'refAndDesc refAndDesc refAndDesc ...'
-    'address ... ... ... '
-    'dates clientDetails clientDetails clientDetails'
-    'clientEmail clientEmail ... ...'
-    'items items items items';
   box-shadow: var(--invoiceShadow);
 }
 
@@ -51,19 +63,11 @@
   width: 100%;
   padding: 1.75rem 1.5rem;
   box-shadow: var(--invoiceShadow);
+  grid-column: 1/-1;
+  z-index: 20;
 }
 
 @media (min-width: 700px) {
-  .invoiceMain {
-    display: grid;
-    padding: 1.75rem;
-    row-gap: 1.25rem;
-    grid-template-areas:
-      'refAndDesc ... ... ... ...  address address'
-      'dates ... clientDetails clientDetails ...  clientEmail ...'
-      'items items items items items items items';
-  }
-
   .statusAndButtons {
     display: flex;
     align-items: center;
@@ -81,80 +85,4 @@
     align-items: center;
     justify-content: center;
   }
-}
-
-.refAndDescription {
-  grid-area: refAndDesc;
-}
-.address {
-  grid-area: address;
-  width: max-content;
-}
-@media (min-width: 768px) {
-  .address {
-    justify-self: end;
-  }
-}
-
-.dates {
-  grid-area: dates;
-  display: flex;
-  flex-direction: column;
-  gap: 1.75rem;
-  width: max-content;
-}
-
-.createdAt,
-.paymentDue {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.ref {
-  grid-area: ref;
-  padding-bottom: 0.25rem;
-}
-
-.description {
-  grid-area: description;
-}
-
-.clientDetails {
-  grid-area: clientDetails;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  width: max-content;
-}
-@media (max-width: 700px) {
-  .clientDetails {
-    justify-self: center;
-  }
-}
-
-.clientEmail {
-  grid-area: clientEmail;
-}
-
-.itemsWrapper {
-  grid-area: items;
-}
-
-.refHash {
-  color: var(--accent);
-}
-
-.amountDue {
-  background-color: var(--invoiceAmountDue);
-  color: var(--white);
-  padding: 1.75rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 0 0 8px 8px;
-}
-
-.amountDue p {
-  color: var(--white);
 }

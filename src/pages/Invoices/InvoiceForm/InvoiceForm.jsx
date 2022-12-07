@@ -1,7 +1,7 @@
-import { Button } from '../Button';
+import { Button } from '../../../components/Button';
 import styles from './InvoiceForm.module.css';
 import { InvoiceFormItem } from './InvoiceFormItem';
-export const InvoiceForm = ({ newInvoice, setShowEdit}) => {
+export const InvoiceForm = ({ newInvoice, setShowEdit }) => {
   return (
     <div className={styles.invoiceForm}>
       {newInvoice ? (
@@ -77,10 +77,12 @@ export const InvoiceForm = ({ newInvoice, setShowEdit}) => {
       </form>
 
       <div>
-        <Button>Cancel</Button>{' '}
-        <Button onClick={() => setShowEdit((prev) => !prev)}>
-          Save Changes
-        </Button>
+        <Button
+          onClick={() => setShowEdit((prev) => !prev)}
+          btnStyle='btnThree'>
+          Cancel
+        </Button>{' '}
+        <Button>Save Changes</Button>
       </div>
     </div>
   );
