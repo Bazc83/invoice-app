@@ -14,32 +14,37 @@ export const Invoice = () => {
   const { invoiceId } = useParams();
   const [invoiceState, setInvoiceState] = useState();
 
+  const [showEdit, setShowEdit] = useState(false);
+
   useEffect(() => {
     setInvoiceState(data.filter((invoice) => invoice.id === invoiceId)[0]);
   }, [invoiceId]);
 
   const { getDate } = useFormatDate();
 
+  
+  useEffect(()=>{console.log(showEdit)},[showEdit])
   return (
     <>
-      <div className={` container ${styles.invoiceWrapper}`}>
+    {showEdit && <InvoiceForm setShowEdit={setShowEdit}/>}
+     
+      <div className={`container ${styles.invoiceWrapper}`}>
         {/* Go back to invoices page link */}
         <GoBackLink linkPath={'/invoices'} />
 
-      
         <div className={`${styles.invoiceContent} text`}>
-        <InvoiceForm />
           <div className={`container secondary-bg ${styles.statusAndButtons}`}>
             <div className={`secondary-bg ${styles.status}`}>
               <p>Status</p>
               <PaymentStatus status={invoiceState?.status} />
             </div>
             <div className={`${styles.buttonWrapperTop}`}>
-              <Button btnStyle='btnThree'>Edit</Button>
+              <Button btnStyle='btnThree'  onClick={() => setShowEdit((prev) => !prev)}>Edit</Button>
               <Button btnStyle='btnFive'>Delete</Button>
               <Button>Mark as Paid</Button>
             </div>
           </div>
+
           <div className={`secondary-bg ${styles.invoiceMain}`}>
             <div className={styles.refAndDescription}>
               <h4 className={styles.ref}>
@@ -113,8 +118,13 @@ export const Invoice = () => {
           </div>
         </div>
       </div>
+
       <div className={`secondary-bg container ${styles.buttonWrapperBottom}`}>
-        <Button btnStyle='btnThree'>Edit</Button>
+        <Button
+          btnStyle='btnThree'
+          onClick={() => setShowEdit((prev) => !prev)}>
+          Edit
+        </Button>
         <Button btnStyle='btnFive'>Delete</Button>
         <Button>Mark as Paid</Button>
       </div>

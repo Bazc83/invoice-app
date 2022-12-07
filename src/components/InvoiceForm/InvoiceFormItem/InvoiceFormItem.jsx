@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import styles from './InvoiceFormItem.module.css';
-export const InvoiceFormItem = ({ type, itemName, itemLabel }) => {
+export const InvoiceFormItem = ({ type, itemName, itemLabel, inputError }) => {
   const [itemValue, setItemValue] = useState('');
-
+  
   return (
-    <div className={styles.invoiceFormItem}>
+    <div className={`${styles.invoiceFormItem} ${inputError && styles.inputError}`} >
       <label htmlFor={itemName} className='text-faded'>
         {itemLabel}
       </label>
