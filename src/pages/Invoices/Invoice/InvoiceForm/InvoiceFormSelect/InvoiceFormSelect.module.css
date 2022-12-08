@@ -1,0 +1,43 @@
+.invoiceFormSelect {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+.invoiceFormSelect label {
+  color: var(--text-faded-secondary);
+}
+
+.invoiceFormSelect select {
+  background-color: var(--secondary-bg);
+  border: 1 solid var(--secondary-bg);
+  padding: 1rem 2rem;
+  color: var(--text);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.invoiceFormSelect select {
+  background-position: right;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.invoiceFormSelect option:hover {
+  color: var(--primary-600);
+  background-color: purple;
+}
+.invoiceFormSelect select:active,
+.invoiceFormSelect select:focus {
+  outline: 1px solid var(--primary-600);
+}
+
+.invoiceFormSelect select *:focus {
+  outline: none;
+  background-color: blue;
+  color: white;
+}
+
+.invoiceFormSelect select option:hover {
+  background-color: none;
+}

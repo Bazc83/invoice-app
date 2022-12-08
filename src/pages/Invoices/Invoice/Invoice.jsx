@@ -1,12 +1,12 @@
 import { GoBackLink } from '@/components/GoBackLink';
-import { InvoiceForm } from '@/pages/Invoices/InvoiceForm';
+import { InvoiceForm } from '@/pages/Invoices/Invoice/InvoiceForm';
 import { PaymentStatus } from '@/pages/Invoices/PaymentStatus';
 import data from '@data/data.json';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { InvoiceButtons } from '../InvoiceButtons';
-import { InvoiceMain } from '../InvoiceMain';
 import styles from './Invoice.module.css';
+import { InvoiceButtons } from './InvoiceButtons';
+import { InvoiceMain } from './InvoiceMain';
 
 export const Invoice = () => {
   const { invoiceId } = useParams();
@@ -20,7 +20,9 @@ export const Invoice = () => {
 
   return (
     <div className={styles.invoice}>
-      {showEdit && <InvoiceForm setShowEdit={setShowEdit} />}
+      {showEdit && (
+        <InvoiceForm setShowEdit={setShowEdit} invoiceState={invoiceState} />
+      )}
 
       <div
         className={`${styles.mainWrapper} ${

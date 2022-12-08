@@ -1,14 +1,26 @@
-import { Button } from '../../../components/Button';
+import { Button } from '@components/Button';
+import { useState } from 'react';
 import styles from './InvoiceForm.module.css';
 import { InvoiceFormItem } from './InvoiceFormItem';
-export const InvoiceForm = ({ newInvoice, setShowEdit }) => {
+import { InvoiceFormSelect } from './InvoiceFormSelect/InvoiceFormSelect';
+import { Simple } from './InvoiceFormSelect/Simple/Simple';
+export const InvoiceForm = ({ newInvoice, setShowEdit, invoiceState }) => {
+  const options = [
+    { key: 1, value: 'test 1' },
+    { key: 2, value: 'test 2' },
+    { key: 3, value: 'test 3' },
+    { key: 4, value: 'test 4' },
+  ];
+  const [selectedOption, setSelectedOption] = useState(3);
+  const [open, setOpen] = useState(false);
   return (
     <div className={styles.invoiceForm}>
       {newInvoice ? (
         <h2>New Invoice</h2>
       ) : (
         <h2>
-          Edit <span className={styles.invoiceFormHeaderAccent}>#</span>24324F
+          Edit <span className={styles.invoiceFormHeaderAccent}>#</span>
+          {invoiceState.id}
         </h2>
       )}
 
@@ -19,14 +31,26 @@ export const InvoiceForm = ({ newInvoice, setShowEdit }) => {
             type='text'
             itemName='streetAddress'
             itemLabel='Street Address'
+            inputValue={invoiceState?.senderAddress.street}
           />
-          <InvoiceFormItem type='text' itemName='city' itemLabel='City' />
+          <InvoiceFormItem
+            type='text'
+            itemName='city'
+            itemLabel='City'
+            inputValue={invoiceState?.senderAddress.city}
+          />
           <InvoiceFormItem
             type='text'
             itemName='postCode'
             itemLabel='Post Code'
+            inputValue={invoiceState?.senderAddress.postCode}
           />
-          <InvoiceFormItem type='text' itemName='country' itemLabel='Country' />
+          <InvoiceFormItem
+            type='text'
+            itemName='country'
+            itemLabel='Country'
+            inputValue={invoiceState?.senderAddress.country}
+          />
         </div>
 
         <div className={styles.formSection}>
@@ -35,43 +59,61 @@ export const InvoiceForm = ({ newInvoice, setShowEdit }) => {
             type='text'
             itemName='clientsName'
             itemLabel="Client's Name"
+            inputValue={invoiceState?.clientName}
           />
           <InvoiceFormItem
             type='email'
             itemName='clientsEmail'
             itemLabel="Client's Email"
+            inputValue={invoiceState?.clientEmail}
           />
 
           <InvoiceFormItem
             type='text'
             itemName='clientsStreetAddress'
             itemLabel='Street Address'
+            inputValue={invoiceState?.clientAddress.street}
           />
           <InvoiceFormItem
             type='text'
             itemName='clientsCity'
             itemLabel='City'
+            inputValue={invoiceState?.clientAddress.city}
           />
           <InvoiceFormItem
             type='text'
             itemName='postCode'
             itemLabel='Post Code'
+            inputValue={invoiceState?.clientAddress.postCode}
           />
-          <InvoiceFormItem type='text' itemName='country' itemLabel='Country' />
+          <InvoiceFormItem
+            type='text'
+            itemName='country'
+            itemLabel='Country'
+            inputValue={invoiceState?.clientAddress.country}
+          />
           <InvoiceFormItem
             type='date'
             itemName='invoiceDate'
             itemLabel='Invoice Date'
+            inputValue={invoiceState?.createdAt}
           />
 
-          <select>
-            <option value='Net 30 Days'>Net 30 Days</option>
-          </select>
+          {/* <InvoiceFormSelect /> */}
+          <Simple
+            options={options}
+            selectedKey={selectedOption}
+            placeholder={'type to search'}
+            onChange={(item) => setSelectedOption(item)}
+            open={open}
+            setOpen={setOpen}
+          />
 
           <InvoiceFormItem
             type='text'
             itemName='projectDescription'
             itemLabel='Project/Description'
+            inputValue={invoiceState?.description}
           />
         </div>
       </form>

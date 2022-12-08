@@ -1,5 +1,5 @@
-import styles from './InvoiceItemsTable.module.css';
 import { InvoiceTableItem } from './InvoiceTableItem/InvoiceTableItem';
+import styles from './InvoiceItemsTable.module.css';
 export const InvoiceItemsTable = ({ items }) => {
   return (
     <table className={styles.invoiceItemsTable}>
