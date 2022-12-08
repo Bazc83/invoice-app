@@ -77,11 +77,9 @@
   --invoiceFormHeaderAccent: var(--neutral-500);
   --invoiceFormSelectBg: var(--white);
   --invoiceFormSelectBorder: var(--neutral-400);
-
-  
 }
 
-[data-theme="light"] input{
+[data-theme='light'] input {
   color-scheme: light;
 }
 
@@ -92,7 +90,7 @@ body {
   padding: 0;
 }
 
-input{
+input {
   color-scheme: dark;
   cursor: pointer;
 }
@@ -167,4 +165,10 @@ h4 {
   background-color: var(--secondary-bg);
   color: var(--text);
   border-radius: 8px;
+}
+
+.grid-row-half {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.75rem;
 }

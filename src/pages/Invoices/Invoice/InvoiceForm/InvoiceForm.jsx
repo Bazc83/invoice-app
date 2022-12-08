@@ -4,8 +4,7 @@ import styles from './InvoiceForm.module.css';
 import { InvoiceFormItem } from './InvoiceFormItem';
 import { InvoiceFormSelect } from './InvoiceFormSelect/InvoiceFormSelect';
 export const InvoiceForm = ({ newInvoice, setShowEdit, invoiceState }) => {
-
-  console.log(invoiceState)
+  console.log(invoiceState);
   const options = [
     { key: 1, value: 'Net 1 Day' },
     { key: 7, value: 'Net 7 Days' },
@@ -93,22 +92,24 @@ export const InvoiceForm = ({ newInvoice, setShowEdit, invoiceState }) => {
             itemLabel='Country'
             inputValue={invoiceState?.clientAddress.country}
           />
-          <InvoiceFormItem
-            type='date'
-            itemName='invoiceDate'
-            itemLabel='Invoice Date'
-            inputValue={invoiceState?.createdAt}
-          />
 
-          <InvoiceFormSelect
-            options={options}
-            selectedKey={selectedOption}
-            placeholder={'type to search'}
-            onChange={(item) => setSelectedOption(item)}
-            open={open}
-            setOpen={setOpen}
-          />
+          <div className='grid-row-half'>
+            <InvoiceFormItem
+              type='date'
+              itemName='invoiceDate'
+              itemLabel='Invoice Date'
+              inputValue={invoiceState?.createdAt}
+            />
 
+            <InvoiceFormSelect
+              options={options}
+              selectedKey={selectedOption}
+              placeholder={'type to search'}
+              onChange={(item) => setSelectedOption(item)}
+              open={open}
+              setOpen={setOpen}
+            />
+          </div>
           <InvoiceFormItem
             type='text'
             itemName='projectDescription'

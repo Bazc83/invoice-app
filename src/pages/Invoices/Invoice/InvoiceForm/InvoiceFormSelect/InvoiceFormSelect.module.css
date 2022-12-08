@@ -12,16 +12,11 @@
   position: relative;
 }
 
-.dropdownContainer input {
-  display: none;
-}
-
 .inputContainer {
   position: relative;
   width: 100%;
-  padding: 1rem 1.5rem;
   cursor: pointer;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .option {
@@ -31,6 +26,10 @@
   padding: 1rem 1.5rem;
   cursor: pointer;
   color: var(--text);
+}
+
+.option:last-child {
+  border-bottom: none;
 }
 
 .option:hover {
@@ -44,29 +43,32 @@
   display: none;
   border-radius: 8px;
   background-color: var(--secondary-bg);
+  box-shadow: var(--filterModalShadow);
 }
 
 .dropdown.visible {
   display: block;
 }
 
-.inputContainer div {
-  position: absolute;
+.inputContainer input {
   background-color: var(--secondary-bg);
   width: 100%;
-  top: 0;
-  left: 0;
   padding: 1rem 1.5rem;
   border-radius: 8px;
+  border: 1px solid var(--secondary-bg);
 }
 
-.inputContainer div:active,
-.inputContainer div:focus {
+.inputContainer input:hover,
+.inputContainer input:active,
+.inputContainer input:focus {
   border: 1px solid var(--primary-600);
+  outline: 1px solid var(--primary-600);
 }
 
 .icon {
   color: var(--primary-600);
   position: absolute;
   right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
 }

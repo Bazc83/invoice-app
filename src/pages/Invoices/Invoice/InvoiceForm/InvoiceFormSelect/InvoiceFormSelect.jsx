@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { FaChevronDown, FaChevronUp} from 'react-icons/fa';
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import styles from './InvoiceFormSelect.module.css';
 export const InvoiceFormSelect = ({
   options,
@@ -39,20 +39,15 @@ export const InvoiceFormSelect = ({
 
       <div className={styles.dropdownContainer}>
         <div className={styles.inputContainer} onClick={onInputClick}>
-          <input
-            type='text'
-            value={inputValue}
-            placeholder={placeholder}
-            onChange={onInputChange}
-          />
 
-          <div className='text'>{inputValue}</div>
+          <input type="text" readOnly value={inputValue} className="text"/>
 
           {open ? (
             <FaChevronUp className={styles.icon} />
           ) : (
             <FaChevronDown className={styles.icon} />
           )}
+
         </div>
 
         <div className={`${styles.dropdown} ${open && styles.visible}`}>
