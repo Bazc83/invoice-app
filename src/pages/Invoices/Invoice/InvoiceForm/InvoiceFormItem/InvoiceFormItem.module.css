@@ -20,6 +20,8 @@
   outline: 1px solid var(--primary-600);
 }
 
+
+
 .inputError label {
   color: var(--orange-600);
 }

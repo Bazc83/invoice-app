@@ -3,41 +3,70 @@
   flex-direction: column;
   gap: 0.625rem;
 }
+
 .invoiceFormSelect label {
   color: var(--text-faded-secondary);
 }
 
-.invoiceFormSelect select {
-  background-color: var(--secondary-bg);
-  border: 1 solid var(--secondary-bg);
-  padding: 1rem 2rem;
-  color: var(--text);
-  border-radius: 8px;
+.dropdownContainer {
+  position: relative;
+}
+
+.dropdownContainer input {
+  display: none;
+}
+
+.inputContainer {
+  position: relative;
+  width: 100%;
+  padding: 1rem 1.5rem;
   cursor: pointer;
+  margin-bottom: 1.5rem;
 }
 
-.invoiceFormSelect select {
-  background-position: right;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  appearance: none;
+.option {
+  border-bottom: 2px solid var(--invoiceFormSelectBorder);
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  color: var(--text);
 }
 
-.invoiceFormSelect option:hover {
+.option:hover {
   color: var(--primary-600);
-  background-color: purple;
-}
-.invoiceFormSelect select:active,
-.invoiceFormSelect select:focus {
-  outline: 1px solid var(--primary-600);
 }
 
-.invoiceFormSelect select *:focus {
-  outline: none;
-  background-color: blue;
-  color: white;
+.dropdown {
+  border-bottom: none;
+  position: absolute;
+  width: 100%;
+  display: none;
+  border-radius: 8px;
+  background-color: var(--secondary-bg);
 }
 
-.invoiceFormSelect select option:hover {
-  background-color: none;
+.dropdown.visible {
+  display: block;
+}
+
+.inputContainer div {
+  position: absolute;
+  background-color: var(--secondary-bg);
+  width: 100%;
+  top: 0;
+  left: 0;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+}
+
+.inputContainer div:active,
+.inputContainer div:focus {
+  border: 1px solid var(--primary-600);
+}
+
+.icon {
+  color: var(--primary-600);
+  position: absolute;
+  right: 24px;
 }

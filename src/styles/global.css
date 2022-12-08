@@ -45,6 +45,8 @@
   --text-faded-secondary: var(--neutral-500);
   --invoiceItemsBg: var(--neutral-700);
   --invoiceFormHeaderAccent: #777f98;
+  --invoiceFormSelectBg: var(--neutral-700);
+  --invoiceFormSelectBorder: var(--neutral-900);
 
   /* font sizes */
   --fs-xl: clamp(2rem, 5vw, 2.25rem);
@@ -73,6 +75,14 @@
   --text-faded-secondary: var(--accent);
   --invoiceItemsBg: var(--neutral-300);
   --invoiceFormHeaderAccent: var(--neutral-500);
+  --invoiceFormSelectBg: var(--white);
+  --invoiceFormSelectBorder: var(--neutral-400);
+
+  
+}
+
+[data-theme="light"] input{
+  color-scheme: light;
 }
 
 body {
@@ -82,6 +92,10 @@ body {
   padding: 0;
 }
 
+input{
+  color-scheme: dark;
+  cursor: pointer;
+}
 .container {
   margin-inline: auto;
   padding-inline: 1.5rem;
@@ -92,6 +106,7 @@ h1,
 h2,
 h3 {
   font-weight: 600;
+  color: var(--text);
 }
 h1 {
   font-size: var(--fs-xl);

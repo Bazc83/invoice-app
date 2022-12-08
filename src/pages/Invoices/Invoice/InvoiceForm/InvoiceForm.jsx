@@ -3,15 +3,16 @@ import { useState } from 'react';
 import styles from './InvoiceForm.module.css';
 import { InvoiceFormItem } from './InvoiceFormItem';
 import { InvoiceFormSelect } from './InvoiceFormSelect/InvoiceFormSelect';
-import { Simple } from './InvoiceFormSelect/Simple/Simple';
 export const InvoiceForm = ({ newInvoice, setShowEdit, invoiceState }) => {
+
+  console.log(invoiceState)
   const options = [
-    { key: 1, value: 'test 1' },
-    { key: 2, value: 'test 2' },
-    { key: 3, value: 'test 3' },
-    { key: 4, value: 'test 4' },
+    { key: 1, value: 'Net 1 Day' },
+    { key: 7, value: 'Net 7 Days' },
+    { key: 14, value: 'Net 14 Days' },
+    { key: 30, value: 'Net 30 Days' },
   ];
-  const [selectedOption, setSelectedOption] = useState(3);
+  const [selectedOption, setSelectedOption] = useState(30);
   const [open, setOpen] = useState(false);
   return (
     <div className={styles.invoiceForm}>
@@ -99,8 +100,7 @@ export const InvoiceForm = ({ newInvoice, setShowEdit, invoiceState }) => {
             inputValue={invoiceState?.createdAt}
           />
 
-          {/* <InvoiceFormSelect /> */}
-          <Simple
+          <InvoiceFormSelect
             options={options}
             selectedKey={selectedOption}
             placeholder={'type to search'}
