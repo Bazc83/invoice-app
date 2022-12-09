@@ -8,14 +8,12 @@
     'qty price total icon';
 
   grid-template-columns: 60px 1fr 1fr 40px;
-
 }
 
 @media (min-width: 768px) {
   .invoiceFormItem {
     grid-template-areas: 'name qty price total icon';
     grid-template-columns: 2fr 60px 1fr 1fr 40px;
-    
   }
 }
 .name {
@@ -33,14 +31,6 @@
 .total {
   grid-area: total;
 }
-
-/* .qtyPriceTotal {
-  display: grid;
-  grid-template-columns: 60px 1fr 1fr 40px;
-  justify-items: center;
-  align-items: center;
-  gap: 0.5rem;
-} */
 
 .icon {
   display: flex;

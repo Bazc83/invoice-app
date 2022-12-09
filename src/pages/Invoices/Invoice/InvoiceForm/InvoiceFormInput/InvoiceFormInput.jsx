@@ -10,15 +10,17 @@ export const InvoiceFormInput = ({
   inputValue,
   maxWidth,
   disabled,
-  noBg
+  noBg,
 }) => {
   const [itemValue, setItemValue] = useState(inputValue);
-
+  console.log(itemValue)
   return (
     <div
       className={`${styles.invoiceFormInput} ${
         inputError && styles.inputError
-      }  ${maxWidth === "max-content" && styles.maxContent} ${noBg && styles.noBg}  ${className && className}`}>
+      }  ${maxWidth === 'max-content' && styles.maxContent} ${
+        noBg && styles.noBg
+      }  ${className && className}`}>
       <label htmlFor={itemName} className='text-faded'>
         {itemLabel}
       </label>
@@ -26,7 +28,7 @@ export const InvoiceFormInput = ({
         type={type ? type : 'text'}
         name={itemName}
         className={`text`}
-        value={`${itemValue}`}
+        value={itemValue}
         onChange={(e) => setItemValue(e.target.value)}
         disabled={disabled}
       />

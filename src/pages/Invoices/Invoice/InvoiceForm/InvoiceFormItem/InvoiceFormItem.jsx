@@ -1,5 +1,5 @@
 import React from 'react';
-import {  FaTrashAlt } from 'react-icons/fa';
+import { FaTrashAlt } from 'react-icons/fa';
 import { InvoiceFormInput } from '../InvoiceFormInput';
 import styles from './InvoiceFormItem.module.css';
 
@@ -12,7 +12,6 @@ export const InvoiceFormItem = ({ item }) => {
         itemLabel='Item Name'
         inputValue={item?.name}
         className={styles.name}
-       
       />
 
       <InvoiceFormInput
@@ -27,7 +26,7 @@ export const InvoiceFormItem = ({ item }) => {
         type='number'
         itemName='itemPrice'
         itemLabel='Price'
-        inputValue={item?.price}
+        inputValue={item?.price.toFixed(2)}
         maxWidth={'max-content'}
         className={styles.price}
       />
@@ -35,7 +34,7 @@ export const InvoiceFormItem = ({ item }) => {
         type='number'
         itemName='itemTotal'
         itemLabel='Total'
-        inputValue={item?.total}
+        inputValue={item?.total.toFixed(2)}
         maxWidth={'max-content'}
         className={styles.total}
         disabled
