@@ -1,30 +1,50 @@
-import { useState } from 'react';
+import React from 'react';
+import {  FaTrashAlt } from 'react-icons/fa';
+import { InvoiceFormInput } from '../InvoiceFormInput';
 import styles from './InvoiceFormItem.module.css';
 
-export const InvoiceFormItem = ({
-  type,
-  itemName,
-  itemLabel,
-  inputError,
-  inputValue,
-}) => {
-  const [itemValue, setItemValue] = useState(inputValue);
-
+export const InvoiceFormItem = ({ item }) => {
   return (
-    <div
-      className={`${styles.invoiceFormItem} ${
-        inputError && styles.inputError
-      }`}>
-      <label htmlFor={itemName} className='text-faded'>
-        {itemLabel}
-      </label>
-      <input
-        type={type ? type : 'text'}
-        name={itemName}
-        className={`text`}
-        value={`${itemValue}`}
-        onChange={(e) => setItemValue(e.target.value)}
+    <div className={styles.invoiceFormItem}>
+      <InvoiceFormInput
+        type='text'
+        itemName='itemName'
+        itemLabel='Item Name'
+        inputValue={item?.name}
+        className={styles.name}
+       
       />
+
+      <InvoiceFormInput
+        type='number'
+        itemName='itemQty'
+        itemLabel='Qty.'
+        inputValue={item?.quantity}
+        maxWidth={'max-content'}
+        className={styles.qty}
+      />
+      <InvoiceFormInput
+        type='number'
+        itemName='itemPrice'
+        itemLabel='Price'
+        inputValue={item?.price}
+        maxWidth={'max-content'}
+        className={styles.price}
+      />
+      <InvoiceFormInput
+        type='number'
+        itemName='itemTotal'
+        itemLabel='Total'
+        inputValue={item?.total}
+        maxWidth={'max-content'}
+        className={styles.total}
+        disabled
+        noBg
+      />
+
+      <div className={styles.icon}>
+        <FaTrashAlt className={styles.trashIcon} />
+      </div>
     </div>
   );
 };

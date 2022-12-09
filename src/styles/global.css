@@ -25,6 +25,7 @@
   --btnSixHover: var(--neutral-400);
   --invoiceShadow: 0px 10px 10px -10px #48549f1a;
   --btnFour: var(--neutral-600);
+  --btnFourText: var(--neutral-400);
   --btnSix: var(--neutral-300);
 
   /* Variables to change dark/light */
@@ -35,6 +36,7 @@
   --btnThree: var(--neutral-700);
   --btnThreeText: var(--neutral-400);
   --btnThreeHover: var(--white);
+
   --btnFourHover: var(--neutral-900);
   --filterModalBg: var(--neutral-700);
   --filterModalShadow: 0px 10px 20px 0px #00000040;
@@ -43,11 +45,10 @@
   --invoiceAmountDue: var(--dark-900);
   --paymentStatusDraft: var(--neutral-400);
   --text-faded-secondary: var(--neutral-500);
-  --invoiceItemsBg: var(--neutral-700);
   --invoiceFormHeaderAccent: #777f98;
   --invoiceFormSelectBg: var(--neutral-700);
   --invoiceFormSelectBorder: var(--neutral-900);
-
+  --formItemBorderColor: var(--neutral-700);
   /* font sizes */
   --fs-xl: clamp(2rem, 5vw, 2.25rem);
   --fs-lg: clamp(1.25rem, 5vw, 1.5rem);
@@ -58,13 +59,15 @@
 }
 
 [data-theme='light'] {
-  --main-bg: var(--neutral-100);
+  /* --main-bg: var(--neutral-100); */
+  --main-bg: var(--white);
   --secondary-bg: var(--white);
   --text: var(--dark-900);
   --text-faded: var(--neutral-500);
   --btnThree: var(--neutral-300);
   --btnThreeText: var(--accent);
   --btnThreeHover: var(--neutral-400);
+  --btnFourText: var(--neutral-500);
   --btnFourHover: var(--dark-900);
   --filterModalBg: var(--white);
   --filterModalShadow: 0px 10px 20px 0px #48549f40;
@@ -76,6 +79,7 @@
   --invoiceItemsBg: var(--neutral-300);
   --invoiceFormHeaderAccent: var(--neutral-500);
   --invoiceFormSelectBg: var(--white);
+  --formItemBorderColor: var(--neutral-400);
   --invoiceFormSelectBorder: var(--neutral-400);
 }
 
@@ -171,4 +175,16 @@ h4 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.75rem;
+}
+
+@media (max-width: 400px) {
+  .grid-row-half {
+    gap: 0.5rem;
+  }
+}
+@media (max-width: 340px) {
+  .grid-row-half {
+    gap: 01.75rem;
+    grid-template-columns: 1fr;
+  }
 }

@@ -29,16 +29,13 @@
 
 .btnThree:hover {
   background-color: var(--btnThreeHover);
-  color: var(--btnThreeText);
-}
-
-.btnFour {
-  background: var(--text-faded);
-  width: max-content;
+  color: var(--accent);
 }
 
 .btnFour {
   color: var(--btnFourText);
+  background: var(--btnFour);
+  width: max-content;
 }
 
 .btnFour:hover {
@@ -89,4 +86,8 @@
 
 .btnPrimary:hover .btnIcon {
   color: var(--primary-400);
+}
+
+.fullWidth {
+  width: 100%;
 }
