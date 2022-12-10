@@ -1,42 +1,44 @@
 .invoiceFormItem {
+  width: 100%;
+  display: grid;
+  gap: 1.75rem 0.75rem;
+
+  grid-template-areas:
+    'name name name name'
+    'qty price total icon';
+
+  grid-template-columns: 60px 1fr 1fr 40px;
+}
+
+@media (min-width: 768px) {
+  .invoiceFormItem {
+    grid-template-areas: 'name qty price total icon';
+    grid-template-columns: 2fr 60px 1fr 1fr 40px;
+  }
+}
+.name {
+  grid-area: name;
+}
+
+.qty {
+  grid-area: qty;
+}
+
+.price {
+  grid-area: price;
+}
+
+.total {
+  grid-area: total;
+}
+
+.icon {
   display: flex;
-  flex-direction: column;
-  gap: 0.625rem;
+  align-items: center;
+  justify-content: center;
+  padding-top: 1rem;
+  grid-area: icon;
 }
-
-.invoiceFormItem label {
-  color: var(--text-faded-secondary);
-}
-
-.invoiceFormItem input {
-  background-color: var(--secondary-bg);
-  border: 1 solid var(--secondary-bg);
-  padding: 1rem 1.5rem;
-  color: var(--text);
-  border-radius: 8px;
-}
-.invoiceFormItem input:active,
-.invoiceFormItem input:focus {
-  outline: 1px solid var(--primary-600);
-}
-
-
-
-.inputError label {
-  color: var(--orange-600);
-}
-
-.inputError input {
-  outline: 1px solid var(--orange-600);
-  position: relative;
-}
-
-.inputError:before {
-  content: "Can't be empty";
-  position: relative;
-  top: 25px;
-  align-self: end;
-  color: var(--orange-600);
-  font-size: 0.7rem;
-  padding: 0 0.25rem;
+.trashIcon {
+  color: var(--neutral-500);
 }

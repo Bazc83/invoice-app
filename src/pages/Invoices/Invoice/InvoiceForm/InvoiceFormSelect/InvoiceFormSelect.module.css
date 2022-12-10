@@ -55,7 +55,7 @@
   width: 100%;
   padding: 1rem 1.5rem;
   border-radius: 8px;
-  border: 1px solid var(--secondary-bg);
+  border: 1px solid var(--formItemBorderColor);
 }
 
 .inputContainer input:hover,
@@ -72,3 +72,4 @@
   top: 50%;
   transform: translateY(-50%);
 }
+
