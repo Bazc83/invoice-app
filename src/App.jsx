@@ -9,8 +9,9 @@ import { PageLayout } from './pages/PageLayout';
 
 export const DarkModeContext = createContext();
 
-function App() {
+export const InvoicesContext = createContext();
 
+function App() {
   const [theme, setTheme] = useLocalStorage('theme' ? 'dark' : 'light');
 
   const toggleDarkMode = () => {
@@ -18,23 +19,25 @@ function App() {
     setTheme(newTheme);
   };
 
+  
   return (
     <div className='App' data-theme={theme}>
       <DarkModeContext.Provider value={{ theme, toggleDarkMode }}>
-        <BrowserRouter>
-      
-          <Routes>
-            <Route element={<PageLayout/>}>
-              <Route index element={<Invoices />} />
-              <Route path='/invoices' element={<Invoices />} />
-              <Route path='/invoices/:invoiceId' element={<Invoice />} />
+        <InvoicesContext.Provider value={{ beans }}>
+          <BrowserRouter>
+            <Routes>
+              <Route element={<PageLayout />}>
+                <Route index element={<Invoices />} />
+                <Route path='/invoices' element={<Invoices />} />
+                <Route path='/invoices/:invoiceId' element={<Invoice />} />
 
-              <Route path='design' element={<DesignSystem />} />
+                <Route path='design' element={<DesignSystem />} />
 
-              <Route path='*' element={<NotFoundPage />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
+                <Route path='*' element={<NotFoundPage />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </InvoicesContext.Provider>
       </DarkModeContext.Provider>
     </div>
   );

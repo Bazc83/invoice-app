@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useUpdateDocument } from '../../../../../hooks/useUpdateDocument';
 import styles from './InvoiceFormInput.module.css';
 
 export const InvoiceFormInput = ({
@@ -11,9 +12,11 @@ export const InvoiceFormInput = ({
   maxWidth,
   disabled,
   noBg,
+  parentId,
 }) => {
   const [itemValue, setItemValue] = useState(inputValue);
 
+  const { updateDocument } = useUpdateDocument();
   useEffect(() => {
     setItemValue(inputValue);
   }, [inputValue]);
@@ -21,10 +24,10 @@ export const InvoiceFormInput = ({
   return (
     <div
       className={`${styles.invoiceFormInput} ${
-        inputError && styles.inputError
-      }  ${maxWidth === 'max-content' && styles.maxContent} ${
-        noBg && styles.noBg
-      }  ${className && className}`}>
+        inputError ? styles.inputError : ''
+      }  ${maxWidth === 'max-content' ? styles.maxContent : ''} ${
+        noBg ? styles.noBg : ''
+      }  ${className ?className : ""}`}>
       <label htmlFor={itemName} className='text-faded'>
         {itemLabel}
       </label>

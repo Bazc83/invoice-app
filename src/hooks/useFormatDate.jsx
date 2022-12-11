@@ -13,7 +13,6 @@ export const useFormatDate = () => {
     'Nov',
     'Dec',
   ];
-
   const getDate = (dateToFormat) =>{
     const splitDate = dateToFormat.split('-');
 

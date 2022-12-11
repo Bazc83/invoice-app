@@ -1,5 +1,6 @@
 import { useFormatDate } from '@/hooks/useFormatDate';
 import { PaymentStatus } from '@/pages/Invoices/PaymentStatus';
+import { useNavigate } from 'react-router';
 import styles from './InvoicePreview.module.css';
 export const InvoicePreview = (props) => {
   const { invoice, onClick } = props;
@@ -8,15 +9,21 @@ export const InvoicePreview = (props) => {
 
   const { getDate } = useFormatDate();
 
+
+  const navigate = useNavigate();
+
+  const showFullInvoice = (invoiceId) => {
+    navigate(`/invoices/${invoiceId}`);
+  };
+
   return (
-    <div onClick={onClick} className={`secondary-bg ${styles.invoicePreview}`}>
+    <div onClick={()=> showFullInvoice(invoice.id)} className={`secondary-bg ${styles.invoicePreview}`}>
       <h4 className={styles.invoiceRef}>
         <span className={styles.invoiceRefHash}>#</span>
         {id}
       </h4>
 
-      {/* <p className={`text-faded ${styles.dueDate}`}>{getDate(paymentDue)}</p> */}
-      <p className={`text-faded ${styles.dueDate}`}>{paymentDue}</p>
+      <p className={`text-faded ${styles.dueDate}`}>{getDate(paymentDue)}</p>
 
       <p className={`text ${styles.name}`}>{clientName}</p>
 
