@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { getFirestoreCollection } from '../../Firebase/Firebase';
 import { useUpdateDocument } from '../../hooks/useUpdateDocument';
@@ -6,29 +7,35 @@ import styles from './Invoices.module.css';
 import { InvoicesPageControls } from './InvoicesPageControls/InvoicesPageControls';
 import { NoInvoices } from './NoInvoices/NoInvoices';
 
-import data from '../../data/data.json';
-
 export const Invoices = () => {
-
   const { value, loading, error } = getFirestoreCollection('invoices');
+
+  const [dataArrLength, setDataArrLength] = useState(0);
+
+  useEffect(() => {
+    if (value !== undefined) {
+      setDataArrLength(value.docs.length);
+    }
+  }, [value]);
 
   const { updateDocument } = useUpdateDocument();
 
-
   return (
- 
-      <div className={`container main-bg`}>
-        <Outlet />
+    <div className={`container main-bg`}>
+      <Outlet />
 
-        <InvoicesPageControls invoicesData={data.length} />
+      {/* // Todo */}
+      <InvoicesPageControls invoicesData={dataArrLength} />
 
-        {data.length === 0 && <NoInvoices />}
-        <div className={styles.invoicesWrapper}>
-          {value &&
-            value.docs.map((invoice) => {
-              return <InvoicePreview invoice={invoice} key={invoice.id} />;
-            })}
-        </div>
+      {/* // Todo */}
+      {dataArrLength === 0 && <NoInvoices />}
+
+      <div className={styles.invoicesWrapper}>
+        {value &&
+          value.docs.map((invoice) => {
+            return <InvoicePreview invoice={invoice} key={invoice.id} />;
+          })}
       </div>
+    </div>
   );
 };
