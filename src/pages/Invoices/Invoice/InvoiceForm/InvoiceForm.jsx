@@ -130,6 +130,7 @@ export const InvoiceForm = ({ newInvoice, setShowEdit, invoiceState }) => {
             ))}
           </div>
 
+<InvoiceFormItem />
           <Button btnStyle='btnThree' fullWidth>
             + Add New Item
           </Button>

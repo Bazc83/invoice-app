@@ -4,7 +4,7 @@ import styles from './InvoicePreview.module.css';
 export const InvoicePreview = (props) => {
   const { invoice, onClick } = props;
 
-  const { status, id, clientName, total, paymentDue } = invoice;
+  const { status, id, clientName, total, paymentDue } = invoice.data();
 
   const { getDate } = useFormatDate();
 
@@ -15,7 +15,8 @@ export const InvoicePreview = (props) => {
         {id}
       </h4>
 
-      <p className={`text-faded ${styles.dueDate}`}>{getDate(paymentDue)}</p>
+      {/* <p className={`text-faded ${styles.dueDate}`}>{getDate(paymentDue)}</p> */}
+      <p className={`text-faded ${styles.dueDate}`}>{paymentDue}</p>
 
       <p className={`text ${styles.name}`}>{clientName}</p>
 
@@ -23,7 +24,7 @@ export const InvoicePreview = (props) => {
         {new Intl.NumberFormat('en', {
           style: 'currency',
           currency: 'GBP',
-        }).format(total)}
+        }).format(+total)}
       </h3>
 
       <PaymentStatus status={status} className={styles.paymentStatus} />

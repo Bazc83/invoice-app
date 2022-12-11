@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './InvoiceFormInput.module.css';
 
 export const InvoiceFormInput = ({
@@ -13,7 +13,11 @@ export const InvoiceFormInput = ({
   noBg,
 }) => {
   const [itemValue, setItemValue] = useState(inputValue);
-  console.log(itemValue)
+
+  useEffect(() => {
+    setItemValue(inputValue);
+  }, [inputValue]);
+
   return (
     <div
       className={`${styles.invoiceFormInput} ${

@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaTrashAlt } from 'react-icons/fa';
 import { InvoiceFormInput } from '../InvoiceFormInput';
 import styles from './InvoiceFormItem.module.css';
 
 export const InvoiceFormItem = ({ item }) => {
+  const [total, setTotal] = useState(0);
+
+  if (!item?.price) return null;
+
+  const totalItemValue = (price, qty) => {
+    setTotal((prev) => (prev = qty * price));
+  };
+
+  useEffect(() => {
+    totalItemValue(item.price, item.quantity);
+  }, [item]);
+
   return (
     <div className={styles.invoiceFormItem}>
       <InvoiceFormInput
@@ -34,7 +46,7 @@ export const InvoiceFormItem = ({ item }) => {
         type='number'
         itemName='itemTotal'
         itemLabel='Total'
-        inputValue={item?.total.toFixed(2)}
+        inputValue={total.toFixed(2)}
         maxWidth={'max-content'}
         className={styles.total}
         disabled

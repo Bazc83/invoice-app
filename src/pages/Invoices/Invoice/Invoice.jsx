@@ -41,7 +41,6 @@ export const Invoice = () => {
               </div>
 
               <div className={styles.buttonWrapperTop}>
-                {' '}
                 <InvoiceButtons setShowEdit={setShowEdit} />
               </div>
             </div>
