@@ -7,6 +7,14 @@ import { InvoiceItemsAmountDue } from '../InvoiceItemsAmountDue';
 import { InvoiceItemsTable } from '../InvoiceItemsTable';
 import styles from './InvoiceMain.module.css';
 export const InvoiceMain = ({ invoiceState, invoiceId }) => {
+  
+  const senderAddress = {
+    street: '19 Union Terrace',
+    city: 'London',
+    postCode: 'E1 3EZ',
+    country: 'United Kingdom',
+  };
+
   const { getDate } = useFormatDate();
 
   const { data, mainInvoiceData } = useInvoiceData();
@@ -15,9 +23,10 @@ export const InvoiceMain = ({ invoiceState, invoiceId }) => {
 
   useEffect(() => {
     mainInvoiceData(invoiceId);
-    getSubCollectionData(invoiceId, 'items');
+    getSubCollectionData(invoiceId, 'clientAddress');
   }, []);
 
+  console.log(subCollectionData[0]?.city)
   return (
     <div className={`secondary-bg ${styles.invoiceMain}`}>
       <div className={styles.refAndDescription}>
@@ -32,21 +41,21 @@ export const InvoiceMain = ({ invoiceState, invoiceId }) => {
       </div>
 
       <div className={`text-faded-xs ${styles.address}`}>
-        <p>{invoiceState?.senderAddress.street}</p>
-        <p>{invoiceState?.senderAddress.city}</p>
-        <p>{invoiceState?.senderAddress.postCode}</p>
-        <p>{invoiceState?.senderAddress.country}</p>
+        <p>{senderAddress.street}</p>
+        <p>{senderAddress.city}</p>
+        <p>{senderAddress.postCode}</p>
+        <p>{senderAddress.country}</p>
       </div>
 
       <div className={styles.dates}>
         <div className={styles.createdAt}>
           <p className='text-faded'>Invoice Date</p>
-          <h3>{data?.createdAt && getDate(data.createdAt)}</h3>
+          <h3>{data?.createdAt && getDate(data?.createdAt)}</h3>
         </div>
 
         <div className={styles.paymentDue}>
           <p className='text-faded'>Payment Due</p>
-          <h3>{data?.paymentDue && getDate(data.paymentDue)}</h3>
+          <h3>{data?.paymentDue && getDate(data?.paymentDue)}</h3>
         </div>
       </div>
 
@@ -55,10 +64,10 @@ export const InvoiceMain = ({ invoiceState, invoiceId }) => {
         <h3>{data?.clientName}</h3>
 
         <div className={`text-faded-xs ${styles.clientAddress}`}>
-          <p>{invoiceState?.clientAddress.street}</p>
-          <p>{invoiceState?.clientAddress.city}</p>
-          <p>{invoiceState?.clientAddress.postCode}</p>
-          <p>{invoiceState?.clientAddress.country}</p>
+          <p>{subCollectionData[0]?.street}</p>
+          <p>{subCollectionData[0]?.city}</p>
+          <p>{subCollectionData[0]?.postCode}</p>
+          <p>{subCollectionData[0]?.country}</p>
         </div>
       </div>
 
