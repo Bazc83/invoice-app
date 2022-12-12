@@ -12,6 +12,41 @@ export const Invoices = () => {
 
   const [dataArrLength, setDataArrLength] = useState(0);
 
+  const [invoiceMainState, setInvoiceMainState] = useState([]);
+
+  const generateInvoiceMainState = (arr) => {
+    if (value !== undefined) {
+      value.docs.map((doc) => {
+        const {
+          id,
+          clientName,
+          clientEmail,
+          status,
+          paymentTerms,
+          total,
+          createdAt,
+          paymentDue,
+          description,
+        } = doc.data();
+
+        setInvoiceMainState((prev) => [
+          ...prev,
+          {
+            id: id,
+            clientName: clientName,
+            clientEmail: clientEmail,
+            paymentTerms: paymentTerms,
+            total: total,
+            status: status,
+            paymentDue: paymentDue,
+            description: description,
+            createdAt: createdAt,
+          },
+        ]);
+      });
+    }
+  };
+
   useEffect(() => {
     if (value !== undefined) {
       setDataArrLength(value.docs.length);

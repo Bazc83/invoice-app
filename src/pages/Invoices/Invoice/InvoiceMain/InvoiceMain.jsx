@@ -1,20 +1,34 @@
 import { useFormatDate } from '@/hooks/useFormatDate';
+import { useEffect } from 'react';
+import { useInvoiceData } from '../../../../hooks/useInvoiceData';
+import { useInvoiceSubCollectionData } from '../../../../hooks/useInvoiceSubCollectionData';
 import { InvoiceItems } from '../InvoiceItems';
 import { InvoiceItemsAmountDue } from '../InvoiceItemsAmountDue';
 import { InvoiceItemsTable } from '../InvoiceItemsTable';
 import styles from './InvoiceMain.module.css';
-export const InvoiceMain = ({ invoiceState }) => {
+export const InvoiceMain = ({ invoiceState, invoiceId }) => {
   const { getDate } = useFormatDate();
+
+  const { data, mainInvoiceData } = useInvoiceData();
+
+  const { subCollectionData, getSubCollectionData } =
+    useInvoiceSubCollectionData();
+  useEffect(() => {
+    mainInvoiceData(invoiceId);
+    getSubCollectionData(invoiceId);
+  }, []);
+
+  console.log(subCollectionData);
   return (
     <div className={`secondary-bg ${styles.invoiceMain}`}>
       <div className={styles.refAndDescription}>
         <h4 className={styles.ref}>
           <span className={styles.refHash}>#</span>
-          {invoiceState?.id}
+          {data?.id}
         </h4>
 
         <p className={`text-faded ${styles.description}`}>
-          {invoiceState?.description}
+          {data?.description}
         </p>
       </div>
 
@@ -28,20 +42,18 @@ export const InvoiceMain = ({ invoiceState }) => {
       <div className={styles.dates}>
         <div className={styles.createdAt}>
           <p className='text-faded'>Invoice Date</p>
-          <h3>{invoiceState?.createdAt && getDate(invoiceState.createdAt)}</h3>
+          <h3>{data?.createdAt && getDate(data.createdAt)}</h3>
         </div>
 
         <div className={styles.paymentDue}>
           <p className='text-faded'>Payment Due</p>
-          <h3>
-            {invoiceState?.paymentDue && getDate(invoiceState.paymentDue)}
-          </h3>
+          <h3>{data?.paymentDue && getDate(data.paymentDue)}</h3>
         </div>
       </div>
 
       <div className={styles.clientDetails}>
         <p className={`text-faded`}>Bill To</p>
-        <h3>{invoiceState?.clientName}</h3>
+        <h3>{data?.clientName}</h3>
 
         <div className={`text-faded-xs ${styles.clientAddress}`}>
           <p>{invoiceState?.clientAddress.street}</p>
@@ -53,12 +65,12 @@ export const InvoiceMain = ({ invoiceState }) => {
 
       <div className={styles.clientEmail}>
         <p className={`text-faded-xs`}>Sent to</p>
-        <h3>{invoiceState?.clientEmail}</h3>
+        <h3>{data?.clientEmail}</h3>
       </div>
 
       <div className={styles.itemsWrapper}>
         {/* hidden screens smaller than 678px */}
-        <InvoiceItemsTable items={invoiceState?.items} />
+        <InvoiceItemsTable items={data?.items} />
 
         {/* Hidden screens bigger than 678px */}
         <InvoiceItems items={invoiceState?.items} />

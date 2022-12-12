@@ -2,6 +2,7 @@
 import { getAnalytics } from 'firebase/analytics';
 import { initializeApp } from 'firebase/app';
 import { collection, getFirestore } from 'firebase/firestore';
+import { useCollection } from 'react-firebase-hooks/firestore';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -25,15 +26,10 @@ const analytics = getAnalytics(app);
 // Initialize Cloud Firestore and get a reference to the service
 export const db = getFirestore(app);
 
-import { useCollection } from 'react-firebase-hooks/firestore';
 export const getFirestoreCollection = (dbCollection) => {
   const [value, loading, error] = useCollection(collection(db, dbCollection), {
     snapshotListenOptions: { includeMetadataChanges: true },
   });
 
-  // {value && 
-  //   value.docs.map((doc) => console.log(doc.id));
-  // }
-
-  return {value, loading, error}
+  return { value, loading, error };
 };
