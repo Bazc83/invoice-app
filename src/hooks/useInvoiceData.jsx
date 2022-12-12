@@ -1,6 +1,6 @@
 import { collection, getDocs, query, where } from 'firebase/firestore';
-import { useEffect, useState } from 'react';
-import { db } from '../Firebase/Firebase';
+import {  useState } from 'react';
+import { db } from '@Firebase/Firebase';
 
 export const useInvoiceData =  () => {
   const [data, setData] = useState();

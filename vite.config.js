@@ -13,6 +13,8 @@ export default defineConfig({
       '@ui': path.resolve(__dirname, './src/ui'),
       '@styles': path.resolve(__dirname, './src/styles'),
       '@data': path.resolve(__dirname, './src/data'),
+      '@hooks': path.resolve(__dirname, './src/hooks'),
+      '@Firebase': path.resolve(__dirname, './src/Firebase'),
     },
   },
 });

@@ -1,5 +1,5 @@
 import { doc, updateDoc } from 'firebase/firestore';
-import { db } from '../Firebase/Firebase';
+import { db } from '@Firebase/Firebase';
 
 export const useUpdateDocument = () => {
   const updateDocument = async (documentToUpdate, updateObj) => {

@@ -1,13 +1,12 @@
 import { useFormatDate } from '@/hooks/useFormatDate';
 import { useEffect } from 'react';
-import { useInvoiceData } from '../../../../hooks/useInvoiceData';
-import { useSubCollection } from '../../../../hooks/useSubCollection';
+import { useInvoiceData } from '@hooks/useInvoiceData';
+import { useSubCollection } from '@hooks/useSubCollection';
 import { InvoiceItems } from '../InvoiceItems';
 import { InvoiceItemsAmountDue } from '../InvoiceItemsAmountDue';
 import { InvoiceItemsTable } from '../InvoiceItemsTable';
 import styles from './InvoiceMain.module.css';
-export const InvoiceMain = ({ invoiceState, invoiceId }) => {
-  
+export const InvoiceMain = ({ invoiceId }) => {
   const senderAddress = {
     street: '19 Union Terrace',
     city: 'London',
@@ -26,7 +25,6 @@ export const InvoiceMain = ({ invoiceState, invoiceId }) => {
     getSubCollectionData(invoiceId, 'clientAddress');
   }, []);
 
-  console.log(subCollectionData[0]?.city)
   return (
     <div className={`secondary-bg ${styles.invoiceMain}`}>
       <div className={styles.refAndDescription}>

@@ -1,6 +1,6 @@
-import { collection, getDocs, query, where } from 'firebase/firestore';
-import { useEffect, useState } from 'react';
-import { db } from '../Firebase/Firebase';
+import { collection, getDocs, query } from 'firebase/firestore';
+import { useState } from 'react';
+import { db } from '@Firebase/Firebase';
 
 export const useSubCollection =  () => {
   const [subCollectionData, setSubCollectionData] = useState([]);
