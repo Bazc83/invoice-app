@@ -1,7 +1,7 @@
 import { useFormatDate } from '@/hooks/useFormatDate';
 import { useEffect } from 'react';
 import { useInvoiceData } from '../../../../hooks/useInvoiceData';
-import { useInvoiceSubCollectionData } from '../../../../hooks/useInvoiceSubCollectionData';
+import { useSubCollection } from '../../../../hooks/useSubCollection';
 import { InvoiceItems } from '../InvoiceItems';
 import { InvoiceItemsAmountDue } from '../InvoiceItemsAmountDue';
 import { InvoiceItemsTable } from '../InvoiceItemsTable';
@@ -11,14 +11,13 @@ export const InvoiceMain = ({ invoiceState, invoiceId }) => {
 
   const { data, mainInvoiceData } = useInvoiceData();
 
-  const { subCollectionData, getSubCollectionData } =
-    useInvoiceSubCollectionData();
+  const { subCollectionData, getSubCollectionData } = useSubCollection();
+
   useEffect(() => {
     mainInvoiceData(invoiceId);
-    getSubCollectionData(invoiceId);
+    getSubCollectionData(invoiceId, 'items');
   }, []);
 
-  console.log(subCollectionData);
   return (
     <div className={`secondary-bg ${styles.invoiceMain}`}>
       <div className={styles.refAndDescription}>
@@ -70,12 +69,13 @@ export const InvoiceMain = ({ invoiceState, invoiceId }) => {
 
       <div className={styles.itemsWrapper}>
         {/* hidden screens smaller than 678px */}
-        <InvoiceItemsTable items={data?.items} />
+
+        <InvoiceItemsTable invoiceId={invoiceId} />
 
         {/* Hidden screens bigger than 678px */}
-        <InvoiceItems items={invoiceState?.items} />
+        <InvoiceItems invoiceId={invoiceId} />
 
-        <InvoiceItemsAmountDue invoiceState={invoiceState} />
+        <InvoiceItemsAmountDue amountDue={data?.total} />
       </div>
     </div>
   );

@@ -1,6 +1,13 @@
-import { InvoiceTableItem } from './InvoiceTableItem/InvoiceTableItem';
+import { useEffect } from 'react';
+import { useSubCollection } from '../../../../hooks/useSubCollection';
 import styles from './InvoiceItemsTable.module.css';
-export const InvoiceItemsTable = ({ items }) => {
+import { InvoiceTableItem } from './InvoiceTableItem/InvoiceTableItem';
+export const InvoiceItemsTable = ({ invoiceId }) => {
+  const { subCollectionData, getSubCollectionData } = useSubCollection();
+
+  useEffect(() => {
+    getSubCollectionData(invoiceId, 'items');
+  }, []);
   return (
     <table className={styles.invoiceItemsTable}>
       <thead>
@@ -12,7 +19,7 @@ export const InvoiceItemsTable = ({ items }) => {
         </tr>
       </thead>
       <tbody>
-        {items?.map((item, i) => {
+        {subCollectionData?.map((item, i) => {
           return <InvoiceTableItem key={`tableItem${i}`} item={item} />;
         })}
       </tbody>
