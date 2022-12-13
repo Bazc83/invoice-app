@@ -43,8 +43,15 @@ export const InvoiceForm = ({
     total: 0,
   };
 
+  const [clientName, setClientName] = useState(mainInvoiceData?.clientName);
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
+  };
+
+  const handleChange = (e) => {
+    console.log(e);
+    setClientName(e.target.value)
   };
 
   return (
@@ -66,28 +73,28 @@ export const InvoiceForm = ({
             itemName='streetAddress'
             itemLabel='Street Address'
             inputValue={senderAddress.street}
-            parentId={mainInvoiceData?.id}
+            parentId={mainInvoiceData?.id} 
           />
           <InvoiceFormInput
             type='text'
             itemName='city'
             itemLabel='City'
             inputValue={senderAddress.city}
-            parentId={mainInvoiceData?.id}
+            parentId={mainInvoiceData?.id} 
           />
           <InvoiceFormInput
             type='text'
             itemName='postCode'
             itemLabel='Post Code'
             inputValue={senderAddress.postCode}
-            parentId={mainInvoiceData?.id}
+            parentId={mainInvoiceData?.id} 
           />
           <InvoiceFormInput
             type='text'
             itemName='country'
             itemLabel='Country'
             inputValue={senderAddress.country}
-            parentId={mainInvoiceData?.id}
+            parentId={mainInvoiceData?.id} 
           />
         </div>
 
@@ -99,13 +106,15 @@ export const InvoiceForm = ({
             itemLabel="Client's Name"
             inputValue={mainInvoiceData?.clientName}
             parentId={mainInvoiceData?.id}
+            handleChange={handleChange}
+            
           />
           <InvoiceFormInput
             type='email'
             itemName='clientsEmail'
             itemLabel="Client's Email"
             inputValue={mainInvoiceData?.clientEmail}
-            parentId={mainInvoiceData?.id}
+            parentId={mainInvoiceData?.id} 
           />
 
           <InvoiceFormInput
@@ -113,28 +122,28 @@ export const InvoiceForm = ({
             itemName='clientsStreetAddress'
             itemLabel='Street Address'
             inputValue={clientAddress?.street}
-            parentId={mainInvoiceData?.id}
+            parentId={mainInvoiceData?.id} 
           />
           <InvoiceFormInput
             type='text'
             itemName='clientsCity'
             itemLabel='City'
             inputValue={clientAddress?.city}
-            parentId={mainInvoiceData?.id}
+            parentId={mainInvoiceData?.id} 
           />
           <InvoiceFormInput
             type='text'
             itemName='postCode'
             itemLabel='Post Code'
             inputValue={clientAddress?.postCode}
-            parentId={mainInvoiceData?.id}
+            parentId={mainInvoiceData?.id} 
           />
           <InvoiceFormInput
             type='text'
             itemName='country'
             itemLabel='Country'
             inputValue={clientAddress?.country}
-            parentId={mainInvoiceData?.id}
+            parentId={mainInvoiceData?.id} 
           />
 
           <div className='grid-row-half'>
@@ -143,7 +152,7 @@ export const InvoiceForm = ({
               itemName='invoiceDate'
               itemLabel='Invoice Date'
               inputValue={mainInvoiceData?.createdAt}
-              parentId={mainInvoiceData?.id}
+              parentId={mainInvoiceData?.id} 
             />
 
             <InvoiceFormSelect
@@ -153,7 +162,7 @@ export const InvoiceForm = ({
               onChange={(item) => setSelectedOption(item)}
               open={open}
               setOpen={setOpen}
-              parentId={mainInvoiceData?.id}
+              parentId={mainInvoiceData?.id} 
             />
           </div>
           <InvoiceFormInput
@@ -161,7 +170,7 @@ export const InvoiceForm = ({
             itemName='projectDescription'
             itemLabel='Project/Description'
             inputValue={mainInvoiceData?.description}
-            parentId={mainInvoiceData?.id}
+            parentId={mainInvoiceData?.id} 
           />
         </div>
 
