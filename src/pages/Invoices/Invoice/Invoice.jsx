@@ -1,6 +1,8 @@
 import { GoBackLink } from '@/components/GoBackLink';
 import { InvoiceForm } from '@/pages/Invoices/Invoice/InvoiceForm';
 import { PaymentStatus } from '@/pages/Invoices/PaymentStatus';
+import { useGetClientAddress } from '@hooks/useGetClientAddress';
+import { useGetInvoiceItems } from '@hooks/useGetInvoiceItems';
 import { useInvoiceData } from '@hooks/useInvoiceData';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -9,19 +11,39 @@ import { InvoiceButtons } from './InvoiceButtons';
 import { InvoiceMain } from './InvoiceMain';
 
 export const Invoice = () => {
+  const senderAddress = {
+    street: '19 Union Terrace',
+    city: 'London',
+    postCode: 'E1 3EZ',
+    country: 'United Kingdom',
+  };
+
   const { invoiceId } = useParams();
 
   const [showEdit, setShowEdit] = useState(false);
 
-  const { mainInvoiceData, data } = useInvoiceData();
+  const { mainInvoiceData, getMainInvoiceData } = useInvoiceData();
+  const { clientAddress, getClientAddress } = useGetClientAddress();
+  const { items, getItems } = useGetInvoiceItems();
 
   useEffect(() => {
-    mainInvoiceData(invoiceId);
+    getMainInvoiceData(invoiceId);
+    getItems(invoiceId);
+    getClientAddress(invoiceId);
   }, [invoiceId]);
 
   return (
     <div className={styles.invoice}>
-      {showEdit && <InvoiceForm setShowEdit={setShowEdit} />}
+      {showEdit && (
+        <InvoiceForm
+          setShowEdit={setShowEdit}
+          invoiceId={invoiceId}
+          mainInvoiceData={mainInvoiceData}
+          clientAddress={clientAddress}
+          senderAddress={senderAddress}
+          items={items}
+        />
+      )}
 
       <div
         className={`${styles.mainWrapper} ${
@@ -36,7 +58,7 @@ export const Invoice = () => {
               className={`container secondary-bg ${styles.statusAndButtons}`}>
               <div className={`secondary-bg ${styles.status}`}>
                 <p>Status</p>
-                <PaymentStatus status={data?.status} />
+                <PaymentStatus status={mainInvoiceData?.status} />
               </div>
 
               <div className={styles.buttonWrapperTop}>
@@ -44,7 +66,13 @@ export const Invoice = () => {
               </div>
             </div>
 
-            <InvoiceMain invoiceId={invoiceId} />
+            <InvoiceMain
+              invoiceId={invoiceId}
+              mainInvoiceData={mainInvoiceData}
+              clientAddress={clientAddress}
+              senderAddress={senderAddress}
+              items={items}
+            />
           </div>
         </div>
 

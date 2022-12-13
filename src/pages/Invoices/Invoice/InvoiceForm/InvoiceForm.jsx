@@ -5,14 +5,25 @@ import { InvoiceFormInput } from './InvoiceFormInput';
 import { InvoiceFormItem } from './InvoiceFormItem/InvoiceFormItem';
 import { InvoiceFormSelect } from './InvoiceFormSelect/InvoiceFormSelect';
 
-export const InvoiceForm = ({ newInvoice, setShowEdit, invoiceState }) => {
+export const InvoiceForm = ({
+  setShowEdit,
+  invoiceId,
+  mainInvoiceData,
+  clientAddress,
+  senderAddress,
+  items,
+  newInvoice,
+}) => {
   const options = [
     { key: 1, value: 'Net 1 Day' },
     { key: 7, value: 'Net 7 Days' },
     { key: 14, value: 'Net 14 Days' },
     { key: 30, value: 'Net 30 Days' },
   ];
-  const [selectedOption, setSelectedOption] = useState(30);
+
+  const [selectedOption, setSelectedOption] = useState(
+    mainInvoiceData.paymentTerms
+  );
   const [open, setOpen] = useState(false);
 
   const baseInputForm = {
@@ -32,12 +43,8 @@ export const InvoiceForm = ({ newInvoice, setShowEdit, invoiceState }) => {
     total: 0,
   };
 
-
-
   const handleFormSubmit = (e) => {
     e.preventDefault();
-
-
   };
 
   return (
@@ -47,7 +54,7 @@ export const InvoiceForm = ({ newInvoice, setShowEdit, invoiceState }) => {
       ) : (
         <h2>
           Edit <span className={styles.invoiceFormHeaderAccent}>#</span>
-          {invoiceState.id}
+          {mainInvoiceData?.id}
         </h2>
       )}
 
@@ -58,29 +65,29 @@ export const InvoiceForm = ({ newInvoice, setShowEdit, invoiceState }) => {
             type='text'
             itemName='streetAddress'
             itemLabel='Street Address'
-            inputValue={invoiceState?.senderAddress.street}
-            parentId={invoiceState?.id}
+            inputValue={senderAddress.street}
+            parentId={mainInvoiceData?.id}
           />
           <InvoiceFormInput
             type='text'
             itemName='city'
             itemLabel='City'
-            inputValue={invoiceState?.senderAddress.city}
-            parentId={invoiceState?.id}
+            inputValue={senderAddress.city}
+            parentId={mainInvoiceData?.id}
           />
           <InvoiceFormInput
             type='text'
             itemName='postCode'
             itemLabel='Post Code'
-            inputValue={invoiceState?.senderAddress.postCode}
-            parentId={invoiceState?.id}
+            inputValue={senderAddress.postCode}
+            parentId={mainInvoiceData?.id}
           />
           <InvoiceFormInput
             type='text'
             itemName='country'
             itemLabel='Country'
-            inputValue={invoiceState?.senderAddress.country}
-            parentId={invoiceState?.id}
+            inputValue={senderAddress.country}
+            parentId={mainInvoiceData?.id}
           />
         </div>
 
@@ -90,44 +97,44 @@ export const InvoiceForm = ({ newInvoice, setShowEdit, invoiceState }) => {
             type='text'
             itemName='clientsName'
             itemLabel="Client's Name"
-            inputValue={invoiceState?.clientName}
-            parentId={invoiceState?.id}
+            inputValue={mainInvoiceData?.clientName}
+            parentId={mainInvoiceData?.id}
           />
           <InvoiceFormInput
             type='email'
             itemName='clientsEmail'
             itemLabel="Client's Email"
-            inputValue={invoiceState?.clientEmail}
-            parentId={invoiceState?.id}
+            inputValue={mainInvoiceData?.clientEmail}
+            parentId={mainInvoiceData?.id}
           />
 
           <InvoiceFormInput
             type='text'
             itemName='clientsStreetAddress'
             itemLabel='Street Address'
-            inputValue={invoiceState?.clientAddress.street}
-            parentId={invoiceState?.id}
+            inputValue={clientAddress?.street}
+            parentId={mainInvoiceData?.id}
           />
           <InvoiceFormInput
             type='text'
             itemName='clientsCity'
             itemLabel='City'
-            inputValue={invoiceState?.clientAddress.city}
-            parentId={invoiceState?.id}
+            inputValue={clientAddress?.city}
+            parentId={mainInvoiceData?.id}
           />
           <InvoiceFormInput
             type='text'
             itemName='postCode'
             itemLabel='Post Code'
-            inputValue={invoiceState?.clientAddress.postCode}
-            parentId={invoiceState?.id}
+            inputValue={clientAddress?.postCode}
+            parentId={mainInvoiceData?.id}
           />
           <InvoiceFormInput
             type='text'
             itemName='country'
             itemLabel='Country'
-            inputValue={invoiceState?.clientAddress.country}
-            parentId={invoiceState?.id}
+            inputValue={clientAddress?.country}
+            parentId={mainInvoiceData?.id}
           />
 
           <div className='grid-row-half'>
@@ -135,8 +142,8 @@ export const InvoiceForm = ({ newInvoice, setShowEdit, invoiceState }) => {
               type='date'
               itemName='invoiceDate'
               itemLabel='Invoice Date'
-              inputValue={invoiceState?.createdAt}
-              parentId={invoiceState?.id}
+              inputValue={mainInvoiceData?.createdAt}
+              parentId={mainInvoiceData?.id}
             />
 
             <InvoiceFormSelect
@@ -146,15 +153,15 @@ export const InvoiceForm = ({ newInvoice, setShowEdit, invoiceState }) => {
               onChange={(item) => setSelectedOption(item)}
               open={open}
               setOpen={setOpen}
-              parentId={invoiceState?.id}
+              parentId={mainInvoiceData?.id}
             />
           </div>
           <InvoiceFormInput
             type='text'
             itemName='projectDescription'
             itemLabel='Project/Description'
-            inputValue={invoiceState?.description}
-            parentId={invoiceState?.id}
+            inputValue={mainInvoiceData?.description}
+            parentId={mainInvoiceData?.id}
           />
         </div>
 
@@ -162,11 +169,11 @@ export const InvoiceForm = ({ newInvoice, setShowEdit, invoiceState }) => {
           <h2>Item List</h2>
 
           <div className={styles.items}>
-            {invoiceState?.items?.map((item, i) => (
+            {items?.map((item, i) => (
               <InvoiceFormItem
                 item={item}
                 key={`item${i}`}
-                parentId={invoiceState?.id}
+                parentId={mainInvoiceData?.id}
               />
             ))}
           </div>

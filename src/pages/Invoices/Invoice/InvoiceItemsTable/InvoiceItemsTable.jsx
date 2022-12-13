@@ -1,13 +1,6 @@
-import { useEffect } from 'react';
-import { useSubCollection } from '../../../../hooks/useSubCollection';
 import styles from './InvoiceItemsTable.module.css';
 import { InvoiceTableItem } from './InvoiceTableItem/InvoiceTableItem';
-export const InvoiceItemsTable = ({ invoiceId }) => {
-  const { subCollectionData, getSubCollectionData } = useSubCollection();
-
-  useEffect(() => {
-    getSubCollectionData(invoiceId, 'items');
-  }, []);
+export const InvoiceItemsTable = ({ items }) => {
   return (
     <table className={styles.invoiceItemsTable}>
       <thead>
@@ -19,11 +12,10 @@ export const InvoiceItemsTable = ({ invoiceId }) => {
         </tr>
       </thead>
       <tbody>
-        {subCollectionData?.map((item, i) => {
+        {items?.map((item, i) => {
           return <InvoiceTableItem key={`tableItem${i}`} item={item} />;
         })}
       </tbody>
     </table>
   );
 };
-// item name QTY  Price   Total
