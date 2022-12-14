@@ -8,20 +8,22 @@ export const InvoiceFormInput = ({
   itemName,
   itemLabel,
   inputError,
-  inputValue,
   maxWidth,
   disabled,
   noBg,
-  parentId,
-  handleChange,
+  value,
+  setValue
 }) => {
-  const [itemValue, setItemValue] = useState(inputValue);
+  const [itemValue, setItemValue] = useState(value);
 
   const { updateDocument } = useUpdateDocument();
 
-  useEffect(() => {
-    setItemValue(inputValue);
-  }, [inputValue]);
+
+  const handleChange = (e)=>{
+    setItemValue(e.target.value);
+    setValue(e.target.value)
+  }
+
 
   return (
     <div
@@ -38,7 +40,7 @@ export const InvoiceFormInput = ({
         name={itemName}
         className={`text`}
         value={itemValue}
-        onChange={(e) => setItemValue(e.target.value)}
+        onChange={handleChange}
         disabled={disabled}
       />
     </div>

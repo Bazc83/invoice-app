@@ -7,7 +7,6 @@ import { InvoiceFormSelect } from './InvoiceFormSelect/InvoiceFormSelect';
 
 export const InvoiceForm = ({
   setShowEdit,
-  invoiceId,
   mainInvoiceData,
   clientAddress,
   senderAddress,
@@ -24,36 +23,27 @@ export const InvoiceForm = ({
   const [selectedOption, setSelectedOption] = useState(
     mainInvoiceData.paymentTerms
   );
+
   const [open, setOpen] = useState(false);
 
-  const baseInputForm = {
-    id: '',
-    streetAddress: '',
-    city: '',
-    postCode: '',
-    country: '',
-    clientsName: '',
-    clientAddress: '',
-    clientsEmail: '',
-    invoiceDate: '',
-    createdAt: '',
-    paymentDue: '',
-    paymentTerms: 1,
-    status: 'draft',
-    total: 0,
-  };
+ 
 
-  const [clientName, setClientName] = useState(mainInvoiceData?.clientName);
+
+  // ! Set state for each form input 
+  // ! Then Add them too form input component as value and setValue
+  // ! On form submit change on firestore
+
+  
+  const [clientName, setClientName] = useState(mainInvoiceData.clientName);
+
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
+
+    console.log(clientName);
   };
 
-  const handleChange = (e) => {
-    console.log(e);
-    setClientName(e.target.value)
-  };
-
+  
   return (
     <div className={styles.invoiceForm}>
       {newInvoice ? (
@@ -72,29 +62,28 @@ export const InvoiceForm = ({
             type='text'
             itemName='streetAddress'
             itemLabel='Street Address'
-            inputValue={senderAddress.street}
-            parentId={mainInvoiceData?.id} 
+            value={senderAddress.street}
+            parentId={mainInvoiceData?.id}
           />
           <InvoiceFormInput
             type='text'
             itemName='city'
             itemLabel='City'
-            inputValue={senderAddress.city}
-            parentId={mainInvoiceData?.id} 
+            value={senderAddress.city}
+            parentId={mainInvoiceData?.id}
           />
           <InvoiceFormInput
             type='text'
             itemName='postCode'
             itemLabel='Post Code'
-            inputValue={senderAddress.postCode}
-            parentId={mainInvoiceData?.id} 
+            value={senderAddress.postCode}
+            parentId={mainInvoiceData?.id}
           />
           <InvoiceFormInput
             type='text'
             itemName='country'
-            itemLabel='Country'
-            inputValue={senderAddress.country}
-            parentId={mainInvoiceData?.id} 
+            value={senderAddress.country}
+            parentId={mainInvoiceData?.id}
           />
         </div>
 
@@ -104,46 +93,45 @@ export const InvoiceForm = ({
             type='text'
             itemName='clientsName'
             itemLabel="Client's Name"
-            inputValue={mainInvoiceData?.clientName}
+            value={clientName}
+            setValue={setClientName}
             parentId={mainInvoiceData?.id}
-            handleChange={handleChange}
-            
           />
           <InvoiceFormInput
             type='email'
             itemName='clientsEmail'
             itemLabel="Client's Email"
-            inputValue={mainInvoiceData?.clientEmail}
-            parentId={mainInvoiceData?.id} 
+            value={mainInvoiceData.clientEmail}
+            parentId={mainInvoiceData?.id}
           />
 
           <InvoiceFormInput
             type='text'
             itemName='clientsStreetAddress'
             itemLabel='Street Address'
-            inputValue={clientAddress?.street}
-            parentId={mainInvoiceData?.id} 
+            value={clientAddress.street}
+            parentId={mainInvoiceData?.id}
           />
           <InvoiceFormInput
             type='text'
             itemName='clientsCity'
             itemLabel='City'
-            inputValue={clientAddress?.city}
-            parentId={mainInvoiceData?.id} 
+            value={clientAddress.city}
+            parentId={mainInvoiceData?.id}
           />
           <InvoiceFormInput
             type='text'
             itemName='postCode'
             itemLabel='Post Code'
-            inputValue={clientAddress?.postCode}
-            parentId={mainInvoiceData?.id} 
+            value={clientAddress.postCode}
+            parentId={mainInvoiceData?.id}
           />
           <InvoiceFormInput
             type='text'
             itemName='country'
             itemLabel='Country'
-            inputValue={clientAddress?.country}
-            parentId={mainInvoiceData?.id} 
+            value={clientAddress.country}
+            parentId={mainInvoiceData?.id}
           />
 
           <div className='grid-row-half'>
@@ -151,8 +139,8 @@ export const InvoiceForm = ({
               type='date'
               itemName='invoiceDate'
               itemLabel='Invoice Date'
-              inputValue={mainInvoiceData?.createdAt}
-              parentId={mainInvoiceData?.id} 
+              value={mainInvoiceData?.createdAt}
+              parentId={mainInvoiceData?.id}
             />
 
             <InvoiceFormSelect
@@ -162,15 +150,15 @@ export const InvoiceForm = ({
               onChange={(item) => setSelectedOption(item)}
               open={open}
               setOpen={setOpen}
-              parentId={mainInvoiceData?.id} 
+              parentId={mainInvoiceData?.id}
             />
           </div>
           <InvoiceFormInput
             type='text'
             itemName='projectDescription'
             itemLabel='Project/Description'
-            inputValue={mainInvoiceData?.description}
-            parentId={mainInvoiceData?.id} 
+            value={mainInvoiceData.description}
+            parentId={mainInvoiceData?.id}
           />
         </div>
 
