@@ -20,21 +20,32 @@ export const InvoiceForm = ({
     { key: 30, value: 'Net 30 Days' },
   ];
 
+  const [open, setOpen] = useState(false);
+
+  // ! Set state for each form input
+  // ! Then Add them too form input component as value and setValue
+  // ! On form submit change on firestore
+  // ! Warning if form changed but not saved
+
+  const [clientName, setClientName] = useState(mainInvoiceData.clientName);
+  const [clientEmail, setClientEmail] = useState(mainInvoiceData.clientEmail);
+  const [clientStreet, setClientStreet] = useState(clientAddress.street);
+  const [clientCity, setClientCity] = useState(clientAddress.city);
+  const [clientPostCode, setClientPostCode] = useState(clientAddress.postCode);
+  const [clientCountry, setClientCountry] = useState(clientAddress.country);
+  const [invoiceCreatedAt, setInvoiceCreatedAt] = useState(
+    mainInvoiceData.createdAt
+  );
   const [selectedOption, setSelectedOption] = useState(
     mainInvoiceData.paymentTerms
   );
 
-  const [open, setOpen] = useState(false);
+  const [invoiceDescription, setInvoiceDescription] = useState(
+    mainInvoiceData.description
+  );
 
- 
+  const [invoiceItems, setInvoiceItems] = useState([]);
 
-
-  // ! Set state for each form input 
-  // ! Then Add them too form input component as value and setValue
-  // ! On form submit change on firestore
-
-  
-  const [clientName, setClientName] = useState(mainInvoiceData.clientName);
 
 
   const handleFormSubmit = (e) => {
@@ -43,7 +54,6 @@ export const InvoiceForm = ({
     console.log(clientName);
   };
 
-  
   return (
     <div className={styles.invoiceForm}>
       {newInvoice ? (
@@ -101,7 +111,8 @@ export const InvoiceForm = ({
             type='email'
             itemName='clientsEmail'
             itemLabel="Client's Email"
-            value={mainInvoiceData.clientEmail}
+            value={clientEmail}
+            setValue={setClientEmail}
             parentId={mainInvoiceData?.id}
           />
 
@@ -109,28 +120,32 @@ export const InvoiceForm = ({
             type='text'
             itemName='clientsStreetAddress'
             itemLabel='Street Address'
-            value={clientAddress.street}
+            value={clientStreet}
+            setValue={setClientStreet}
             parentId={mainInvoiceData?.id}
           />
           <InvoiceFormInput
             type='text'
             itemName='clientsCity'
             itemLabel='City'
-            value={clientAddress.city}
+            value={clientCity}
+            setValue={setClientCity}
             parentId={mainInvoiceData?.id}
           />
           <InvoiceFormInput
             type='text'
             itemName='postCode'
             itemLabel='Post Code'
-            value={clientAddress.postCode}
+            value={clientPostCode}
+            setValue={setClientPostCode}
             parentId={mainInvoiceData?.id}
           />
           <InvoiceFormInput
             type='text'
             itemName='country'
             itemLabel='Country'
-            value={clientAddress.country}
+            value={clientCountry}
+            setValue={setClientCountry}
             parentId={mainInvoiceData?.id}
           />
 
@@ -139,7 +154,8 @@ export const InvoiceForm = ({
               type='date'
               itemName='invoiceDate'
               itemLabel='Invoice Date'
-              value={mainInvoiceData?.createdAt}
+              value={invoiceCreatedAt}
+              setValue={setInvoiceCreatedAt}
               parentId={mainInvoiceData?.id}
             />
 
@@ -157,7 +173,8 @@ export const InvoiceForm = ({
             type='text'
             itemName='projectDescription'
             itemLabel='Project/Description'
-            value={mainInvoiceData.description}
+            value={invoiceDescription}
+            setValue={setInvoiceDescription}
             parentId={mainInvoiceData?.id}
           />
         </div>
@@ -171,6 +188,8 @@ export const InvoiceForm = ({
                 item={item}
                 key={`item${i}`}
                 parentId={mainInvoiceData?.id}
+                value={invoiceItems}
+                setValue={setInvoiceItems}
               />
             ))}
           </div>

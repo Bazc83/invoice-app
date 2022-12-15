@@ -42,6 +42,7 @@ export const InvoiceFormInput = ({
         value={itemValue}
         onChange={handleChange}
         disabled={disabled}
+        min="1"
       />
     </div>
   );
