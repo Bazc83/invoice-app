@@ -1,4 +1,5 @@
 import { Button } from '@components/Button';
+import { useUpdateDocument } from '@hooks/useUpdateDocument';
 import { useState } from 'react';
 import styles from './InvoiceForm.module.css';
 import { InvoiceFormInput } from './InvoiceFormInput';
@@ -12,6 +13,7 @@ export const InvoiceForm = ({
   senderAddress,
   items,
   newInvoice,
+  invoiceId,
 }) => {
   const options = [
     { key: 1, value: 'Net 1 Day' },
@@ -44,14 +46,29 @@ export const InvoiceForm = ({
     mainInvoiceData.description
   );
 
+  const [invoiceStatus, setInvoiceStatus] = useState('paid');
   const [invoiceItems, setInvoiceItems] = useState([]);
+  const [invoiceTotal, setInvoiceTotal] = useState(mainInvoiceData.total);
 
-
+  const { updateDocument } = useUpdateDocument();
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    console.log(clientName);
+    const obj = {
+      id: mainInvoiceData.id,
+      clientEmail: clientEmail,
+      createdAt: invoiceCreatedAt,
+      description: invoiceDescription,
+      clientName: clientName,
+      paymentTerms: selectedOption,
+      status: invoiceStatus,
+      total: invoiceTotal,
+    };
+
+    updateDocument(invoiceId, obj);
+
+    setShowEdit((prev) => !prev);
   };
 
   return (

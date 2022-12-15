@@ -4,7 +4,7 @@ import { InvoiceFormInput } from '../InvoiceFormInput';
 import styles from './InvoiceFormItem.module.css';
 import { v4 as uuidv4 } from 'uuid';
 
-export const InvoiceFormItem = ({ item, value, setValue }) => {
+export const InvoiceFormItem = ({ item,  setValue }) => {
   const [total, setTotal] = useState(0);
 
   if (!item?.price) return null;
