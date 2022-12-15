@@ -16,8 +16,15 @@ export const InvoiceFormItem = ({ item, setValue }) => {
   const [itemName, setItemName] = useState(item?.name);
   const [itemQuantity, setItemQuantity] = useState(item?.quantity);
   const [itemPrice, setItemPrice] = useState(+item?.price);
-  const [itemTotal, setItemTotal] = useState(+item?.total);
+  const [itemTotal, setItemTotal] = useState(+itemQuantity * +itemPrice);
   const [itemId, setItemId] = useState(item?.itemId);
+
+
+  useEffect(()=>{
+    setItemTotal(+itemQuantity * +itemPrice);
+    console.log(itemQuantity * itemPrice)
+  }, [itemPrice, itemQuantity])
+
 
   useEffect(() => {
     totalItemValue(item.price, item.quantity);
@@ -69,7 +76,7 @@ export const InvoiceFormItem = ({ item, setValue }) => {
         type='number'
         itemName='itemTotal'
         itemLabel='Total'
-        value={+itemTotal}
+        value={itemTotal}
         setValue={setItemTotal}
         maxWidth={'max-content'}
         className={styles.total}

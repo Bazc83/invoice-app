@@ -78,7 +78,6 @@ export const InvoiceForm = ({
       clientAddressObj
     );
 
-
     // todo needs updating so doesn't just cover first item
     // todo needs dynamic item
     updateSubCollection(
@@ -90,8 +89,6 @@ export const InvoiceForm = ({
 
     setShowEdit((prev) => !prev);
   };
-
-
 
   return (
     <div className={styles.invoiceForm}>

@@ -12,18 +12,21 @@ export const InvoiceFormInput = ({
   disabled,
   noBg,
   value,
-  setValue
+  setValue,
 }) => {
   const [itemValue, setItemValue] = useState(value);
 
-
   const { updateDocument } = useUpdateDocument();
-  
-  const handleChange = (e)=>{
-    setItemValue(e.target.value);
-    setValue(e.target.value)
-  }
 
+  const handleChange = (e) => {
+    setItemValue(e.target.value);
+    setValue(e.target.value);
+  };
+
+  useEffect(() => {
+    setItemValue(value);
+  }, [value]);
+  
   return (
     <div
       className={`${styles.invoiceFormInput} ${
