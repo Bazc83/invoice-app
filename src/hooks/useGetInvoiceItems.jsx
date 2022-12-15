@@ -10,7 +10,7 @@ export const useGetInvoiceItems = () => {
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       setItems((prev) => [
-        ...prev?.filter((val) => val.name !== doc.data().name),
+        ...prev?.filter((val) => val.itemId !== doc.data().itemId),
         doc.data(),
       ]);
     });

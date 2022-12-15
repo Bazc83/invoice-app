@@ -16,14 +16,13 @@ export const InvoiceFormInput = ({
 }) => {
   const [itemValue, setItemValue] = useState(value);
 
+
   const { updateDocument } = useUpdateDocument();
-
-
+  
   const handleChange = (e)=>{
     setItemValue(e.target.value);
     setValue(e.target.value)
   }
-
 
   return (
     <div
@@ -42,7 +41,6 @@ export const InvoiceFormInput = ({
         value={itemValue}
         onChange={handleChange}
         disabled={disabled}
-        min="1"
       />
     </div>
   );

@@ -30,7 +30,7 @@ export const Invoice = () => {
     getMainInvoiceData(invoiceId);
     getItems(invoiceId);
     getClientAddress(invoiceId);
-  }, [invoiceId]);
+  }, [invoiceId, showEdit, items, mainInvoiceData, clientAddress]);
 
   return (
     <div className={styles.invoice}>

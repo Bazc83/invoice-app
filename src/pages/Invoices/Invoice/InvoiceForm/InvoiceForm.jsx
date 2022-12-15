@@ -1,5 +1,7 @@
 import { Button } from '@components/Button';
 import { useUpdateDocument } from '@hooks/useUpdateDocument';
+import { useUpdateSubCollection } from '@hooks/useUpdateSubCollection';
+import { useEffect } from 'react';
 import { useState } from 'react';
 import styles from './InvoiceForm.module.css';
 import { InvoiceFormInput } from './InvoiceFormInput';
@@ -23,12 +25,6 @@ export const InvoiceForm = ({
   ];
 
   const [open, setOpen] = useState(false);
-
-  // ! Set state for each form input
-  // ! Then Add them too form input component as value and setValue
-  // ! On form submit change on firestore
-  // ! Warning if form changed but not saved
-
   const [clientName, setClientName] = useState(mainInvoiceData.clientName);
   const [clientEmail, setClientEmail] = useState(mainInvoiceData.clientEmail);
   const [clientStreet, setClientStreet] = useState(clientAddress.street);
@@ -51,10 +47,10 @@ export const InvoiceForm = ({
   const [invoiceTotal, setInvoiceTotal] = useState(mainInvoiceData.total);
 
   const { updateDocument } = useUpdateDocument();
+  const { updateSubCollection } = useUpdateSubCollection();
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-
     const obj = {
       id: mainInvoiceData.id,
       clientEmail: clientEmail,
@@ -66,10 +62,36 @@ export const InvoiceForm = ({
       total: invoiceTotal,
     };
 
+    const clientAddressObj = {
+      street: clientStreet,
+      city: clientCity,
+      country: clientCountry,
+      postCode: clientPostCode,
+    };
+
     updateDocument(invoiceId, obj);
+
+    updateSubCollection(
+      invoiceId,
+      'clientAddress',
+      'clientAddress',
+      clientAddressObj
+    );
+
+    updateSubCollection(
+      invoiceId,
+      "items",
+      items[0].itemId,
+      invoiceItems[0]
+    );
 
     setShowEdit((prev) => !prev);
   };
+
+  useEffect(()=>{
+
+    console.log(invoiceItems)
+  },[invoiceItems])
 
   return (
     <div className={styles.invoiceForm}>
