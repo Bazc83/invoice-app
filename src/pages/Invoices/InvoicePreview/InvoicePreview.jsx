@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import styles from './InvoicePreview.module.css';
 export const InvoicePreview = ({invoice}) => {
 
-  const { status, id, clientName, total, paymentDue } = invoice.data();
+  const { status, id, clientName, total, paymentDue } = invoice;
 
   const { getDate } = useFormatDate();
 

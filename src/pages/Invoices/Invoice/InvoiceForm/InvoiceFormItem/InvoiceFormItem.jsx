@@ -22,7 +22,6 @@ export const InvoiceFormItem = ({ item, setValue }) => {
 
   useEffect(()=>{
     setItemTotal(+itemQuantity * +itemPrice);
-    console.log(itemQuantity * itemPrice)
   }, [itemPrice, itemQuantity])
 
 

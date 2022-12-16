@@ -1,8 +1,6 @@
+import { InvoicesContext } from '@/App';
 import { Button } from '@components/Button';
-import { useUpdateDocument } from '@hooks/useUpdateDocument';
-import { useUpdateSubCollection } from '@hooks/useUpdateSubCollection';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styles from './InvoiceForm.module.css';
 import { InvoiceFormInput } from './InvoiceFormInput';
 import { InvoiceFormItem } from './InvoiceFormItem/InvoiceFormItem';
@@ -10,83 +8,59 @@ import { InvoiceFormSelect } from './InvoiceFormSelect/InvoiceFormSelect';
 
 export const InvoiceForm = ({
   setShowEdit,
-  mainInvoiceData,
-  clientAddress,
-  senderAddress,
   items,
   newInvoice,
-  invoiceId,
+  invoiceData,
+  InvoiceValues
 }) => {
-  const options = [
-    { key: 1, value: 'Net 1 Day' },
-    { key: 7, value: 'Net 7 Days' },
-    { key: 14, value: 'Net 14 Days' },
-    { key: 30, value: 'Net 30 Days' },
-  ];
+
+
+  const { senderAddress, options } = useContext(InvoicesContext);
 
   const [open, setOpen] = useState(false);
-  const [clientName, setClientName] = useState(mainInvoiceData.clientName);
-  const [clientEmail, setClientEmail] = useState(mainInvoiceData.clientEmail);
-  const [clientStreet, setClientStreet] = useState(clientAddress.street);
-  const [clientCity, setClientCity] = useState(clientAddress.city);
-  const [clientPostCode, setClientPostCode] = useState(clientAddress.postCode);
-  const [clientCountry, setClientCountry] = useState(clientAddress.country);
+
+  const [clientName, setClientName] = useState(
+    newInvoice ? '' : invoiceData?.clientName
+  );
+  const [clientEmail, setClientEmail] = useState(
+    newInvoice ? '' : invoiceData?.clientEmail
+  );
+  const [clientStreet, setClientStreet] = useState(
+    newInvoice ? '' : invoiceData?.clientAddress.street
+  );
+  const [clientCity, setClientCity] = useState(
+    newInvoice ? '' : invoiceData?.clientAddress.city
+  );
+  const [clientPostCode, setClientPostCode] = useState(
+    newInvoice ? '' : invoiceData?.clientAddress.postCode
+  );
+  const [clientCountry, setClientCountry] = useState(
+    newInvoice ? '' : invoiceData?.clientAddress.country
+  );
   const [invoiceCreatedAt, setInvoiceCreatedAt] = useState(
-    mainInvoiceData.createdAt
+    newInvoice ? '' : invoiceData?.createdAt
   );
   const [selectedOption, setSelectedOption] = useState(
-    mainInvoiceData.paymentTerms
+    newInvoice ? 1 : invoiceData?.paymentTerms
   );
 
   const [invoiceDescription, setInvoiceDescription] = useState(
-    mainInvoiceData.description
+    newInvoice ? '' : invoiceData?.description
   );
 
-  const [invoiceStatus, setInvoiceStatus] = useState('paid');
-  const [invoiceItems, setInvoiceItems] = useState([]);
-  const [invoiceTotal, setInvoiceTotal] = useState(mainInvoiceData.total);
-
-  const { updateDocument } = useUpdateDocument();
-  const { updateSubCollection } = useUpdateSubCollection();
+  const [invoiceStatus, setInvoiceStatus] = useState(
+    newInvoice ? '' : invoiceData?.status
+  );
+  const [invoiceItems, setInvoiceItems] = useState(
+    newInvoice ? [] : invoiceData?.items
+  );
+  const [invoiceTotal, setInvoiceTotal] = useState(
+    newInvoice ? '' : invoiceData?.total
+  );
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const obj = {
-      id: mainInvoiceData.id,
-      clientEmail: clientEmail,
-      createdAt: invoiceCreatedAt,
-      description: invoiceDescription,
-      clientName: clientName,
-      paymentTerms: selectedOption,
-      status: invoiceStatus,
-      total: invoiceTotal,
-    };
-
-    const clientAddressObj = {
-      street: clientStreet,
-      city: clientCity,
-      country: clientCountry,
-      postCode: clientPostCode,
-    };
-
-    updateDocument(invoiceId, obj);
-
-    updateSubCollection(
-      invoiceId,
-      'clientAddress',
-      'clientAddress',
-      clientAddressObj
-    );
-
-    // todo needs updating so doesn't just cover first item
-    // todo needs dynamic item
-    updateSubCollection(
-      invoiceId,
-      "items",
-      items[0].itemId,
-      invoiceItems[0]
-    );
-
+    console.log('submitted');
     setShowEdit((prev) => !prev);
   };
 
@@ -97,7 +71,7 @@ export const InvoiceForm = ({
       ) : (
         <h2>
           Edit <span className={styles.invoiceFormHeaderAccent}>#</span>
-          {mainInvoiceData?.id}
+          {'needs replaced'}
         </h2>
       )}
 
@@ -109,27 +83,23 @@ export const InvoiceForm = ({
             itemName='streetAddress'
             itemLabel='Street Address'
             value={senderAddress.street}
-            parentId={mainInvoiceData?.id}
           />
           <InvoiceFormInput
             type='text'
             itemName='city'
             itemLabel='City'
             value={senderAddress.city}
-            parentId={mainInvoiceData?.id}
           />
           <InvoiceFormInput
             type='text'
             itemName='postCode'
             itemLabel='Post Code'
             value={senderAddress.postCode}
-            parentId={mainInvoiceData?.id}
           />
           <InvoiceFormInput
             type='text'
             itemName='country'
             value={senderAddress.country}
-            parentId={mainInvoiceData?.id}
           />
         </div>
 
@@ -141,7 +111,6 @@ export const InvoiceForm = ({
             itemLabel="Client's Name"
             value={clientName}
             setValue={setClientName}
-            parentId={mainInvoiceData?.id}
           />
           <InvoiceFormInput
             type='email'
@@ -149,7 +118,6 @@ export const InvoiceForm = ({
             itemLabel="Client's Email"
             value={clientEmail}
             setValue={setClientEmail}
-            parentId={mainInvoiceData?.id}
           />
 
           <InvoiceFormInput
@@ -158,7 +126,6 @@ export const InvoiceForm = ({
             itemLabel='Street Address'
             value={clientStreet}
             setValue={setClientStreet}
-            parentId={mainInvoiceData?.id}
           />
           <InvoiceFormInput
             type='text'
@@ -166,7 +133,6 @@ export const InvoiceForm = ({
             itemLabel='City'
             value={clientCity}
             setValue={setClientCity}
-            parentId={mainInvoiceData?.id}
           />
           <InvoiceFormInput
             type='text'
@@ -174,7 +140,6 @@ export const InvoiceForm = ({
             itemLabel='Post Code'
             value={clientPostCode}
             setValue={setClientPostCode}
-            parentId={mainInvoiceData?.id}
           />
           <InvoiceFormInput
             type='text'
@@ -182,7 +147,6 @@ export const InvoiceForm = ({
             itemLabel='Country'
             value={clientCountry}
             setValue={setClientCountry}
-            parentId={mainInvoiceData?.id}
           />
 
           <div className='grid-row-half'>
@@ -192,7 +156,6 @@ export const InvoiceForm = ({
               itemLabel='Invoice Date'
               value={invoiceCreatedAt}
               setValue={setInvoiceCreatedAt}
-              parentId={mainInvoiceData?.id}
             />
 
             <InvoiceFormSelect
@@ -202,7 +165,6 @@ export const InvoiceForm = ({
               onChange={(item) => setSelectedOption(item)}
               open={open}
               setOpen={setOpen}
-              parentId={mainInvoiceData?.id}
             />
           </div>
           <InvoiceFormInput
@@ -211,7 +173,6 @@ export const InvoiceForm = ({
             itemLabel='Project/Description'
             value={invoiceDescription}
             setValue={setInvoiceDescription}
-            parentId={mainInvoiceData?.id}
           />
         </div>
 
@@ -219,18 +180,16 @@ export const InvoiceForm = ({
           <h2>Item List</h2>
 
           <div className={styles.items}>
-            {items?.map((item, i) => (
+            {invoiceItems?.map((item, i) => (
               <InvoiceFormItem
                 item={item}
                 key={`item${i}`}
-                parentId={mainInvoiceData?.id}
                 value={invoiceItems}
                 setValue={setInvoiceItems}
               />
             ))}
           </div>
 
-          <InvoiceFormItem />
           <Button btnStyle='btnThree' fullWidth>
             + Add New Item
           </Button>

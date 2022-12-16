@@ -1,4 +1,3 @@
-import { useUpdateDocument } from '@hooks/useUpdateDocument';
 import { useEffect, useState } from 'react';
 import styles from './InvoiceFormInput.module.css';
 
@@ -16,7 +15,6 @@ export const InvoiceFormInput = ({
 }) => {
   const [itemValue, setItemValue] = useState(value);
 
-  const { updateDocument } = useUpdateDocument();
 
   const handleChange = (e) => {
     setItemValue(e.target.value);
