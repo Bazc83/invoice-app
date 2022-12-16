@@ -77,6 +77,8 @@ export const Invoice = () => {
     invoiceTotal,
     invoicePaymentDue,
   };
+
+  
   if (isLoading) return null;
 
   return (
