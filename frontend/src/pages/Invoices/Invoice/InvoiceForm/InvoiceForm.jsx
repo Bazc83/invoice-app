@@ -71,7 +71,7 @@ export const InvoiceForm = ({
       ) : (
         <h2>
           Edit <span className={styles.invoiceFormHeaderAccent}>#</span>
-          {'needs replaced'}
+          {invoiceData?.id}
         </h2>
       )}
 

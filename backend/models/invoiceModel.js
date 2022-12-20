@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const invoiceSchema = mongoose.Schema(
+const invoiceSchema = new mongoose.Schema(
   {
     clientAddress: {
       city: {
@@ -71,7 +71,6 @@ const invoiceSchema = mongoose.Schema(
       type: Number,
     },
   },
-  { timestamps: true }
 );
 
 module.exports = mongoose.model('Invoice', invoiceSchema);

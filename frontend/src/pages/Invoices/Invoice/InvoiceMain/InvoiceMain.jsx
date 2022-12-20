@@ -1,31 +1,28 @@
-import { InvoicesContext } from '@/App';
+// import { InvoicesContext } from '@/App';
 import { useFormatDate } from '@/hooks/useFormatDate';
 import { useContext } from 'react';
-import { InvoiceContext } from '../Invoice';
+// import { InvoiceContext } from '../Invoice';
 import { InvoiceItems } from '../InvoiceItems';
 import { InvoiceItemsAmountDue } from '../InvoiceItemsAmountDue';
 import { InvoiceItemsTable } from '../InvoiceItemsTable';
 import styles from './InvoiceMain.module.css';
-export const InvoiceMain = () => {
+export const InvoiceMain = ({invoiceData}) => {
   const { getDate } = useFormatDate();
 
-  const { senderAddress } = useContext(InvoicesContext);
 
   const {
     invoiceDescription,
     id,
     clientName,
     clientEmail,
-    clientStreet,
-    clientCity,
-    clientCountry,
-    clientPostCode,
-    invoiceCreatedAt,
-    selectedOption,
-    invoiceItems,
-    invoiceTotal,
-    invoicePaymentDue,
-  } = useContext(InvoiceContext);
+    clientAddress,
+    senderAddress,
+    createdAt,
+    paymentTerms,
+    items,
+    total,
+    paymentDue,
+  } = invoiceData;
 
   return (
     <div className={`secondary-bg ${styles.invoiceMain}`}>
@@ -50,12 +47,12 @@ export const InvoiceMain = () => {
       <div className={styles.dates}>
         <div className={styles.createdAt}>
           <p className='text-faded'>Invoice Date</p>
-          <h3>{invoiceCreatedAt && getDate(invoiceCreatedAt)}</h3>
+          <h3>{createdAt && getDate(createdAt)}</h3>
         </div>
 
         <div className={styles.paymentDue}>
           <p className='text-faded'>Payment Due</p>
-          <h3>{invoicePaymentDue && getDate(invoicePaymentDue)}</h3>
+          <h3>{paymentDue && getDate(paymentDue)}</h3>
         </div>
       </div>
 
@@ -64,10 +61,10 @@ export const InvoiceMain = () => {
         <h3>{clientName}</h3>
 
         <div className={`text-faded-xs ${styles.clientAddress}`}>
-          <p>{clientStreet}</p>
-          <p>{clientCity}</p>
-          <p>{clientPostCode}</p>
-          <p>{clientCountry}</p>
+          <p>{clientAddress?.street}</p>
+          <p>{clientAddress?.city}</p>
+          <p>{clientAddress?.postCode}</p>
+          <p>{clientAddress?.country}</p>
         </div>
       </div>
 
@@ -79,12 +76,12 @@ export const InvoiceMain = () => {
       <div className={styles.itemsWrapper}>
         {/* hidden screens smaller than 678px */}
 
-        <InvoiceItemsTable items={invoiceItems} />
+        <InvoiceItemsTable items={items} />
 
         {/* Hidden screens bigger than 678px */}
-        <InvoiceItems items={invoiceItems} />
+        <InvoiceItems items={items} />
 
-        <InvoiceItemsAmountDue amountDue={invoiceTotal} />
+        <InvoiceItemsAmountDue amountDue={total} />
       </div>
     </div>
   );
