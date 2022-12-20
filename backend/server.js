@@ -1,4 +1,5 @@
 const express = require('express');
+var cors = require('cors');
 const path = require('path');
 const colors = require('colors');
 
@@ -12,10 +13,9 @@ connectDB();
 const port = process.env.PORT || 5000;
 
 const app = express();
-
+app.use(cors({origin: false}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
 
 app.use('/api/invoices', require('./routes/invoiceRoutes'));
 

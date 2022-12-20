@@ -1,4 +1,3 @@
-import { InvoicesContext } from '@/App';
 import { Button } from '@components/Button';
 import { useContext, useEffect, useState } from 'react';
 import styles from './InvoiceForm.module.css';
@@ -6,57 +5,18 @@ import { InvoiceFormInput } from './InvoiceFormInput';
 import { InvoiceFormItem } from './InvoiceFormItem/InvoiceFormItem';
 import { InvoiceFormSelect } from './InvoiceFormSelect/InvoiceFormSelect';
 
-export const InvoiceForm = ({
-  setShowEdit,
-  items,
-  newInvoice,
-  invoiceData,
-  InvoiceValues
-}) => {
+export const InvoiceForm = ({ setShowEdit, newInvoice, invoice }) => {
+  const options = [
+    { key: 1, value: 'Net 1 Day' },
+    { key: 7, value: 'Net 7 Days' },
+    { key: 14, value: 'Net 14 Days' },
+    { key: 30, value: 'Net 30 Days' },
+  ];
 
-
-  const { senderAddress, options } = useContext(InvoicesContext);
+  const [itemsValue, setItemsValue] = useState(invoice?.items);
+  const [selectedOption, setSelectedOption] = useState(1);
 
   const [open, setOpen] = useState(false);
-
-  const [clientName, setClientName] = useState(
-    newInvoice ? '' : invoiceData?.clientName
-  );
-  const [clientEmail, setClientEmail] = useState(
-    newInvoice ? '' : invoiceData?.clientEmail
-  );
-  const [clientStreet, setClientStreet] = useState(
-    newInvoice ? '' : invoiceData?.clientAddress.street
-  );
-  const [clientCity, setClientCity] = useState(
-    newInvoice ? '' : invoiceData?.clientAddress.city
-  );
-  const [clientPostCode, setClientPostCode] = useState(
-    newInvoice ? '' : invoiceData?.clientAddress.postCode
-  );
-  const [clientCountry, setClientCountry] = useState(
-    newInvoice ? '' : invoiceData?.clientAddress.country
-  );
-  const [invoiceCreatedAt, setInvoiceCreatedAt] = useState(
-    newInvoice ? '' : invoiceData?.createdAt
-  );
-  const [selectedOption, setSelectedOption] = useState(
-    newInvoice ? 1 : invoiceData?.paymentTerms
-  );
-
-  const [invoiceDescription, setInvoiceDescription] = useState(
-    newInvoice ? '' : invoiceData?.description
-  );
-
-  const [invoiceStatus, setInvoiceStatus] = useState(
-    newInvoice ? '' : invoiceData?.status
-  );
-  const [invoiceItems, setInvoiceItems] = useState(
-    newInvoice ? [] : invoiceData?.items
-  );
-  const [invoiceTotal, setInvoiceTotal] = useState(
-    newInvoice ? '' : invoiceData?.total
-  );
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -71,7 +31,7 @@ export const InvoiceForm = ({
       ) : (
         <h2>
           Edit <span className={styles.invoiceFormHeaderAccent}>#</span>
-          {invoiceData?.id}
+          {invoice?.id}
         </h2>
       )}
 
@@ -82,24 +42,24 @@ export const InvoiceForm = ({
             type='text'
             itemName='streetAddress'
             itemLabel='Street Address'
-            value={senderAddress.street}
+            value={invoice.senderAddress.street}
           />
           <InvoiceFormInput
             type='text'
             itemName='city'
             itemLabel='City'
-            value={senderAddress.city}
+            value={invoice.senderAddress.city}
           />
           <InvoiceFormInput
             type='text'
             itemName='postCode'
             itemLabel='Post Code'
-            value={senderAddress.postCode}
+            value={invoice.senderAddress.postCode}
           />
           <InvoiceFormInput
             type='text'
             itemName='country'
-            value={senderAddress.country}
+            value={invoice.senderAddress.country}
           />
         </div>
 
@@ -109,44 +69,38 @@ export const InvoiceForm = ({
             type='text'
             itemName='clientsName'
             itemLabel="Client's Name"
-            value={clientName}
-            setValue={setClientName}
+            value={invoice.clientName}
           />
           <InvoiceFormInput
             type='email'
             itemName='clientsEmail'
             itemLabel="Client's Email"
-            value={clientEmail}
-            setValue={setClientEmail}
+            value={invoice.clientEmail}
           />
 
           <InvoiceFormInput
             type='text'
             itemName='clientsStreetAddress'
             itemLabel='Street Address'
-            value={clientStreet}
-            setValue={setClientStreet}
+            value={invoice.clientAddress.street}
           />
           <InvoiceFormInput
             type='text'
             itemName='clientsCity'
             itemLabel='City'
-            value={clientCity}
-            setValue={setClientCity}
+            value={invoice.clientAddress.city}
           />
           <InvoiceFormInput
             type='text'
             itemName='postCode'
             itemLabel='Post Code'
-            value={clientPostCode}
-            setValue={setClientPostCode}
+            value={invoice.clientAddress.postCode}
           />
           <InvoiceFormInput
             type='text'
             itemName='country'
             itemLabel='Country'
-            value={clientCountry}
-            setValue={setClientCountry}
+            value={invoice.clientAddress.country}
           />
 
           <div className='grid-row-half'>
@@ -154,8 +108,7 @@ export const InvoiceForm = ({
               type='date'
               itemName='invoiceDate'
               itemLabel='Invoice Date'
-              value={invoiceCreatedAt}
-              setValue={setInvoiceCreatedAt}
+              value={invoice.createdAt}
             />
 
             <InvoiceFormSelect
@@ -171,8 +124,7 @@ export const InvoiceForm = ({
             type='text'
             itemName='projectDescription'
             itemLabel='Project/Description'
-            value={invoiceDescription}
-            setValue={setInvoiceDescription}
+            value={invoice.description}
           />
         </div>
 
@@ -180,12 +132,12 @@ export const InvoiceForm = ({
           <h2>Item List</h2>
 
           <div className={styles.items}>
-            {invoiceItems?.map((item, i) => (
+            {itemsValue?.map((item, i) => (
               <InvoiceFormItem
                 item={item}
                 key={`item${i}`}
-                value={invoiceItems}
-                setValue={setInvoiceItems}
+                value={item}
+                setItemsValue={setItemsValue}
               />
             ))}
           </div>

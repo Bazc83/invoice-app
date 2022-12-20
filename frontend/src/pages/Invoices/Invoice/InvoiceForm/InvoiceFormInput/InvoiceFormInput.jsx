@@ -10,15 +10,13 @@ export const InvoiceFormInput = ({
   maxWidth,
   disabled,
   noBg,
-  value,
-  setValue,
+  value
 }) => {
   const [itemValue, setItemValue] = useState(value);
 
 
   const handleChange = (e) => {
     setItemValue(e.target.value);
-    setValue(e.target.value);
   };
 
   useEffect(() => {

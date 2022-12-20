@@ -4,32 +4,35 @@ import { PaymentStatus } from '@/pages/Invoices/PaymentStatus';
 // import data from '@data/data.json';
 import axios from 'axios';
 import { createContext, useContext, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { InvoicesContext } from '../../../context/InvoicesData';
+import { getInvoices } from '../../../features/invoice/invoicesSlice';
+// import { InvoicesContext } from '../../../context/InvoicesData';
 import styles from './Invoice.module.css';
 import { InvoiceButtons } from './InvoiceButtons';
 import { InvoiceMain } from './InvoiceMain';
 
 export const Invoice = () => {
-  const { invoices } = useContext(InvoicesContext);
+
 
   const { invoiceId } = useParams();
 
-  const [invoiceData, setInvoiceData] = useState();
-
   const [showEdit, setShowEdit] = useState(false);
+  const [invoice, setInvoice] = useState();
+  const dispatch = useDispatch();
 
-  const [isLoading, setIsLoading] = useState(true);
+  const { invoices, isLoading, options } = useSelector((state) => state.invoices);
+
+ 
+  useEffect(()=>{
+    dispatch(getInvoices());
+  },[])
 
   useEffect(() => {
-    const invoice = invoices?.filter((invoice) => invoice.id === invoiceId);
-
-    setInvoiceData({ ...invoice[0] });
-
-    if (invoices) {
-      setIsLoading(false);
-    }
+    const invoiceData = invoices?.filter((invoice) => invoice.id === invoiceId);
+    setInvoice(invoiceData[0]);
   }, [invoices]);
+
 
   if (isLoading) return null;
 
@@ -40,7 +43,7 @@ export const Invoice = () => {
           <InvoiceForm
             setShowEdit={setShowEdit}
             invoiceId={invoiceId}
-            invoiceData={invoiceData}
+            invoice={invoice}
           />
         )}
 
@@ -57,19 +60,16 @@ export const Invoice = () => {
                 className={`container secondary-bg ${styles.statusAndButtons}`}>
                 <div className={`secondary-bg ${styles.status}`}>
                   <p>Status</p>
-                  <PaymentStatus status={invoiceData?.status} />
+                  <PaymentStatus status={invoice?.status} />
                 </div>
 
                 <div className={styles.buttonWrapperTop}>
                   <InvoiceButtons setShowEdit={setShowEdit} />
                 </div>
               </div>
-
-              <InvoiceMain
-                invoiceId={invoiceId}
-                invoiceData={invoiceData}
-                invoiceCreatedAt={invoiceData?.createdAt}
-              />
+              {invoice !== undefined && (
+                <InvoiceMain invoiceId={invoiceId} invoice={invoice} />
+              )}
             </div>
           </div>
 

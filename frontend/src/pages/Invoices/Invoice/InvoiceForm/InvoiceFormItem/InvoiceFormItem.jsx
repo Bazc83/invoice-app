@@ -4,7 +4,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { InvoiceFormInput } from '../InvoiceFormInput';
 import styles from './InvoiceFormItem.module.css';
 
-export const InvoiceFormItem = ({ item, setValue }) => {
+export const InvoiceFormItem = ({ item, setItemsValue}) => {
+
+
   const [total, setTotal] = useState(0);
 
   if (!item?.price) return null;
@@ -30,7 +32,7 @@ export const InvoiceFormItem = ({ item, setValue }) => {
   }, [item]);
 
   useEffect(() => {
-    setValue((prev) => [
+    setItemsValue((prev) => [
       ...prev.filter((val) => val.itemId !== itemId),
       {
         itemId: itemId,

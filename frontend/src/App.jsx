@@ -2,14 +2,12 @@ import { DesignSystem } from '@/pages/DesignSystem';
 import { createContext } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import useLocalStorage from 'use-local-storage';
-import InvoicesData from './context/InvoicesData';
 import { Invoice } from './pages/Invoices/Invoice';
 import { Invoices } from './pages/Invoices/Invoices';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { PageLayout } from './pages/PageLayout';
 
 export const DarkModeContext = createContext();
-export const InvoicesContext = createContext();
 
 function App() {
   const senderAddress = {
@@ -30,7 +28,7 @@ function App() {
   return (
     <div className='App' data-theme={theme}>
       <DarkModeContext.Provider value={{ theme, toggleDarkMode }}>
-        <InvoicesData>
+   
             <BrowserRouter>
               <Routes>
                 <Route element={<PageLayout />}>
@@ -45,7 +43,6 @@ function App() {
               </Routes>
             </BrowserRouter>
       
-        </InvoicesData>
       </DarkModeContext.Provider>
     </div>
   );

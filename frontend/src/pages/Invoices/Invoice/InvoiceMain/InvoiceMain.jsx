@@ -1,17 +1,16 @@
-// import { InvoicesContext } from '@/App';
 import { useFormatDate } from '@/hooks/useFormatDate';
-import { useContext } from 'react';
-// import { InvoiceContext } from '../Invoice';
 import { InvoiceItems } from '../InvoiceItems';
 import { InvoiceItemsAmountDue } from '../InvoiceItemsAmountDue';
 import { InvoiceItemsTable } from '../InvoiceItemsTable';
 import styles from './InvoiceMain.module.css';
-export const InvoiceMain = ({invoiceData}) => {
+
+
+export const InvoiceMain = ({invoice}) => {
   const { getDate } = useFormatDate();
 
 
   const {
-    invoiceDescription,
+    description,
     id,
     clientName,
     clientEmail,
@@ -22,7 +21,7 @@ export const InvoiceMain = ({invoiceData}) => {
     items,
     total,
     paymentDue,
-  } = invoiceData;
+  } = invoice;
 
   return (
     <div className={`secondary-bg ${styles.invoiceMain}`}>
@@ -32,9 +31,7 @@ export const InvoiceMain = ({invoiceData}) => {
           {id}
         </h4>
 
-        <p className={`text-faded ${styles.description}`}>
-          {invoiceDescription}
-        </p>
+        <p className={`text-faded ${styles.description}`}>{description}</p>
       </div>
 
       <div className={`text-faded-xs ${styles.address}`}>

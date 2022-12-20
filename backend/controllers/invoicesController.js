@@ -1,10 +1,11 @@
 const asyncHandler = require('express-async-handler');
+const { restart } = require('nodemon');
 
 const Invoice = require('../models/invoiceModel');
 
 // get all invoices
 const getInvoices = asyncHandler(async (req, res) => {
-  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', "*");
 
   const invoices = await Invoice.find();
 
@@ -14,6 +15,7 @@ const getInvoices = asyncHandler(async (req, res) => {
 // Get since invoice by id
 
 const getInvoice = asyncHandler(async (req, res) => {
+
   res.header('Access-Control-Allow-Origin', '*');
   const invoice = await Invoice.findOne({id: req.params.id});
   if (!invoice) {
