@@ -1,34 +1,40 @@
-// import data from '@data/data.json';
-import axios from 'axios';
-import { useContext, useEffect, useState } from 'react';
+import { set } from 'mongoose';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
-// import { InvoicesContext } from '../../context/InvoicesData';
 import { getInvoices } from '../../features/invoice/invoicesSlice';
+import { InvoiceForm } from './Invoice/InvoiceForm/InvoiceForm';
 import { InvoicePreview } from './InvoicePreview';
 import styles from './Invoices.module.css';
 import { InvoicesPageControls } from './InvoicesPageControls/InvoicesPageControls';
+
 import { NoInvoices } from './NoInvoices/NoInvoices';
 
 export const Invoices = () => {
+  
+  const [showForm, setShowForm] = useState(true);
 
-
- 
   const dispatch = useDispatch();
 
-  const { invoices, isError, message, isSuccess, isLoading} = useSelector((state)=> state.invoices)
+  const { invoices, isError, message, isSuccess, isLoading } = useSelector(
+    (state) => state.invoices
+  );
 
-  useEffect(()=>{
-    dispatch(getInvoices())
-  },[])
-
+  useEffect(() => {
+    dispatch(getInvoices());
+    setShowForm(false);
+  }, []);
 
   return (
     <div className={`container main-bg`}>
       <Outlet />
 
-      <InvoicesPageControls invoicesData={invoices?.length} />
-
+      <InvoicesPageControls
+        invoicesData={invoices?.length}
+        setShowForm={setShowForm}
+      />
+      {showForm && <InvoiceForm newInvoice setShowForm={setShowForm} />}
+      {invoices?.length === 0 && <NoInvoices />}
       <div className={styles.invoicesWrapper}>
         {invoices &&
           invoices?.map((invoice) => {

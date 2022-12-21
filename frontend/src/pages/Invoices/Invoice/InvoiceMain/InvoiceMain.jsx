@@ -35,10 +35,10 @@ export const InvoiceMain = ({invoice}) => {
       </div>
 
       <div className={`text-faded-xs ${styles.address}`}>
-        <p>{senderAddress.street}</p>
-        <p>{senderAddress.city}</p>
-        <p>{senderAddress.postCode}</p>
-        <p>{senderAddress.country}</p>
+        <p>{senderAddress?.street}</p>
+        <p>{senderAddress?.city}</p>
+        <p>{senderAddress?.postCode}</p>
+        <p>{senderAddress?.country}</p>
       </div>
 
       <div className={styles.dates}>

@@ -1,11 +1,72 @@
 import { Button } from '@components/Button';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addInvoice, reset } from '../../../../features/invoice/invoicesSlice';
 import styles from './InvoiceForm.module.css';
 import { InvoiceFormInput } from './InvoiceFormInput';
 import { InvoiceFormItem } from './InvoiceFormItem/InvoiceFormItem';
 import { InvoiceFormSelect } from './InvoiceFormSelect/InvoiceFormSelect';
+export const InvoiceForm = ({ setShowForm, newInvoice, invoice }) => {
+  const senderAddress = {
+    street: '19 Union Terrace',
+    city: 'London',
+    postCode: 'E1 3EZ',
+    country: 'United Kingdom',
+  };
 
-export const InvoiceForm = ({ setShowEdit, newInvoice, invoice }) => {
+  const { street, city, postCode, country } = senderAddress;
+
+  const dispatch = useDispatch();
+
+  const { invoices, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.invoices
+  );
+
+  useEffect(() => {
+    // if (isError) {
+    //   toast.error(message);
+    // }
+
+    dispatch(reset);
+  }, [invoices, isLoading, isError, isSuccess, message, dispatch]);
+
+  const [formData, setFormData] = useState({
+    street: street,
+    city: city,
+    postCode: postCode,
+    country: country,
+    clientEmail: newInvoice ? '' : invoice?.clientEmail,
+    clientName: newInvoice ? '' : invoice?.clientName,
+    clientCity: newInvoice ? '' : invoice?.clientAddress.city,
+    clientStreet: newInvoice ? '' : invoice?.clientAddress.street,
+    clientCountry: newInvoice ? '' : invoice?.clientAddress.country,
+    clientPostCode: newInvoice ? '' : invoice?.clientAddress.postCode,
+    description: newInvoice ? '' : invoice?.description,
+    invoiceDate: newInvoice ? '' : invoice?.createdAt,
+    id: newInvoice ? '' : invoice?.id,
+    paymentDue: newInvoice ? '' : invoice?.paymentDue,
+    paymentTerms: newInvoice ? '' : invoice?.paymentTerms,
+    status: newInvoice ? 'draft' : invoice?.status,
+    total: newInvoice ? '' : invoice?.total,
+    items: newInvoice ? [] : invoice?.items,
+  });
+
+  const {
+    clientEmail,
+    clientName,
+    description,
+    id,
+    paymentDue,
+    paymentTerms,
+    status,
+    total,
+    clientCity,
+    clientStreet,
+    clientPostCode,
+    clientCountry,
+    invoiceDate,
+  } = formData;
+
   const options = [
     { key: 1, value: 'Net 1 Day' },
     { key: 7, value: 'Net 7 Days' },
@@ -18,12 +79,44 @@ export const InvoiceForm = ({ setShowEdit, newInvoice, invoice }) => {
 
   const [open, setOpen] = useState(false);
 
+  const inputOnChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
     console.log('submitted');
-    setShowEdit((prev) => !prev);
+    const invoiceData = {
+      city,
+      street,
+      postCode,
+      country,
+      clientEmail,
+      clientName,
+      clientCity,
+      clientCountry,
+      clientPostCode,
+      clientStreet,
+      description,
+      id,
+      paymentDue,
+      paymentTerms,
+      status,
+      total,
+      invoiceDate,
+    };
+
+    console.log(invoiceData);
+    dispatch(addInvoice(invoiceData));
+
+    setShowForm((prev) => !prev);
   };
 
+  useEffect(() => {}, []);
+  console.log(formData);
   return (
     <div className={styles.invoiceForm}>
       {newInvoice ? (
@@ -37,29 +130,40 @@ export const InvoiceForm = ({ setShowEdit, newInvoice, invoice }) => {
 
       <form className={styles.form} onSubmit={handleFormSubmit}>
         <div className={styles.formSection}>
+          <InvoiceFormInput
+            type='text'
+            itemName='id'
+            itemLabel='invoice id'
+            value={newInvoice ? '' : invoice.id}
+            setValue={inputOnChange}
+          />
           <h4 className={styles.formSectionHeader}>Bill From</h4>
           <InvoiceFormInput
             type='text'
             itemName='streetAddress'
             itemLabel='Street Address'
-            value={invoice.senderAddress.street}
+            value={street}
+            setValue={inputOnChange}
           />
           <InvoiceFormInput
             type='text'
             itemName='city'
             itemLabel='City'
-            value={invoice.senderAddress.city}
+            value={city}
+            setValue={inputOnChange}
           />
           <InvoiceFormInput
             type='text'
             itemName='postCode'
             itemLabel='Post Code'
-            value={invoice.senderAddress.postCode}
+            value={postCode}
+            setValue={inputOnChange}
           />
           <InvoiceFormInput
             type='text'
             itemName='country'
-            value={invoice.senderAddress.country}
+            value={country}
+            setValue={inputOnChange}
           />
         </div>
 
@@ -67,40 +171,46 @@ export const InvoiceForm = ({ setShowEdit, newInvoice, invoice }) => {
           <h4 className={styles.formSectionHeader}>Bill To</h4>
           <InvoiceFormInput
             type='text'
-            itemName='clientsName'
+            itemName='clientName'
             itemLabel="Client's Name"
-            value={invoice.clientName}
+            value={newInvoice ? '' : invoice.clientName}
+            setValue={inputOnChange}
           />
           <InvoiceFormInput
             type='email'
-            itemName='clientsEmail'
+            itemName='clientEmail'
             itemLabel="Client's Email"
-            value={invoice.clientEmail}
+            value={newInvoice ? '' : invoice.clientEmail}
+            setValue={inputOnChange}
           />
 
           <InvoiceFormInput
             type='text'
-            itemName='clientsStreetAddress'
+            itemName='clientStreet'
             itemLabel='Street Address'
-            value={invoice.clientAddress.street}
+            value={newInvoice ? '' : invoice.clientAddress.street}
+            setValue={inputOnChange}
           />
           <InvoiceFormInput
             type='text'
-            itemName='clientsCity'
+            itemName='clientCity'
             itemLabel='City'
-            value={invoice.clientAddress.city}
+            value={newInvoice ? '' : invoice.clientAddress.city}
+            setValue={inputOnChange}
           />
           <InvoiceFormInput
             type='text'
-            itemName='postCode'
+            itemName='clientPostCode'
             itemLabel='Post Code'
-            value={invoice.clientAddress.postCode}
+            value={newInvoice ? '' : invoice.clientAddress.postCode}
+            setValue={inputOnChange}
           />
           <InvoiceFormInput
             type='text'
-            itemName='country'
+            itemName='clientCountry'
             itemLabel='Country'
-            value={invoice.clientAddress.country}
+            value={newInvoice ? '' : invoice.clientAddress.country}
+            setValue={inputOnChange}
           />
 
           <div className='grid-row-half'>
@@ -108,7 +218,8 @@ export const InvoiceForm = ({ setShowEdit, newInvoice, invoice }) => {
               type='date'
               itemName='invoiceDate'
               itemLabel='Invoice Date'
-              value={invoice.createdAt}
+              value={newInvoice ? '' : invoice.createdAt}
+              setValue={inputOnChange}
             />
 
             <InvoiceFormSelect
@@ -122,9 +233,10 @@ export const InvoiceForm = ({ setShowEdit, newInvoice, invoice }) => {
           </div>
           <InvoiceFormInput
             type='text'
-            itemName='projectDescription'
+            itemName='description'
             itemLabel='Project/Description'
-            value={invoice.description}
+            value={newInvoice ? '' : invoice.description}
+            setValue={inputOnChange}
           />
         </div>
 
@@ -148,7 +260,7 @@ export const InvoiceForm = ({ setShowEdit, newInvoice, invoice }) => {
         </div>
         <div className={styles.formButtons}>
           <Button
-            onClick={() => setShowEdit((prev) => !prev)}
+            onClick={() => setShowForm((prev) => !prev)}
             btnStyle='btnThree'>
             Cancel
           </Button>

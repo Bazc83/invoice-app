@@ -10,14 +10,6 @@ import { PageLayout } from './pages/PageLayout';
 export const DarkModeContext = createContext();
 
 function App() {
-  const senderAddress = {
-    street: '19 Union Terrace',
-    city: 'London',
-    postCode: 'E1 3EZ',
-    country: 'United Kingdom',
-  };
-
-
   const [theme, setTheme] = useLocalStorage('theme' ? 'dark' : 'light');
 
   const toggleDarkMode = () => {
@@ -28,21 +20,19 @@ function App() {
   return (
     <div className='App' data-theme={theme}>
       <DarkModeContext.Provider value={{ theme, toggleDarkMode }}>
-   
-            <BrowserRouter>
-              <Routes>
-                <Route element={<PageLayout />}>
-                  <Route index element={<Invoices />} />
-                  <Route path='/invoices' element={<Invoices />} />
-                  <Route path='/invoices/:invoiceId' element={<Invoice />} />
+        <BrowserRouter>
+          <Routes>
+            <Route element={<PageLayout />}>
+              <Route index element={<Invoices />} />
+              <Route path='/invoices' element={<Invoices />} />
+              <Route path='/invoices/:invoiceId' element={<Invoice />} />
 
-                  <Route path='design' element={<DesignSystem />} />
+              <Route path='design' element={<DesignSystem />} />
 
-                  <Route path='*' element={<NotFoundPage />} />
-                </Route>
-              </Routes>
-            </BrowserRouter>
-      
+              <Route path='*' element={<NotFoundPage />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
       </DarkModeContext.Provider>
     </div>
   );

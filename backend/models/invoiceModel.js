@@ -1,76 +1,75 @@
 const mongoose = require('mongoose');
 
-const invoiceSchema = new mongoose.Schema(
-  {
-    clientAddress: {
-      city: {
-        type: String,
-      },
-      street: {
-        type: String,
-      },
-      postCode: {
-        type: String,
-      },
-      country: {
-        type: String,
-      },
-    },
-    clientEmail: {
+const invoiceSchema = new mongoose.Schema({
+  clientAddress: {
+    city: {
       type: String,
     },
-    clientName: {
+    street: {
       type: String,
     },
-    description: {
+    postCode: {
       type: String,
     },
-    id: {
+    country: {
       type: String,
-    },
-    items: [
-      {
-        name: {
-          type: String,
-        },
-        price: {
-          type: Number,
-        },
-        quantity: {
-          type: Number,
-        },
-        total: {
-          type: Number,
-        },
-      },
-    ],
-    paymentDue: {
-      type: String,
-    },
-    paymentTerms: {
-      type: Number,
-    },
-    senderAddress: {
-      city: {
-        type: String,
-      },
-      street: {
-        type: String,
-      },
-      postCode: {
-        type: String,
-      },
-      country: {
-        type: String,
-      },
-    },
-    status: {
-      type: String,
-    },
-    total: {
-      type: Number,
     },
   },
-);
+  clientEmail: {
+    type: String,
+  },
+  clientName: {
+    type: String,
+  },
+  description: {
+    type: String,
+  },
+  id: {
+    type: String,
+    unique: true,
+  },
+  items: [
+    {
+      name: {
+        type: String,
+      },
+      price: {
+        type: Number,
+      },
+      quantity: {
+        type: Number,
+      },
+      total: {
+        type: Number,
+      },
+    },
+  ],
+  paymentDue: {
+    type: String,
+  },
+  paymentTerms: {
+    type: Number,
+  },
+  senderAddress: {
+    city: {
+      type: String,
+    },
+    street: {
+      type: String,
+    },
+    postCode: {
+      type: String,
+    },
+    country: {
+      type: String,
+    },
+  },
+  status: {
+    type: String,
+  },
+  total: {
+    type: Number,
+  },
+});
 
 module.exports = mongoose.model('Invoice', invoiceSchema);
