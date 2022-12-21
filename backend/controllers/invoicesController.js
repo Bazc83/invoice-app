@@ -148,9 +148,25 @@ const updateInvoice = asyncHandler(async (req, res) => {
   }
 });
 
+// delete invoice
+
+const deleteInvoice = asyncHandler(async (req, res) => {
+  res.header('Access-Control-Allow-Origin', '*');
+
+  const invoice = await Invoice.findOne({ id: req.params.id });
+  if (!invoice) {
+    res.status(400);
+    throw new Error('Invoice not found');
+  } else {
+    await invoice.remove();
+    res.status(200).json({ id: req.params.id });
+  }
+});
+
 module.exports = {
   getInvoices,
   getInvoice,
   addInvoice,
   updateInvoice,
+  deleteInvoice,
 };

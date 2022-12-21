@@ -4,7 +4,7 @@ import { PaymentStatus } from '@/pages/Invoices/PaymentStatus';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getInvoices } from '../../../features/invoice/invoicesSlice';
+import { getInvoice } from '../../../features/invoice/invoicesSlice';
 import styles from './Invoice.module.css';
 import { InvoiceButtons } from './InvoiceButtons';
 import { InvoiceMain } from './InvoiceMain';
@@ -18,21 +18,26 @@ export const Invoice = () => {
   const { invoices, isLoading } = useSelector((state) => state.invoices);
 
   useEffect(() => {
-    dispatch(getInvoices());
+    dispatch(getInvoice(invoiceId));
   }, []);
 
   useEffect(() => {
-    const invoiceData = invoices?.filter((invoice) => invoice.id === invoiceId);
-    setInvoice(invoiceData[0]);
-  }, []);
+    setInvoice(invoices[0]);
+  }, [invoices]);
 
-  if (isLoading) return null;
+ 
+  if (isLoading ) return null;
 
+  
   return (
     <div>
       <div className={styles.invoice}>
         {showEdit && (
-          <InvoiceForm setShowForm={setShowEdit} invoice={invoice} paramsInvoiceId={invoiceId} />
+          <InvoiceForm
+            setShowForm={setShowEdit}
+            invoice={invoice}
+            paramsInvoiceId={invoiceId}
+          />
         )}
 
         <div
@@ -52,10 +57,10 @@ export const Invoice = () => {
                 </div>
 
                 <div className={styles.buttonWrapperTop}>
-                  <InvoiceButtons setShowEdit={setShowEdit} />
+                  <InvoiceButtons setShowEdit={setShowEdit} invoice={invoice} />
                 </div>
               </div>
-              {invoice !== undefined && (
+              {invoice  && (
                 <InvoiceMain invoiceId={invoiceId} invoice={invoice} />
               )}
             </div>

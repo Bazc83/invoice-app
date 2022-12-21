@@ -9,6 +9,7 @@ const initialState = {
   message: '',
 };
 
+// Get invoices
 export const getInvoices = createAsyncThunk(
   'invoices/getInvoices',
   async (_, thunkAPI) => {
@@ -25,9 +26,10 @@ export const getInvoices = createAsyncThunk(
   }
 );
 
+// Get a single invoice
 export const getInvoice = createAsyncThunk(
   'invoices/getInvoice',
-  async (_, thunkAPI) => {
+  async (invoiceId, thunkAPI) => {
     try {
       return await invoicesService.getInvoice(invoiceId);
     } catch (error) {
@@ -41,11 +43,11 @@ export const getInvoice = createAsyncThunk(
   }
 );
 
+// Add an invoice
 export const addInvoice = createAsyncThunk(
   'invoices/addInvoice',
   async (invoiceData, thunkAPI) => {
     try {
-      
       return await invoicesService.addInvoice(invoiceData);
     } catch (error) {
       const message =
@@ -58,11 +60,29 @@ export const addInvoice = createAsyncThunk(
   }
 );
 
+// Update invoice
 export const updateInvoice = createAsyncThunk(
   'invoices/updateInvoice',
-  async ( invoiceData, thunkAPI) => {
+  async (invoiceData, thunkAPI) => {
     try {
       return await invoicesService.updateInvoice(invoiceData, invoiceData.id);
+    } catch (error) {
+      const message =
+        (error.response && error.response.data && error.reponse.data.message) ||
+        error.message ||
+        error.toString;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// Delete invoice
+export const deleteInvoice = createAsyncThunk(
+  'invoices/deleteInvoice',
+  async (invoiceId, thunkAPI) => {
+    try {
+      console.log(invoiceId)
+      return await invoicesService.deleteInvoice(invoiceId);
     } catch (error) {
       const message =
         (error.response && error.response.data && error.reponse.data.message) ||
@@ -73,9 +93,6 @@ export const updateInvoice = createAsyncThunk(
     }
   }
 );
-
-
-
 
 export const invoicesSlice = createSlice({
   name: 'invoices',
@@ -104,7 +121,9 @@ export const invoicesSlice = createSlice({
       .addCase(getInvoice.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.invoices = action.payload;
+        state.invoices = state.invoices.filter(
+          (invoice) => invoice.id === action.payload.id
+        );
       })
       .addCase(getInvoice.rejected, (state, action) => {
         state.isLoading = false;
@@ -133,6 +152,21 @@ export const invoicesSlice = createSlice({
         state.invoices = action.payload;
       })
       .addCase(updateInvoice.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(deleteInvoice.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteInvoice.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.invoices = state.invoices.filter(
+          (invoice) => invoice.id !== action.payload.id
+        );
+      })
+      .addCase(deleteInvoice.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

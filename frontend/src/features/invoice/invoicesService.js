@@ -22,11 +22,18 @@ const updateInvoice = async ( invoiceData, invoiceId) => {
   return response.data;
 };
 
+const deleteInvoice = async (invoiceId) => {
+  console.log(invoiceId)
+  const response = await axios.delete(API_URL + invoiceId);
+  return response.data;
+};
+
 const invoicesService = {
   getInvoices,
   getInvoice,
   addInvoice,
   updateInvoice,
+  deleteInvoice
 };
 
 export default invoicesService;
