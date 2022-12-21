@@ -4,7 +4,7 @@ import { PaymentStatus } from '@/pages/Invoices/PaymentStatus';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getInvoice } from '../../../features/invoice/invoicesSlice';
+import { getInvoices } from '../../../features/invoice/invoicesSlice';
 import styles from './Invoice.module.css';
 import { InvoiceButtons } from './InvoiceButtons';
 import { InvoiceMain } from './InvoiceMain';
@@ -18,13 +18,13 @@ export const Invoice = () => {
   const { invoices, isLoading } = useSelector((state) => state.invoices);
 
   useEffect(() => {
-    dispatch(getInvoice(invoiceId));
+    dispatch(getInvoices());
   }, []);
 
   useEffect(() => {
     const invoiceData = invoices?.filter((invoice) => invoice.id === invoiceId);
     setInvoice(invoiceData[0]);
-  }, [invoices]);
+  }, []);
 
   if (isLoading) return null;
 
@@ -32,7 +32,7 @@ export const Invoice = () => {
     <div>
       <div className={styles.invoice}>
         {showEdit && (
-          <InvoiceForm setShowForm={setShowEdit} invoice={invoice} />
+          <InvoiceForm setShowForm={setShowEdit} invoice={invoice} paramsInvoiceId={invoiceId} />
         )}
 
         <div

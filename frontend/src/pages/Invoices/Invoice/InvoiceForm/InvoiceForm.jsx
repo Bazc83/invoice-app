@@ -1,18 +1,31 @@
 import { Button } from '@components/Button';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addInvoice, reset } from '../../../../features/invoice/invoicesSlice';
+import {
+  addInvoice,
+  reset,
+  updateInvoice,
+} from '../../../../features/invoice/invoicesSlice';
 import { useInvoiceId } from '../../../../hooks/useInvoiceId';
 import styles from './InvoiceForm.module.css';
 import { InvoiceFormInput } from './InvoiceFormInput';
 import { InvoiceFormItem } from './InvoiceFormItem/InvoiceFormItem';
 import { InvoiceFormSelect } from './InvoiceFormSelect/InvoiceFormSelect';
-export const InvoiceForm = ({ setShowForm, newInvoice, invoice }) => {
+
+
+export const InvoiceForm = ({
+  setShowForm,
+  newInvoice,
+  invoice,
+  paramsInvoiceId,
+}) => {
   const { invoiceId, getInvoiceId, updateInvoiceId } = useInvoiceId();
 
   useEffect(() => {
-    getInvoiceId();
-  }, []);
+    if (newInvoice) {
+      getInvoiceId();
+    }
+  }, [newInvoice]);
 
   const senderAddress = {
     street: '19 Union Terrace',
@@ -92,7 +105,7 @@ export const InvoiceForm = ({ setShowForm, newInvoice, invoice }) => {
   };
 
   useEffect(() => {
-    if (invoiceId !== undefined) {
+    if (invoiceId !== undefined && newInvoice) {
       setFormData((prevState) => ({
         ...prevState,
         id: invoiceId[0].invoiceId,
@@ -123,12 +136,18 @@ export const InvoiceForm = ({ setShowForm, newInvoice, invoice }) => {
       createdAt,
     };
 
-    dispatch(addInvoice(invoiceData));
-    updateInvoiceId();
+    if (newInvoice) {
+      dispatch(addInvoice(invoiceData));
+      dispatch(reset);
+      updateInvoiceId();
+    } else {
+      dispatch(updateInvoice(invoiceData));
+      dispatch(reset);
+    }
+
     setShowForm((prev) => !prev);
   };
 
-  console.log(formData);
   return (
     <div className={styles.invoiceForm}>
       {newInvoice ? (

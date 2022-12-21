@@ -58,6 +58,22 @@ export const addInvoice = createAsyncThunk(
   }
 );
 
+export const updateInvoice = createAsyncThunk(
+  'invoices/updateInvoice',
+  async ( invoiceData, thunkAPI) => {
+    try {
+      return await invoicesService.updateInvoice(invoiceData, invoiceData.id);
+    } catch (error) {
+      const message =
+        (error.response && error.response.data && error.reponse.data.message) ||
+        error.message ||
+        error.toString;
+
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 
 
 
@@ -104,6 +120,19 @@ export const invoicesSlice = createSlice({
         state.invoices.push(action.payload);
       })
       .addCase(addInvoice.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(updateInvoice.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateInvoice.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.invoices = action.payload;
+      })
+      .addCase(updateInvoice.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
