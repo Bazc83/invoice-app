@@ -13,15 +13,11 @@ const getInvoiceId = asyncHandler(async (req, res) => {
 const updateInvoiceId = asyncHandler(async (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
   const invoiceId = await InvoiceId.findOne({ _id: 'invoiceId' });
-  console.log(invoiceId.invoiceIdIndex);
-
-  const indexUpdate = invoiceId.invoiceIdIndex + 1;
-  const invoiceIdUpdate = invoiceId.invoiceIdRef + indexUpdate;
+  const invoiceIdUpdate = invoiceId.invoiceId + 1;
 
   const updateId = await InvoiceId.findByIdAndUpdate(
     { _id: 'invoiceId' },
     {
-      invoiceIdIndex: indexUpdate,
       invoiceId: invoiceIdUpdate,
     }
   );

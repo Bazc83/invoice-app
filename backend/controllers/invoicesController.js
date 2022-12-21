@@ -39,6 +39,7 @@ const addInvoice = asyncHandler(async (req, res) => {
     clientCountry,
     description,
     id,
+    createdAt,
     paymentDue,
     paymentTerms,
     status,
@@ -73,6 +74,7 @@ const addInvoice = asyncHandler(async (req, res) => {
     status,
     total,
     items,
+    createdAt,
   });
 
   if (invoice) {

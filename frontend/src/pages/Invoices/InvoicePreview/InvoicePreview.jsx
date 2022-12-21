@@ -2,8 +2,7 @@ import { useFormatDate } from '@/hooks/useFormatDate';
 import { PaymentStatus } from '@/pages/Invoices/PaymentStatus';
 import { useNavigate } from 'react-router';
 import styles from './InvoicePreview.module.css';
-export const InvoicePreview = ({invoice}) => {
-
+export const InvoicePreview = ({ invoice }) => {
   const { status, id, clientName, total, paymentDue } = invoice;
 
   const { getDate } = useFormatDate();
@@ -15,7 +14,9 @@ export const InvoicePreview = ({invoice}) => {
   };
 
   return (
-    <div onClick={()=> showFullInvoice(invoice.id)} className={`secondary-bg ${styles.invoicePreview}`}>
+    <div
+      onClick={() => showFullInvoice(invoice.id)}
+      className={`secondary-bg ${styles.invoicePreview}`}>
       <h4 className={styles.invoiceRef}>
         <span className={styles.invoiceRefHash}>#</span>
         {id}

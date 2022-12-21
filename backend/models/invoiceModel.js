@@ -44,6 +44,9 @@ const invoiceSchema = new mongoose.Schema({
       },
     },
   ],
+  createdAt: {
+    type: String,
+  },
   paymentDue: {
     type: String,
   },

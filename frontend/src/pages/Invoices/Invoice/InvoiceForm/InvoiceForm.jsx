@@ -2,11 +2,18 @@ import { Button } from '@components/Button';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addInvoice, reset } from '../../../../features/invoice/invoicesSlice';
+import { useInvoiceId } from '../../../../hooks/useInvoiceId';
 import styles from './InvoiceForm.module.css';
 import { InvoiceFormInput } from './InvoiceFormInput';
 import { InvoiceFormItem } from './InvoiceFormItem/InvoiceFormItem';
 import { InvoiceFormSelect } from './InvoiceFormSelect/InvoiceFormSelect';
 export const InvoiceForm = ({ setShowForm, newInvoice, invoice }) => {
+  const { invoiceId, getInvoiceId, updateInvoiceId } = useInvoiceId();
+
+  useEffect(() => {
+    getInvoiceId();
+  }, []);
+
   const senderAddress = {
     street: '19 Union Terrace',
     city: 'London',
@@ -23,10 +30,6 @@ export const InvoiceForm = ({ setShowForm, newInvoice, invoice }) => {
   );
 
   useEffect(() => {
-    // if (isError) {
-    //   toast.error(message);
-    // }
-
     dispatch(reset);
   }, [invoices, isLoading, isError, isSuccess, message, dispatch]);
 
@@ -44,6 +47,7 @@ export const InvoiceForm = ({ setShowForm, newInvoice, invoice }) => {
     description: newInvoice ? '' : invoice?.description,
     invoiceDate: newInvoice ? '' : invoice?.createdAt,
     id: newInvoice ? '' : invoice?.id,
+    createdAt: newInvoice ? '' : invoice?.createdAt,
     paymentDue: newInvoice ? '' : invoice?.paymentDue,
     paymentTerms: newInvoice ? '' : invoice?.paymentTerms,
     status: newInvoice ? 'draft' : invoice?.status,
@@ -65,6 +69,7 @@ export const InvoiceForm = ({ setShowForm, newInvoice, invoice }) => {
     clientPostCode,
     clientCountry,
     invoiceDate,
+    createdAt,
   } = formData;
 
   const options = [
@@ -86,9 +91,17 @@ export const InvoiceForm = ({ setShowForm, newInvoice, invoice }) => {
     }));
   };
 
+  useEffect(() => {
+    if (invoiceId !== undefined) {
+      setFormData((prevState) => ({
+        ...prevState,
+        id: invoiceId[0].invoiceId,
+      }));
+    }
+  }, [invoiceId]);
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log('submitted');
     const invoiceData = {
       city,
       street,
@@ -107,15 +120,14 @@ export const InvoiceForm = ({ setShowForm, newInvoice, invoice }) => {
       status,
       total,
       invoiceDate,
+      createdAt,
     };
 
-    console.log(invoiceData);
     dispatch(addInvoice(invoiceData));
-
+    updateInvoiceId();
     setShowForm((prev) => !prev);
   };
 
-  useEffect(() => {}, []);
   console.log(formData);
   return (
     <div className={styles.invoiceForm}>
@@ -134,7 +146,7 @@ export const InvoiceForm = ({ setShowForm, newInvoice, invoice }) => {
             type='text'
             itemName='id'
             itemLabel='invoice id'
-            value={newInvoice ? '' : invoice.id}
+            value={id}
             setValue={inputOnChange}
           />
           <h4 className={styles.formSectionHeader}>Bill From</h4>
@@ -173,14 +185,14 @@ export const InvoiceForm = ({ setShowForm, newInvoice, invoice }) => {
             type='text'
             itemName='clientName'
             itemLabel="Client's Name"
-            value={newInvoice ? '' : invoice.clientName}
+            value={clientName}
             setValue={inputOnChange}
           />
           <InvoiceFormInput
             type='email'
             itemName='clientEmail'
             itemLabel="Client's Email"
-            value={newInvoice ? '' : invoice.clientEmail}
+            value={clientEmail}
             setValue={inputOnChange}
           />
 
@@ -188,37 +200,46 @@ export const InvoiceForm = ({ setShowForm, newInvoice, invoice }) => {
             type='text'
             itemName='clientStreet'
             itemLabel='Street Address'
-            value={newInvoice ? '' : invoice.clientAddress.street}
+            value={clientStreet}
             setValue={inputOnChange}
           />
           <InvoiceFormInput
             type='text'
             itemName='clientCity'
             itemLabel='City'
-            value={newInvoice ? '' : invoice.clientAddress.city}
+            value={clientCity}
             setValue={inputOnChange}
           />
           <InvoiceFormInput
             type='text'
             itemName='clientPostCode'
             itemLabel='Post Code'
-            value={newInvoice ? '' : invoice.clientAddress.postCode}
+            value={clientPostCode}
             setValue={inputOnChange}
           />
           <InvoiceFormInput
             type='text'
             itemName='clientCountry'
             itemLabel='Country'
-            value={newInvoice ? '' : invoice.clientAddress.country}
+            value={clientCountry}
             setValue={inputOnChange}
           />
 
           <div className='grid-row-half'>
             <InvoiceFormInput
               type='date'
-              itemName='invoiceDate'
-              itemLabel='Invoice Date'
-              value={newInvoice ? '' : invoice.createdAt}
+              itemName='createdAt'
+              itemLabel='Created at'
+              value={createdAt}
+              setValue={inputOnChange}
+            />
+
+            {/* // todo tempory as needs to be created at plus days to payment terms date */}
+            <InvoiceFormInput
+              type='date'
+              itemName='paymentDue'
+              itemLabel='Payment Due'
+              value={paymentDue}
               setValue={inputOnChange}
             />
 

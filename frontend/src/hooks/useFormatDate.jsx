@@ -17,7 +17,7 @@ export const useFormatDate = () => {
     const splitDate = dateToFormat.split('-');
 
     const year = splitDate[0];
-    const month = monthsOfTheYear[+splitDate[1]];
+    const month = monthsOfTheYear[+splitDate[1] - 1];
     const day = splitDate[2];
     const dueDate = `Due ${day} ${month} ${year}`;
     return dueDate;

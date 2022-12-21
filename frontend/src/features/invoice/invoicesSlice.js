@@ -45,6 +45,7 @@ export const addInvoice = createAsyncThunk(
   'invoices/addInvoice',
   async (invoiceData, thunkAPI) => {
     try {
+      
       return await invoicesService.addInvoice(invoiceData);
     } catch (error) {
       const message =
