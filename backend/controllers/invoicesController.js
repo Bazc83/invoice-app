@@ -13,7 +13,7 @@ const getInvoices = asyncHandler(async (req, res) => {
 // Get since invoice by id
 const getInvoice = asyncHandler(async (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
-  const invoice = await Invoice.findOne({ id: req.params.id });
+  const invoice = await Invoice.findOne({id: req.params.id});
   if (!invoice) {
     res.status(400);
     throw new Error('Invoice not found');
