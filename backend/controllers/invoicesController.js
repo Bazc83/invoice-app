@@ -6,7 +6,6 @@ const Invoice = require('../models/invoiceModel');
 const getInvoices = asyncHandler(async (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
   const invoices = await Invoice.find();
-
   res.status(200).json(invoices);
 });
 
@@ -131,7 +130,6 @@ const updateInvoice = asyncHandler(async (req, res) => {
       country: clientCountry,
     },
     description,
-    id,
     paymentDue,
     paymentTerms,
     status,

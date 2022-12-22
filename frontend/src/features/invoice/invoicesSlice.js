@@ -81,7 +81,7 @@ export const deleteInvoice = createAsyncThunk(
   'invoices/deleteInvoice',
   async (invoiceId, thunkAPI) => {
     try {
-      console.log(invoiceId)
+      console.log(invoiceId);
       return await invoicesService.deleteInvoice(invoiceId);
     } catch (error) {
       const message =
@@ -121,9 +121,7 @@ export const invoicesSlice = createSlice({
       .addCase(getInvoice.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.invoices = state.invoices.filter(
-          (invoice) => invoice.id === action.payload.id
-        );
+        state.invoices = action.payload;
       })
       .addCase(getInvoice.rejected, (state, action) => {
         state.isLoading = false;

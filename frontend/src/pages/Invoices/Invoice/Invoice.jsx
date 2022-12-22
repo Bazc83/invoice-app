@@ -1,7 +1,7 @@
 import { GoBackLink } from '@/components/GoBackLink';
 import { InvoiceForm } from '@/pages/Invoices/Invoice/InvoiceForm';
 import { PaymentStatus } from '@/pages/Invoices/PaymentStatus';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getInvoices } from '../../../features/invoice/invoicesSlice';
@@ -14,25 +14,25 @@ import { InvoiceItemsTable } from './InvoiceItemsTable';
 
 export const Invoice = () => {
   const { invoiceId } = useParams();
+
   const [showEdit, setShowEdit] = useState(false);
 
-  // const [invoice, setInvoice] = useState();
   const dispatch = useDispatch();
   const { getDate } = useFormatDate();
-
   const [invoice, setInvoice] = useState();
 
-  const { invoices, isLoading } = useSelector((state) => state.invoices);
-
-  useEffect(() => {
-    setInvoice(invoices?.filter((invoice) => invoice.id === invoiceId)[0]);
-  }, []);
+  const { invoices, isLoading, isSuccess, isError, message } = useSelector((state) => state.invoices);
 
   useEffect(() => {
     dispatch(getInvoices());
-  }, []);
+  }, [invoice]);
 
-  // if (isLoading) return null;
+  useEffect(() => {
+    if (invoice === undefined) {
+      setInvoice(invoices.filter((invoice) => invoice.id === invoiceId)[0]);
+    }
+  }, [invoices, isLoading, isSuccess]);
+
   return (
     <div>
       <div className={styles.invoice}>
@@ -40,6 +40,7 @@ export const Invoice = () => {
           <InvoiceForm
             setShowForm={setShowEdit}
             invoice={invoice}
+            setInvoice={setInvoice}
             paramsInvoiceId={invoiceId}
           />
         )}

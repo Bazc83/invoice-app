@@ -36,9 +36,9 @@ export const Invoices = () => {
       {showForm && <InvoiceForm newInvoice setShowForm={setShowForm} />}
       {invoices?.length === 0 && <NoInvoices />}
       <div className={styles.invoicesWrapper}>
-        {invoices &&
+        {invoices.length > 0 &&
           invoices?.map((invoice) => {
-            return <InvoicePreview invoice={invoice} key={invoice.id} />;
+            return <InvoicePreview invoice={invoice} key={invoice?.id} />;
           })}
       </div>
     </div>

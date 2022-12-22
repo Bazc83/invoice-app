@@ -1,8 +1,10 @@
 import { Button } from '@components/Button';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import {
   addInvoice,
+  getInvoices,
   reset,
   updateInvoice,
 } from '../../../../features/invoice/invoicesSlice';
@@ -12,13 +14,16 @@ import { InvoiceFormInput } from './InvoiceFormInput';
 import { InvoiceFormItem } from './InvoiceFormItem/InvoiceFormItem';
 import { InvoiceFormSelect } from './InvoiceFormSelect/InvoiceFormSelect';
 
-
 export const InvoiceForm = ({
   setShowForm,
   newInvoice,
   invoice,
+  setInvoice,
   paramsInvoiceId,
 }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const { invoiceId, getInvoiceId, updateInvoiceId } = useInvoiceId();
 
   useEffect(() => {
@@ -35,8 +40,6 @@ export const InvoiceForm = ({
   };
 
   const { street, city, postCode, country } = senderAddress;
-
-  const dispatch = useDispatch();
 
   const { invoices, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.invoices
@@ -83,6 +86,7 @@ export const InvoiceForm = ({
     clientCountry,
     invoiceDate,
     createdAt,
+    items,
   } = formData;
 
   const options = [
@@ -111,41 +115,44 @@ export const InvoiceForm = ({
         id: invoiceId[0].invoiceId,
       }));
     }
-  }, [invoiceId]);
+  }, [invoiceId, newInvoice]);
+
+  const invoiceData = {
+    city,
+    street,
+    postCode,
+    country,
+    clientEmail,
+    clientName,
+    clientCity,
+    clientCountry,
+    clientPostCode,
+    clientStreet,
+    description,
+    id,
+    paymentDue,
+    paymentTerms,
+    status,
+    total,
+    invoiceDate,
+    createdAt,
+    items,
+  };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const invoiceData = {
-      city,
-      street,
-      postCode,
-      country,
-      clientEmail,
-      clientName,
-      clientCity,
-      clientCountry,
-      clientPostCode,
-      clientStreet,
-      description,
-      id,
-      paymentDue,
-      paymentTerms,
-      status,
-      total,
-      invoiceDate,
-      createdAt,
-    };
 
     if (newInvoice) {
       dispatch(addInvoice(invoiceData));
       dispatch(reset);
       updateInvoiceId();
-    } else {
+    } else if (!newInvoice) {
       dispatch(updateInvoice(invoiceData));
       dispatch(reset);
     }
 
     setShowForm((prev) => !prev);
+    // navigate('/invoices');
   };
 
   return (
