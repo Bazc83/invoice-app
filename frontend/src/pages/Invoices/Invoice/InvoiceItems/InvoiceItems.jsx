@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { InvoiceItem } from './InvoiceItem/InvoiceItem';
 import styles from './InvoiceItems.module.css';
 export const InvoiceItems = ({ items}) => {

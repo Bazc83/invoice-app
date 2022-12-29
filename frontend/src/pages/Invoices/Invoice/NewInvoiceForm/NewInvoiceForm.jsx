@@ -1,19 +1,21 @@
 import { Button } from '@components/Button';
-import {
-  QueryClient,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 
-import { getInvoice, updateInvoice } from '@hooks/useInvoicesApi';
+import {
+  addInvoice,
+  reset,
+  updateInvoice,
+} from '../../../../features/invoice/invoicesSlice';
+
+import { useInvoiceId } from '../../../../hooks/useInvoiceId';
+import { getInvoice } from '../../../../hooks/useInvoicesApi';
 import styles from './InvoiceForm.module.css';
 import { InvoiceFormInput } from './InvoiceFormInput';
 import { InvoiceFormItem } from './InvoiceFormItem/InvoiceFormItem';
 import { InvoiceFormSelect } from './InvoiceFormSelect/InvoiceFormSelect';
 
-export const InvoiceForm = ({ setShowForm, invoiceId }) => {
+export const NewInvoiceForm = ({ setShowForm, invoiceId }) => {
   const {
     isLoading,
     isError,
@@ -21,7 +23,17 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
     data: invoice,
   } = useQuery(['invoice'], () => getInvoice(invoiceId));
 
-  const queryClient = useQueryClient();
+  if (isLoading) return 'Loading...';
+  if (isError) return 'An error has occurred: ' + error.message;
+
+  const { newInvoiceId, getInvoiceId, updateInvoiceId } = useInvoiceId();
+
+  // useEffect(() => {
+  //   if (newInvoice) {
+  //     getInvoiceId();
+  //   }
+  // }, [newInvoice]);
+
   const senderAddress = {
     street: '19 Union Terrace',
     city: 'London',
@@ -36,21 +48,21 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
     city: city,
     postCode: postCode,
     country: country,
-    clientEmail: invoice?.clientEmail,
-    clientName: invoice?.clientName,
-    clientCity: invoice?.clientAddress?.city,
-    clientStreet: invoice?.clientAddress?.street,
-    clientCountry: invoice?.clientAddress?.country,
-    clientPostCode: invoice?.clientAddress?.postCode,
-    description: invoice?.description,
-    invoiceDate: invoice?.createdAt,
-    id: invoice?.id,
-    createdAt: invoice?.createdAt,
-    paymentDue: invoice?.paymentDue,
-    paymentTerms: invoice?.paymentTerms,
-    status: invoice?.status,
-    total: invoice?.total,
-    items: [...invoice?.items],
+    clientEmail: newInvoice ? '' : invoice?.clientEmail,
+    clientName: newInvoice ? '' : invoice?.clientName,
+    clientCity: newInvoice ? '' : invoice?.clientAddress.city,
+    clientStreet: newInvoice ? '' : invoice?.clientAddress.street,
+    clientCountry: newInvoice ? '' : invoice?.clientAddress.country,
+    clientPostCode: newInvoice ? '' : invoice?.clientAddress.postCode,
+    description: newInvoice ? '' : invoice?.description,
+    invoiceDate: newInvoice ? '' : invoice?.createdAt,
+    id: newInvoice ? newInvoiceId : invoice?.id,
+    createdAt: newInvoice ? '' : invoice?.createdAt,
+    paymentDue: newInvoice ? '' : invoice?.paymentDue,
+    paymentTerms: newInvoice ? '' : invoice?.paymentTerms,
+    status: newInvoice ? 'draft' : invoice?.status,
+    total: newInvoice ? '' : invoice?.total,
+    items: newInvoice ? [] : invoice?.items,
   });
 
   const {
@@ -78,19 +90,10 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
     { key: 30, value: 'Net 30 Days' },
   ];
 
+  const [itemsValue, setItemsValue] = useState(invoice?.items);
   const [selectedOption, setSelectedOption] = useState(1);
 
   const [open, setOpen] = useState(false);
-
-  const updateMutation = useMutation(() => updateInvoice(formData, invoiceId), {
-    onSuccess: () => {
-      // invalidates cache and refetch
-      queryClient.invalidateQueries('invoices');
-    },
-  });
-
-  if (isLoading) return 'Loading...';
-  if (isError) return 'An error has occurred: ' + error.message;
 
   const inputOnChange = (e) => {
     setFormData((prevState) => ({
@@ -98,6 +101,15 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
       [e.target.name]: e.target.value,
     }));
   };
+
+  useEffect(() => {
+    if (invoiceId !== undefined && newInvoice) {
+      setFormData((prevState) => ({
+        ...prevState,
+        id: invoiceId[0].invoiceId,
+      }));
+    }
+  }, [invoiceId, newInvoice]);
 
   const invoiceData = {
     city,
@@ -121,28 +133,32 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
     items,
   };
 
-  const [itemsValue, setItemsValue] = useState(invoice?.items);
-
-  useEffect(() => {
-    setFormData((prevState) => ({
-      ...prevState,
-      items: [...itemsValue],
-    }));
-  }, [itemsValue]);
-
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    updateMutation.mutate({ ...formData });
+
+    if (newInvoice) {
+      dispatch(addInvoice(invoiceData));
+      dispatch(reset);
+      updateInvoiceId();
+    } else if (!newInvoice) {
+      dispatch(updateInvoice(invoiceData));
+      dispatch(reset);
+    }
+
     setShowForm((prev) => !prev);
     // navigate('/invoices');
   };
 
   return (
     <div className={styles.invoiceForm}>
-      <h2>
-        Edit <span className={styles.invoiceFormHeaderAccent}>#</span>
-        {invoice?.id}
-      </h2>
+      {newInvoice ? (
+        <h2>New Invoice</h2>
+      ) : (
+        <h2>
+          Edit <span className={styles.invoiceFormHeaderAccent}>#</span>
+          {invoice?.id}
+        </h2>
+      )}
 
       <form className={styles.form} onSubmit={handleFormSubmit}>
         <div className={styles.formSection}>
@@ -260,7 +276,7 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
             type='text'
             itemName='description'
             itemLabel='Project/Description'
-            value={invoice.description}
+            value={newInvoice ? '' : invoice.description}
             setValue={inputOnChange}
           />
         </div>
@@ -273,7 +289,7 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
               <InvoiceFormItem
                 item={item}
                 key={`item${i}`}
-                value={item?.name}
+                value={item}
                 setItemsValue={setItemsValue}
               />
             ))}

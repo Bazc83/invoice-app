@@ -1,29 +1,25 @@
-import { set } from 'mongoose';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { getInvoices } from '@hooks/useInvoicesApi';
+import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import { getInvoices } from '../../features/invoice/invoicesSlice';
 import { InvoiceForm } from './Invoice/InvoiceForm/InvoiceForm';
 import { InvoicePreview } from './InvoicePreview';
 import styles from './Invoices.module.css';
 import { InvoicesPageControls } from './InvoicesPageControls/InvoicesPageControls';
-
 import { NoInvoices } from './NoInvoices/NoInvoices';
 
 export const Invoices = () => {
-  
-  const [showForm, setShowForm] = useState(true);
+  const {
+    isLoading,
+    isError,
+    error,
+    data: invoices,
+  } = useQuery(['invoices'], getInvoices);
 
-  const dispatch = useDispatch();
+  const [showForm, setShowForm] = useState(false);
 
-  const { invoices, isError, message, isSuccess, isLoading } = useSelector(
-    (state) => state.invoices
-  );
-
-  useEffect(() => {
-    dispatch(getInvoices());
-    setShowForm(false);
-  }, []);
+  if (isLoading) return 'Loading...';
+  if (isError) return 'An error has occurred: ' + error.message;
 
   return (
     <div className={`container main-bg`}>
@@ -34,10 +30,10 @@ export const Invoices = () => {
         setShowForm={setShowForm}
       />
       {showForm && <InvoiceForm newInvoice setShowForm={setShowForm} />}
-      {invoices?.length === 0 && <NoInvoices />}
+      {invoices.length === 0 && <NoInvoices />}
       <div className={styles.invoicesWrapper}>
         {invoices.length > 0 &&
-          invoices?.map((invoice) => {
+          invoices.map((invoice) => {
             return <InvoicePreview invoice={invoice} key={invoice?.id} />;
           })}
       </div>

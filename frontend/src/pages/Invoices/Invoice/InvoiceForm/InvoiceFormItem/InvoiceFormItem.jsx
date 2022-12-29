@@ -3,33 +3,25 @@ import { FaTrashAlt } from 'react-icons/fa';
 import { v4 as uuidv4 } from 'uuid';
 import { InvoiceFormInput } from '../InvoiceFormInput';
 import styles from './InvoiceFormItem.module.css';
-
-export const InvoiceFormItem = ({ item, setItemsValue}) => {
-
-
+export const InvoiceFormItem = ({ item, setItemsValue }) => {
   const [total, setTotal] = useState(0);
 
   if (!item?.price) return null;
 
-  const totalItemValue = (price, qty) => {
+  const getTotalItemValue = (price, qty) => {
+    if (price === 0) return setTotal(0);
     setTotal((prev) => (prev = qty * price));
   };
 
   const [itemName, setItemName] = useState(item?.name);
   const [itemQuantity, setItemQuantity] = useState(item?.quantity);
   const [itemPrice, setItemPrice] = useState(+item?.price);
-  const [itemTotal, setItemTotal] = useState(+itemQuantity * +itemPrice);
+  const [itemTotal, setItemTotal] = useState(total || 0);
   const [itemId, setItemId] = useState(item?.itemId);
 
-
-  useEffect(()=>{
-    setItemTotal(+itemQuantity * +itemPrice);
-  }, [itemPrice, itemQuantity])
-
-
   useEffect(() => {
-    totalItemValue(item.price, item.quantity);
-  }, [item]);
+    getTotalItemValue(itemPrice, itemQuantity);
+  }, [itemPrice, itemQuantity]);
 
   useEffect(() => {
     setItemsValue((prev) => [
@@ -38,11 +30,11 @@ export const InvoiceFormItem = ({ item, setItemsValue}) => {
         itemId: itemId,
         name: itemName,
         quantity: +itemQuantity,
-        price: +itemPrice,
-        total: +itemTotal,
+        price: itemPrice <= 0 ? 0 : itemPrice,
+        total: itemTotal,
       },
     ]);
-  }, [itemName, itemQuantity, itemPrice, itemTotal]);
+  }, [itemName, itemQuantity, itemTotal, itemPrice]);
 
   return (
     <div className={styles.invoiceFormItem}>
@@ -53,6 +45,7 @@ export const InvoiceFormItem = ({ item, setItemsValue}) => {
         value={itemName}
         setValue={setItemName}
         className={styles.name}
+        item
       />
 
       <InvoiceFormInput
@@ -63,6 +56,7 @@ export const InvoiceFormItem = ({ item, setItemsValue}) => {
         setValue={setItemQuantity}
         maxWidth={'max-content'}
         className={styles.qty}
+        item
       />
       <InvoiceFormInput
         type='number'
@@ -72,6 +66,7 @@ export const InvoiceFormItem = ({ item, setItemsValue}) => {
         setValue={setItemPrice}
         maxWidth={'max-content'}
         className={styles.price}
+        item
       />
       <InvoiceFormInput
         type='number'
@@ -83,6 +78,7 @@ export const InvoiceFormItem = ({ item, setItemsValue}) => {
         className={styles.total}
         disabled
         noBg
+        item
       />
 
       <div className={styles.icon}>

@@ -1,11 +1,11 @@
 import { GoBackLink } from '@/components/GoBackLink';
 import { InvoiceForm } from '@/pages/Invoices/Invoice/InvoiceForm';
 import { PaymentStatus } from '@/pages/Invoices/PaymentStatus';
-import { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useFormatDate } from '@hooks/useFormatDate';
+import { getInvoice } from '@hooks/useInvoicesApi.js';
+import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getInvoices } from '../../../features/invoice/invoicesSlice';
-import { useFormatDate } from '../../../hooks/useFormatDate';
 import styles from './Invoice.module.css';
 import { InvoiceButtons } from './InvoiceButtons';
 import { InvoiceItems } from './InvoiceItems';
@@ -15,34 +15,24 @@ import { InvoiceItemsTable } from './InvoiceItemsTable';
 export const Invoice = () => {
   const { invoiceId } = useParams();
 
+  const { getDate } = useFormatDate();
+  const {
+    isLoading,
+    isError,
+    error,
+    data: invoice,
+  } = useQuery(['invoice'], () => getInvoice(invoiceId));
+
   const [showEdit, setShowEdit] = useState(false);
 
-  const dispatch = useDispatch();
-  const { getDate } = useFormatDate();
-  const [invoice, setInvoice] = useState();
-
-  const { invoices, isLoading, isSuccess, isError, message } = useSelector((state) => state.invoices);
-
-  useEffect(() => {
-    dispatch(getInvoices());
-  }, [invoice]);
-
-  useEffect(() => {
-    if (invoice === undefined) {
-      setInvoice(invoices.filter((invoice) => invoice.id === invoiceId)[0]);
-    }
-  }, [invoices, isLoading, isSuccess]);
+  if (isLoading) return 'Loading...';
+  if (isError) return 'An error has occurred: ' + error.message;
 
   return (
     <div>
       <div className={styles.invoice}>
         {showEdit && (
-          <InvoiceForm
-            setShowForm={setShowEdit}
-            invoice={invoice}
-            setInvoice={setInvoice}
-            paramsInvoiceId={invoiceId}
-          />
+          <InvoiceForm setShowForm={setShowEdit} invoiceId={invoiceId} />
         )}
 
         <div
