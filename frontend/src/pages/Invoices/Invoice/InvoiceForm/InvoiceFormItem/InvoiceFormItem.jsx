@@ -1,79 +1,91 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react';
 import { FaTrashAlt } from 'react-icons/fa';
-import { v4 as uuidv4 } from 'uuid';
+import { updateItem } from '../../../../../hooks/useInvoicesApi';
 import { InvoiceFormInput } from '../InvoiceFormInput';
 import styles from './InvoiceFormItem.module.css';
-export const InvoiceFormItem = ({ item, setItemsValue }) => {
-  const [total, setTotal] = useState(0);
+export const InvoiceFormItem = ({ item, updateFormItem, invoiceId }) => {
+  const queryClient = useQueryClient();
 
-  if (!item?.price) return null;
+  const [formItem, setFormItem] = useState({
+    itemId: item?.itemId,
+    name: item?.name,
+    quantity: +item?.quantity,
+    price: +item?.price,
+    total: +item?.total,
+  });
 
-  const getTotalItemValue = (price, qty) => {
-    if (price === 0) return setTotal(0);
-    setTotal((prev) => (prev = qty * price));
+  const { itemId, name, quantity, price, total } = formItem;
+
+  const onFormItemChange = (e) => {
+    setFormItem((prev) => ({ ...prev, itemId: itemId }));
+    if (
+      e.target.name === 'quantity' ||
+      e.target.name === 'price' ||
+      e.target.name === 'total'
+    ) {
+      setFormItem((prev) => ({
+        ...prev,
+        [e.target.name]: +e.target.value,
+      }));
+    } else {
+      setFormItem((prev) => ({
+        ...prev,
+        [e.target.name]: e.target.value,
+      }));
+    }
   };
 
-  const [itemName, setItemName] = useState(item?.name);
-  const [itemQuantity, setItemQuantity] = useState(item?.quantity);
-  const [itemPrice, setItemPrice] = useState(+item?.price);
-  const [itemTotal, setItemTotal] = useState(total || 0);
-  const [itemId, setItemId] = useState(item?.itemId);
+  useEffect(() => {
+    setFormItem((prev) => ({ ...prev, itemId: itemId }));
+  }, [itemId]);
 
   useEffect(() => {
-    getTotalItemValue(itemPrice, itemQuantity);
-  }, [itemPrice, itemQuantity]);
+    setFormItem((prev) => ({ ...prev, total: +quantity * +price }));
+  }, [price, quantity]);
 
   useEffect(() => {
-    setItemsValue((prev) => [
-      ...prev.filter((val) => val.itemId !== itemId),
-      {
-        itemId: itemId,
-        name: itemName,
-        quantity: +itemQuantity,
-        price: itemPrice <= 0 ? 0 : itemPrice,
-        total: itemTotal,
-      },
-    ]);
-  }, [itemName, itemQuantity, itemTotal, itemPrice]);
+    updateFormItem(formItem);
+  }, [formItem]);
 
   return (
     <div className={styles.invoiceFormItem}>
       <InvoiceFormInput
         type='text'
-        itemName='itemName'
+        itemName='name'
         itemLabel='Item Name'
-        value={itemName}
-        setValue={setItemName}
+        value={name}
+        setValue={onFormItemChange}
         className={styles.name}
         item
       />
 
       <InvoiceFormInput
         type='number'
-        itemName='itemQty'
+        itemName='quantity'
         itemLabel='Qty.'
-        value={itemQuantity}
-        setValue={setItemQuantity}
+        value={+quantity}
+        setValue={onFormItemChange}
         maxWidth={'max-content'}
         className={styles.qty}
         item
       />
       <InvoiceFormInput
         type='number'
-        itemName='itemPrice'
+        itemName='price'
         itemLabel='Price'
-        value={+itemPrice}
-        setValue={setItemPrice}
+        value={+price}
+        setValue={onFormItemChange}
         maxWidth={'max-content'}
         className={styles.price}
         item
       />
       <InvoiceFormInput
         type='number'
-        itemName='itemTotal'
+        itemName='total'
         itemLabel='Total'
-        value={itemTotal}
-        setValue={setItemTotal}
+        value={total}
+        setValue={onFormItemChange}
         maxWidth={'max-content'}
         className={styles.total}
         disabled

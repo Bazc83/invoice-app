@@ -18,11 +18,7 @@ export const InvoiceFormInput = ({
 
   const handleChange = (e) => {
     setItemValue(e.target.value);
-    if (item) {
-      setValue(e.target.value);
-    } else {
-      setValue(e);
-    }
+    setValue(e);
   };
 
   useEffect(() => {

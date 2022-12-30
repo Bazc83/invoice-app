@@ -1,24 +1,5 @@
 const mongoose = require('mongoose');
 
-const invoiceItems = new mongoose.Schema([
-  {
-    name: {
-      type: String,
-    },
-    price: {
-      type: Number,
-      default: 0,
-    },
-    quantity: {
-      type: Number,
-      default: 0,
-    },
-    total: {
-      type: Number,
-      default: 0,
-    },
-  },
-]);
 const invoiceSchema = new mongoose.Schema({
   clientAddress: {
     city: {
@@ -47,7 +28,28 @@ const invoiceSchema = new mongoose.Schema({
     type: String,
     unique: true,
   },
-  items: [invoiceItems],
+  items: [
+    {
+      name: {
+        type: String,
+      },
+      price: {
+        type: Number,
+        default: 0,
+      },
+      quantity: {
+        type: Number,
+        default: 0,
+      },
+      total: {
+        type: Number,
+        default: 0,
+      },
+      itemId: {
+        type: String,
+      },
+    },
+  ],
   createdAt: {
     type: String,
   },

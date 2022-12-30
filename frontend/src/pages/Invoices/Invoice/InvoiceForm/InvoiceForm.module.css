@@ -55,25 +55,3 @@
 }
 
 
-.formItemsSection h2 {
-  color: #777f98;
-  font-weight: 700;
-  size: 1.125rem;
-  line-height: 32px;
-}
-
-
-.formItemsSection{
-  display: flex;
-  flex-direction: column;
-  gap: 1.75rem;
-}
-.items{
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-}
-
-.formItemsSection Button{
-  margin: 1.75rem 0;
-}

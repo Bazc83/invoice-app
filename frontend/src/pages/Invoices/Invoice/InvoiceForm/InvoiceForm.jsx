@@ -7,11 +7,13 @@ import {
 } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 
-import { getInvoice, updateInvoice } from '@hooks/useInvoicesApi';
+import { getInvoice, updateInvoice, updateItem } from '@hooks/useInvoicesApi';
+
 import styles from './InvoiceForm.module.css';
 import { InvoiceFormInput } from './InvoiceFormInput';
 import { InvoiceFormItem } from './InvoiceFormItem/InvoiceFormItem';
 import { InvoiceFormSelect } from './InvoiceFormSelect/InvoiceFormSelect';
+import { InvoiceItems } from './InvoiceItems';
 
 export const InvoiceForm = ({ setShowForm, invoiceId }) => {
   const {
@@ -50,7 +52,7 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
     paymentTerms: invoice?.paymentTerms,
     status: invoice?.status,
     total: invoice?.total,
-    items: [...invoice?.items],
+    items: invoice?.items,
   });
 
   const {
@@ -80,9 +82,9 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
 
   const [selectedOption, setSelectedOption] = useState(1);
 
-  const [open, setOpen] = useState(false);
+  const [showOptionsMenu, setShowOptionsMenu] = useState(false);
 
-  const updateMutation = useMutation(() => updateInvoice(formData, invoiceId), {
+  const updateMutation = useMutation(() => updateInvoice(invoiceId, formData), {
     onSuccess: () => {
       // invalidates cache and refetch
       queryClient.invalidateQueries('invoices');
@@ -121,20 +123,30 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
     items,
   };
 
-  const [itemsValue, setItemsValue] = useState(invoice?.items);
+  const [itemsArray, setItemsArray] = useState([...invoice?.items]);
+
+  const onItemsChange = (itemValue) => {
+    if (!itemValue) return;
+
+    if (itemsArray.length === 0) {
+      setItemsArray([itemValue]);
+    } else {
+      setItemsArray((prev) => [
+        ...prev.filter((val) => val.itemId !== itemValue.itemId),
+        itemValue,
+      ]);
+    }
+  };
 
   useEffect(() => {
-    setFormData((prevState) => ({
-      ...prevState,
-      items: [...itemsValue],
-    }));
-  }, [itemsValue]);
+    setFormData((prev) => ({ ...prev, items: [...itemsArray] }));
+  }, [itemsArray]);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
+    console.log(formData)
     updateMutation.mutate({ ...formData });
     setShowForm((prev) => !prev);
-    // navigate('/invoices');
   };
 
   return (
@@ -147,7 +159,6 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
       <form className={styles.form} onSubmit={handleFormSubmit}>
         <div className={styles.formSection}>
           <InvoiceFormInput
-            type='text'
             itemName='id'
             itemLabel='invoice id'
             value={id}
@@ -155,28 +166,24 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
           />
           <h4 className={styles.formSectionHeader}>Bill From</h4>
           <InvoiceFormInput
-            type='text'
             itemName='streetAddress'
             itemLabel='Street Address'
             value={street}
             setValue={inputOnChange}
           />
           <InvoiceFormInput
-            type='text'
             itemName='city'
             itemLabel='City'
             value={city}
             setValue={inputOnChange}
           />
           <InvoiceFormInput
-            type='text'
             itemName='postCode'
             itemLabel='Post Code'
             value={postCode}
             setValue={inputOnChange}
           />
           <InvoiceFormInput
-            type='text'
             itemName='country'
             value={country}
             setValue={inputOnChange}
@@ -186,7 +193,6 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
         <div className={styles.formSection}>
           <h4 className={styles.formSectionHeader}>Bill To</h4>
           <InvoiceFormInput
-            type='text'
             itemName='clientName'
             itemLabel="Client's Name"
             value={clientName}
@@ -201,28 +207,24 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
           />
 
           <InvoiceFormInput
-            type='text'
             itemName='clientStreet'
             itemLabel='Street Address'
             value={clientStreet}
             setValue={inputOnChange}
           />
           <InvoiceFormInput
-            type='text'
             itemName='clientCity'
             itemLabel='City'
             value={clientCity}
             setValue={inputOnChange}
           />
           <InvoiceFormInput
-            type='text'
             itemName='clientPostCode'
             itemLabel='Post Code'
             value={clientPostCode}
             setValue={inputOnChange}
           />
           <InvoiceFormInput
-            type='text'
             itemName='clientCountry'
             itemLabel='Country'
             value={clientCountry}
@@ -252,12 +254,11 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
               selectedKey={selectedOption}
               placeholder={'type to search'}
               onChange={(item) => setSelectedOption(item)}
-              open={open}
-              setOpen={setOpen}
+              showOptionsMenu={showOptionsMenu}
+              setShowOptionsMenu={setShowOptionsMenu}
             />
           </div>
           <InvoiceFormInput
-            type='text'
             itemName='description'
             itemLabel='Project/Description'
             value={invoice.description}
@@ -265,24 +266,12 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
           />
         </div>
 
-        <div className={styles.formItemsSection}>
-          <h2>Item List</h2>
+        <InvoiceItems
+          items={invoice?.items}
+          invoiceId={invoiceId}
+          onItemsChange={onItemsChange}
+        />
 
-          <div className={styles.items}>
-            {itemsValue?.map((item, i) => (
-              <InvoiceFormItem
-                item={item}
-                key={`item${i}`}
-                value={item?.name}
-                setItemsValue={setItemsValue}
-              />
-            ))}
-          </div>
-
-          <Button btnStyle='btnThree' fullWidth>
-            + Add New Item
-          </Button>
-        </div>
         <div className={styles.formButtons}>
           <Button
             onClick={() => setShowForm((prev) => !prev)}
