@@ -40,10 +40,10 @@ const addInvoice = asyncHandler(async (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
 
   const {
-    city,
-    street,
-    country,
-    postCode,
+    senderCity,
+    senderStreet,
+    senderCountry,
+    senderPostCode,
     clientEmail,
     clientName,
     clientCity,
@@ -56,9 +56,10 @@ const addInvoice = asyncHandler(async (req, res) => {
     paymentDue,
     paymentTerms,
     status,
-    total,
+    amountDueTotal,
     items,
   } = req.body;
+
 
   if (!clientEmail || !clientName || !id) {
     res.status(400);
@@ -67,10 +68,10 @@ const addInvoice = asyncHandler(async (req, res) => {
 
   const invoice = await Invoice.create({
     senderAddress: {
-      city: city,
-      street: street,
-      postCode: postCode,
-      country: country,
+      city: senderCity,
+      street: senderStreet,
+      postCode: senderPostCode,
+      country: senderCountry,
     },
     clientEmail,
     clientName,
@@ -85,7 +86,7 @@ const addInvoice = asyncHandler(async (req, res) => {
     paymentDue,
     paymentTerms,
     status,
-    total,
+    total: amountDueTotal,
     items,
     createdAt,
   });
@@ -102,10 +103,10 @@ const addInvoice = asyncHandler(async (req, res) => {
 const updateInvoice = asyncHandler(async (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
   const {
-    city,
-    street,
-    country,
-    postCode,
+    senderCity,
+    senderStreet,
+    senderCountry,
+    senderPostCode,
     clientEmail,
     clientName,
     clientCity,
@@ -118,7 +119,7 @@ const updateInvoice = asyncHandler(async (req, res) => {
     paymentDue,
     paymentTerms,
     status,
-    total,
+    amountDueTotal,
     items,
   } = req.body;
 
@@ -147,7 +148,7 @@ const updateInvoice = asyncHandler(async (req, res) => {
       paymentDue,
       paymentTerms,
       status,
-      total,
+      total: amountDueTotal,
       items,
       createdAt,
     }

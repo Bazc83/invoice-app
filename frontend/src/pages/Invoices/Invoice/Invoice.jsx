@@ -11,7 +11,6 @@ import { InvoiceItems } from './InvoiceItems';
 import { InvoiceItemsAmountDue } from './InvoiceItemsAmountDue';
 import { InvoiceItemsTable } from './InvoiceItemsTable';
 
-
 export const Invoice = () => {
   const [showEdit, setShowEdit] = useState(false);
 

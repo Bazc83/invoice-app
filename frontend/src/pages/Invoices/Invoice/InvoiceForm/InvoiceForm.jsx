@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import { getInvoice, updateInvoice, updateItem } from '@hooks/useInvoicesApi';
 
 import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
+import { set } from 'mongoose';
 import styles from './InvoiceForm.module.css';
 import { InvoiceFormInput } from './InvoiceFormInput';
 import { InvoiceFormItem } from './InvoiceFormItem/InvoiceFormItem';
@@ -17,6 +18,17 @@ import { InvoiceFormSelect } from './InvoiceFormSelect/InvoiceFormSelect';
 import { InvoiceItems } from './InvoiceItems';
 
 export const InvoiceForm = ({ setShowForm, invoiceId }) => {
+  const options = [
+    { key: 1, value: 'Net 1 Day' },
+    { key: 7, value: 'Net 7 Days' },
+    { key: 14, value: 'Net 14 Days' },
+    { key: 30, value: 'Net 30 Days' },
+  ];
+
+  const [selectedOption, setSelectedOption] = useState(1);
+
+  const [showOptionsMenu, setShowOptionsMenu] = useState(false);
+
   const queryClient = useQueryClient();
 
   // Fetch invoice data
@@ -26,6 +38,8 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
     isError,
     error,
   } = useFilterInvoiceById(invoiceId);
+
+  const [amountDue, setAmountDue] = useState(invoice?.total);
 
   const [formData, setFormData] = useState({
     senderCity: invoice?.senderAddress?.city,
@@ -45,7 +59,7 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
     paymentDue: invoice?.paymentDue,
     paymentTerms: invoice?.paymentTerms,
     status: invoice?.status,
-    total: invoice?.total,
+    amountDueTotal: amountDue,
     items: invoice?.items,
   });
 
@@ -57,7 +71,7 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
     paymentDue,
     paymentTerms,
     status,
-    total,
+    amountDueTotal,
     clientCity,
     clientStreet,
     clientPostCode,
@@ -70,17 +84,6 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
     senderCountry,
     senderPostCode,
   } = formData;
-
-  const options = [
-    { key: 1, value: 'Net 1 Day' },
-    { key: 7, value: 'Net 7 Days' },
-    { key: 14, value: 'Net 14 Days' },
-    { key: 30, value: 'Net 30 Days' },
-  ];
-
-  const [selectedOption, setSelectedOption] = useState(1);
-
-  const [showOptionsMenu, setShowOptionsMenu] = useState(false);
 
   // update invoice with formData
   const updateInvoiceMutation = useMutation(
@@ -120,6 +123,26 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
   useEffect(() => {
     setFormData((prev) => ({ ...prev, items: [...itemsArray] }));
   }, [itemsArray]);
+
+  useEffect(() => {
+    if (itemsArray.length === 1) {
+      setAmountDue((prev) => (prev = itemsArray[0].total));
+    } else {
+      setAmountDue(
+        (prev) =>
+          (prev = items
+            .map((item) => +item.total)
+            .reduce((acc, cur) => acc + cur, 0))
+      );
+    }
+  }, [itemsArray, items]);
+
+  useEffect(() => {
+    setFormData((prevState) => ({
+      ...prevState,
+      amountDueTotal: amountDue,
+    }));
+  }, [amountDue]);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
