@@ -130,10 +130,10 @@ const updateInvoice = asyncHandler(async (req, res) => {
     { id: req.params.id },
     {
       senderAddress: {
-        city: city,
-        street: street,
-        postCode: postCode,
-        country: country,
+        city: senderCity,
+        street: senderStreet,
+        postCode: senderPostCode,
+        country: senderCountry,
       },
       clientEmail,
       clientName,
