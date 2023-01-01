@@ -2,10 +2,9 @@ import { GoBackLink } from '@/components/GoBackLink';
 import { InvoiceForm } from '@/pages/Invoices/Invoice/InvoiceForm';
 import { PaymentStatus } from '@/pages/Invoices/PaymentStatus';
 import { useFormatDate } from '@hooks/useFormatDate';
-import { getInvoice } from '@hooks/useInvoicesApi.js';
-import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useFilterInvoiceById } from '../../../hooks/reactQueryHooks/useFilterInvoiceById';
 import styles from './Invoice.module.css';
 import { InvoiceButtons } from './InvoiceButtons';
 import { InvoiceItems } from './InvoiceItems';
@@ -13,17 +12,19 @@ import { InvoiceItemsAmountDue } from './InvoiceItemsAmountDue';
 import { InvoiceItemsTable } from './InvoiceItemsTable';
 
 export const Invoice = () => {
+  const [showEdit, setShowEdit] = useState(false);
+
   const { invoiceId } = useParams();
 
   const { getDate } = useFormatDate();
+
   const {
+    data: invoice,
     isLoading,
     isError,
     error,
-    data: invoice,
-  } = useQuery(['invoice'], () => getInvoice(invoiceId));
+  } = useFilterInvoiceById(invoiceId);
 
-  const [showEdit, setShowEdit] = useState(false);
 
   if (isLoading) return 'Loading...';
   if (isError) return 'An error has occurred: ' + error.message;

@@ -1,4 +1,5 @@
 import { DesignSystem } from '@/pages/DesignSystem';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { createContext } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import useLocalStorage from 'use-local-storage';
@@ -7,7 +8,7 @@ import { Invoices } from './pages/Invoices/Invoices';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { PageLayout } from './pages/PageLayout';
 
-import {  QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 export const DarkModeContext = createContext();
 
 const queryClient = new QueryClient();
@@ -36,6 +37,7 @@ function App() {
               </Route>
             </Routes>
           </BrowserRouter>
+          <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </DarkModeContext.Provider>
     </div>

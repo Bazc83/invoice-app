@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 
 import { getInvoice, updateInvoice, updateItem } from '@hooks/useInvoicesApi';
 
+import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
 import styles from './InvoiceForm.module.css';
 import { InvoiceFormInput } from './InvoiceFormInput';
 import { InvoiceFormItem } from './InvoiceFormItem/InvoiceFormItem';
@@ -16,28 +17,21 @@ import { InvoiceFormSelect } from './InvoiceFormSelect/InvoiceFormSelect';
 import { InvoiceItems } from './InvoiceItems';
 
 export const InvoiceForm = ({ setShowForm, invoiceId }) => {
+  const queryClient = useQueryClient();
+
+  // Fetch invoice data
   const {
+    data: invoice,
     isLoading,
     isError,
     error,
-    data: invoice,
-  } = useQuery(['invoice'], () => getInvoice(invoiceId));
-
-  const queryClient = useQueryClient();
-  const senderAddress = {
-    street: '19 Union Terrace',
-    city: 'London',
-    postCode: 'E1 3EZ',
-    country: 'United Kingdom',
-  };
-
-  const { street, city, postCode, country } = senderAddress;
+  } = useFilterInvoiceById(invoiceId);
 
   const [formData, setFormData] = useState({
-    street: street,
-    city: city,
-    postCode: postCode,
-    country: country,
+    senderCity: invoice?.senderAddress?.city,
+    senderStreet: invoice?.senderAddress?.street,
+    senderPostCode: invoice?.senderAddress?.postCode,
+    senderCountry: invoice?.senderAddress?.country,
     clientEmail: invoice?.clientEmail,
     clientName: invoice?.clientName,
     clientCity: invoice?.clientAddress?.city,
@@ -71,6 +65,10 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
     invoiceDate,
     createdAt,
     items,
+    senderCity,
+    senderStreet,
+    senderCountry,
+    senderPostCode,
   } = formData;
 
   const options = [
@@ -84,12 +82,15 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
 
   const [showOptionsMenu, setShowOptionsMenu] = useState(false);
 
-  const updateMutation = useMutation(() => updateInvoice(invoiceId, formData), {
-    onSuccess: () => {
-      // invalidates cache and refetch
-      queryClient.invalidateQueries('invoices');
-    },
-  });
+  // update invoice with formData
+  const updateInvoiceMutation = useMutation(
+    () => updateInvoice(invoiceId, formData),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('invoices');
+      },
+    }
+  );
 
   if (isLoading) return 'Loading...';
   if (isError) return 'An error has occurred: ' + error.message;
@@ -101,29 +102,7 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
     }));
   };
 
-  const invoiceData = {
-    city,
-    street,
-    postCode,
-    country,
-    clientEmail,
-    clientName,
-    clientCity,
-    clientCountry,
-    clientPostCode,
-    clientStreet,
-    description,
-    id,
-    paymentDue,
-    paymentTerms,
-    status,
-    total,
-    invoiceDate,
-    createdAt,
-    items,
-  };
-
-  const [itemsArray, setItemsArray] = useState([...invoice?.items]);
+  const [itemsArray, setItemsArray] = useState(invoice?.items);
 
   const onItemsChange = (itemValue) => {
     if (!itemValue) return;
@@ -144,10 +123,13 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log(formData)
-    updateMutation.mutate({ ...formData });
+    updateInvoiceMutation.mutate({ ...formData });
     setShowForm((prev) => !prev);
   };
+
+  if (isLoading) return 'Loading...';
+
+  if (isError) return 'An error has occurred: ' + error.message;
 
   return (
     <div className={styles.invoiceForm}>
@@ -168,24 +150,24 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
           <InvoiceFormInput
             itemName='streetAddress'
             itemLabel='Street Address'
-            value={street}
+            value={senderStreet}
             setValue={inputOnChange}
           />
           <InvoiceFormInput
             itemName='city'
             itemLabel='City'
-            value={city}
+            value={senderCity}
             setValue={inputOnChange}
           />
           <InvoiceFormInput
             itemName='postCode'
             itemLabel='Post Code'
-            value={postCode}
+            value={senderPostCode}
             setValue={inputOnChange}
           />
           <InvoiceFormInput
             itemName='country'
-            value={country}
+            value={senderCountry}
             setValue={inputOnChange}
           />
         </div>

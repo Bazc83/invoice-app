@@ -1,7 +1,6 @@
-import { getInvoices } from '@hooks/useInvoicesApi';
-import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
+import { useInvoices } from '../../hooks/reactQueryHooks/useInvoices';
 import { InvoiceForm } from './Invoice/InvoiceForm/InvoiceForm';
 import { InvoicePreview } from './InvoicePreview';
 import styles from './Invoices.module.css';
@@ -9,12 +8,7 @@ import { InvoicesPageControls } from './InvoicesPageControls/InvoicesPageControl
 import { NoInvoices } from './NoInvoices/NoInvoices';
 
 export const Invoices = () => {
-  const {
-    isLoading,
-    isError,
-    error,
-    data: invoices,
-  } = useQuery(['invoices'], getInvoices);
+  const { isLoading, isError, error, data: invoices } = useInvoices();
 
   const [showForm, setShowForm] = useState(false);
 
