@@ -148,25 +148,25 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
           />
           <h4 className={styles.formSectionHeader}>Bill From</h4>
           <InvoiceFormInput
-            itemName='streetAddress'
+            itemName='senderAddress'
             itemLabel='Street Address'
             value={senderStreet}
             setValue={inputOnChange}
           />
           <InvoiceFormInput
-            itemName='city'
+            itemName='senderCity'
             itemLabel='City'
             value={senderCity}
             setValue={inputOnChange}
           />
           <InvoiceFormInput
-            itemName='postCode'
+            itemName='senderPostCode'
             itemLabel='Post Code'
             value={senderPostCode}
             setValue={inputOnChange}
           />
           <InvoiceFormInput
-            itemName='country'
+            itemName='senderCountry'
             value={senderCountry}
             setValue={inputOnChange}
           />
