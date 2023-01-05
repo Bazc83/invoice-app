@@ -39,7 +39,6 @@ export const updateItem = async (invoiceId, itemId, itemData) => {
 };
 
 export const deleteInvoice = async (invoiceId) => {
-  console.log(invoiceId);
-  const response = await axios.delete(API_URL + invoiceId);
+  const response = await axios.delete(`${API_URL}${invoiceId}`);
   return response.data;
 };

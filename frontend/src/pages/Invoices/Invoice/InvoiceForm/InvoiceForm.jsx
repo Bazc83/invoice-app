@@ -7,13 +7,13 @@ import {
 } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 
-import { getInvoice, updateInvoice, updateItem } from '@hooks/useInvoicesApi';
+
+import { updateInvoice } from '@hooks/useInvoicesApi';
 
 import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
-import { set } from 'mongoose';
+import { getInvoice } from '@/hooks/useInvoicesApi';
 import styles from './InvoiceForm.module.css';
 import { InvoiceFormInput } from './InvoiceFormInput';
-import { InvoiceFormItem } from './InvoiceFormItem/InvoiceFormItem';
 import { InvoiceFormSelect } from './InvoiceFormSelect/InvoiceFormSelect';
 import { InvoiceItems } from './InvoiceItems';
 
@@ -38,6 +38,7 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
     isError,
     error,
   } = useFilterInvoiceById(invoiceId);
+
 
   const [amountDue, setAmountDue] = useState(invoice?.total);
 
@@ -161,7 +162,10 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
         {invoice?.id}
       </h2>
 
-      <form className={styles.form} onSubmit={handleFormSubmit}>
+      <form
+        className={styles.form}
+        onSubmit={handleFormSubmit}
+        disabled={isLoading}>
         <div className={styles.formSection}>
           <InvoiceFormInput
             itemName='id'
@@ -171,7 +175,7 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
           />
           <h4 className={styles.formSectionHeader}>Bill From</h4>
           <InvoiceFormInput
-            itemName='senderAddress'
+            itemName='senderStreet'
             itemLabel='Street Address'
             value={senderStreet}
             setValue={inputOnChange}

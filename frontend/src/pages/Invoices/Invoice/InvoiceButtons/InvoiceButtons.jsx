@@ -1,13 +1,16 @@
 import { Button } from '@/components/Button';
-import { useDispatch } from 'react-redux';
+import { useDeleteInvoice } from '@/hooks/reactQueryHooks/useDeleteInvoice';
+
 import { useNavigate } from 'react-router-dom';
-import { deleteInvoice } from '../../../../features/invoice/invoicesSlice';
-import styles from './InvoiceButtons.module.css';
-
 export const InvoiceButtons = ({ setShowEdit, invoice }) => {
-  const dispatch = useDispatch();
-
   const navigate = useNavigate();
+
+  const { deleteSelectedInvoice, isLoading } = useDeleteInvoice();
+
+  const handleDeleteInvoice = async () => {
+    await deleteSelectedInvoice(invoice.id);
+    navigate('/');
+  };
 
   return (
     <>
@@ -16,11 +19,8 @@ export const InvoiceButtons = ({ setShowEdit, invoice }) => {
       </Button>
       <Button
         btnStyle='btnFive'
-        onClick={() => {
-          dispatch(deleteInvoice(invoice.id));
-          navigate('/');
-        }}>
-        Delete
+        onClick={() => handleDeleteInvoice(invoice.id)}>
+        {isLoading ? '...Deleting' : 'Delete'}
       </Button>
       <Button>Mark as Paid</Button>
     </>

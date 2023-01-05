@@ -50,8 +50,57 @@
   gap: 0.5rem;
   align-items: center;
   justify-content: flex-end;
-
-  
 }
 
+.invoiceFormInput {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
 
+.invoiceFormInput label {
+  color: var(--text-faded-secondary);
+}
+
+.invoiceFormInput input {
+  background-color: var(--secondary-bg);
+  border: 1px solid var(--formItemBorderColor);
+  padding: 1rem 1.5rem;
+  color: var(--text);
+  border-radius: 8px;
+}
+
+.invoiceFormInput.noBg input {
+  background-color: transparent;
+  color: var(--text-faded);
+}
+
+.invoiceFormInput.maxContent input {
+  padding: 1rem 0;
+  width: 100%;
+  text-align: center;
+}
+
+.invoiceFormInput input:active,
+.invoiceFormInput input:focus {
+  outline: 1px solid var(--primary-600);
+}
+
+.inputError label {
+  color: var(--orange-600);
+}
+
+.inputError input {
+  outline: 1px solid var(--orange-600);
+  position: relative;
+}
+
+.inputError:before {
+  content: "Can't be empty";
+  position: relative;
+  top: 25px;
+  align-self: end;
+  color: var(--orange-600);
+  font-size: 0.7rem;
+  padding: 0 0.25rem;
+}

@@ -1,11 +1,10 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaTrashAlt } from 'react-icons/fa';
-import { updateItem } from '../../../../../hooks/useInvoicesApi';
+
 import { InvoiceFormInput } from '../InvoiceFormInput';
 import styles from './InvoiceFormItem.module.css';
-export const InvoiceFormItem = ({ item, updateFormItem, invoiceId }) => {
-  const queryClient = useQueryClient();
+export const InvoiceFormItem = ({ item, updateFormItem}) => {
+ 
 
   const [formItem, setFormItem] = useState({
     itemId: item?.itemId,
