@@ -1,0 +1,23 @@
+load page layout
+
+getInvoices and show single invoice previews to UI 
+
+when invoice preview clicked get all that invoices data and show the single invoice to UI 
+
+on Edit button click show invoice edit form 
+
+invoice edit form submit change invoice data on the DB and show single invoice page again but with the updated data
+
+go back takes you back to invoice preview (home  "/")
+
+on Mark as paid button click, change invoice status on DB to "Paid" and show update to UI
+
+on Delete button click delete selected invoice (Maybe prompt to ask if you are sure)
+
+
+
+
+
+
+
+
