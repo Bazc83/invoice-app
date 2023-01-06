@@ -1,4 +1,4 @@
-import { FilterModalItem } from '../FilterModalItem/FilterModalItem';
+import { FilterModalItem } from '@/components/FilterModalItem';
 import styles from './FilterModal.module.css';
 
 export const FilterModal = () => {

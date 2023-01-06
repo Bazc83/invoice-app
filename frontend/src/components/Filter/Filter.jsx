@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styles from './Filter.module.css';
 
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
-import { FilterModal } from './FilterModal/FilterModal';
+import { FilterModal } from '@/components/FilterModal';
 
 export const Filter = () => {
   const [filterIsOpen, setFilterIsOpen] = useState(false);

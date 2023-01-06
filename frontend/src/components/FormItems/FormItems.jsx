@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
 import { Button } from '@/components/Button';
+import { useEffect, useState } from 'react';
 
-import { InvoiceFormItem } from '../../InvoiceFormItem';
-import styles from './InvoiceItems.module.css';
-export const InvoiceItems = ({ items, invoiceId, onItemsChange }) => {
+import { InvoiceFormItem } from '@/components/InvoiceFormItem';
+import styles from './FormItems.module.css';
+export const FormItems = ({ items, invoiceId, onItemsChange}) => {
   const [formItem, setFormItem] = useState();
 
   const updateFormItem = (formItemData) => {
