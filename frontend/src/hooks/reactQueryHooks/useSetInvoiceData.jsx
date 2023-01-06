@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useFilterInvoiceById } from './useFilterInvoiceById';
 
-const useSetInvoiceData = (invoiceId) => {
-  const [invoiceData, setInvoiceData] = useState({});
+const useSetInvoiceData = (data) => {
+  const [invoiceData, setInvoiceData] = useState(data);
 
-  const { data, isLoading, isError, error } = useFilterInvoiceById(invoiceId);
+  // const { data, isLoading, isError, error } = useFilterInvoiceById(invoiceId);
 
   const [amountDue, setAmountDue] = useState(data?.total);
   const [itemsArray, setItemsArray] = useState(data?.items);
@@ -31,14 +31,11 @@ const useSetInvoiceData = (invoiceId) => {
       amountDueTotal: amountDue,
       items: itemsArray,
     });
-
     return () => {};
-  }, [amountDue, isLoading, itemsArray, amountDue]);
+  }, [amountDue, itemsArray, amountDue, data]);
 
   return {
-    isLoading,
-    isError,
-    error,
+    
     invoiceData,
     setInvoiceData,
     setAmountDue,
