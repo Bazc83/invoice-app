@@ -2,6 +2,7 @@ import { FormItems } from '@/components/FormItems';
 import { InvoiceFormInput } from '@/components/InvoiceFormInput';
 import { InvoiceFormSelect } from '@/components/InvoiceFormSelect/';
 import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
+import useSetInvoiceData from '@/hooks/reactQueryHooks/useSetInvoiceData';
 import { Button } from '@components/Button';
 import { updateInvoice } from '@hooks/useInvoicesApi';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -22,43 +23,21 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
 
   const [selectedPaymentTerm, setSelectedPaymentTerm] = useState(1);
 
-  // Fetch invoice data
   const {
-    data: invoice,
+    invoiceData,
     isLoading,
     isError,
     error,
-  } = useFilterInvoiceById(invoiceId);
+    setInvoiceData,
+    setAmountDue,
+    amountDue,
+    itemsArray,
+    setItemsArray,
+  } = useSetInvoiceData(invoiceId);
 
-  const [amountDue, setAmountDue] = useState(invoice?.total);
-
-  const [formData, setFormData] = useState({
-    senderCity: invoice?.senderAddress?.city,
-    senderStreet: invoice?.senderAddress?.street,
-    senderPostCode: invoice?.senderAddress?.postCode,
-    senderCountry: invoice?.senderAddress?.country,
-    clientEmail: invoice?.clientEmail,
-    clientName: invoice?.clientName,
-    clientCity: invoice?.clientAddress?.city,
-    clientStreet: invoice?.clientAddress?.street,
-    clientCountry: invoice?.clientAddress?.country,
-    clientPostCode: invoice?.clientAddress?.postCode,
-    description: invoice?.description,
-    invoiceDate: invoice?.createdAt,
-    id: invoice?.id,
-    createdAt: invoice?.createdAt,
-    paymentDue: invoice?.paymentDue,
-    paymentTerms: invoice?.paymentTerms,
-    status: invoice?.status,
-    amountDueTotal: amountDue,
-    items: invoice?.items,
-  });
-
-
-
-  // update invoice on db with formData
+  // update invoice on db with invoiceData
   const updateInvoiceMutation = useMutation(
-    () => updateInvoice(invoiceId, formData),
+    () => updateInvoice(invoiceId, invoiceData),
     {
       onSuccess: () => {
         queryClient.invalidateQueries('invoices');
@@ -68,57 +47,47 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
 
   // Update formdata when form values change
   const inputOnChange = (e) => {
-    setFormData((prevState) => ({
+    setInvoiceData((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
   };
 
-  // Update items
-  const [itemsArray, setItemsArray] = useState(invoice?.items);
-
   const onItemsChange = (itemValue) => {
     if (!itemValue) return;
-
-    if (itemsArray.length === 0) {
+    if (itemsArray?.length === 0) {
       setItemsArray([itemValue]);
     } else {
       setItemsArray((prev) => [
-        ...prev.filter((val) => val.itemId !== itemValue.itemId),
+        ...prev?.filter((val) => val.itemId !== itemValue.itemId),
         itemValue,
       ]);
     }
   };
 
-  // Update formdata when items values change
-  useEffect(() => {
-    setFormData((prev) => ({ ...prev, items: [...itemsArray] }));
-  }, [itemsArray]);
-
   // Calculate total amount due for invoice
   useEffect(() => {
-    if (itemsArray.length === 1) {
-      setAmountDue((prev) => (prev = itemsArray[0].total));
+    if (itemsArray?.length === 1) {
+      setAmountDue(+itemsArray[0]?.total);
     } else {
       setAmountDue(
-        (prev) =>
-          (prev = formData.items
-            .map((item) => +item.total)
-            .reduce((acc, cur) => acc + cur, 0))
+        invoiceData?.items
+          ?.map((item) => +item.total)
+          ?.reduce((acc, cur) => +acc + +cur, 0)
       );
     }
-  }, [itemsArray, formData.items]);
+  }, [itemsArray, invoiceData.items]);
 
   useEffect(() => {
-    setFormData((prevState) => ({
+    setInvoiceData((prevState) => ({
       ...prevState,
       amountDueTotal: amountDue,
     }));
-  }, [amountDue]);
+  }, [invoiceData?.amountDue]);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    updateInvoiceMutation.mutate({ ...formData });
+    updateInvoiceMutation.mutate({ ...invoiceData });
     setShowForm((prev) => !prev);
   };
 
@@ -126,12 +95,12 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
 
   if (isError) return 'An error has occurred: ' + error.message;
 
-  if (invoice)
+  
     return (
       <div className={styles.invoiceForm}>
         <h2>
           Edit <span className={styles.invoiceFormHeaderAccent}>#</span>
-          {invoice?.id}
+          {invoiceId}
         </h2>
 
         <form
@@ -142,31 +111,31 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
             <InvoiceFormInput
               itemName='id'
               itemLabel='invoice id'
-              value={formData.id}
+              value={invoiceData.id || ''}
               setValue={inputOnChange}
             />
             <h4 className={styles.formSectionHeader}>Bill From</h4>
             <InvoiceFormInput
               itemName='senderStreet'
               itemLabel='Street Address'
-              value={formData.senderStreet}
+              value={invoiceData.senderStreet || ''}
               setValue={inputOnChange}
             />
             <InvoiceFormInput
               itemName='senderCity'
               itemLabel='City'
-              value={formData.senderCity}
+              value={invoiceData.senderCity || ''}
               setValue={inputOnChange}
             />
             <InvoiceFormInput
               itemName='senderPostCode'
               itemLabel='Post Code'
-              value={formData.senderPostCode}
+              value={invoiceData.senderPostCode || ''}
               setValue={inputOnChange}
             />
             <InvoiceFormInput
               itemName='senderCountry'
-              value={formData.senderCountry}
+              value={invoiceData.senderCountry || ''}
               setValue={inputOnChange}
             />
           </div>
@@ -176,39 +145,39 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
             <InvoiceFormInput
               itemName='clientName'
               itemLabel="Client's Name"
-              value={formData.clientName}
+              value={invoiceData.clientName || ''}
               setValue={inputOnChange}
             />
             <InvoiceFormInput
               type='email'
               itemName='clientEmail'
               itemLabel="Client's Email"
-              value={formData.clientEmail}
+              value={invoiceData.clientEmail || ''}
               setValue={inputOnChange}
             />
 
             <InvoiceFormInput
               itemName='clientStreet'
               itemLabel='Street Address'
-              value={formData.clientStreet}
+              value={invoiceData.clientStreet || ''}
               setValue={inputOnChange}
             />
             <InvoiceFormInput
               itemName='clientCity'
               itemLabel='City'
-              value={formData.clientCity}
+              value={invoiceData.clientCity || ''}
               setValue={inputOnChange}
             />
             <InvoiceFormInput
               itemName='clientPostCode'
               itemLabel='Post Code'
-              value={formData.clientPostCode}
+              value={invoiceData.clientPostCode || ''}
               setValue={inputOnChange}
             />
             <InvoiceFormInput
               itemName='clientCountry'
               itemLabel='Country'
-              value={formData.clientCountry}
+              value={invoiceData.clientCountry || ''}
               setValue={inputOnChange}
             />
 
@@ -217,7 +186,7 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
                 type='date'
                 itemName='createdAt'
                 itemLabel='Created at'
-                value={formData.createdAt}
+                value={invoiceData.createdAt || ''}
                 setValue={inputOnChange}
               />
 
@@ -226,7 +195,7 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
                 type='date'
                 itemName='paymentDue'
                 itemLabel='Payment Due'
-                value={formData.paymentDue}
+                value={invoiceData.paymentDue || ''}
                 setValue={inputOnChange}
               />
 
@@ -242,16 +211,15 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
             <InvoiceFormInput
               itemName='description'
               itemLabel='Project/Description'
-              value={formData.description}
+              value={invoiceData.description || ''}
               setValue={inputOnChange}
             />
           </div>
 
           <FormItems
-            items={formData?.items}
+            items={itemsArray}
             invoiceId={invoiceId}
             onItemsChange={onItemsChange}
-            amountDueTotal={formData.amountDueTotal}
           />
 
           <div className={styles.formButtons}>

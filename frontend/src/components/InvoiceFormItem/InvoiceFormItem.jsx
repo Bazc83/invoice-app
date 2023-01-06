@@ -3,7 +3,8 @@ import { FaTrashAlt } from 'react-icons/fa';
 
 import { InvoiceFormInput } from '../InvoiceFormInput';
 import styles from './InvoiceFormItem.module.css';
-export const InvoiceFormItem = ({ item, updateFormItem }) => {
+
+export const InvoiceFormItem = ({ item, onItemsChange }) => {
   const [formItem, setFormItem] = useState({
     itemId: item?.itemId,
     name: item?.name,
@@ -42,7 +43,7 @@ export const InvoiceFormItem = ({ item, updateFormItem }) => {
   }, [price, quantity]);
 
   useEffect(() => {
-    updateFormItem(formItem);
+    onItemsChange(formItem);
   }, [formItem]);
 
   return (

@@ -1,5 +1,6 @@
 import styles from './InvoiceItemsAmountDue.module.css';
 export const InvoiceItemsAmountDue = ({ amountDue}) => {
+
   return (
     <div className={styles.amountDue}>
       <p className='text-xs'>Amount Due</p>

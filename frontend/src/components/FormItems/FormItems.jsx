@@ -3,16 +3,8 @@ import { useEffect, useState } from 'react';
 
 import { InvoiceFormItem } from '@/components/InvoiceFormItem';
 import styles from './FormItems.module.css';
-export const FormItems = ({ items, invoiceId, onItemsChange}) => {
-  const [formItem, setFormItem] = useState();
 
-  const updateFormItem = (formItemData) => {
-    setFormItem(formItemData);
-  };
-
-  useEffect(() => {
-    onItemsChange(formItem);
-  }, [formItem]);
+export const FormItems = ({ items, invoiceId, onItemsChange }) => {
 
   return (
     <div className={styles.formItemsSection}>
@@ -23,8 +15,8 @@ export const FormItems = ({ items, invoiceId, onItemsChange}) => {
             item={item}
             key={`item${i}`}
             value={item?.name}
-            updateFormItem={updateFormItem}
             invoiceId={invoiceId}
+            onItemsChange={onItemsChange}
           />
         ))}
       </div>
