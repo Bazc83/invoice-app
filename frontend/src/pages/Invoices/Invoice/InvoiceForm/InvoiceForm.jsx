@@ -7,7 +7,6 @@ import {
 } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 
-
 import { updateInvoice } from '@hooks/useInvoicesApi';
 
 import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
@@ -38,7 +37,6 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
     isError,
     error,
   } = useFilterInvoiceById(invoiceId);
-
 
   const [amountDue, setAmountDue] = useState(invoice?.total);
 
@@ -96,9 +94,6 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
     }
   );
 
-  if (isLoading) return 'Loading...';
-  if (isError) return 'An error has occurred: ' + error.message;
-
   const inputOnChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -151,145 +146,147 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
     setShowForm((prev) => !prev);
   };
 
+  console.log(id);
   if (isLoading) return 'Loading...';
 
   if (isError) return 'An error has occurred: ' + error.message;
 
-  return (
-    <div className={styles.invoiceForm}>
-      <h2>
-        Edit <span className={styles.invoiceFormHeaderAccent}>#</span>
-        {invoice?.id}
-      </h2>
+  if (invoice)
+    return (
+      <div className={styles.invoiceForm}>
+        <h2>
+          Edit <span className={styles.invoiceFormHeaderAccent}>#</span>
+          {invoice?.id}
+        </h2>
 
-      <form
-        className={styles.form}
-        onSubmit={handleFormSubmit}
-        disabled={isLoading}>
-        <div className={styles.formSection}>
-          <InvoiceFormInput
-            itemName='id'
-            itemLabel='invoice id'
-            value={id}
-            setValue={inputOnChange}
-          />
-          <h4 className={styles.formSectionHeader}>Bill From</h4>
-          <InvoiceFormInput
-            itemName='senderStreet'
-            itemLabel='Street Address'
-            value={senderStreet}
-            setValue={inputOnChange}
-          />
-          <InvoiceFormInput
-            itemName='senderCity'
-            itemLabel='City'
-            value={senderCity}
-            setValue={inputOnChange}
-          />
-          <InvoiceFormInput
-            itemName='senderPostCode'
-            itemLabel='Post Code'
-            value={senderPostCode}
-            setValue={inputOnChange}
-          />
-          <InvoiceFormInput
-            itemName='senderCountry'
-            value={senderCountry}
-            setValue={inputOnChange}
-          />
-        </div>
-
-        <div className={styles.formSection}>
-          <h4 className={styles.formSectionHeader}>Bill To</h4>
-          <InvoiceFormInput
-            itemName='clientName'
-            itemLabel="Client's Name"
-            value={clientName}
-            setValue={inputOnChange}
-          />
-          <InvoiceFormInput
-            type='email'
-            itemName='clientEmail'
-            itemLabel="Client's Email"
-            value={clientEmail}
-            setValue={inputOnChange}
-          />
-
-          <InvoiceFormInput
-            itemName='clientStreet'
-            itemLabel='Street Address'
-            value={clientStreet}
-            setValue={inputOnChange}
-          />
-          <InvoiceFormInput
-            itemName='clientCity'
-            itemLabel='City'
-            value={clientCity}
-            setValue={inputOnChange}
-          />
-          <InvoiceFormInput
-            itemName='clientPostCode'
-            itemLabel='Post Code'
-            value={clientPostCode}
-            setValue={inputOnChange}
-          />
-          <InvoiceFormInput
-            itemName='clientCountry'
-            itemLabel='Country'
-            value={clientCountry}
-            setValue={inputOnChange}
-          />
-
-          <div className='grid-row-half'>
+        <form
+          className={styles.form}
+          onSubmit={handleFormSubmit}
+          disabled={isLoading}>
+          <div className={styles.formSection}>
             <InvoiceFormInput
-              type='date'
-              itemName='createdAt'
-              itemLabel='Created at'
-              value={createdAt}
+              itemName='id'
+              itemLabel='invoice id'
+              value={id}
               setValue={inputOnChange}
             />
-
-            {/* // todo tempory as needs to be created at plus days to payment terms date */}
+            <h4 className={styles.formSectionHeader}>Bill From</h4>
             <InvoiceFormInput
-              type='date'
-              itemName='paymentDue'
-              itemLabel='Payment Due'
-              value={paymentDue}
+              itemName='senderStreet'
+              itemLabel='Street Address'
+              value={senderStreet}
               setValue={inputOnChange}
             />
-
-            <InvoiceFormSelect
-              options={options}
-              selectedKey={selectedOption}
-              placeholder={'type to search'}
-              onChange={(item) => setSelectedOption(item)}
-              showOptionsMenu={showOptionsMenu}
-              setShowOptionsMenu={setShowOptionsMenu}
+            <InvoiceFormInput
+              itemName='senderCity'
+              itemLabel='City'
+              value={senderCity}
+              setValue={inputOnChange}
+            />
+            <InvoiceFormInput
+              itemName='senderPostCode'
+              itemLabel='Post Code'
+              value={senderPostCode}
+              setValue={inputOnChange}
+            />
+            <InvoiceFormInput
+              itemName='senderCountry'
+              value={senderCountry}
+              setValue={inputOnChange}
             />
           </div>
-          <InvoiceFormInput
-            itemName='description'
-            itemLabel='Project/Description'
-            value={invoice.description}
-            setValue={inputOnChange}
+
+          <div className={styles.formSection}>
+            <h4 className={styles.formSectionHeader}>Bill To</h4>
+            <InvoiceFormInput
+              itemName='clientName'
+              itemLabel="Client's Name"
+              value={clientName}
+              setValue={inputOnChange}
+            />
+            <InvoiceFormInput
+              type='email'
+              itemName='clientEmail'
+              itemLabel="Client's Email"
+              value={clientEmail}
+              setValue={inputOnChange}
+            />
+
+            <InvoiceFormInput
+              itemName='clientStreet'
+              itemLabel='Street Address'
+              value={clientStreet}
+              setValue={inputOnChange}
+            />
+            <InvoiceFormInput
+              itemName='clientCity'
+              itemLabel='City'
+              value={clientCity}
+              setValue={inputOnChange}
+            />
+            <InvoiceFormInput
+              itemName='clientPostCode'
+              itemLabel='Post Code'
+              value={clientPostCode}
+              setValue={inputOnChange}
+            />
+            <InvoiceFormInput
+              itemName='clientCountry'
+              itemLabel='Country'
+              value={clientCountry}
+              setValue={inputOnChange}
+            />
+
+            <div className='grid-row-half'>
+              <InvoiceFormInput
+                type='date'
+                itemName='createdAt'
+                itemLabel='Created at'
+                value={createdAt}
+                setValue={inputOnChange}
+              />
+
+              {/* // todo tempory as needs to be created at plus days to payment terms date */}
+              <InvoiceFormInput
+                type='date'
+                itemName='paymentDue'
+                itemLabel='Payment Due'
+                value={paymentDue}
+                setValue={inputOnChange}
+              />
+
+              <InvoiceFormSelect
+                options={options}
+                selectedKey={selectedOption}
+                placeholder={'type to search'}
+                onChange={(item) => setSelectedOption(item)}
+                showOptionsMenu={showOptionsMenu}
+                setShowOptionsMenu={setShowOptionsMenu}
+              />
+            </div>
+            <InvoiceFormInput
+              itemName='description'
+              itemLabel='Project/Description'
+              value={invoice.description}
+              setValue={inputOnChange}
+            />
+          </div>
+
+          <InvoiceItems
+            items={invoice?.items}
+            invoiceId={invoiceId}
+            onItemsChange={onItemsChange}
           />
-        </div>
 
-        <InvoiceItems
-          items={invoice?.items}
-          invoiceId={invoiceId}
-          onItemsChange={onItemsChange}
-        />
-
-        <div className={styles.formButtons}>
-          <Button
-            onClick={() => setShowForm((prev) => !prev)}
-            btnStyle='btnThree'>
-            Cancel
-          </Button>
-          <Button type='submit'>Save Changes</Button>
-        </div>
-      </form>
-    </div>
-  );
+          <div className={styles.formButtons}>
+            <Button
+              onClick={() => setShowForm((prev) => !prev)}
+              btnStyle='btnThree'>
+              Cancel
+            </Button>
+            <Button type='submit'>Save Changes</Button>
+          </div>
+        </form>
+      </div>
+    );
 };
