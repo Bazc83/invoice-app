@@ -1,15 +1,16 @@
 import { GoBackLink } from '@/components/GoBackLink';
+import { InvoiceButtons } from '@/components/InvoiceButtons';
+import { InvoiceForm } from '@/components/InvoiceForm';
+import { InvoiceItems } from '@/components/InvoiceItems';
+import { InvoiceItemsAmountDue } from '@/components/InvoiceItemsAmountDue';
+import { InvoiceItemsTable } from '@/components/InvoiceItemsTable';
 import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
-import { InvoiceForm } from '@/pages/Invoices/Invoice/InvoiceForm';
-import { PaymentStatus } from '@/pages/Invoices/PaymentStatus';
+
+import { PaymentStatus } from '@/components/PaymentStatus';
 import { useFormatDate } from '@hooks/useFormatDate';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './Invoice.module.css';
-import { InvoiceButtons } from './InvoiceButtons';
-import { InvoiceItems } from './InvoiceItems';
-import { InvoiceItemsAmountDue } from './InvoiceItemsAmountDue';
-import { InvoiceItemsTable } from './InvoiceItemsTable';
 
 export const Invoice = () => {
   const [showEdit, setShowEdit] = useState(false);

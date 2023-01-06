@@ -1,4 +1,5 @@
 import styles from './PaymentStatus.module.css';
+
 export const PaymentStatus = ({ status, className }) => {
   let paymentStatusColor;
   if (status === 'paid') {

@@ -1,11 +1,11 @@
+import { InvoiceForm } from '@/components/InvoiceForm';
+import { InvoicePreview } from '@/components/InvoicePreview';
+import { InvoicesPageControls } from '@/components/InvoicesPageControls';
+import { NoInvoices } from '@/components/NoInvoices';
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { useInvoices } from '../../hooks/reactQueryHooks/useInvoices';
-import { InvoiceForm } from './Invoice/InvoiceForm/InvoiceForm';
-import { InvoicePreview } from './InvoicePreview';
 import styles from './Invoices.module.css';
-import { InvoicesPageControls } from './InvoicesPageControls/InvoicesPageControls';
-import { NoInvoices } from './NoInvoices/NoInvoices';
 
 export const Invoices = () => {
   const { isLoading, isError, error, data: invoices } = useInvoices();

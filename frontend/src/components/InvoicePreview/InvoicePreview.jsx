@@ -1,6 +1,7 @@
 import { useFormatDate } from '@/hooks/useFormatDate';
-import { PaymentStatus } from '@/pages/Invoices/PaymentStatus';
+
 import { useNavigate } from 'react-router';
+import { PaymentStatus } from '@/components/PaymentStatus';
 import styles from './InvoicePreview.module.css';
 export const InvoicePreview = ({ invoice }) => {
   const { status, id, clientName, total, paymentDue } = invoice;

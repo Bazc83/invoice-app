@@ -3,8 +3,8 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { createContext } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import useLocalStorage from 'use-local-storage';
-import { Invoice } from './pages/Invoices/Invoice';
-import { Invoices } from './pages/Invoices/Invoices';
+import { Invoice } from './pages/Invoice';
+import { Invoices } from './pages/Invoices';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { PageLayout } from './pages/PageLayout';
 

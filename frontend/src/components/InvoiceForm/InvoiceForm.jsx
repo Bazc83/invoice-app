@@ -8,12 +8,10 @@ import {
 import { useEffect, useState } from 'react';
 
 import { updateInvoice } from '@hooks/useInvoicesApi';
-
 import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
-import { getInvoice } from '@/hooks/useInvoicesApi';
+import { InvoiceFormInput} from '@/components/InvoiceFormInput';
+import { InvoiceFormSelect } from '@/components/InvoiceFormSelect/';
 import styles from './InvoiceForm.module.css';
-import { InvoiceFormInput } from './InvoiceFormInput';
-import { InvoiceFormSelect } from './InvoiceFormSelect/InvoiceFormSelect';
 import { InvoiceItems } from './InvoiceItems';
 
 export const InvoiceForm = ({ setShowForm, invoiceId }) => {

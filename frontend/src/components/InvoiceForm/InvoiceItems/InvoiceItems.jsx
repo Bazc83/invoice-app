@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Button } from '../../../../../components/Button';
+import { Button } from '@/components/Button';
 
-import { InvoiceFormItem } from '../InvoiceFormItem';
+import { InvoiceFormItem } from '../../InvoiceFormItem';
 import styles from './InvoiceItems.module.css';
 export const InvoiceItems = ({ items, invoiceId, onItemsChange }) => {
   const [formItem, setFormItem] = useState();
@@ -13,7 +13,6 @@ export const InvoiceItems = ({ items, invoiceId, onItemsChange }) => {
   useEffect(() => {
     onItemsChange(formItem);
   }, [formItem]);
-
 
   return (
     <div className={styles.formItemsSection}>
