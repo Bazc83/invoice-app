@@ -19,9 +19,9 @@ export const Invoice = () => {
 
   const { getDate } = useFormatDate();
 
-  const { data, isLoading, isError, error } = useFilterInvoiceById(invoiceId);
+  const { data:invoiceData, isLoading, isError, error } = useFilterInvoiceById(invoiceId);
 
-  const { invoiceData } = useSetInvoiceData(data);
+  // const { invoiceData } = useSetInvoiceData(data);
 
   if (isLoading) return 'Loading...';
   if (isError) return 'An error has occurred: ' + error.message;
@@ -72,10 +72,10 @@ export const Invoice = () => {
                   </div>
 
                   <div className={`text-faded-xs ${styles.address}`}>
-                    <p>{invoiceData?.senderStreet}</p>
-                    <p>{invoiceData?.senderCity}</p>
-                    <p>{invoiceData?.senderPostCode}</p>
-                    <p>{invoiceData?.senderCountry}</p>
+                    <p>{invoiceData?.senderAddress?.street}</p>
+                    <p>{invoiceData?.senderAddress?.city}</p>
+                    <p>{invoiceData?.senderAddress?.postCode}</p>
+                    <p>{invoiceData?.senderAddress?.country}</p>
                   </div>
 
                   <div className={styles.dates}>
@@ -101,10 +101,10 @@ export const Invoice = () => {
                     <h3>{invoiceData?.clientName}</h3>
 
                     <div className={`text-faded-xs ${styles.clientAddress}`}>
-                      <p>{invoiceData?.clientStreet}</p>
-                      <p>{invoiceData?.clientCity}</p>
-                      <p>{invoiceData?.clientPostCode}</p>
-                      <p>{invoiceData?.clientCountry}</p>
+                      <p>{invoiceData?.clientAddress?.street}</p>
+                      <p>{invoiceData?.clientAddress?.city}</p>
+                      <p>{invoiceData?.clientAddress?.postCode}</p>
+                      <p>{invoiceData?.clientAddress?.country}</p>
                     </div>
                   </div>
 

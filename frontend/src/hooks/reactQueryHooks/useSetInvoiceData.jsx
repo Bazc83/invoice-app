@@ -4,10 +4,7 @@ import { useFilterInvoiceById } from './useFilterInvoiceById';
 const useSetInvoiceData = (data) => {
   const [invoiceData, setInvoiceData] = useState(data);
 
-  // const { data, isLoading, isError, error } = useFilterInvoiceById(invoiceId);
-
   const [amountDue, setAmountDue] = useState(data?.total);
-  const [itemsArray, setItemsArray] = useState(data?.items);
 
   useEffect(() => {
     setInvoiceData({
@@ -29,19 +26,16 @@ const useSetInvoiceData = (data) => {
       paymentTerms: data?.paymentTerms,
       status: data?.status,
       amountDueTotal: amountDue,
-      items: itemsArray,
+      items: data?.items,
     });
     return () => {};
-  }, [amountDue, itemsArray, amountDue, data]);
+  }, [amountDue, data]);
 
   return {
-    
     invoiceData,
     setInvoiceData,
     setAmountDue,
     amountDue,
-    itemsArray,
-    setItemsArray,
   };
 };
 

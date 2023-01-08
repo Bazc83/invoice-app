@@ -4,7 +4,7 @@ import { FaTrashAlt } from 'react-icons/fa';
 import { InvoiceFormInput } from '../InvoiceFormInput';
 import styles from './InvoiceFormItem.module.css';
 
-export const InvoiceFormItem = ({ item, onItemsChange }) => {
+export const InvoiceFormItem = ({ item, onItemChange }) => {
   const [formItem, setFormItem] = useState({
     itemId: item?.itemId,
     name: item?.name,
@@ -15,35 +15,22 @@ export const InvoiceFormItem = ({ item, onItemsChange }) => {
 
   const { itemId, name, quantity, price, total } = formItem;
 
-  const onFormItemChange = (e) => {
+  useEffect(() => {
     setFormItem((prev) => ({ ...prev, itemId: itemId }));
-    if (
-      e.target.name === 'quantity' ||
-      e.target.name === 'price' ||
-      e.target.name === 'total'
-    ) {
-      setFormItem((prev) => ({
-        ...prev,
-        [e.target.name]: +e.target.value,
-      }));
-    } else {
-      setFormItem((prev) => ({
-        ...prev,
-        [e.target.name]: e.target.value,
-      }));
-    }
+  }, []);
+
+  const handleNameChange = (e) => {
+    setFormItem((prev) => ({ ...prev, name: e.target.value }));
+  };
+  const handleQuantityChange = (e) => {
+    setFormItem((prev) => ({ ...prev, quantity: +e.target.value }));
+  };
+  const handlePriceChange = (e) => {
+    setFormItem((prev) => ({ ...prev, price: +e.target.value }));
   };
 
   useEffect(() => {
-    setFormItem((prev) => ({ ...prev, itemId: itemId }));
-  }, [itemId]);
-
-  useEffect(() => {
-    setFormItem((prev) => ({ ...prev, total: +quantity * +price }));
-  }, [price, quantity]);
-
-  useEffect(() => {
-    onItemsChange(formItem);
+    onItemChange(formItem);
   }, [formItem]);
 
   return (
@@ -53,8 +40,8 @@ export const InvoiceFormItem = ({ item, onItemsChange }) => {
         itemName='name'
         itemLabel='Item Name'
         value={name}
-        setValue={onFormItemChange}
         className={styles.name}
+        setValue={handleNameChange}
         item
       />
 
@@ -63,9 +50,9 @@ export const InvoiceFormItem = ({ item, onItemsChange }) => {
         itemName='quantity'
         itemLabel='Qty.'
         value={+quantity}
-        setValue={onFormItemChange}
         maxWidth={'max-content'}
         className={styles.qty}
+        setValue={handleQuantityChange}
         item
       />
       <InvoiceFormInput
@@ -73,7 +60,7 @@ export const InvoiceFormItem = ({ item, onItemsChange }) => {
         itemName='price'
         itemLabel='Price'
         value={+price}
-        setValue={onFormItemChange}
+        setValue={handlePriceChange}
         maxWidth={'max-content'}
         className={styles.price}
         item
@@ -83,7 +70,6 @@ export const InvoiceFormItem = ({ item, onItemsChange }) => {
         itemName='total'
         itemLabel='Total'
         value={total}
-        setValue={onFormItemChange}
         maxWidth={'max-content'}
         className={styles.total}
         disabled
