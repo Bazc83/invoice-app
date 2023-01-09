@@ -6,9 +6,8 @@ import { InvoiceItemsAmountDue } from '@/components/InvoiceItemsAmountDue';
 import { InvoiceItemsTable } from '@/components/InvoiceItemsTable';
 import { PaymentStatus } from '@/components/PaymentStatus';
 import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
-import useSetInvoiceData from '@/hooks/reactQueryHooks/useSetInvoiceData';
 import { useFormatDate } from '@hooks/useFormatDate';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './Invoice.module.css';
 

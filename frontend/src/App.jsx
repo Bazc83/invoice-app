@@ -11,6 +11,7 @@ import { PageLayout } from './pages/PageLayout';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 export const DarkModeContext = createContext();
 
+
 const queryClient = new QueryClient();
 function App() {
   const [theme, setTheme] = useLocalStorage('theme' ? 'dark' : 'light');

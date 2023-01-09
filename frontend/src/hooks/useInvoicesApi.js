@@ -14,8 +14,7 @@ export const getInvoice = async (invoiceId) => {
 
 export const getItems = async (invoiceId, itemId) => {
   const response = await axios.get(
-    API_URL + `/${invoiceId}/items/${itemId}`,
-    itemData
+    API_URL + `/${invoiceId}/items/${itemId}`
   );
   return response.data;
 };

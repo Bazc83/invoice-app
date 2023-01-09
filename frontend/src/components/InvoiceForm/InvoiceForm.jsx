@@ -1,14 +1,13 @@
 import { FormItems } from '@/components/FormItems';
 import { InvoiceFormInput } from '@/components/InvoiceFormInput';
 import { InvoiceFormSelect } from '@/components/InvoiceFormSelect/';
-import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
-import useSetInvoiceData from '@/hooks/reactQueryHooks/useSetInvoiceData';
+
+import { getInvoice } from '@/hooks/useInvoicesApi';
 import { Button } from '@components/Button';
 import { updateInvoice } from '@hooks/useInvoicesApi';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import styles from './InvoiceForm.module.css';
-
 export const InvoiceForm = ({ setShowForm, invoiceId }) => {
   const [showPaymentTermsOptions, setShowPaymentTermsOptions] = useState(false);
 
@@ -23,9 +22,16 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
 
   const [selectedPaymentTerm, setSelectedPaymentTerm] = useState(1);
 
-  const { data, isLoading, isError, error } = useFilterInvoiceById(invoiceId);
+  const getInvoiceData = (invoiceId) =>
+    useQuery({
+      queryKey: ['filteredInvoice', invoiceId],
+      queryFn: () => getInvoice(invoiceId),
+      staleTime: 1000,
+    });
 
-  const [invoiceData, setInvoiceData] = useState((prev) => data);
+  const { data, isLoading, isError, error } = getInvoiceData(invoiceId);
+
+  const [invoiceData, setInvoiceData] = useState(data);
 
   useEffect(() => {
     setInvoiceData({

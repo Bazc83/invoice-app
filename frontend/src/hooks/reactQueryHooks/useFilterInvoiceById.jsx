@@ -1,5 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import { getInvoice } from '../useInvoicesApi';
+
+import { getInvoice } from '@/hooks/useInvoicesApi';
 
 export const useFilterInvoiceById = (invoiceId) =>
-  useQuery(['invoices', invoiceId], () => getInvoice(invoiceId));
+  useQuery({
+    queryKey: ['filteredInvoice', invoiceId],
+    queryFn: () => getInvoice(invoiceId),
+    staleTime: 1000,
+  });
