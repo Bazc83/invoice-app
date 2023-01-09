@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useFilterInvoiceById } from './useFilterInvoiceById';
 
 const useSetInvoiceData = (data) => {
-  const [invoiceData, setInvoiceData] = useState(data);
-
-  const [amountDue, setAmountDue] = useState(data?.total);
+  const [invoiceData, setInvoiceData] = useState(prev => data);
 
   useEffect(() => {
     setInvoiceData({
@@ -25,17 +22,16 @@ const useSetInvoiceData = (data) => {
       paymentDue: data?.paymentDue,
       paymentTerms: data?.paymentTerms,
       status: data?.status,
-      amountDueTotal: amountDue,
+      amountDueTotal: data?.total,
       items: data?.items,
     });
     return () => {};
-  }, [amountDue, data]);
+  }, [ data]);
 
   return {
     invoiceData,
     setInvoiceData,
-    setAmountDue,
-    amountDue,
+
   };
 };
 

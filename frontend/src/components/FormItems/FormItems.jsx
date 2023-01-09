@@ -4,7 +4,12 @@ import { useEffect, useState } from 'react';
 import { InvoiceFormItem } from '@/components/InvoiceFormItem';
 import styles from './FormItems.module.css';
 
-export const FormItems = ({ items, invoiceId, onItemsChange }) => {
+export const FormItems = ({
+  items,
+  invoiceId,
+  onItemsChange,
+  setAmountDue,
+}) => {
   const [itemsArray, setItemsArray] = useState(items);
 
   const onItemChange = (itemValue) => {
@@ -18,6 +23,10 @@ export const FormItems = ({ items, invoiceId, onItemsChange }) => {
       ]);
     }
   };
+
+  useEffect(() => {
+    setAmountDue(itemsArray.reduce((acc, curr) => acc + curr.total, 0));
+  }, [itemsArray]);
 
   useEffect(() => {
     onItemsChange(itemsArray);

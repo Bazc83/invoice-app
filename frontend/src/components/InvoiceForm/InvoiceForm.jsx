@@ -23,17 +23,36 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
 
   const [selectedPaymentTerm, setSelectedPaymentTerm] = useState(1);
 
-  const { data } = useFilterInvoiceById(invoiceId);
+  const { data, isLoading, isError, error } = useFilterInvoiceById(invoiceId);
 
-  const {
-    invoiceData,
-    isLoading,
-    isError,
-    error,
-    setInvoiceData,
-    setAmountDue,
-    amountDue,
-  } = useSetInvoiceData(data);
+  const [invoiceData, setInvoiceData] = useState((prev) => data);
+
+  useEffect(() => {
+    setInvoiceData({
+      id: data?.id,
+      senderCity: data?.senderAddress?.city,
+      senderStreet: data?.senderAddress?.street,
+      senderPostCode: data?.senderAddress?.postCode,
+      senderCountry: data?.senderAddress?.country,
+      clientEmail: data?.clientEmail,
+      clientName: data?.clientName,
+      clientCity: data?.clientAddress?.city,
+      clientStreet: data?.clientAddress?.street,
+      clientCountry: data?.clientAddress?.country,
+      clientPostCode: data?.clientAddress?.postCode,
+      description: data?.description,
+      invoiceDate: data?.createdAt,
+      createdAt: data?.createdAt,
+      paymentDue: data?.paymentDue,
+      paymentTerms: data?.paymentTerms,
+      status: data?.status,
+      amountDueTotal: data?.total,
+      items: data?.items,
+    });
+    return () => {};
+  }, [data]);
+
+  const [amountDue, setAmountDue] = useState(data?.total);
 
   // update invoice on db with invoiceData
   const updateInvoiceMutation = useMutation(
@@ -57,25 +76,12 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
     setInvoiceData((prev) => ({ ...prev, items: [...itemsValue] }));
   };
 
-  // Calculate total amount due for invoice
-  useEffect(() => {
-    if (invoiceData?.items?.length === 1) {
-      setAmountDue(+invoiceData?.items[0]?.total);
-    } else {
-      setAmountDue(
-        invoiceData?.items
-          ?.map((item) => +item.total)
-          ?.reduce((acc, cur) => +acc + +cur, 0)
-      );
-    }
-  }, [invoiceData.items]);
-
   useEffect(() => {
     setInvoiceData((prevState) => ({
       ...prevState,
       amountDueTotal: amountDue,
     }));
-  }, [invoiceData?.amountDue]);
+  }, [invoiceData?.amountDue, amountDue]);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -211,6 +217,7 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
           items={invoiceData.items}
           invoiceId={invoiceId}
           onItemsChange={onItemsChange}
+          setAmountDue={setAmountDue}
         />
 
         <div className={styles.formButtons}>

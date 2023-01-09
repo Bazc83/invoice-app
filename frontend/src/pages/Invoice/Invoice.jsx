@@ -19,10 +19,10 @@ export const Invoice = () => {
 
   const { getDate } = useFormatDate();
 
-  const { data:invoiceData, isLoading, isError, error } = useFilterInvoiceById(invoiceId);
+  const { data: invoiceData, isLoading, isError, error } = useFilterInvoiceById(invoiceId);
 
-  // const { invoiceData } = useSetInvoiceData(data);
 
+    console.log("invoiceData ", invoiceData)
   if (isLoading) return 'Loading...';
   if (isError) return 'An error has occurred: ' + error.message;
 
@@ -122,7 +122,7 @@ export const Invoice = () => {
                     <InvoiceItems items={invoiceData?.items} />
 
                     <InvoiceItemsAmountDue
-                      amountDue={invoiceData?.amountDueTotal}
+                      amountDue={invoiceData?.total}
                     />
                   </div>
                 </div>
