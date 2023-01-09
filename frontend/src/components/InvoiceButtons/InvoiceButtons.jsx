@@ -14,6 +14,8 @@ export const InvoiceButtons = ({ setShowEdit, invoiceData }) => {
   const handleMarkAsPaid = () => {
     console.log('Mark as paid function');
   };
+
+  
   return (
     <>
       <Button btnStyle='btnThree' onClick={() => setShowEdit((prev) => !prev)}>
