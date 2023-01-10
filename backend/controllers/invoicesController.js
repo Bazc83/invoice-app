@@ -60,7 +60,7 @@ const addInvoice = asyncHandler(async (req, res) => {
     items,
   } = req.body;
 
-
+  
   if (!clientEmail || !clientName || !id) {
     res.status(400);
     throw new Error('Please add required fields');
@@ -90,6 +90,7 @@ const addInvoice = asyncHandler(async (req, res) => {
     items,
     createdAt,
   });
+
 
   if (invoice) {
     res.status(200).json(invoice);

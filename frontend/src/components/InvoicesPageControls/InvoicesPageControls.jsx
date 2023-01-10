@@ -1,7 +1,7 @@
 import { Button } from '@/components/Button';
 import { Filter } from '@/components/Filter';
 import styles from './InvoicesPageControls.module.css';
-export const InvoicesPageControls = ({ invoicesData, setShowForm }) => {
+export const InvoicesPageControls = ({ invoicesData, setShowInvoiceForm }) => {
   return (
     <div className={styles.invoicesPageController}>
       <div className={styles.invoicesControllerLeftSide}>
@@ -14,7 +14,7 @@ export const InvoicesPageControls = ({ invoicesData, setShowForm }) => {
 
       <div className={styles.invoicesControllerRightSide}>
         <Filter />
-        <Button plusIcon onClick={() => setShowForm((prev) => !prev)}>
+        <Button plusIcon onClick={() => setShowInvoiceForm((prev) => !prev)}>
           New
         </Button>
       </div>

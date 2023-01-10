@@ -14,7 +14,7 @@ export const InvoiceContextProvider = ({ children }) => {
   const { data, isLoading, isError, error } = useFilterInvoiceById(invoiceId);
 
   const [invoiceData, setInvoiceData] = useState(data);
-
+  
   useEffect(() => {
     setInvoiceData({
       id: data?.id,
