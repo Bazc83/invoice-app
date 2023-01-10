@@ -1,4 +1,3 @@
-import { DesignSystem } from '@/pages/DesignSystem';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { createContext } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -8,7 +7,8 @@ import { NotFoundPage } from './pages/NotFoundPage';
 import { PageLayout } from './pages/PageLayout';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { InvoiceWrapper } from './pages/InvoiceWrapper';
+import { Invoice } from './pages/Invoice';
+
 export const DarkModeContext = createContext();
 
 const queryClient = new QueryClient();
@@ -29,13 +29,7 @@ function App() {
               <Route element={<PageLayout />}>
                 <Route index element={<Invoices />} />
                 <Route path='/invoices' element={<Invoices />} />
-                <Route
-                  path='/invoices/:invoiceId'
-                  element={<InvoiceWrapper />}
-                />
-
-                <Route path='design' element={<DesignSystem />} />
-
+                <Route path='/invoices/:invoiceId' element={<Invoice />} />
                 <Route path='*' element={<NotFoundPage />} />
               </Route>
             </Routes>

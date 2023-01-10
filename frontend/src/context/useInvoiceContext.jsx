@@ -42,7 +42,14 @@ export const InvoiceContextProvider = ({ children }) => {
 
   return (
     <InvoiceContext.Provider
-      value={{ invoiceData, setInvoiceData, isLoading, isError, error, invoiceId}}>
+      value={{
+        invoiceData,
+        setInvoiceData,
+        isLoading,
+        isError,
+        error,
+        invoiceId,
+      }}>
       {children}
     </InvoiceContext.Provider>
   );

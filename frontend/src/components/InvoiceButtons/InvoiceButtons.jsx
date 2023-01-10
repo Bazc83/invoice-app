@@ -3,7 +3,7 @@ import { useInvoiceContext } from '@/context/useInvoiceContext';
 import { useDeleteInvoice } from '@/hooks/reactQueryHooks/useDeleteInvoice';
 import { useUpdateInvoice } from '@/hooks/reactQueryHooks/useUpdateInvoice';
 import { useNavigate } from 'react-router-dom';
-export const InvoiceButtons = ({ setShowEdit }) => {
+export const InvoiceButtons = ({ setShowInvoiceForm }) => {
   const navigate = useNavigate();
   const { invoiceData, invoiceId } = useInvoiceContext();
 
@@ -28,7 +28,7 @@ export const InvoiceButtons = ({ setShowEdit }) => {
       {invoiceData?.status === 'draft' && (
         <Button
           btnStyle='btnThree'
-          onClick={() => setShowEdit((prev) => !prev)}>
+          onClick={() => setShowInvoiceForm((prev) => !prev)}>
           Edit
         </Button>
       )}

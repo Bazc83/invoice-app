@@ -6,7 +6,7 @@ import { useUpdateInvoice } from '@/hooks/reactQueryHooks/useUpdateInvoice';
 import { Button } from '@components/Button';
 import { useEffect, useState } from 'react';
 import styles from './InvoiceForm.module.css';
-export const InvoiceForm = ({ setShowForm }) => {
+export const InvoiceForm = ({ setShowInvoiceForm }) => {
   const [showPaymentTermsOptions, setShowPaymentTermsOptions] = useState(false);
 
   const paymentOptions = [
@@ -50,7 +50,7 @@ export const InvoiceForm = ({ setShowForm }) => {
       invoiceId: invoiceId,
       invoiceData: { ...invoiceData },
     });
-    setShowForm((prev) => !prev);
+    setShowInvoiceForm((prev) => !prev);
   };
 
   return (
@@ -180,7 +180,7 @@ export const InvoiceForm = ({ setShowForm }) => {
 
         <div className={styles.formButtons}>
           <Button
-            onClick={() => setShowForm((prev) => !prev)}
+            onClick={() => setShowInvoiceForm((prev) => !prev)}
             btnStyle='btnThree'>
             Cancel
           </Button>

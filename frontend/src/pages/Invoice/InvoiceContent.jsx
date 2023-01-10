@@ -5,10 +5,14 @@ import { InvoiceItemsTable } from '@/components/InvoiceItemsTable';
 import { useInvoiceContext } from '@/context/useInvoiceContext';
 import { useFormatDate } from '@/hooks/useFormatDate';
 import styles from './Invoice.module.css';
-export const InvoiceContent = ({ setShowEdit }) => {
+export const InvoiceContent = () => {
   const { getDate } = useFormatDate();
 
-  const { invoiceData } = useInvoiceContext();
+  const { invoiceData, isLoading, isError, error } = useInvoiceContext();
+
+  if (isLoading) return 'Loading...';
+
+  if (isError) return 'An error has occurred: ' + error.message;
 
   return (
     <div className={`secondary-bg ${styles.invoiceMain}`}>
