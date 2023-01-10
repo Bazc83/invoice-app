@@ -1,12 +1,12 @@
 import { FormItems } from '@/components/FormItems';
 import { InvoiceFormInput } from '@/components/InvoiceFormInput';
 import { InvoiceFormSelect } from '@/components/InvoiceFormSelect/';
+import { useInvoiceContext } from '@/context/useInvoiceContext';
 import { useUpdateInvoice } from '@/hooks/reactQueryHooks/useUpdateInvoice';
-import { InvoiceContext } from '@/pages/Invoice';
 import { Button } from '@components/Button';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './InvoiceForm.module.css';
-export const InvoiceForm = ({ setShowForm, invoiceId }) => {
+export const InvoiceForm = ({ setShowForm }) => {
   const [showPaymentTermsOptions, setShowPaymentTermsOptions] = useState(false);
 
   const paymentOptions = [
@@ -16,7 +16,7 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
     { key: 30, value: 'Net 30 Days' },
   ];
 
-  const { invoiceData, setInvoiceData } = useContext(InvoiceContext);
+  const { invoiceData, setInvoiceData, invoiceId } = useInvoiceContext();
 
   const [selectedPaymentTerm, setSelectedPaymentTerm] = useState(1);
 

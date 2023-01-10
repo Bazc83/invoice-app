@@ -1,13 +1,11 @@
 import { Button } from '@/components/Button';
+import { useInvoiceContext } from '@/context/useInvoiceContext';
 import { useDeleteInvoice } from '@/hooks/reactQueryHooks/useDeleteInvoice';
 import { useUpdateInvoice } from '@/hooks/reactQueryHooks/useUpdateInvoice';
-import { InvoiceContext } from '@/pages/Invoice';
-import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-export const InvoiceButtons = ({ setShowEdit, invoiceId }) => {
-  const { invoiceData } = useContext(InvoiceContext);
-
+export const InvoiceButtons = ({ setShowEdit }) => {
   const navigate = useNavigate();
+  const { invoiceData, invoiceId } = useInvoiceContext();
 
   const { deleteSelectedInvoice, isLoading } = useDeleteInvoice();
 
