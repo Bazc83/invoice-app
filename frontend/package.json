@@ -8,7 +8,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint "
+    "lint": "eslint --ext .jsx .js"
   },
   "dependencies": {
     "@tanstack/eslint-plugin-query": "^4.21.0",
@@ -18,7 +18,6 @@
     "@typescript-eslint/parser": "^5.48.0",
     "axios": "^1.2.1",
     "eslint-config-prettier": "^8.6.0",
-    "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsx-a11y": "^6.6.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -35,6 +34,11 @@
     "@types/react-dom": "^18.0.8",
     "@vitejs/plugin-react": "^2.2.0",
     "eslint": "^8.31.0",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.6.0",
+    "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.31.11",
     "prettier": "^2.8.2",
     "react-icons": "^4.6.0",

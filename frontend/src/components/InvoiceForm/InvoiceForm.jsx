@@ -1,17 +1,13 @@
 import { FormItems } from '@/components/FormItems';
 import { InvoiceFormInput } from '@/components/InvoiceFormInput';
 import { InvoiceFormSelect } from '@/components/InvoiceFormSelect/';
-
-import { getInvoice } from '@/hooks/useInvoicesApi';
+import { useUpdateInvoice } from '@/hooks/reactQueryHooks/useUpdateInvoice';
+import { InvoiceContext } from '@/pages/Invoice';
 import { Button } from '@components/Button';
-import { updateInvoice } from '@hooks/useInvoicesApi';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styles from './InvoiceForm.module.css';
 export const InvoiceForm = ({ setShowForm, invoiceId }) => {
   const [showPaymentTermsOptions, setShowPaymentTermsOptions] = useState(false);
-
-  const queryClient = useQueryClient();
 
   const paymentOptions = [
     { key: 1, value: 'Net 1 Day' },
@@ -20,55 +16,14 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
     { key: 30, value: 'Net 30 Days' },
   ];
 
+  const { invoiceData, setInvoiceData } = useContext(InvoiceContext);
+
   const [selectedPaymentTerm, setSelectedPaymentTerm] = useState(1);
 
-  const getInvoiceData = (invoiceId) =>
-    useQuery({
-      queryKey: ['filteredInvoice', invoiceId],
-      queryFn: () => getInvoice(invoiceId),
-      staleTime: 1000,
-    });
+  const [amountDue, setAmountDue] = useState(invoiceData?.amountDueTotal);
 
-  const { data, isLoading, isError, error } = getInvoiceData(invoiceId);
-
-  const [invoiceData, setInvoiceData] = useState(data);
-
-  useEffect(() => {
-    setInvoiceData({
-      id: data?.id,
-      senderCity: data?.senderAddress?.city,
-      senderStreet: data?.senderAddress?.street,
-      senderPostCode: data?.senderAddress?.postCode,
-      senderCountry: data?.senderAddress?.country,
-      clientEmail: data?.clientEmail,
-      clientName: data?.clientName,
-      clientCity: data?.clientAddress?.city,
-      clientStreet: data?.clientAddress?.street,
-      clientCountry: data?.clientAddress?.country,
-      clientPostCode: data?.clientAddress?.postCode,
-      description: data?.description,
-      invoiceDate: data?.createdAt,
-      createdAt: data?.createdAt,
-      paymentDue: data?.paymentDue,
-      paymentTerms: data?.paymentTerms,
-      status: data?.status,
-      amountDueTotal: data?.total,
-      items: data?.items,
-    });
-    return () => {};
-  }, [data]);
-
-  const [amountDue, setAmountDue] = useState(data?.total);
-
-  // update invoice on db with invoiceData
-  const updateInvoiceMutation = useMutation(
-    () => updateInvoice(invoiceId, invoiceData),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries('invoices');
-      },
-    }
-  );
+  // Update Invoice
+  const { updateInvoiceMutation } = useUpdateInvoice(invoiceId, invoiceData);
 
   // Update formdata when form values change
   const inputOnChange = (e) => {
@@ -87,17 +42,16 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
       ...prevState,
       amountDueTotal: amountDue,
     }));
-  }, [invoiceData?.amountDue, amountDue]);
+  }, [amountDue, setInvoiceData]);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    updateInvoiceMutation.mutate({ ...invoiceData });
+    updateInvoiceMutation.mutate({
+      invoiceId: invoiceId,
+      invoiceData: { ...invoiceData },
+    });
     setShowForm((prev) => !prev);
   };
-
-  if (isLoading) return 'Loading...';
-
-  if (isError) return 'An error has occurred: ' + error.message;
 
   return (
     <div className={styles.invoiceForm}>
@@ -106,10 +60,7 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
         {invoiceId}
       </h2>
 
-      <form
-        className={styles.form}
-        onSubmit={handleFormSubmit}
-        disabled={isLoading}>
+      <form className={styles.form} onSubmit={handleFormSubmit}>
         <div className={styles.formSection}>
           <InvoiceFormInput
             itemName='id'
@@ -132,12 +83,13 @@ export const InvoiceForm = ({ setShowForm, invoiceId }) => {
           />
           <InvoiceFormInput
             itemName='senderPostCode'
-            itemLabel='Post Code'
+            itemLabel='Postcode'
             value={invoiceData.senderPostCode || ''}
             setValue={inputOnChange}
           />
           <InvoiceFormInput
             itemName='senderCountry'
+            itemLabel='Country'
             value={invoiceData.senderCountry || ''}
             setValue={inputOnChange}
           />
