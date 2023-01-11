@@ -32,7 +32,8 @@ export const InvoiceForm = ({
   };
 
   const onItemsChange = (itemsValue) => {
-    setInvoiceData((prev) => ({ ...prev, items: [...itemsValue] }));
+    console.log('itemsVAlue ', itemsValue);
+    setInvoiceData((prev) => ({ ...prev, items: itemsValue }));
   };
 
   useEffect(() => {
@@ -168,7 +169,7 @@ export const InvoiceForm = ({
         </div>
 
         <FormItems
-          items={invoiceData.items}
+          items={invoiceData?.items}
           invoiceId={invoiceData?.id}
           onItemsChange={onItemsChange}
           setAmountDue={setAmountDue}

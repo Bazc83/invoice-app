@@ -2,15 +2,12 @@ import { Button } from '@/components/Button';
 import { useEffect, useState } from 'react';
 
 import { InvoiceFormItem } from '@/components/InvoiceFormItem';
+import { NewInvoiceItem } from '../NewInvoiceItem';
 import styles from './FormItems.module.css';
 
-export const FormItems = ({
-  items,
-  invoiceId,
-  onItemsChange,
-  setAmountDue,
-}) => {
+export const FormItems = ({ items, onItemsChange, setAmountDue }) => {
   const [itemsArray, setItemsArray] = useState(items);
+  const [showNewItemInput, setShowNewItemInput] = useState(false);
 
   const onItemChange = (itemValue) => {
     if (!itemValue) return;
@@ -24,14 +21,25 @@ export const FormItems = ({
     }
   };
 
+  const handleDeleteItem = (itemToDeleteId) => {
+    setItemsArray((prev) => [
+      ...prev?.filter((val) => val.itemId !== itemToDeleteId),
+    ]);
+  };
+
+  const handleShowNewItemForm = (e) => {
+    e.preventDefault();
+    setShowNewItemInput((prev) => !prev);
+  };
+
   useEffect(() => {
     setAmountDue(itemsArray.reduce((acc, curr) => acc + curr.total, 0));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [itemsArray]);
 
   useEffect(() => {
     onItemsChange(itemsArray);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [itemsArray]);
 
   return (
@@ -42,14 +50,19 @@ export const FormItems = ({
           <InvoiceFormItem
             item={item}
             key={`item${i}`}
-            value={item?.name}
-            invoiceId={invoiceId}
             onItemChange={onItemChange}
+            handleDeleteItem={handleDeleteItem}
           />
         ))}
-      </div>
 
-      <Button btnStyle='btnThree' fullWidth>
+        {showNewItemInput && (
+          <NewInvoiceItem
+            onItemChange={onItemChange}
+            setShowNewItemInput={setShowNewItemInput}
+          />
+        )}
+      </div>
+      <Button btnStyle='btnThree' fullWidth onClick={handleShowNewItemForm}>
         + Add New Item
       </Button>
     </div>
