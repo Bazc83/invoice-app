@@ -67,6 +67,7 @@ export const NewInvoiceItem = ({ onItemChange, setShowNewItemInput }) => {
           setValue={(e) => setQuantity(+e.target.value)}
           item
         />
+        
         <InvoiceFormInput
           type='number'
           itemName='price'

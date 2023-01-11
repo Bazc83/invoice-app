@@ -32,7 +32,6 @@ export const InvoiceForm = ({
   };
 
   const onItemsChange = (itemsValue) => {
-    console.log('itemsVAlue ', itemsValue);
     setInvoiceData((prev) => ({ ...prev, items: itemsValue }));
   };
 

@@ -1,25 +1,51 @@
-// ! invoice loses invoice data on refresh and only shows status/buttons
+## Required features
 
-# user authentication (admin, so only one user needed, all protected)
+### error handling
 
-# invoice items select from list of products
+#### add toast messages for different actions
 
-# invoice items price change only by discount selector
+#### Validate Inputs
 
-# error handling
+### dates
 
-~~~~ payment status button change status to paid
+#### date logic creation date + paymentTerms
 
-# date starts at created date and then add payment terms value to get due date
+#### check date formats too
 
-# or could do no credit, 7 days end of month or 15days end of month. eg: 7th april or 15th april if purchased in march.
+#### calendar picker change?
 
-# filter invoices by payment status
+### filter
 
-# add toast messages for different actions
+#### filter invoices by payment status
 
-# sort styling
+#### maybe search invoices
 
-# add avatar
+### buttonWrapper
 
-# user authentication
+#### Needs to be used once (not top and bottom)
+
+### css
+
+#### fonts need some set sizes
+
+#### colors in light mode
+
+#### Items table vs grid pick one (grid?)
+
+## Optional features
+
+### add avatar
+
+### user authentication
+
+### db of products to select items from
+
+### price change by discount input only
+
+### customer a/c's
+
+#### to show invoice history
+
+#### payment history
+
+#### ability to add new invoice to their a/c
