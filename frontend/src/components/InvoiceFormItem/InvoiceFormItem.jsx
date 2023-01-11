@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import { FaTrashAlt } from 'react-icons/fa';
 
@@ -5,7 +6,7 @@ import { InvoiceFormInput } from '../InvoiceFormInput';
 import styles from './InvoiceFormItem.module.css';
 
 export const InvoiceFormItem = ({ item, onItemChange }) => {
-  const [itemId, setItemId] = useState(item?.itemId);
+  const [itemId] = useState(item?.itemId);
   const [name, setName] = useState(item?.name);
   const [quantity, setQuantity] = useState(item?.quantity);
   const [price, setPrice] = useState(item?.price);
@@ -35,6 +36,7 @@ export const InvoiceFormItem = ({ item, onItemChange }) => {
 
   useEffect(() => {
     onItemChange(formItem);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formItem]);
 
   return (

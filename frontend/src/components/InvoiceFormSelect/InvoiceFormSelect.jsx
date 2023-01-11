@@ -21,12 +21,14 @@ export const InvoiceFormSelect = ({
   };
 
   useEffect(() => {
-    if(!paymentOptions) return;
-
+    if (!paymentOptions) return;
     if (selectedPaymentTerm) {
-      setInputValue(paymentOptions.find((o) => o.key === selectedPaymentTerm)?.value);
+      setInputValue(
+        paymentOptions.find((o) => o.key === selectedPaymentTerm)?.value
+      );
     }
-  }, [paymentOptions, selectedPaymentTerm]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className={styles.invoiceFormSelect}>

@@ -1,7 +1,6 @@
-
 import { InvoicePreview } from '@/components/InvoicePreview';
 import { InvoicesPageControls } from '@/components/InvoicesPageControls';
-import { NewInvoiceForm } from '@/components/NewInvoiceForm/NewInvoiceForm';
+import { NewInvoiceForm } from '@/components/NewInvoiceForm';
 import { NoInvoices } from '@/components/NoInvoices';
 import { useState } from 'react';
 import { useInvoices } from '../../hooks/reactQueryHooks/useInvoices';

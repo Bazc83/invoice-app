@@ -1,30 +1,27 @@
 import { FormItems } from '@/components/FormItems';
 import { InvoiceFormInput } from '@/components/InvoiceFormInput';
-import { InvoiceFormSelect } from '@/components/InvoiceFormSelect/';
-import { useInvoiceContext } from '@/context/useInvoiceContext';
-import { useUpdateInvoice } from '@/hooks/reactQueryHooks/useUpdateInvoice';
+import { InvoiceFormSelect } from '@/components/InvoiceFormSelect';
 import { Button } from '@components/Button';
 import { useEffect, useState } from 'react';
 import styles from './InvoiceForm.module.css';
-export const InvoiceForm = ({ setShowInvoiceForm }) => {
-  const [showPaymentTermOptions, setShowPaymentTermOptions] = useState(false);
 
+export const InvoiceForm = ({
+  invoiceData,
+  setInvoiceData,
+  handleFormSubmit,
+  setShowInvoiceForm,
+}) => {
+  const [selectedPaymentTerm, setSelectedPaymentTerm] = useState(
+    invoiceData?.paymentTerms
+  );
+
+  const [showPaymentTermOptions, setShowPaymentTermOptions] = useState(false);
+  const [amountDue, setAmountDue] = useState(invoiceData?.amountDueTotal);
   const paymentOptions = [
     { key: '0', value: 'Cash' },
     { key: '15', value: '15 days End of Month' },
     { key: '21', value: '21 days End of Month' },
   ];
-
-  const { invoiceData, setInvoiceData, invoiceId } = useInvoiceContext();
-
-  const [amountDue, setAmountDue] = useState(invoiceData?.amountDueTotal);
-
-  const [selectedPaymentTerm, setSelectedPaymentTerm] = useState(
-    invoiceData?.paymentTerms
-  );
-
-  // Update Invoice
-  const { updateInvoiceMutation } = useUpdateInvoice(invoiceId, invoiceData);
 
   // Update formdata when form values change
   const inputOnChange = (e) => {
@@ -45,15 +42,6 @@ export const InvoiceForm = ({ setShowInvoiceForm }) => {
     }));
   }, [amountDue, setInvoiceData]);
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    updateInvoiceMutation.mutate({
-      invoiceId: invoiceId,
-      invoiceData: { ...invoiceData },
-    });
-    setShowInvoiceForm((prev) => !prev);
-  };
-
   useEffect(() => {
     setInvoiceData((prevState) => ({
       ...prevState,
@@ -65,7 +53,7 @@ export const InvoiceForm = ({ setShowInvoiceForm }) => {
     <div className={styles.invoiceForm}>
       <h2>
         Edit <span className={styles.invoiceFormHeaderAccent}>#</span>
-        {invoiceId}
+        {invoiceData?.id}
       </h2>
 
       <form className={styles.form} onSubmit={handleFormSubmit}>
@@ -181,7 +169,7 @@ export const InvoiceForm = ({ setShowInvoiceForm }) => {
 
         <FormItems
           items={invoiceData.items}
-          invoiceId={invoiceId}
+          invoiceId={invoiceData?.id}
           onItemsChange={onItemsChange}
           setAmountDue={setAmountDue}
         />

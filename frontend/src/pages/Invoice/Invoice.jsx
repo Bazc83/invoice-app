@@ -1,6 +1,6 @@
 import { GoBackLink } from '@/components/GoBackLink';
 import { InvoiceButtons } from '@/components/InvoiceButtons';
-import { InvoiceForm } from '@/components/InvoiceForm';
+import { EditInvoiceForm } from '@/components/EditInvoiceForm';
 import { InvoiceContextProvider } from '@/context/useInvoiceContext';
 import { useState } from 'react';
 import styles from './Invoice.module.css';
@@ -14,7 +14,7 @@ export const Invoice = () => {
     <InvoiceContextProvider>
       <div className={styles.invoice}>
         {showInvoiceForm && (
-          <InvoiceForm setShowInvoiceForm={setShowInvoiceForm} />
+          <EditInvoiceForm setShowInvoiceForm={setShowInvoiceForm} />
         )}
 
         <div

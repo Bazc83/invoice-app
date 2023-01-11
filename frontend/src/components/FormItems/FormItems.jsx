@@ -26,10 +26,12 @@ export const FormItems = ({
 
   useEffect(() => {
     setAmountDue(itemsArray.reduce((acc, curr) => acc + curr.total, 0));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [itemsArray]);
 
   useEffect(() => {
     onItemsChange(itemsArray);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [itemsArray]);
 
   return (

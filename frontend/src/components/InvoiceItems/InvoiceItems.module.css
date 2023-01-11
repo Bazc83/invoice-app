@@ -7,6 +7,23 @@
   padding: 1.75rem;
   border-radius: 8px 8px 0 0;
 }
+.invoiceItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.invoiceItem div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.quantityXPrice {
+  color: var(--text-faded-secondary);
+}
+
 
 @media (min-width: 768px) {
   .invoiceItems {
