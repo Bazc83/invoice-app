@@ -6,8 +6,8 @@ export const InvoiceFormSelect = ({
   placeholder = '',
   onChange,
   selectedKey,
-  showOptionsMenu,
-  setShowOptionsMenu,
+  showPaymentTermOptions, setShowPaymentTermOptions
+ 
 }) => {
   const [inputValue, setInputValue] = useState('');
 
@@ -18,19 +18,18 @@ export const InvoiceFormSelect = ({
   const onItemSelected = (option) => {
     onChange !== undefined && onChange(option.key);
     onChange !== undefined && setInputValue(option.value);
-
-    setShowOptionsMenu(false);
+    setShowPaymentTermOptions(false);
   };
 
   const onInputClick = () => {
-    setShowOptionsMenu((prev) => !prev);
+    setShowPaymentTermOptions((prev) => !prev);
   };
 
   useEffect(() => {
     if (selectedKey) {
       setInputValue(options.find((o) => o.key === selectedKey).value);
     }
-  }, [selectedKey]);
+  }, [options, selectedKey]);
 
   return (
     <div className={styles.invoiceFormSelect}>
@@ -42,7 +41,7 @@ export const InvoiceFormSelect = ({
         <div className={styles.inputContainer} onClick={onInputClick}>
           <input type='text' readOnly value={inputValue} className='text' />
 
-          {showOptionsMenu ? (
+          {showPaymentTermOptions ? (
             <FaChevronUp className={styles.icon} />
           ) : (
             <FaChevronDown className={styles.icon} />
@@ -50,7 +49,7 @@ export const InvoiceFormSelect = ({
         </div>
 
         <div
-          className={`${styles.dropdown} ${showOptionsMenu && styles.visible}`}>
+          className={`${styles.dropdown} ${showPaymentTermOptions && styles.visible}`}>
           {options.map((option) => {
             return (
               <div

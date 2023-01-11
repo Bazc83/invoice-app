@@ -7,7 +7,7 @@ import { Button } from '@components/Button';
 import { useEffect, useState } from 'react';
 import styles from './InvoiceForm.module.css';
 export const InvoiceForm = ({ setShowInvoiceForm }) => {
-  const [showPaymentTermsOptions, setShowPaymentTermsOptions] = useState(false);
+  const [showPaymentTermOptions, setShowPaymentTermOptions] = useState(false);
 
   const paymentOptions = [
     { key: 1, value: 'Net 1 Day' },
@@ -159,8 +159,8 @@ export const InvoiceForm = ({ setShowInvoiceForm }) => {
               selectedKey={selectedPaymentTerm}
               placeholder={'type to search'}
               onChange={(item) => setSelectedPaymentTerm(item)}
-              showPaymentTermsOptions={showPaymentTermsOptions}
-              setShowPaymentTermsOptions={setShowPaymentTermsOptions}
+              showPaymentTermOptions={showPaymentTermOptions}
+              setShowPaymentTermOptions={setShowPaymentTermOptions}
             />
           </div>
           <InvoiceFormInput

@@ -8,7 +8,7 @@
 
 # error handling
 
-# payment status button change status to paid,
+~~~~ payment status button change status to paid
 
 # date starts at created date and then add payment terms value to get due date
 
