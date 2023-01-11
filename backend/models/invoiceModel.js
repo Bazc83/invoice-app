@@ -57,7 +57,7 @@ const invoiceSchema = new mongoose.Schema({
     type: String,
   },
   paymentTerms: {
-    type: Number,
+    type: String,
   },
   senderAddress: {
     city: {

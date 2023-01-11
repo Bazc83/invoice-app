@@ -14,13 +14,12 @@ export const NewInvoiceForm = ({ setShowInvoiceForm }) => {
   const [showPaymentTermOptions, setShowPaymentTermOptions] = useState(false);
 
   const paymentOptions = [
-    { key: 1, value: 'Net 1 Day' },
-    { key: 7, value: 'Net 7 Days' },
-    { key: 14, value: 'Net 14 Days' },
-    { key: 30, value: 'Net 30 Days' },
+    { key: '0', value: 'Cash' },
+    { key: '15', value: '15 days End of Month' },
+    { key: '21', value: '21 days End of Month' },
   ];
 
-  const [selectedPaymentTerm, setSelectedPaymentTerm] = useState(1);
+  const [selectedPaymentTerm, setSelectedPaymentTerm] = useState('0');
 
   const [amountDue, setAmountDue] = useState(0);
 
@@ -200,10 +199,10 @@ export const NewInvoiceForm = ({ setShowInvoiceForm }) => {
               />
 
               <InvoiceFormSelect
-                options={paymentOptions}
-                selectedKey={selectedPaymentTerm}
+                paymentOptions={paymentOptions}
+                selectedPaymentTerm={selectedPaymentTerm}
                 placeholder={'type to search'}
-                onChange={(item) => setSelectedPaymentTerm(item)}
+                setSelectedPaymentTerm={setSelectedPaymentTerm}
                 showPaymentTermOptions={showPaymentTermOptions}
                 setShowPaymentTermOptions={setShowPaymentTermOptions}
               />

@@ -2,22 +2,17 @@ import { useEffect, useState } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import styles from './InvoiceFormSelect.module.css';
 export const InvoiceFormSelect = ({
-  options,
-  placeholder = '',
-  onChange,
-  selectedKey,
-  showPaymentTermOptions, setShowPaymentTermOptions
- 
+  paymentOptions,
+  setSelectedPaymentTerm,
+  selectedPaymentTerm,
+  showPaymentTermOptions,
+  setShowPaymentTermOptions,
 }) => {
   const [inputValue, setInputValue] = useState('');
 
-  const onInputChange = (e) => {
-    setInputValue(e.target.value);
-  };
-
   const onItemSelected = (option) => {
-    onChange !== undefined && onChange(option.key);
-    onChange !== undefined && setInputValue(option.value);
+    setSelectedPaymentTerm(option.key);
+    setInputValue(option.value);
     setShowPaymentTermOptions(false);
   };
 
@@ -26,10 +21,12 @@ export const InvoiceFormSelect = ({
   };
 
   useEffect(() => {
-    if (selectedKey) {
-      setInputValue(options.find((o) => o.key === selectedKey).value);
+    if(!paymentOptions) return;
+
+    if (selectedPaymentTerm) {
+      setInputValue(paymentOptions.find((o) => o.key === selectedPaymentTerm)?.value);
     }
-  }, [options, selectedKey]);
+  }, [paymentOptions, selectedPaymentTerm]);
 
   return (
     <div className={styles.invoiceFormSelect}>
@@ -49,8 +46,10 @@ export const InvoiceFormSelect = ({
         </div>
 
         <div
-          className={`${styles.dropdown} ${showPaymentTermOptions && styles.visible}`}>
-          {options.map((option) => {
+          className={`${styles.dropdown} ${
+            showPaymentTermOptions && styles.visible
+          }`}>
+          {paymentOptions.map((option) => {
             return (
               <div
                 key={option.key}

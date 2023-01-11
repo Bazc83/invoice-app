@@ -10,17 +10,18 @@ export const InvoiceForm = ({ setShowInvoiceForm }) => {
   const [showPaymentTermOptions, setShowPaymentTermOptions] = useState(false);
 
   const paymentOptions = [
-    { key: 1, value: 'Net 1 Day' },
-    { key: 7, value: 'Net 7 Days' },
-    { key: 14, value: 'Net 14 Days' },
-    { key: 30, value: 'Net 30 Days' },
+    { key: '0', value: 'Cash' },
+    { key: '15', value: '15 days End of Month' },
+    { key: '21', value: '21 days End of Month' },
   ];
 
   const { invoiceData, setInvoiceData, invoiceId } = useInvoiceContext();
 
-  const [selectedPaymentTerm, setSelectedPaymentTerm] = useState(1);
-
   const [amountDue, setAmountDue] = useState(invoiceData?.amountDueTotal);
+
+  const [selectedPaymentTerm, setSelectedPaymentTerm] = useState(
+    invoiceData?.paymentTerms
+  );
 
   // Update Invoice
   const { updateInvoiceMutation } = useUpdateInvoice(invoiceId, invoiceData);
@@ -52,6 +53,13 @@ export const InvoiceForm = ({ setShowInvoiceForm }) => {
     });
     setShowInvoiceForm((prev) => !prev);
   };
+
+  useEffect(() => {
+    setInvoiceData((prevState) => ({
+      ...prevState,
+      paymentTerms: selectedPaymentTerm,
+    }));
+  }, [selectedPaymentTerm, setInvoiceData]);
 
   return (
     <div className={styles.invoiceForm}>
@@ -155,10 +163,10 @@ export const InvoiceForm = ({ setShowInvoiceForm }) => {
             />
 
             <InvoiceFormSelect
-              options={paymentOptions}
-              selectedKey={selectedPaymentTerm}
+              paymentOptions={paymentOptions}
+              selectedPaymentTerm={selectedPaymentTerm}
               placeholder={'type to search'}
-              onChange={(item) => setSelectedPaymentTerm(item)}
+              setSelectedPaymentTerm={setSelectedPaymentTerm}
               showPaymentTermOptions={showPaymentTermOptions}
               setShowPaymentTermOptions={setShowPaymentTermOptions}
             />
