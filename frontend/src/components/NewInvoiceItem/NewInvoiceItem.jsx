@@ -1,15 +1,14 @@
 import { useEffect, useState } from 'react';
 import { FaTrashAlt } from 'react-icons/fa';
 import { v4 as uuidv4 } from 'uuid';
-import { Button } from './Button';
-import { InvoiceFormInput } from './InvoiceFormInput';
+import { Button } from '../Button';
+import { InvoiceFormInput } from '../InvoiceFormInput';
 
-import styles from './InvoiceFormItem/InvoiceFormItem.module.css';
-
+import styles from './NewInvoiceItem.module.css';
 export const NewInvoiceItem = ({ onItemChange, setShowNewItemInput }) => {
   const [itemId, setItemId] = useState('');
   const [name, setName] = useState('');
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
   const [price, setPrice] = useState(0);
   const [total, setTotal] = useState(0);
 
@@ -30,6 +29,12 @@ export const NewInvoiceItem = ({ onItemChange, setShowNewItemInput }) => {
     });
   };
 
+  const handleCancel = (e) => {
+    e.preventDefault();
+
+    setShowNewItemInput((prev) => !prev);
+  };
+
   useEffect(() => {
     if (itemId === '') setItemId(uuidv4());
   }, [itemId]);
@@ -45,7 +50,7 @@ export const NewInvoiceItem = ({ onItemChange, setShowNewItemInput }) => {
 
   return (
     <div>
-      <h1>Add new item</h1>
+      <h4 style={{ paddingBottom: '0.5rem' }}>Add A New Item</h4>
       <div className={styles.invoiceFormItem}>
         <InvoiceFormInput
           type='text'
@@ -67,7 +72,7 @@ export const NewInvoiceItem = ({ onItemChange, setShowNewItemInput }) => {
           setValue={(e) => setQuantity(+e.target.value)}
           item
         />
-        
+
         <InvoiceFormInput
           type='number'
           itemName='price'
@@ -95,8 +100,8 @@ export const NewInvoiceItem = ({ onItemChange, setShowNewItemInput }) => {
         </div>
       </div>
 
-      <Button onClick={addItem}>Add Item</Button>
-      <Button>Cancel</Button>
+      <Button onClick={addItem}>Add Item To Invoice</Button>
+      <Button onClick={handleCancel}>Cancel</Button>
     </div>
   );
 };

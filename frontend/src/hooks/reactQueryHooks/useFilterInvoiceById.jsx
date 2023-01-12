@@ -6,5 +6,5 @@ export const useFilterInvoiceById = (invoiceId) =>
   useQuery({
     queryKey: ['filteredInvoice', invoiceId],
     queryFn: () => getInvoice(invoiceId),
-    staleTime: 1000,
+    staleTime: 500,
   });

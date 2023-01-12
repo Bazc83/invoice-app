@@ -7,7 +7,7 @@ import styles from './InvoiceForm.module.css';
 
 export const InvoiceForm = ({
   invoiceData,
-  setInvoiceData,
+  setFormData,
   handleFormSubmit,
   setShowInvoiceForm,
 }) => {
@@ -25,29 +25,29 @@ export const InvoiceForm = ({
 
   // Update formdata when form values change
   const inputOnChange = (e) => {
-    setInvoiceData((prevState) => ({
+    setFormData((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
   };
 
   const onItemsChange = (itemsValue) => {
-    setInvoiceData((prev) => ({ ...prev, items: itemsValue }));
+    setFormData((prev) => ({ ...prev, items: itemsValue }));
   };
 
   useEffect(() => {
-    setInvoiceData((prevState) => ({
+    setFormData((prevState) => ({
       ...prevState,
       amountDueTotal: amountDue,
     }));
-  }, [amountDue, setInvoiceData]);
+  }, [amountDue, setFormData]);
 
   useEffect(() => {
-    setInvoiceData((prevState) => ({
+    setFormData((prevState) => ({
       ...prevState,
       paymentTerms: selectedPaymentTerm,
     }));
-  }, [selectedPaymentTerm, setInvoiceData]);
+  }, [selectedPaymentTerm, setFormData]);
 
   return (
     <div className={styles.invoiceForm}>
@@ -168,8 +168,8 @@ export const InvoiceForm = ({
         </div>
 
         <FormItems
-          items={invoiceData?.items}
-          invoiceId={invoiceData?.id}
+          invoiceData={invoiceData}
+          setFormData={setFormData}
           onItemsChange={onItemsChange}
           setAmountDue={setAmountDue}
         />

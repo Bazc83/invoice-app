@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import { PaymentStatus } from '@/components/PaymentStatus';
 import styles from './InvoicePreview.module.css';
 export const InvoicePreview = ({ invoice }) => {
-  const { status, id, clientName, total, paymentDue } = invoice;
+  const { status, id, clientName, amountDueTotal, paymentDue } = invoice;
 
   const { getDate } = useFormatDate();
 
@@ -31,7 +31,7 @@ export const InvoicePreview = ({ invoice }) => {
         {new Intl.NumberFormat('en', {
           style: 'currency',
           currency: 'GBP',
-        }).format(+total)}
+        }).format(+amountDueTotal)}
       </h3>
 
       <PaymentStatus status={status} className={styles.paymentStatus} />

@@ -60,37 +60,31 @@ const addInvoice = asyncHandler(async (req, res) => {
     items,
   } = req.body;
 
-  
   if (!clientEmail || !clientName || !id) {
     res.status(400);
     throw new Error('Please add required fields');
   }
 
   const invoice = await Invoice.create({
-    senderAddress: {
-      city: senderCity,
-      street: senderStreet,
-      postCode: senderPostCode,
-      country: senderCountry,
-    },
+    senderStreet,
+    senderCity,
+    senderPostCode,
+    senderCountry,
     clientEmail,
     clientName,
-    clientAddress: {
-      city: clientCity,
-      street: clientStreet,
-      postCode: clientPostCode,
-      country: clientCountry,
-    },
+    clientCity,
+    clientStreet,
+    clientPostCode,
+    clientCountry,
     description,
     id,
     paymentDue,
     paymentTerms,
     status,
-    total: amountDueTotal,
+    amountDueTotal,
     items,
     createdAt,
   });
-
 
   if (invoice) {
     res.status(200).json(invoice);
@@ -124,34 +118,31 @@ const updateInvoice = asyncHandler(async (req, res) => {
     items,
   } = req.body;
 
-  if ( !clientName || !id) {
+  if (!clientName || !id) {
     res.status(400);
     throw new Error('Please add required fields');
   }
   const invoice = await Invoice.findOneAndUpdate(
     { id: req.params.id },
     {
-      senderAddress: {
-        city: senderCity,
-        street: senderStreet,
-        postCode: senderPostCode,
-        country: senderCountry,
-      },
+      senderCity,
+      senderStreet,
+      senderCountry,
+      senderPostCode,
       clientEmail,
       clientName,
-      clientAddress: {
-        city: clientCity,
-        street: clientStreet,
-        postCode: clientPostCode,
-        country: clientCountry,
-      },
+      clientCity,
+      clientStreet,
+      clientPostCode,
+      clientCountry,
       description,
+      id,
+      createdAt,
       paymentDue,
       paymentTerms,
       status,
-      total: amountDueTotal,
+      amountDueTotal,
       items,
-      createdAt,
     }
   );
 

@@ -1,20 +1,19 @@
 const mongoose = require('mongoose');
 
 const invoiceSchema = new mongoose.Schema({
-  clientAddress: {
-    city: {
-      type: String,
-    },
-    street: {
-      type: String,
-    },
-    postCode: {
-      type: String,
-    },
-    country: {
-      type: String,
-    },
+  senderCity: {
+    type: String,
   },
+  senderStreet: {
+    type: String,
+  },
+  senderPostCode: {
+    type: String,
+  },
+  senderCountry: {
+    type: String,
+  },
+
   clientEmail: {
     type: String,
   },
@@ -59,24 +58,24 @@ const invoiceSchema = new mongoose.Schema({
   paymentTerms: {
     type: String,
   },
-  senderAddress: {
-    city: {
-      type: String,
-    },
-    street: {
-      type: String,
-    },
-    postCode: {
-      type: String,
-    },
-    country: {
-      type: String,
-    },
+
+  clientCity: {
+    type: String,
   },
+  clientStreet: {
+    type: String,
+  },
+  clientPostCode: {
+    type: String,
+  },
+  clientCountry: {
+    type: String,
+  },
+
   status: {
     type: String,
   },
-  total: {
+  amountDueTotal: {
     type: Number,
   },
 });

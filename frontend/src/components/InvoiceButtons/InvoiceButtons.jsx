@@ -1,18 +1,26 @@
 import { Button } from '@/components/Button';
-import { useInvoiceContext } from '@/context/useInvoiceContext';
 import { useDeleteInvoice } from '@/hooks/reactQueryHooks/useDeleteInvoice';
+import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
 import { useUpdateInvoice } from '@/hooks/reactQueryHooks/useUpdateInvoice';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 export const InvoiceButtons = ({ setShowInvoiceForm }) => {
   const navigate = useNavigate();
-  const { invoiceData, invoiceId } = useInvoiceContext();
 
-  const { deleteSelectedInvoice, isLoading } = useDeleteInvoice();
+  const { invoiceId } = useParams();
 
-  const { updateInvoiceMutation } = useUpdateInvoice(invoiceId, invoiceData);
+  const {
+    data: invoiceData,
+    isLoading,
+    isError,
+    error,
+  } = useFilterInvoiceById(invoiceId);
+
+  const { deleteSelectedInvoice } = useDeleteInvoice();
+
+  const { updateInvoiceMutation } = useUpdateInvoice();
 
   const handleDeleteInvoice = async () => {
-    await deleteSelectedInvoice(invoiceData.id);
+    await deleteSelectedInvoice(invoiceId);
     navigate('/');
   };
 
@@ -23,6 +31,10 @@ export const InvoiceButtons = ({ setShowInvoiceForm }) => {
     });
   };
 
+  if (isLoading) return 'Loading...';
+
+  if (isError) return 'An error has occurred: ' + error.message;
+
   return (
     <>
       {invoiceData?.status === 'draft' && (
@@ -32,9 +44,7 @@ export const InvoiceButtons = ({ setShowInvoiceForm }) => {
           Edit
         </Button>
       )}
-      <Button
-        btnStyle='btnFive'
-        onClick={() => handleDeleteInvoice(invoiceData.id)}>
+      <Button btnStyle='btnFive' onClick={() => handleDeleteInvoice(invoiceId)}>
         {isLoading ? '...Deleting' : 'Delete'}
       </Button>
 

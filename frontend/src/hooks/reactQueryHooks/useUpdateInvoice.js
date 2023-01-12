@@ -13,5 +13,13 @@ export const useUpdateInvoice = () => {
     },
   });
 
-  return { updateInvoiceMutation };
+
+  const  updateInvoiceData = (invoiceId, invoiceData)=>{
+    updateInvoiceMutation.mutate({
+      invoiceId: invoiceId,
+      invoiceData: { ...invoiceData },
+    })
+  }
+ 
+  return { updateInvoiceMutation, updateInvoiceData };
 };

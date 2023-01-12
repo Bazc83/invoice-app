@@ -2,11 +2,17 @@ import { Button } from '@/components/Button';
 import { useEffect, useState } from 'react';
 
 import { InvoiceFormItem } from '@/components/InvoiceFormItem';
-import { NewInvoiceItem } from '../NewInvoiceItem';
+import { NewInvoiceItem } from '../NewInvoiceItem/NewInvoiceItem';
 import styles from './FormItems.module.css';
 
-export const FormItems = ({ items, onItemsChange, setAmountDue }) => {
-  const [itemsArray, setItemsArray] = useState(items);
+export const FormItems = ({
+  invoiceData,
+  onItemsChange,
+  setAmountDue,
+  setFormData,
+}) => {
+  const [itemsArray, setItemsArray] = useState(invoiceData?.items);
+
   const [showNewItemInput, setShowNewItemInput] = useState(false);
 
   const onItemChange = (itemValue) => {
@@ -15,17 +21,21 @@ export const FormItems = ({ items, onItemsChange, setAmountDue }) => {
       setItemsArray([itemValue]);
     } else {
       setItemsArray((prev) => [
-        ...prev?.filter((val) => val.itemId !== itemValue.itemId),
+        ...prev.filter((item) => item.itemId !== itemValue.itemId),
         itemValue,
       ]);
     }
   };
 
   const handleDeleteItem = (itemToDeleteId) => {
-    setItemsArray((prev) => [
-      ...prev?.filter((val) => val.itemId !== itemToDeleteId),
-    ]);
+    setItemsArray((prev) =>
+      prev.filter((item) => item.itemId !== itemToDeleteId)
+    );
   };
+
+  useEffect(() => {
+    setFormData((prev) => ({ ...prev, items: [...itemsArray] }));
+  }, [itemsArray, setFormData]);
 
   const handleShowNewItemForm = (e) => {
     e.preventDefault();
@@ -33,20 +43,17 @@ export const FormItems = ({ items, onItemsChange, setAmountDue }) => {
   };
 
   useEffect(() => {
-    setAmountDue(itemsArray.reduce((acc, curr) => acc + curr.total, 0));
+    setAmountDue(
+      invoiceData?.items?.reduce((acc, curr) => acc + curr.total, 0)
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [itemsArray]);
-
-  useEffect(() => {
-    onItemsChange(itemsArray);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [itemsArray]);
+  }, [invoiceData?.items]);
 
   return (
     <div className={styles.formItemsSection}>
       <h2>Item List</h2>
       <div className={styles.items}>
-        {items?.map((item, i) => (
+        {itemsArray?.map((item, i) => (
           <InvoiceFormItem
             item={item}
             key={`item${i}`}
