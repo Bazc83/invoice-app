@@ -1,52 +1,40 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FaTrashAlt } from 'react-icons/fa';
 import { v4 as uuidv4 } from 'uuid';
 import { Button } from '../Button';
 import { InvoiceFormInput } from '../InvoiceFormInput';
 
 import styles from './NewInvoiceItem.module.css';
-export const NewInvoiceItem = ({ onItemChange, setShowNewItemInput }) => {
-  const [itemId, setItemId] = useState('');
-  const [name, setName] = useState('');
-  const [quantity, setQuantity] = useState(1);
-  const [price, setPrice] = useState(0);
-  const [total, setTotal] = useState(0);
+export const NewInvoiceItem = ({ addNewItem, setShowNewItemInput }) => {
+  const newId = uuidv4();
 
-  const [formItem, setFormItem] = useState({});
+  const [formItem, setFormItem] = useState({
+    itemId: newId,
+    name: '',
+    quantity: 0,
+    price: 0.0,
+    total: 0,
+  });
 
-  useEffect(() => {
-    setTotal(+price * +(+quantity));
-  }, [price, quantity]);
+  const handleInputChange = (e) => {
+    if (e.target.name === 'price' || e.target.name === 'quantity') {
+      setFormItem((prev) => ({ ...prev, [e.target.name]: +e.target.value }));
+    } else {
+      setFormItem((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    }
+    setFormItem((prev) => ({ ...prev, total: +prev.price * +prev.quantity }));
+  };
 
   const addItem = (e) => {
     e.preventDefault();
-    setFormItem({
-      itemId: itemId,
-      name: name,
-      quantity: quantity,
-      price: price,
-      total: total,
-    });
+    addNewItem(formItem);
+    setShowNewItemInput((prev) => !prev);
   };
 
   const handleCancel = (e) => {
     e.preventDefault();
-
     setShowNewItemInput((prev) => !prev);
   };
-
-  useEffect(() => {
-    if (itemId === '') setItemId(uuidv4());
-  }, [itemId]);
-
-  useEffect(() => {
-    if (formItem.itemId === undefined) return;
-    if (formItem.itemId) {
-      onItemChange(formItem);
-      setShowNewItemInput(false);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formItem]);
 
   return (
     <div>
@@ -56,9 +44,9 @@ export const NewInvoiceItem = ({ onItemChange, setShowNewItemInput }) => {
           type='text'
           itemName='name'
           itemLabel='Item Names'
-          value={name || ''}
+          value={formItem.name}
           className={styles.name}
-          setValue={(e) => setName(e.target.value)}
+          setValue={handleInputChange}
           item
         />
 
@@ -66,10 +54,10 @@ export const NewInvoiceItem = ({ onItemChange, setShowNewItemInput }) => {
           type='number'
           itemName='quantity'
           itemLabel='Qty.'
-          value={quantity || 1}
+          value={formItem.quantity}
           maxWidth={'max-content'}
           className={styles.qty}
-          setValue={(e) => setQuantity(+e.target.value)}
+          setValue={handleInputChange}
           item
         />
 
@@ -77,8 +65,8 @@ export const NewInvoiceItem = ({ onItemChange, setShowNewItemInput }) => {
           type='number'
           itemName='price'
           itemLabel='Price'
-          value={price || 0.0}
-          setValue={(e) => setPrice(+e.target.value)}
+          value={formItem.price}
+          setValue={handleInputChange}
           maxWidth={'max-content'}
           className={styles.price}
           item
@@ -87,7 +75,7 @@ export const NewInvoiceItem = ({ onItemChange, setShowNewItemInput }) => {
           type='number'
           itemName='total'
           itemLabel='Total'
-          value={total || 0}
+          value={formItem.total}
           maxWidth={'max-content'}
           className={styles.total}
           disabled
@@ -100,7 +88,7 @@ export const NewInvoiceItem = ({ onItemChange, setShowNewItemInput }) => {
         </div>
       </div>
 
-      <Button onClick={addItem}>Add Item To Invoice</Button>
+      <Button onClick={(e) => addItem(e)}>Add Item To Invoice</Button>
       <Button onClick={handleCancel}>Cancel</Button>
     </div>
   );

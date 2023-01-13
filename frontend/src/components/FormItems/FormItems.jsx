@@ -1,70 +1,69 @@
 import { Button } from '@/components/Button';
 import { InvoiceFormItem } from '@/components/InvoiceFormItem';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { NewInvoiceItem } from '../NewInvoiceItem/NewInvoiceItem';
 import styles from './FormItems.module.css';
 
-export const FormItems = ({ formData, setAmountDue, setFormData }) => {
-  const [itemsArray, setItemsArray] = useState(formData?.items);
-
+export const FormItems = ({
+  itemsArray,
+  setItemsArray,
+}) => {
   const [showNewItemInput, setShowNewItemInput] = useState(false);
 
-  const onItemChange = (itemValue) => {
-    if (!itemValue) return;
-    if (itemsArray?.length === 0) {
-      setItemsArray([itemValue]);
+  const onItemChange = (itemVal) => {
+    const itemIndex = itemsArray.findIndex(
+      (indexVal) => indexVal.itemId === itemVal.itemId
+    );
+    if (itemIndex === -1) {
+      return;
     } else {
       setItemsArray((prev) => [
-        ...prev.filter((item) => item.itemId !== itemValue.itemId),
-        itemValue,
+        ...prev.slice(0, itemIndex),
+        itemVal,
+        ...prev.slice(itemIndex + 1),
       ]);
     }
   };
 
+  const addNewItem = (item) => {
+    setItemsArray((prev) => [...prev, item]);
+  };
+
   const handleDeleteItem = (itemToDeleteId) => {
-    const test = itemsArray.filter((item) => item.itemId !== itemToDeleteId);
-    console.log(test);
     setItemsArray((prev) =>
       prev.filter((item) => item.itemId !== itemToDeleteId)
     );
   };
-
-  useEffect(() => {
-    setFormData((prev) => ({ ...prev, items: itemsArray }));
-  }, [itemsArray, setFormData]);
 
   const handleShowNewItemForm = (e) => {
     e.preventDefault();
     setShowNewItemInput((prev) => !prev);
   };
 
-  useEffect(() => {
-    setAmountDue(formData?.items?.reduce((acc, curr) => acc + curr.total, 0));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formData?.items, itemsArray]);
-
   return (
     <div className={styles.formItemsSection}>
       <h2>Item List</h2>
       <div className={styles.items}>
-        {formData &&
-          formData.items.map((item, i) => (
-            <InvoiceFormItem
-              item={item}
-              key={item.itemId}
-              onItemChange={onItemChange}
-              handleDeleteItem={handleDeleteItem}
-            />
-          ))}
+        {itemsArray.map((item, i) => (
+          <InvoiceFormItem
+            item={item}
+            key={item.itemId}
+            onItemChange={onItemChange}
+            handleDeleteItem={handleDeleteItem}
+          />
+        ))}
 
         {showNewItemInput && (
           <NewInvoiceItem
-            onItemChange={onItemChange}
+            addNewItem={addNewItem}
             setShowNewItemInput={setShowNewItemInput}
           />
         )}
       </div>
-      <Button btnStyle='btnThree' fullWidth onClick={handleShowNewItemForm}>
+      <Button
+        btnStyle='btnThree'
+        fullWidth
+        onClick={(e) => handleShowNewItemForm(e)}>
         + Add New Item
       </Button>
     </div>

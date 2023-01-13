@@ -8,20 +8,16 @@ import styles from './InvoiceForm.module.css';
 export const InvoiceForm = ({
   formData,
   setFormData,
+  itemsArray,
+  setItemsArray,
   handleFormSubmit,
   setShowInvoiceForm,
 }) => {
-
-
-
-
   const [selectedPaymentTerm, setSelectedPaymentTerm] = useState(
     formData?.paymentTerms
   );
 
   const [showPaymentTermOptions, setShowPaymentTermOptions] = useState(false);
-
-  const [amountDue, setAmountDue] = useState(formData?.amountDueTotal);
 
   const paymentOptions = [
     { key: '0', value: 'Cash' },
@@ -45,13 +41,6 @@ export const InvoiceForm = ({
   useEffect(() => {
     setFormData((prevState) => ({
       ...prevState,
-      amountDueTotal: amountDue,
-    }));
-  }, [amountDue, setFormData]);
-
-  useEffect(() => {
-    setFormData((prevState) => ({
-      ...prevState,
       paymentTerms: selectedPaymentTerm,
     }));
   }, [selectedPaymentTerm, setFormData]);
@@ -63,7 +52,7 @@ export const InvoiceForm = ({
         {formData?.id}
       </h2>
 
-      <form className={styles.form} onSubmit={handleFormSubmit}>
+      <form className={styles.form}>
         <div className={styles.formSection}>
           <InvoiceFormInput
             itemName='id'
@@ -174,17 +163,13 @@ export const InvoiceForm = ({
           />
         </div>
 
-        <FormItems
-          formData={formData}
-          setFormData={setFormData}
-          setAmountDue={setAmountDue}
-        />
+        <FormItems itemsArray={itemsArray} setItemsArray={setItemsArray} />
 
         <div className={styles.formButtons}>
           <Button onClick={handleCancelEdit} btnStyle='btnThree'>
             Cancel
           </Button>
-          <Button type='submit'>Save Changes</Button>
+          <Button onClick={handleFormSubmit}>Save Changes</Button>
         </div>
       </form>
     </div>

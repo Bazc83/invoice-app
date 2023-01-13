@@ -2,6 +2,13 @@ const asyncHandler = require('express-async-handler');
 
 const Invoice = require('../models/invoiceModel');
 
+// Calculate amount due total
+const getAmountDueTotal = (itemsArr) => {
+  if (itemsArr.length === 0) return 0;
+
+  return itemsArr.reduce((acc, curr) => acc + curr.total, 0);
+};
+
 // get all invoices
 const getInvoices = asyncHandler(async (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -81,7 +88,7 @@ const addInvoice = asyncHandler(async (req, res) => {
     paymentDue,
     paymentTerms,
     status,
-    amountDueTotal,
+    amountDueTotal: getAmountDueTotal(items),
     items,
     createdAt,
   });
@@ -122,6 +129,7 @@ const updateInvoice = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error('Please add required fields');
   }
+
   const invoice = await Invoice.findOneAndUpdate(
     { id: req.params.id },
     {
@@ -141,7 +149,7 @@ const updateInvoice = asyncHandler(async (req, res) => {
       paymentDue,
       paymentTerms,
       status,
-      amountDueTotal,
+      amountDueTotal: getAmountDueTotal(items),
       items,
     }
   );

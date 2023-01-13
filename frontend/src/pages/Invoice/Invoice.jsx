@@ -25,7 +25,6 @@ export const Invoice = () => {
     error,
   } = useFilterInvoiceById(invoiceId);
 
-  
   if (isLoading) return 'Loading...';
 
   if (isError) return 'An error has occurred: ' + error.message;
@@ -33,10 +32,7 @@ export const Invoice = () => {
   return (
     <div className={styles.invoice}>
       {showInvoiceForm && (
-        <EditInvoiceForm
-          setShowInvoiceForm={setShowInvoiceForm}
-          
-        />
+        <EditInvoiceForm setShowInvoiceForm={setShowInvoiceForm} />
       )}
 
       <div

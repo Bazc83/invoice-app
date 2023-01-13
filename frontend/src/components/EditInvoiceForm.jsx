@@ -16,15 +16,17 @@ export const EditInvoiceForm = ({ setShowInvoiceForm }) => {
 
   const [formData, setFormData] = useState(invoiceData);
 
+  const [itemsArray, setItemsArray] = useState(invoiceData?.items);
+
   // Update Invoice
   const { updateInvoiceMutation } = useUpdateInvoice();
-
   const handleFormSubmit = (e) => {
     e.preventDefault();
     updateInvoiceMutation.mutate({
       invoiceId: invoiceId,
       invoiceData: formData,
     });
+
     setShowInvoiceForm((prev) => !prev);
   };
 
@@ -34,15 +36,9 @@ export const EditInvoiceForm = ({ setShowInvoiceForm }) => {
     setShowInvoiceForm(false);
   };
 
-
-
   useEffect(() => {
-    updateInvoiceMutation.mutate({
-      invoiceId: invoiceId,
-      invoiceData: formData,
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formData]);
+    setFormData((prev) => ({ ...prev, items: itemsArray }));
+  }, [itemsArray, setFormData]);
 
   if (isLoading) return 'Loading...';
 
@@ -50,9 +46,10 @@ export const EditInvoiceForm = ({ setShowInvoiceForm }) => {
 
   return (
     <InvoiceForm
-      // invoiceData={invoiceData}
       formData={formData}
       setFormData={setFormData}
+      itemsArray={itemsArray}
+      setItemsArray={setItemsArray}
       handleFormSubmit={handleFormSubmit}
       setShowInvoiceForm={setShowInvoiceForm}
       handleCancelEdit={handleCancelEdit}

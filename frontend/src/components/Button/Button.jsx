@@ -12,7 +12,7 @@ export const Button = (props) => {
   return (
     <button
       onClick={onClick}
-      type={type}
+      type={type || "button"}
       className={`${btnStyling} ${styles.btn} ${
         plusIcon && styles.btnWithIcon
       } ${fullWidth && styles.fullWidth}`}>
