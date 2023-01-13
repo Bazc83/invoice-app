@@ -1,17 +1,11 @@
 import { Button } from '@/components/Button';
-import { useEffect, useState } from 'react';
-
 import { InvoiceFormItem } from '@/components/InvoiceFormItem';
+import { useEffect, useState } from 'react';
 import { NewInvoiceItem } from '../NewInvoiceItem/NewInvoiceItem';
 import styles from './FormItems.module.css';
 
-export const FormItems = ({
-  invoiceData,
-  onItemsChange,
-  setAmountDue,
-  setFormData,
-}) => {
-  const [itemsArray, setItemsArray] = useState(invoiceData?.items);
+export const FormItems = ({ formData, setAmountDue, setFormData }) => {
+  const [itemsArray, setItemsArray] = useState(formData?.items);
 
   const [showNewItemInput, setShowNewItemInput] = useState(false);
 
@@ -28,13 +22,15 @@ export const FormItems = ({
   };
 
   const handleDeleteItem = (itemToDeleteId) => {
+    const test = itemsArray.filter((item) => item.itemId !== itemToDeleteId);
+    console.log(test);
     setItemsArray((prev) =>
       prev.filter((item) => item.itemId !== itemToDeleteId)
     );
   };
 
   useEffect(() => {
-    setFormData((prev) => ({ ...prev, items: [...itemsArray] }));
+    setFormData((prev) => ({ ...prev, items: itemsArray }));
   }, [itemsArray, setFormData]);
 
   const handleShowNewItemForm = (e) => {
@@ -43,24 +39,23 @@ export const FormItems = ({
   };
 
   useEffect(() => {
-    setAmountDue(
-      invoiceData?.items?.reduce((acc, curr) => acc + curr.total, 0)
-    );
+    setAmountDue(formData?.items?.reduce((acc, curr) => acc + curr.total, 0));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [invoiceData?.items]);
+  }, [formData?.items, itemsArray]);
 
   return (
     <div className={styles.formItemsSection}>
       <h2>Item List</h2>
       <div className={styles.items}>
-        {itemsArray?.map((item, i) => (
-          <InvoiceFormItem
-            item={item}
-            key={`item${i}`}
-            onItemChange={onItemChange}
-            handleDeleteItem={handleDeleteItem}
-          />
-        ))}
+        {formData &&
+          formData.items.map((item, i) => (
+            <InvoiceFormItem
+              item={item}
+              key={item.itemId}
+              onItemChange={onItemChange}
+              handleDeleteItem={handleDeleteItem}
+            />
+          ))}
 
         {showNewItemInput && (
           <NewInvoiceItem

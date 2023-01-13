@@ -5,8 +5,6 @@ import { useParams } from 'react-router-dom';
 import { InvoiceForm } from './InvoiceForm';
 
 export const EditInvoiceForm = ({ setShowInvoiceForm }) => {
-  // const { invoiceData, setInvoiceData, invoiceId } = useInvoiceContext();
-
   const { invoiceId } = useParams();
 
   const {
@@ -19,18 +17,31 @@ export const EditInvoiceForm = ({ setShowInvoiceForm }) => {
   const [formData, setFormData] = useState(invoiceData);
 
   // Update Invoice
-  const { updateInvoiceData } = useUpdateInvoice();
+  const { updateInvoiceMutation } = useUpdateInvoice();
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    updateInvoiceData(invoiceId, formData);
+    updateInvoiceMutation.mutate({
+      invoiceId: invoiceId,
+      invoiceData: formData,
+    });
     setShowInvoiceForm((prev) => !prev);
   };
 
-  useEffect(() => {
-    updateInvoiceData(invoiceId, formData);
+  const handleCancelEdit = (e) => {
+    e.preventDefault();
+    updateInvoiceMutation.reset();
+    setShowInvoiceForm(false);
+  };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
+
+  useEffect(() => {
+    updateInvoiceMutation.mutate({
+      invoiceId: invoiceId,
+      invoiceData: formData,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData]);
 
   if (isLoading) return 'Loading...';
@@ -39,10 +50,12 @@ export const EditInvoiceForm = ({ setShowInvoiceForm }) => {
 
   return (
     <InvoiceForm
-      invoiceData={invoiceData}
+      // invoiceData={invoiceData}
+      formData={formData}
       setFormData={setFormData}
       handleFormSubmit={handleFormSubmit}
       setShowInvoiceForm={setShowInvoiceForm}
+      handleCancelEdit={handleCancelEdit}
     />
   );
 };

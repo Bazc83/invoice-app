@@ -6,17 +6,23 @@ import { useEffect, useState } from 'react';
 import styles from './InvoiceForm.module.css';
 
 export const InvoiceForm = ({
-  invoiceData,
+  formData,
   setFormData,
   handleFormSubmit,
   setShowInvoiceForm,
 }) => {
+
+
+
+
   const [selectedPaymentTerm, setSelectedPaymentTerm] = useState(
-    invoiceData?.paymentTerms
+    formData?.paymentTerms
   );
 
   const [showPaymentTermOptions, setShowPaymentTermOptions] = useState(false);
-  const [amountDue, setAmountDue] = useState(invoiceData?.amountDueTotal);
+
+  const [amountDue, setAmountDue] = useState(formData?.amountDueTotal);
+
   const paymentOptions = [
     { key: '0', value: 'Cash' },
     { key: '15', value: '15 days End of Month' },
@@ -31,8 +37,9 @@ export const InvoiceForm = ({
     }));
   };
 
-  const onItemsChange = (itemsValue) => {
-    setFormData((prev) => ({ ...prev, items: itemsValue }));
+  const handleCancelEdit = (e) => {
+    e.preventDefault();
+    setShowInvoiceForm(false);
   };
 
   useEffect(() => {
@@ -53,7 +60,7 @@ export const InvoiceForm = ({
     <div className={styles.invoiceForm}>
       <h2>
         Edit <span className={styles.invoiceFormHeaderAccent}>#</span>
-        {invoiceData?.id}
+        {formData?.id}
       </h2>
 
       <form className={styles.form} onSubmit={handleFormSubmit}>
@@ -61,32 +68,32 @@ export const InvoiceForm = ({
           <InvoiceFormInput
             itemName='id'
             itemLabel='invoice id'
-            value={invoiceData.id || ''}
+            value={formData.id || ''}
             setValue={inputOnChange}
           />
           <h4 className={styles.formSectionHeader}>Bill From</h4>
           <InvoiceFormInput
             itemName='senderStreet'
             itemLabel='Street Address'
-            value={invoiceData.senderStreet || ''}
+            value={formData.senderStreet || ''}
             setValue={inputOnChange}
           />
           <InvoiceFormInput
             itemName='senderCity'
             itemLabel='City'
-            value={invoiceData.senderCity || ''}
+            value={formData.senderCity || ''}
             setValue={inputOnChange}
           />
           <InvoiceFormInput
             itemName='senderPostCode'
             itemLabel='Postcode'
-            value={invoiceData.senderPostCode || ''}
+            value={formData.senderPostCode || ''}
             setValue={inputOnChange}
           />
           <InvoiceFormInput
             itemName='senderCountry'
             itemLabel='Country'
-            value={invoiceData.senderCountry || ''}
+            value={formData.senderCountry || ''}
             setValue={inputOnChange}
           />
         </div>
@@ -96,39 +103,39 @@ export const InvoiceForm = ({
           <InvoiceFormInput
             itemName='clientName'
             itemLabel="Client's Name"
-            value={invoiceData.clientName || ''}
+            value={formData.clientName || ''}
             setValue={inputOnChange}
           />
           <InvoiceFormInput
             type='email'
             itemName='clientEmail'
             itemLabel="Client's Email"
-            value={invoiceData.clientEmail || ''}
+            value={formData.clientEmail || ''}
             setValue={inputOnChange}
           />
 
           <InvoiceFormInput
             itemName='clientStreet'
             itemLabel='Street Address'
-            value={invoiceData.clientStreet || ''}
+            value={formData.clientStreet || ''}
             setValue={inputOnChange}
           />
           <InvoiceFormInput
             itemName='clientCity'
             itemLabel='City'
-            value={invoiceData.clientCity || ''}
+            value={formData.clientCity || ''}
             setValue={inputOnChange}
           />
           <InvoiceFormInput
             itemName='clientPostCode'
             itemLabel='Post Code'
-            value={invoiceData.clientPostCode || ''}
+            value={formData.clientPostCode || ''}
             setValue={inputOnChange}
           />
           <InvoiceFormInput
             itemName='clientCountry'
             itemLabel='Country'
-            value={invoiceData.clientCountry || ''}
+            value={formData.clientCountry || ''}
             setValue={inputOnChange}
           />
 
@@ -137,7 +144,7 @@ export const InvoiceForm = ({
               type='date'
               itemName='createdAt'
               itemLabel='Created at'
-              value={invoiceData.createdAt || ''}
+              value={formData.createdAt || ''}
               setValue={inputOnChange}
             />
 
@@ -146,7 +153,7 @@ export const InvoiceForm = ({
               type='date'
               itemName='paymentDue'
               itemLabel='Payment Due'
-              value={invoiceData.paymentDue || ''}
+              value={formData.paymentDue || ''}
               setValue={inputOnChange}
             />
 
@@ -162,22 +169,19 @@ export const InvoiceForm = ({
           <InvoiceFormInput
             itemName='description'
             itemLabel='Project/Description'
-            value={invoiceData.description || ''}
+            value={formData.description || ''}
             setValue={inputOnChange}
           />
         </div>
 
         <FormItems
-          invoiceData={invoiceData}
+          formData={formData}
           setFormData={setFormData}
-          onItemsChange={onItemsChange}
           setAmountDue={setAmountDue}
         />
 
         <div className={styles.formButtons}>
-          <Button
-            onClick={() => setShowInvoiceForm((prev) => !prev)}
-            btnStyle='btnThree'>
+          <Button onClick={handleCancelEdit} btnStyle='btnThree'>
             Cancel
           </Button>
           <Button type='submit'>Save Changes</Button>
