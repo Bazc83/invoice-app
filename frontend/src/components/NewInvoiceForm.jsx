@@ -6,6 +6,10 @@ import { useEffect, useState } from 'react';
 import { InvoiceForm } from './InvoiceForm';
 
 export const NewInvoiceForm = ({ setShowInvoiceForm }) => {
+
+
+  const [itemsArray, setItemsArray] = useState([]);
+
   const useInvoiceId = () =>
     useQuery({
       queryKey: ['invoiceId'],
@@ -17,7 +21,7 @@ export const NewInvoiceForm = ({ setShowInvoiceForm }) => {
 
   const { data: invoiceId, isLoading, isError, error } = useInvoiceId();
 
-  const [invoiceData, setInvoiceData] = useState({
+  const [formData, setFormData] = useState({
     id: invoiceId,
     senderCity: '',
     senderStreet: '',
@@ -36,16 +40,16 @@ export const NewInvoiceForm = ({ setShowInvoiceForm }) => {
     paymentTerms: '0',
     status: 'draft',
     amountDueTotal: 0,
-    items: [],
+    items: itemsArray,
   });
 
   // Set Invoice id from saved value in db
   useEffect(() => {
-    setInvoiceData((prev) => ({ ...prev, id: invoiceId }));
+    setFormData((prev) => ({ ...prev, id: invoiceId }));
   }, [isLoading, invoiceId]);
 
   // add new Invoice
-  const { newInvoiceMutation } = useAddNewInvoice(invoiceData);
+  const { newInvoiceMutation } = useAddNewInvoice(formData);
 
   // update invoiceId
   const { updateIdMutation } = useUpdateInvoiceId();
@@ -54,23 +58,30 @@ export const NewInvoiceForm = ({ setShowInvoiceForm }) => {
     e.preventDefault();
     newInvoiceMutation.mutate({
       invoiceId: invoiceId,
-      invoiceData: { ...invoiceData },
+      invoiceData: { ...formData },
     });
     // increase invoice id by one
     updateIdMutation.mutate();
-
     setShowInvoiceForm((prev) => !prev);
   };
+
+
+
+  useEffect(() => {
+    setFormData((prev) => ({ ...prev, items: itemsArray }));
+  }, [itemsArray, setFormData]);
 
   if (isLoading) return 'Loading....';
   if (isError) return `An error has occurred ${error}`;
 
   return (
     <InvoiceForm
-      invoiceData={invoiceData}
-      setInvoiceData={setInvoiceData}
+      formData={formData}
+      setFormData={setFormData}
       handleFormSubmit={handleFormSubmit}
       setShowInvoiceForm={setShowInvoiceForm}
+      itemsArray={itemsArray}
+      setItemsArray={setItemsArray}
     />
   );
 };

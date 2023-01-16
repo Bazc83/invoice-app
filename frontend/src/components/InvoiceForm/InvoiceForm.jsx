@@ -13,6 +13,7 @@ export const InvoiceForm = ({
   handleFormSubmit,
   setShowInvoiceForm,
 }) => {
+
   const [selectedPaymentTerm, setSelectedPaymentTerm] = useState(
     formData?.paymentTerms
   );

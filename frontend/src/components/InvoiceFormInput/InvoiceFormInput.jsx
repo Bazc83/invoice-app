@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 
 import styles from './InvoiceFormInput.module.css';
@@ -14,7 +13,9 @@ export const InvoiceFormInput = ({
   noBg,
   value,
   setValue,
-
+  onBlur,
+  required,
+  step,
 }) => {
   const [itemValue, setItemValue] = useState(value);
 
@@ -38,12 +39,15 @@ export const InvoiceFormInput = ({
         {itemLabel}
       </label>
       <input
+        onBlur={onBlur}
         type={type ? type : 'text'}
         name={itemName}
         className={`text`}
         value={itemValue}
         onChange={handleChange}
         disabled={disabled}
+        required={required}
+        step={step}
       />
     </div>
   );

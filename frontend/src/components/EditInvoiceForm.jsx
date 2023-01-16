@@ -40,6 +40,7 @@ export const EditInvoiceForm = ({ setShowInvoiceForm }) => {
     setFormData((prev) => ({ ...prev, items: itemsArray }));
   }, [itemsArray, setFormData]);
 
+  
   if (isLoading) return 'Loading...';
 
   if (isError) return 'An error has occurred: ' + error.message;

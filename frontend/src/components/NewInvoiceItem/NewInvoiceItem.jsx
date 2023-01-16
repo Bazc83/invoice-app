@@ -11,18 +11,35 @@ export const NewInvoiceItem = ({ addNewItem, setShowNewItemInput }) => {
   const [formItem, setFormItem] = useState({
     itemId: newId,
     name: '',
-    quantity: 0,
+    quantity: 1,
     price: 0.0,
-    total: 0,
+    total: 0.0,
   });
 
+  const [totalFixed, setTotalFixed] = useState(formItem.total.toFixed(2));
+
   const handleInputChange = (e) => {
-    if (e.target.name === 'price' || e.target.name === 'quantity') {
+    if (e.target.name === 'price') {
+      setFormItem((prev) => ({
+        ...prev,
+        [e.target.name]: +e.target.value,
+      }));
+    } else if (e.target.name === 'quantity') {
       setFormItem((prev) => ({ ...prev, [e.target.name]: +e.target.value }));
     } else {
       setFormItem((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     }
-    setFormItem((prev) => ({ ...prev, total: +prev.price * +prev.quantity }));
+
+    setFormItem((prev) => {
+      const totalValue = +prev.price * +prev.quantity;
+
+      setTotalFixed(() => totalValue);
+
+      return {
+        ...prev,
+        total: totalValue,
+      };
+    });
   };
 
   const addItem = (e) => {
@@ -70,12 +87,16 @@ export const NewInvoiceItem = ({ addNewItem, setShowNewItemInput }) => {
           maxWidth={'max-content'}
           className={styles.price}
           item
+          step={0.01}
+          onBlur={() =>
+            setFormItem((prev) => ({ ...prev, price: prev.price.toFixed(2) }))
+          }
         />
         <InvoiceFormInput
           type='number'
           itemName='total'
           itemLabel='Total'
-          value={formItem.total}
+          value={totalFixed}
           maxWidth={'max-content'}
           className={styles.total}
           disabled
