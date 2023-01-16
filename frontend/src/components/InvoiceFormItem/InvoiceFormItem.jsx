@@ -12,14 +12,38 @@ export const InvoiceFormItem = ({ item, onItemChange, handleDeleteItem }) => {
     total: item?.total,
   });
 
+  const setItemTotal = (itemPrice, itemQuantity) => {
+    setFormItem((prev) => ({ ...prev, total: +itemPrice * +itemQuantity }));
+  };
+
   const handleInputChange = (e) => {
     if (e.target.name === 'price' || e.target.name === 'quantity') {
       setFormItem((prev) => ({ ...prev, [e.target.name]: +e.target.value }));
     } else {
       setFormItem((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     }
-    setFormItem((prev) => ({ ...prev, total: +prev.price * +prev.quantity }));
+    setItemTotal(formItem.price, formItem.quantity);
   };
+
+  const validatePrice = (e) => {
+    if (+e.target.value >= 0.0) {
+      setFormItem((prev) => ({ ...prev, price: prev.price }));
+    } else if (+e.target.value < 0.0 || e.target.value === undefined) {
+      setFormItem((prev) => ({ ...prev, price: 0.0 }));
+    }
+  };
+
+  const validateQty = (e) => {
+    if (+e.target.value >= 1) {
+      return setFormItem((prev) => ({ ...prev, quantity: prev.quantity }));
+    } else if (+e.target.value < 1 || e.target.value === undefined) {
+      setFormItem((prev) => ({ ...prev, quantity: 1 }));
+    }
+  };
+
+  useEffect(() => {
+    setItemTotal(formItem.price, formItem.quantity);
+  }, [formItem.price, formItem.quantity]);
 
   useEffect(() => {
     setFormItem((prev) => ({ ...prev, itemId: item.itemId }));
@@ -39,7 +63,6 @@ export const InvoiceFormItem = ({ item, onItemChange, handleDeleteItem }) => {
         value={formItem?.name}
         className={styles.name}
         setValue={handleInputChange}
-        item
       />
 
       <InvoiceFormInput
@@ -50,8 +73,12 @@ export const InvoiceFormItem = ({ item, onItemChange, handleDeleteItem }) => {
         maxWidth={'max-content'}
         className={styles.qty}
         setValue={handleInputChange}
-        item
+        min={1}
+        max={100}
+        step={1}
+        onBlur={validateQty}
       />
+
       <InvoiceFormInput
         type='number'
         itemName='price'
@@ -60,18 +87,20 @@ export const InvoiceFormItem = ({ item, onItemChange, handleDeleteItem }) => {
         setValue={handleInputChange}
         maxWidth={'max-content'}
         className={styles.price}
-        item
+        min={0.01}
+        step={0.01}
+        onBlur={validatePrice}
       />
+
       <InvoiceFormInput
         type='number'
         itemName='total'
         itemLabel='Total'
-        value={formItem.total}
+        value={formItem.total.toFixed(2)}
         maxWidth={'max-content'}
         className={styles.total}
         disabled
         noBg
-        item
       />
 
       <div

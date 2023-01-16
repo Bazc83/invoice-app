@@ -26,8 +26,8 @@ export const InvoiceForm = ({
 
   const paymentOptions = [
     { key: '0', value: 'Cash' },
-    { key: '15', value: '15 days End of Month' },
-    { key: '21', value: '21 days End of Month' },
+    { key: '15', value: '15 days from invoice date' },
+    { key: '21', value: '21 days from invoice date' },
   ];
 
   // Update formdata when form values change

@@ -10,8 +10,6 @@
   grid-template-columns: 60px 1fr 1fr 40px;
 }
 
-
-
 @media (min-width: 768px) {
   .invoiceFormItem {
     grid-template-areas: 'name qty price total icon';
@@ -40,8 +38,8 @@
   justify-content: center;
   padding-top: 1rem;
   grid-area: icon;
+  cursor: pointer;
 }
 .trashIcon {
   color: var(--neutral-500);
 }
-

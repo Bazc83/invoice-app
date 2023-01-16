@@ -10,6 +10,13 @@
   grid-template-columns: 60px 1fr 1fr 40px;
 }
 
+.btnWrapper {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: flex-end;
+}
+
 @media (min-width: 768px) {
   .invoiceFormItem {
     grid-template-areas: 'name qty price total icon';

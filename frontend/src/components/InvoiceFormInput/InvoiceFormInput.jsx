@@ -13,6 +13,8 @@ export const InvoiceFormInput = ({
   noBg,
   value,
   setValue,
+  min,
+  max,
   onBlur,
   required,
   step,
@@ -39,6 +41,8 @@ export const InvoiceFormInput = ({
         {itemLabel}
       </label>
       <input
+        min={min}
+        max={max}
         onBlur={onBlur}
         type={type ? type : 'text'}
         name={itemName}

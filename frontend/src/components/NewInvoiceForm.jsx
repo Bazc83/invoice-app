@@ -37,7 +37,7 @@ export const NewInvoiceForm = ({ setShowInvoiceForm }) => {
     description: '',
     invoiceDate: '',
     createdAt: todaysDate,
-    paymentDue: '',
+    paymentDue: todaysDate,
     paymentTerms: '0',
     status: 'draft',
     amountDueTotal: 0,
