@@ -40,7 +40,6 @@ export const FormItems = ({
     setShowNewItemInput((prev) => !prev);
   };
 
-  
 
   return (
     <div className={styles.formItemsSection}>

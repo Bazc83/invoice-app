@@ -1,12 +1,13 @@
 import { useAddNewInvoice } from '@/hooks/reactQueryHooks/useAddNewInvoice';
 import { useUpdateInvoiceId } from '@/hooks/reactQueryHooks/useUpdateInvoiceId';
+import { setInvoiceDates } from '@/hooks/setInvoiceDates';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { InvoiceForm } from './InvoiceForm';
 
 export const NewInvoiceForm = ({ setShowInvoiceForm }) => {
-
+  const { todaysDate } = setInvoiceDates();
 
   const [itemsArray, setItemsArray] = useState([]);
 
@@ -35,7 +36,7 @@ export const NewInvoiceForm = ({ setShowInvoiceForm }) => {
     clientPostCode: '',
     description: '',
     invoiceDate: '',
-    createdAt: '',
+    createdAt: todaysDate,
     paymentDue: '',
     paymentTerms: '0',
     status: 'draft',
@@ -65,11 +66,13 @@ export const NewInvoiceForm = ({ setShowInvoiceForm }) => {
     setShowInvoiceForm((prev) => !prev);
   };
 
-
-
   useEffect(() => {
     setFormData((prev) => ({ ...prev, items: itemsArray }));
   }, [itemsArray, setFormData]);
+
+  useEffect(() => {
+    setFormData((prev) => ({ ...prev, createdAt: todaysDate }));
+  }, [todaysDate, setFormData]);
 
   if (isLoading) return 'Loading....';
   if (isError) return `An error has occurred ${error}`;

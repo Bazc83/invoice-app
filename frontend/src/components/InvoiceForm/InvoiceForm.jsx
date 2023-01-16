@@ -1,6 +1,7 @@
 import { FormItems } from '@/components/FormItems';
 import { InvoiceFormInput } from '@/components/InvoiceFormInput';
 import { InvoiceFormSelect } from '@/components/InvoiceFormSelect';
+import { setInvoiceDates } from '@/hooks/setInvoiceDates';
 import { Button } from '@components/Button';
 import { useEffect, useState } from 'react';
 import styles from './InvoiceForm.module.css';
@@ -13,6 +14,9 @@ export const InvoiceForm = ({
   handleFormSubmit,
   setShowInvoiceForm,
 }) => {
+  const { todaysDate, fifteenDays, twentyOneDays } = setInvoiceDates(
+    formData?.createdAt
+  );
 
   const [selectedPaymentTerm, setSelectedPaymentTerm] = useState(
     formData?.paymentTerms
@@ -45,6 +49,22 @@ export const InvoiceForm = ({
       paymentTerms: selectedPaymentTerm,
     }));
   }, [selectedPaymentTerm, setFormData]);
+
+  useEffect(() => {
+    if (selectedPaymentTerm === '0') {
+      setFormData((prev) => ({ ...prev, paymentDue: todaysDate }));
+    } else if (selectedPaymentTerm === '15') {
+      setFormData((prev) => ({ ...prev, paymentDue: fifteenDays }));
+    } else if (selectedPaymentTerm === '21') {
+      setFormData((prev) => ({ ...prev, paymentDue: twentyOneDays }));
+    }
+  }, [
+    fifteenDays,
+    selectedPaymentTerm,
+    setFormData,
+    todaysDate,
+    twentyOneDays,
+  ]);
 
   return (
     <div className={styles.invoiceForm}>
@@ -135,7 +155,8 @@ export const InvoiceForm = ({
               itemName='createdAt'
               itemLabel='Created at'
               value={formData.createdAt || ''}
-              setValue={inputOnChange}
+              // setValue={inputOnChange}
+              disabled
             />
 
             {/* // todo tempory as needs to be created at plus days to payment terms date */}
@@ -145,6 +166,7 @@ export const InvoiceForm = ({
               itemLabel='Payment Due'
               value={formData.paymentDue || ''}
               setValue={inputOnChange}
+              disabled
             />
 
             <InvoiceFormSelect
