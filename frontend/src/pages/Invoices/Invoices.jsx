@@ -2,14 +2,69 @@ import { InvoicePreview } from '@/components/InvoicePreview';
 import { InvoicesPageControls } from '@/components/InvoicesPageControls';
 import { NewInvoiceForm } from '@/components/NewInvoiceForm';
 import { NoInvoices } from '@/components/NoInvoices';
-import { useState } from 'react';
-import { useInvoices } from '../../hooks/reactQueryHooks/useInvoices';
+import { useInvoices } from '@/hooks/reactQueryHooks/useInvoices';
+import { useEffect, useState } from 'react';
 import styles from './Invoices.module.css';
 
 export const Invoices = () => {
   const { isLoading, isError, error, data: invoices } = useInvoices();
 
   const [showInvoiceForm, setShowInvoiceForm] = useState(false);
+
+  const [filters, setFilters] = useState({
+    paid: false,
+    pending: false,
+    draft: false,
+  });
+
+  const [filteredInvoices, setFilteredInvoices] = useState();
+
+  useEffect(() => {
+    setFilteredInvoices(invoices);
+  }, [invoices]);
+
+  const [selectedFilters, setSelectedFilters] = useState([]);
+
+  const updateFilters = () => {
+    for (const filterVal in filters) {
+      if (filters[filterVal]) {
+        if (selectedFilters?.length === 0) {
+          setSelectedFilters([filterVal]);
+        } else {
+          setSelectedFilters((prev) => [
+            ...prev.filter((val) => val !== filterVal),
+            filterVal,
+          ]);
+        }
+      } else {
+        setSelectedFilters((prev) => [
+          ...prev.filter((val) => val !== filterVal),
+        ]);
+      }
+    }
+  };
+
+  const runFilter = () => {
+    if (selectedFilters.length > 0) {
+      setFilteredInvoices(
+        invoices.filter((filterVal) =>
+          selectedFilters.includes(filterVal.status)
+        )
+      );
+    } else {
+      setFilteredInvoices(invoices);
+    }
+  };
+
+  useEffect(() => {
+    updateFilters();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filters]);
+
+  useEffect(() => {
+    runFilter();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedFilters]);
 
   if (isLoading) return 'Loading...';
   if (isError) return 'An error has occurred: ' + error.message;
@@ -19,6 +74,9 @@ export const Invoices = () => {
       <InvoicesPageControls
         invoicesData={invoices?.length}
         setShowInvoiceForm={setShowInvoiceForm}
+        updateFilters={updateFilters}
+        filters={filters}
+        setFilters={setFilters}
       />
 
       {showInvoiceForm && (
@@ -27,7 +85,7 @@ export const Invoices = () => {
       {invoices.length === 0 && <NoInvoices />}
       <div className={styles.invoicesWrapper}>
         {invoices.length > 0 &&
-          invoices.map((invoice) => {
+          filteredInvoices?.map((invoice) => {
             return <InvoicePreview invoice={invoice} key={invoice?.id} />;
           })}
       </div>

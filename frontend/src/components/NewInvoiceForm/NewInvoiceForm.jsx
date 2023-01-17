@@ -4,7 +4,7 @@ import { setInvoiceDates } from '@/hooks/setInvoiceDates';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { InvoiceForm } from './InvoiceForm';
+import { InvoiceForm } from '../InvoiceForm';
 
 export const NewInvoiceForm = ({ setShowInvoiceForm }) => {
   const { todaysDate } = setInvoiceDates();

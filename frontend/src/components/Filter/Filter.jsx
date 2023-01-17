@@ -1,11 +1,16 @@
 import { useState } from 'react';
 import styles from './Filter.module.css';
 
+import { FilterModalItem } from '@/components/FilterModalItem';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
-import { FilterModal } from '@/components/FilterModal';
 
-export const Filter = () => {
+export const Filter = ({ filterInvoices, filters, setFilters }) => {
   const [filterIsOpen, setFilterIsOpen] = useState(false);
+
+  const filterChangeHandler = (checkboxName) => {
+    setFilters((prev) => ({ ...prev, [checkboxName]: !prev[checkboxName] }));
+    setFilterIsOpen((prevState) => !prevState);
+  };
 
   return (
     <div className={styles.filterWrapper}>
@@ -19,7 +24,33 @@ export const Filter = () => {
           <FaChevronDown className={styles.filterIcon} />
         )}
       </div>
-      {filterIsOpen && <FilterModal />}
+
+      {filterIsOpen && (
+        <div className={styles.modal}>
+          <form className={styles.modalForm}>
+            <FilterModalItem
+              checkboxLabel={'draft'}
+              filterInvoices={filterInvoices}
+              filterChangeHandler={filterChangeHandler}
+              filters={filters}
+            />
+
+            <FilterModalItem
+              checkboxLabel={'pending'}
+              filterInvoices={filterInvoices}
+              filterChangeHandler={filterChangeHandler}
+              filters={filters}
+            />
+
+            <FilterModalItem
+              checkboxLabel={'paid'}
+              filterInvoices={filterInvoices}
+              filterChangeHandler={filterChangeHandler}
+              filters={filters}
+            />
+          </form>
+        </div>
+      )}
     </div>
   );
 };

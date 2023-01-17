@@ -2,7 +2,7 @@ import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceBy
 import { useUpdateInvoice } from '@/hooks/reactQueryHooks/useUpdateInvoice';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { InvoiceForm } from './InvoiceForm';
+import { InvoiceForm } from '../InvoiceForm';
 
 export const EditInvoiceForm = ({ setShowInvoiceForm }) => {
   const { invoiceId } = useParams();
