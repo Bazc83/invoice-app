@@ -1,3 +1,4 @@
+import { ConfirmDeleteModal } from '@/components/ConfirmDeleteModal';
 import { EditInvoiceForm } from '@/components/EditInvoiceForm';
 import { GoBackLink } from '@/components/GoBackLink';
 import { InvoiceButtons } from '@/components/InvoiceButtons';
@@ -5,16 +6,21 @@ import { InvoiceItems } from '@/components/InvoiceItems';
 import { InvoiceItemsAmountDue } from '@/components/InvoiceItemsAmountDue';
 import { InvoiceItemsTable } from '@/components/InvoiceItemsTable';
 import { PaymentStatus } from '@/components/PaymentStatus';
+import { useDeleteInvoice } from '@/hooks/reactQueryHooks/useDeleteInvoice';
 import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
 import { useFormatDate } from '@/hooks/useFormatDate';
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styles from './Invoice.module.css';
 
 export const Invoice = () => {
   const [showInvoiceForm, setShowInvoiceForm] = useState(false);
 
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
   const { getDate } = useFormatDate();
+
+  const navigate = useNavigate();
 
   const { invoiceId } = useParams();
 
@@ -24,6 +30,13 @@ export const Invoice = () => {
     isError,
     error,
   } = useFilterInvoiceById(invoiceId);
+
+  const { deleteSelectedInvoice } = useDeleteInvoice();
+
+  const handleDeleteInvoice = async () => {
+    await deleteSelectedInvoice(invoiceId);
+    navigate('/');
+  };
 
   const handleCloseForm = () => {
     if (!showInvoiceForm) return;
@@ -35,7 +48,17 @@ export const Invoice = () => {
   if (isError) return 'An error has occurred: ' + error.message;
 
   return (
-    <div className={styles.invoice}>
+    <div
+      className={`${styles.invoice} ${
+        showDeleteModal && styles.confirmModalOpen
+      }`}>
+      {showDeleteModal && (
+        <ConfirmDeleteModal
+          setShowDeleteModal={setShowDeleteModal}
+          handleDeleteInvoice={handleDeleteInvoice}
+        />
+      )}
+
       {showInvoiceForm && (
         <EditInvoiceForm setShowInvoiceForm={setShowInvoiceForm} />
       )}
@@ -59,7 +82,10 @@ export const Invoice = () => {
 
             {/* Another InvoiceButtons component further down */}
             <div className={styles.buttonWrapperTop}>
-              <InvoiceButtons setShowInvoiceForm={setShowInvoiceForm} />
+              <InvoiceButtons
+                setShowInvoiceForm={setShowInvoiceForm}
+                setShowDeleteModal={setShowDeleteModal}
+              />
             </div>
           </div>
 
@@ -133,7 +159,7 @@ export const Invoice = () => {
         <div className={`secondary-bg container ${styles.buttonWrapperBottom}`}>
           <InvoiceButtons
             setShowInvoiceForm={setShowInvoiceForm}
-            invoiceId={invoiceId}
+            setShowDeleteModal={setShowDeleteModal}
           />
         </div>
       </div>

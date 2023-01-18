@@ -3,6 +3,17 @@
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
   position: relative;
+  
+}
+
+.confirmModalOpen:before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  height: 100%;
+  width: 100%;
+  z-index: 100;
 }
 
 .mainWrapper {

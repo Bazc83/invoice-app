@@ -1,10 +1,8 @@
 import { Button } from '@/components/Button';
-import { useDeleteInvoice } from '@/hooks/reactQueryHooks/useDeleteInvoice';
 import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
 import { useUpdateInvoice } from '@/hooks/reactQueryHooks/useUpdateInvoice';
-import { useNavigate, useParams } from 'react-router-dom';
-export const InvoiceButtons = ({ setShowInvoiceForm }) => {
-  const navigate = useNavigate();
+import { useParams } from 'react-router-dom';
+export const InvoiceButtons = ({ setShowInvoiceForm, setShowDeleteModal}) => {
 
   const { invoiceId } = useParams();
 
@@ -15,14 +13,7 @@ export const InvoiceButtons = ({ setShowInvoiceForm }) => {
     error,
   } = useFilterInvoiceById(invoiceId);
 
-  const { deleteSelectedInvoice } = useDeleteInvoice();
-
   const { updateInvoiceMutation } = useUpdateInvoice();
-
-  const handleDeleteInvoice = async () => {
-    await deleteSelectedInvoice(invoiceId);
-    navigate('/');
-  };
 
   const setStatus = (statusValue) => {
     updateInvoiceMutation.mutate({
@@ -44,7 +35,7 @@ export const InvoiceButtons = ({ setShowInvoiceForm }) => {
           Edit
         </Button>
       )}
-      <Button btnStyle='btnFive' onClick={() => handleDeleteInvoice(invoiceId)}>
+      <Button btnStyle='btnFive' onClick={() => setShowDeleteModal(true)}>
         {isLoading ? '...Deleting' : 'Delete'}
       </Button>
 

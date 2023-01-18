@@ -148,7 +148,8 @@ h4 {
 }
 
 .text-faded,
-.text-faded-xs {
+.text-faded-xs,
+.text-faded-lg {
   color: var(--text-faded);
 }
 
@@ -158,6 +159,13 @@ h4 {
   font-size: var(--fs-xs);
   line-height: 18px;
   letter-spacing: 0.23px;
+}
+
+.text-lg,
+.text-faded-lg {
+  font-weight: 500;
+  font-size: var(--fs-lg);
+  color: var(--text-faded-secondary);
 }
 
 .main-bg {
