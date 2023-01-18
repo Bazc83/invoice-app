@@ -1,6 +1,8 @@
 .filterWrapper {
   position: relative;
 }
+
+
 .filter {
   display: flex;
   gap: 0.75rem;
