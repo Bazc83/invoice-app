@@ -25,6 +25,11 @@ export const Invoice = () => {
     error,
   } = useFilterInvoiceById(invoiceId);
 
+  const handleCloseForm = () => {
+    if (!showInvoiceForm) return;
+    setShowInvoiceForm(false);
+  };
+
   if (isLoading) return 'Loading...';
 
   if (isError) return 'An error has occurred: ' + error.message;
@@ -36,6 +41,7 @@ export const Invoice = () => {
       )}
 
       <div
+        onClick={handleCloseForm}
         className={`${styles.mainWrapper} ${
           showInvoiceForm && styles.mainWrapperOverlay
         }`}>
