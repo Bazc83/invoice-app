@@ -48,4 +48,28 @@ userSchema.statics.signup = async function (email, password) {
   return user;
 };
 
+// Static login method
+// can't be an arrow function as using "this"
+userSchema.statics.login = async function (email, password) {
+  // Check user entered both email and password
+  if (!email || !password) {
+    throw Error('All fields must be completed');
+  }
+
+  const user = await this.findOne({ email });
+
+  if (!user) {
+    throw Error('Invalid credentials');
+  }
+
+  // Match plaintext password to the hash returned from user
+  const match = await bcrypt.compare(password, user.password);
+
+  if (!match) {
+    throw Error('Invalid credentials');
+  }
+
+  return user;
+};
+
 module.exports = mongoose.model('User', userSchema);

@@ -6,17 +6,15 @@
 
 #### Validate Inputs
 
-### dates
+<!-- ### dates -->
 
-#### date logic creation date + paymentTerms
+<!-- #### date logic creation date + paymentTerms -->
 
 #### check date formats too
 
-#### calendar picker change?
+<!-- ### filter -->
 
-### filter
-
-#### filter invoices by payment status
+<!-- #### filter invoices by payment status -->
 
 #### maybe search invoices
 
@@ -49,3 +47,13 @@
 #### payment history
 
 #### ability to add new invoice to their a/c
+
+### invoiceIds and invoiceNewItem ids
+
+#### set these id's to the mongodb \_id
+
+#### saves having to create my own'
+
+#### so can remove all that functionality
+
+#### invoiceIdRoutes, controller etc
