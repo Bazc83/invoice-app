@@ -8,6 +8,8 @@ import { PageLayout } from './pages/PageLayout';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Invoice } from './pages/Invoice';
+import { Login } from './pages/Login';
+import { Signup } from './pages/Signup.jsx';
 
 export const DarkModeContext = createContext();
 
@@ -30,6 +32,9 @@ function App() {
                 <Route index element={<Invoices />} />
                 <Route path='/invoices' element={<Invoices />} />
                 <Route path='/invoices/:invoiceId' element={<Invoice />} />
+
+                <Route path='/login' element={<Login />} />
+                <Route path='/signup' element={<Signup />} />
                 <Route path='*' element={<NotFoundPage />} />
               </Route>
             </Routes>
