@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 
 
 // user route
-app.use('/api/user', require('./routes/user'));
+app.use('/api/user', require('./routes/userRoutes'));
 
 // Invoices
 app.use('/api/invoices', require('./routes/invoiceRoutes'));
