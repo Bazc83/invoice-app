@@ -1,12 +1,15 @@
 import { useAddNewInvoice } from '@/hooks/reactQueryHooks/useAddNewInvoice';
 import { useUpdateInvoiceId } from '@/hooks/reactQueryHooks/useUpdateInvoiceId';
 import { setInvoiceDates } from '@/hooks/setInvoiceDates';
+import { useInvoicesContext } from '@/hooks/useContextHooks/useInvoicesContext';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { InvoiceForm } from '../InvoiceForm';
 
-export const NewInvoiceForm = ({ setShowInvoiceForm }) => {
+export const NewInvoiceForm = () => {
+  const { dispatch } = useInvoicesContext();
+
   const { todaysDate } = setInvoiceDates();
 
   const [itemsArray, setItemsArray] = useState([]);
@@ -63,7 +66,14 @@ export const NewInvoiceForm = ({ setShowInvoiceForm }) => {
     });
     // increase invoice id by one
     updateIdMutation.mutate();
-    setShowInvoiceForm((prev) => !prev);
+
+    dispatch({ type: 'toggleInvoiceForm' });
+  };
+
+  const handleCancel = (e) => {
+    e.preventDefault();
+    newInvoiceMutation.reset();
+    dispatch({ type: 'hideInvoiceForm' });
   };
 
   useEffect(() => {
@@ -82,9 +92,9 @@ export const NewInvoiceForm = ({ setShowInvoiceForm }) => {
       formData={formData}
       setFormData={setFormData}
       handleFormSubmit={handleFormSubmit}
-      setShowInvoiceForm={setShowInvoiceForm}
       itemsArray={itemsArray}
       setItemsArray={setItemsArray}
+      handleCancel={handleCancel}
     />
   );
 };

@@ -1,5 +1,5 @@
 import { DarkModeContext } from '@/App';
-import { useAuthContext } from '@/hooks/useAuthContext';
+import { useAuthContext } from '@/hooks/useContextHooks/useAuthContext';
 import { useLogout } from '@/hooks/useLogout';
 
 import { useContext } from 'react';
@@ -42,8 +42,6 @@ export const Navbar = () => {
               </Link>
             </div>
           )}
-
-          
         </div>
         <div onClick={toggleDarkMode} className={styles.darkModeToggle}>
           {theme === 'dark' ? (

@@ -1,10 +1,13 @@
 import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
 import { useUpdateInvoice } from '@/hooks/reactQueryHooks/useUpdateInvoice';
+import { useInvoiceContext } from '@/hooks/useContextHooks/useInvoiceContext';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { InvoiceForm } from '../InvoiceForm';
 
-export const EditInvoiceForm = ({ setShowInvoiceForm }) => {
+export const EditInvoiceForm = () => {
+  const { dispatch } = useInvoiceContext();
+
   const { invoiceId } = useParams();
 
   const {
@@ -20,6 +23,7 @@ export const EditInvoiceForm = ({ setShowInvoiceForm }) => {
 
   // Update Invoice
   const { updateInvoiceMutation } = useUpdateInvoice();
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
     updateInvoiceMutation.mutate({
@@ -27,20 +31,19 @@ export const EditInvoiceForm = ({ setShowInvoiceForm }) => {
       invoiceData: formData,
     });
 
-    setShowInvoiceForm((prev) => !prev);
+    dispatch({ type: 'hideEditForm' });
   };
 
-  const handleCancelEdit = (e) => {
+  const handleCancel = (e) => {
     e.preventDefault();
     updateInvoiceMutation.reset();
-    setShowInvoiceForm(false);
+    dispatch({ type: 'hideEditForm' });
   };
 
   useEffect(() => {
     setFormData((prev) => ({ ...prev, items: itemsArray }));
   }, [itemsArray, setFormData]);
 
-  
   if (isLoading) return 'Loading...';
 
   if (isError) return 'An error has occurred: ' + error.message;
@@ -52,8 +55,7 @@ export const EditInvoiceForm = ({ setShowInvoiceForm }) => {
       itemsArray={itemsArray}
       setItemsArray={setItemsArray}
       handleFormSubmit={handleFormSubmit}
-      setShowInvoiceForm={setShowInvoiceForm}
-      handleCancelEdit={handleCancelEdit}
+      handleCancel={handleCancel}
     />
   );
 };

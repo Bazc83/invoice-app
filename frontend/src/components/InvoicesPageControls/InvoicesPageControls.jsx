@@ -1,5 +1,6 @@
 import { Button } from '@/components/Button';
 import { Filter } from '@/components/Filter';
+import { useInvoicesContext } from '@/hooks/useContextHooks/useInvoicesContext';
 import styles from './InvoicesPageControls.module.css';
 export const InvoicesPageControls = ({
   invoicesData,
@@ -8,6 +9,10 @@ export const InvoicesPageControls = ({
   filters,
   setFilters,
 }) => {
+
+  const { dispatch} = useInvoicesContext();
+
+  
   return (
     <div className={styles.invoicesPageController}>
       <div className={styles.invoicesControllerLeftSide}>
@@ -27,7 +32,11 @@ export const InvoicesPageControls = ({
         />
 
         {/* Button shows new invoice form */}
-        <Button plusIcon onClick={() => setShowInvoiceForm((prev) => !prev)}>
+        <Button
+          plusIcon
+          onClick={() =>
+            dispatch({ type: "toggleInvoiceForm"})
+          }>
           New
         </Button>
       </div>

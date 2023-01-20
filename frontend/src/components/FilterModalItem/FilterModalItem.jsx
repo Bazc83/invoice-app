@@ -7,6 +7,7 @@ export const FilterModalItem = ({
   filterChangeHandler,
   filters,
 }) => {
+  
   const [checked, setChecked] = useState(filters[checkboxLabel]);
 
   const handleChecked = (e) => {

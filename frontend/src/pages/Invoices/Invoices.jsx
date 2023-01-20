@@ -3,14 +3,17 @@ import { InvoicesPageControls } from '@/components/InvoicesPageControls';
 import { NewInvoiceForm } from '@/components/NewInvoiceForm';
 import { NoInvoices } from '@/components/NoInvoices';
 import { useInvoices } from '@/hooks/reactQueryHooks/useInvoices';
+import { useInvoicesContext } from '@/hooks/useContextHooks/useInvoicesContext';
 import { useEffect, useState } from 'react';
 import styles from './Invoices.module.css';
 
 export const Invoices = () => {
+  const { showInvoiceForm} = useInvoicesContext();
 
   const { isLoading, isError, error, data: invoices } = useInvoices();
 
-  const [showInvoiceForm, setShowInvoiceForm] = useState(false);
+  const [selectedFilters, setSelectedFilters] = useState([]);
+  const [filteredInvoices, setFilteredInvoices] = useState();
 
   const [filters, setFilters] = useState({
     paid: false,
@@ -18,13 +21,9 @@ export const Invoices = () => {
     draft: false,
   });
 
-  const [filteredInvoices, setFilteredInvoices] = useState();
-
   useEffect(() => {
     setFilteredInvoices(invoices);
   }, [invoices]);
-
-  const [selectedFilters, setSelectedFilters] = useState([]);
 
   const updateFilters = () => {
     for (const filterVal in filters) {
@@ -74,15 +73,12 @@ export const Invoices = () => {
     <div className={`container main-bg`}>
       <InvoicesPageControls
         invoicesData={invoices?.length}
-        setShowInvoiceForm={setShowInvoiceForm}
         updateFilters={updateFilters}
         filters={filters}
         setFilters={setFilters}
       />
 
-      {showInvoiceForm && (
-        <NewInvoiceForm setShowInvoiceForm={setShowInvoiceForm} />
-      )}
+      {showInvoiceForm && <NewInvoiceForm />}
       {invoices?.length === 0 && <NoInvoices />}
       <div className={styles.invoicesWrapper}>
         {invoices?.length > 0 &&

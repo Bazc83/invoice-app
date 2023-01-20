@@ -8,13 +8,15 @@ import { InvoiceItemsTable } from '@/components/InvoiceItemsTable';
 import { PaymentStatus } from '@/components/PaymentStatus';
 import { useDeleteInvoice } from '@/hooks/reactQueryHooks/useDeleteInvoice';
 import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
+import { useInvoiceContext } from '@/hooks/useContextHooks/useInvoiceContext';
 import { useFormatDate } from '@/hooks/useFormatDate';
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from './Invoice.module.css';
 
 export const Invoice = () => {
-  const [showInvoiceForm, setShowInvoiceForm] = useState(false);
+  const { showEditForm, dispatch } = useInvoiceContext();
+
 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
@@ -39,9 +41,11 @@ export const Invoice = () => {
   };
 
   const handleCloseForm = () => {
-    if (!showInvoiceForm) return;
-    setShowInvoiceForm(false);
+    if (!showEditForm) return;
+    dispatch({ type: 'hideEditForm' });
   };
+
+
 
   if (isLoading) return 'Loading...';
 
@@ -59,14 +63,12 @@ export const Invoice = () => {
         />
       )}
 
-      {showInvoiceForm && (
-        <EditInvoiceForm setShowInvoiceForm={setShowInvoiceForm} />
-      )}
+      {showEditForm && <EditInvoiceForm />}
 
       <div
         onClick={handleCloseForm}
         className={`${styles.mainWrapper} ${
-          showInvoiceForm && styles.mainWrapperOverlay
+          showEditForm && styles.mainWrapperOverlay
         }`}>
         <div className={` container ${styles.invoiceWrapper} text`}>
           {/* Go back to invoices page link */}
@@ -82,10 +84,7 @@ export const Invoice = () => {
 
             {/* Another InvoiceButtons component further down */}
             <div className={styles.buttonWrapperTop}>
-              <InvoiceButtons
-                setShowInvoiceForm={setShowInvoiceForm}
-                setShowDeleteModal={setShowDeleteModal}
-              />
+              <InvoiceButtons setShowDeleteModal={setShowDeleteModal} />
             </div>
           </div>
 
@@ -157,10 +156,7 @@ export const Invoice = () => {
 
         {/* Other InvoiceButtons component */}
         <div className={`secondary-bg container ${styles.buttonWrapperBottom}`}>
-          <InvoiceButtons
-            setShowInvoiceForm={setShowInvoiceForm}
-            setShowDeleteModal={setShowDeleteModal}
-          />
+          <InvoiceButtons setShowDeleteModal={setShowDeleteModal} />
         </div>
       </div>
     </div>

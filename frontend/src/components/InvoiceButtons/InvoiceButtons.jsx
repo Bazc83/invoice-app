@@ -1,8 +1,10 @@
 import { Button } from '@/components/Button';
 import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
 import { useUpdateInvoice } from '@/hooks/reactQueryHooks/useUpdateInvoice';
+import { useInvoiceContext } from '@/hooks/useContextHooks/useInvoiceContext';
 import { useParams } from 'react-router-dom';
-export const InvoiceButtons = ({ setShowInvoiceForm, setShowDeleteModal}) => {
+export const InvoiceButtons = ({ setShowDeleteModal }) => {
+  const { dispatch } = useInvoiceContext();
 
   const { invoiceId } = useParams();
 
@@ -31,7 +33,7 @@ export const InvoiceButtons = ({ setShowInvoiceForm, setShowDeleteModal}) => {
       {invoiceData?.status === 'draft' && (
         <Button
           btnStyle='btnThree'
-          onClick={() => setShowInvoiceForm((prev) => !prev)}>
+          onClick={() => dispatch({ type: 'showEditForm' })}>
           Edit
         </Button>
       )}

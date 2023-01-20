@@ -1,12 +1,12 @@
 import { useMutation } from '@tanstack/react-query';
-import { useAuthContext } from '../useAuthContext';
+import { useAuthContext } from '../useContextHooks/useAuthContext';
 
 export const useDeleteInvoice = () => {
   const { user } = useAuthContext();
 
   const deleteInvoice = async (invoiceId) => {
     const response = await fetch(`/api/invoices/${invoiceId}`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
         Authorization: `Bearer ${user.token}`,
       },

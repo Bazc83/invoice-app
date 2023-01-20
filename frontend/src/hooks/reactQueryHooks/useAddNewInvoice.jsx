@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useAuthContext } from '../useAuthContext';
+import { useAuthContext } from '../useContextHooks/useAuthContext';
 
 export const useAddNewInvoice = () => {
   const queryClient = useQueryClient();

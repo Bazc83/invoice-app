@@ -3,7 +3,12 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { createContext } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import useLocalStorage from 'use-local-storage';
-import { useAuthContext } from './hooks/useAuthContext';
+import {
+  InvoiceContext,
+  InvoiceContextProvider,
+} from './context/InvoiceContext';
+import { InvoicesContextProvider } from './context/InvoicesContext';
+import { useAuthContext } from './hooks/useContextHooks/useAuthContext';
 import { Invoice } from './pages/Invoice';
 import { Invoices } from './pages/Invoices';
 import { Login } from './pages/Login';
@@ -29,37 +34,42 @@ function App() {
     <div className='App' data-theme={theme}>
       <DarkModeContext.Provider value={{ theme, toggleDarkMode }}>
         <QueryClientProvider client={queryClient}>
-          <BrowserRouter>
-            <Routes>
-              <Route element={<PageLayout />}>
-                <Route
-                  index
-                  element={user ? <Invoices /> : <Navigate to='/login' />}
-                />
-                <Route
-                  path='/invoices/:invoiceId'
-                  element={user ? <Invoice /> : <Navigate to='/login' />}
-                />
+          <InvoicesContextProvider>
+            <InvoiceContextProvider>
+              <BrowserRouter>
+                <Routes>
+                  <Route element={<PageLayout />}>
+                    <Route
+                      index
+                      element={user ? <Invoices /> : <Navigate to='/login' />}
+                    />
 
-                <Route
-                  path='/invoices'
-                  element={user ? <Invoices /> : <Navigate to='/login' />}
-                />
+                    <Route
+                      path='/invoices/:invoiceId'
+                      element={user ? <Invoice /> : <Navigate to='/login' />}
+                    />
 
-                <Route
-                  path='/login'
-                  element={!user ? <Login /> : <Navigate to='/' />}
-                />
-                <Route
-                  path='/signup'
-                  element={!user ? <Signup /> : <Navigate to='/' />}
-                />
+                    <Route
+                      path='/invoices'
+                      element={user ? <Invoices /> : <Navigate to='/login' />}
+                    />
 
-                <Route path='*' element={<NotFoundPage />} />
-              </Route>
-            </Routes>
-          </BrowserRouter>
-          <ReactQueryDevtools initialIsOpen={false} />
+                    <Route
+                      path='/login'
+                      element={!user ? <Login /> : <Navigate to='/' />}
+                    />
+                    <Route
+                      path='/signup'
+                      element={!user ? <Signup /> : <Navigate to='/' />}
+                    />
+
+                    <Route path='*' element={<NotFoundPage />} />
+                  </Route>
+                </Routes>
+              </BrowserRouter>
+              <ReactQueryDevtools initialIsOpen={false} />
+            </InvoiceContextProvider>
+          </InvoicesContextProvider>
         </QueryClientProvider>
       </DarkModeContext.Provider>
     </div>

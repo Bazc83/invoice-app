@@ -12,7 +12,7 @@ export const InvoiceForm = ({
   itemsArray,
   setItemsArray,
   handleFormSubmit,
-  setShowInvoiceForm,
+  handleCancel,
 }) => {
   const { todaysDate, fifteenDays, twentyOneDays } = setInvoiceDates(
     formData?.createdAt
@@ -36,11 +36,6 @@ export const InvoiceForm = ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
-  };
-
-  const handleCancelEdit = (e) => {
-    e.preventDefault();
-    setShowInvoiceForm(false);
   };
 
   useEffect(() => {
@@ -189,7 +184,7 @@ export const InvoiceForm = ({
         <FormItems itemsArray={itemsArray} setItemsArray={setItemsArray} />
 
         <div className={styles.formButtons}>
-          <Button onClick={handleCancelEdit} btnStyle='btnThree'>
+          <Button onClick={handleCancel} btnStyle='btnThree'>
             Cancel
           </Button>
           <Button onClick={handleFormSubmit}>Save Changes</Button>

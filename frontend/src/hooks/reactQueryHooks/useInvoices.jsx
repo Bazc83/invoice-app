@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useAuthContext } from '../useAuthContext';
+import { useAuthContext } from '../useContextHooks/useAuthContext';
 
 export const useInvoices = () => {
   const { user } = useAuthContext();
