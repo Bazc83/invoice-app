@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import styles from './Invoices.module.css';
 
 export const Invoices = () => {
+
   const { isLoading, isError, error, data: invoices } = useInvoices();
 
   const [showInvoiceForm, setShowInvoiceForm] = useState(false);
@@ -82,9 +83,9 @@ export const Invoices = () => {
       {showInvoiceForm && (
         <NewInvoiceForm setShowInvoiceForm={setShowInvoiceForm} />
       )}
-      {invoices.length === 0 && <NoInvoices />}
+      {invoices?.length === 0 && <NoInvoices />}
       <div className={styles.invoicesWrapper}>
-        {invoices.length > 0 &&
+        {invoices?.length > 0 &&
           filteredInvoices?.map((invoice) => {
             return <InvoicePreview invoice={invoice} key={invoice?.id} />;
           })}

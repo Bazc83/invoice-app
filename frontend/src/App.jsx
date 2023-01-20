@@ -1,19 +1,20 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { createContext } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import useLocalStorage from 'use-local-storage';
+import { useAuthContext } from './hooks/useAuthContext';
+import { Invoice } from './pages/Invoice';
 import { Invoices } from './pages/Invoices';
+import { Login } from './pages/Login';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { PageLayout } from './pages/PageLayout';
-
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Invoice } from './pages/Invoice';
-import { Login } from './pages/Login';
 import { Signup } from './pages/Signup.jsx';
 
 export const DarkModeContext = createContext();
 
 const queryClient = new QueryClient();
+
 function App() {
   const [theme, setTheme] = useLocalStorage('theme' ? 'dark' : 'light');
 
@@ -22,6 +23,8 @@ function App() {
     setTheme(newTheme);
   };
 
+  const { user } = useAuthContext();
+
   return (
     <div className='App' data-theme={theme}>
       <DarkModeContext.Provider value={{ theme, toggleDarkMode }}>
@@ -29,12 +32,29 @@ function App() {
           <BrowserRouter>
             <Routes>
               <Route element={<PageLayout />}>
-                <Route index element={<Invoices />} />
-                <Route path='/invoices' element={<Invoices />} />
-                <Route path='/invoices/:invoiceId' element={<Invoice />} />
+                <Route
+                  index
+                  element={user ? <Invoices /> : <Navigate to='/login' />}
+                />
+                <Route
+                  path='/invoices/:invoiceId'
+                  element={user ? <Invoice /> : <Navigate to='/login' />}
+                />
 
-                <Route path='/login' element={<Login />} />
-                <Route path='/signup' element={<Signup />} />
+                <Route
+                  path='/invoices'
+                  element={user ? <Invoices /> : <Navigate to='/login' />}
+                />
+
+                <Route
+                  path='/login'
+                  element={!user ? <Login /> : <Navigate to='/' />}
+                />
+                <Route
+                  path='/signup'
+                  element={!user ? <Signup /> : <Navigate to='/' />}
+                />
+
                 <Route path='*' element={<NotFoundPage />} />
               </Route>
             </Routes>
