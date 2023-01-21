@@ -12,7 +12,6 @@ export const FilterModal = () => {
   const handleShowModal = () => {
     setShowModal((prev) => !prev);
   };
-
   return (
     <div className={styles.filterWrapper}>
       <div className={styles.filter} onClick={handleShowModal}>
@@ -27,11 +26,10 @@ export const FilterModal = () => {
       {showModal && (
         <div className={styles.modal}>
           <form className={styles.modalForm}>
-            {state.filters.map((filter) =>
-              (
-                <FilterModalItem filter={filter} key={filter.filterValue} />
-              )
-            )}
+            {/* Filter modal options */}
+            {state.filters.map((filter) => (
+              <FilterModalItem filter={filter} key={filter.filterValue} />
+            ))}
           </form>
         </div>
       )}

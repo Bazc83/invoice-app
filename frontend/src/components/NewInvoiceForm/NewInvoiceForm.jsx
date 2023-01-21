@@ -8,6 +8,7 @@ import { useContext, useEffect, useState } from 'react';
 import { InvoiceForm } from '../InvoiceForm';
 
 export const NewInvoiceForm = () => {
+  
   const { dispatch } = useContext(InvoicesContext)
 
   const { todaysDate } = setInvoiceDates();
