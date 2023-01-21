@@ -1,8 +1,9 @@
+import { AuthContext } from '@/context/AuthContext';
 import { useMutation } from '@tanstack/react-query';
-import { useAuthContext } from '../useContextHooks/useAuthContext';
+import { useContext } from 'react';
 
 export const useDeleteInvoice = () => {
-  const { user } = useAuthContext();
+  const { user } = useContext(AuthContext)
 
   const deleteInvoice = async (invoiceId) => {
     const response = await fetch(`/api/invoices/${invoiceId}`, {

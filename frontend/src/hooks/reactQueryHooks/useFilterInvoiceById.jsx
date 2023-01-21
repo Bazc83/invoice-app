@@ -1,8 +1,9 @@
+import { AuthContext } from '@/context/AuthContext';
 import { useQuery } from '@tanstack/react-query';
-import { useAuthContext } from '../useContextHooks/useAuthContext';
+import { useContext } from 'react';
 
 export const useFilterInvoiceById = (invoiceId) => {
-  const { user } = useAuthContext();
+  const { user } = useContext(AuthContext)
 
   const getInvoiceById = async (invoiceId) => {
     const response = await fetch(`/api/invoices/${invoiceId}`, {

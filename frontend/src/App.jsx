@@ -1,14 +1,13 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { createContext } from 'react';
+import { createContext, useContext } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import useLocalStorage from 'use-local-storage';
+import { AuthContext } from './context/AuthContext';
 import {
-  InvoiceContext,
   InvoiceContextProvider,
 } from './context/InvoiceContext';
 import { InvoicesContextProvider } from './context/InvoicesContext';
-import { useAuthContext } from './hooks/useContextHooks/useAuthContext';
 import { Invoice } from './pages/Invoice';
 import { Invoices } from './pages/Invoices';
 import { Login } from './pages/Login';
@@ -28,7 +27,8 @@ function App() {
     setTheme(newTheme);
   };
 
-  const { user } = useAuthContext();
+
+  const {user} = useContext(AuthContext)
 
   return (
     <div className='App' data-theme={theme}>

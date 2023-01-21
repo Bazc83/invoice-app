@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { useAuthContext } from './useContextHooks/useAuthContext';
+import { AuthContext } from '@/context/AuthContext';
+import { useContext, useState } from 'react';
 
 export const useLogin = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
-  const { dispatch } = useAuthContext();
+  const {dispatch} = useContext(AuthContext)
 
   const login = async (email, password) => {
     setIsLoading(true);

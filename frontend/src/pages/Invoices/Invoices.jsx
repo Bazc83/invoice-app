@@ -2,69 +2,66 @@ import { InvoicePreview } from '@/components/InvoicePreview';
 import { InvoicesPageControls } from '@/components/InvoicesPageControls';
 import { NewInvoiceForm } from '@/components/NewInvoiceForm';
 import { NoInvoices } from '@/components/NoInvoices';
+import { InvoicesContext } from '@/context/InvoicesContext';
 import { useInvoices } from '@/hooks/reactQueryHooks/useInvoices';
-import { useInvoicesContext } from '@/hooks/useContextHooks/useInvoicesContext';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styles from './Invoices.module.css';
 
 export const Invoices = () => {
-  const { showInvoiceForm} = useInvoicesContext();
+  const {state } = useContext(InvoicesContext)
 
   const { isLoading, isError, error, data: invoices } = useInvoices();
 
   const [selectedFilters, setSelectedFilters] = useState([]);
   const [filteredInvoices, setFilteredInvoices] = useState();
 
-  const [filters, setFilters] = useState({
-    paid: false,
-    pending: false,
-    draft: false,
-  });
+ 
 
   useEffect(() => {
     setFilteredInvoices(invoices);
   }, [invoices]);
 
-  const updateFilters = () => {
-    for (const filterVal in filters) {
-      if (filters[filterVal]) {
-        if (selectedFilters?.length === 0) {
-          setSelectedFilters([filterVal]);
-        } else {
-          setSelectedFilters((prev) => [
-            ...prev.filter((val) => val !== filterVal),
-            filterVal,
-          ]);
-        }
-      } else {
-        setSelectedFilters((prev) => [
-          ...prev.filter((val) => val !== filterVal),
-        ]);
-      }
-    }
-  };
+  // const updateFilters = () => {
+  //   for (const filterVal in state.filters) {
+  //     if (state.filters[filterVal]) {
+  //       if (selectedFilters?.length === 0) {
+  //         setSelectedFilters([filterVal]);
+  //       } else {
+  //         setSelectedFilters((prev) => [
+  //           ...prev.filter((val) => val !== filterVal),
+  //           filterVal,
+  //         ]);
+  //       }
+  //     } else {
+  //       setSelectedFilters((prev) => [
+  //         ...prev.filter((val) => val !== filterVal),
+  //       ]);
+  //     }
+  //   }
+  // };
 
-  const runFilter = () => {
-    if (selectedFilters.length > 0) {
-      setFilteredInvoices(
-        invoices.filter((filterVal) =>
-          selectedFilters.includes(filterVal.status)
-        )
-      );
-    } else {
-      setFilteredInvoices(invoices);
-    }
-  };
+  // const runFilter = () => {
 
-  useEffect(() => {
-    updateFilters();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filters]);
+  //   if (selectedFilters.length > 0) {
+  //     setFilteredInvoices(
+  //       invoices.filter((filterVal) =>
+  //         selectedFilters.includes(filterVal.status)
+  //       )
+  //     );
+  //   } else {
+  //     setFilteredInvoices(invoices);
+  //   }
+  // };
 
-  useEffect(() => {
-    runFilter();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedFilters]);
+  // useEffect(() => {
+  //   updateFilters();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [state.filters]);
+
+  // useEffect(() => {
+  //   runFilter();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [selectedFilters]);
 
   if (isLoading) return 'Loading...';
   if (isError) return 'An error has occurred: ' + error.message;
@@ -73,12 +70,11 @@ export const Invoices = () => {
     <div className={`container main-bg`}>
       <InvoicesPageControls
         invoicesData={invoices?.length}
-        updateFilters={updateFilters}
-        filters={filters}
-        setFilters={setFilters}
+        // updateFilters={updateFilters}
+       
       />
 
-      {showInvoiceForm && <NewInvoiceForm />}
+      {state.showInvoiceForm && <NewInvoiceForm />}
       {invoices?.length === 0 && <NoInvoices />}
       <div className={styles.invoicesWrapper}>
         {invoices?.length > 0 &&

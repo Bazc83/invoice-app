@@ -1,18 +1,12 @@
 import { Button } from '@/components/Button';
-import { Filter } from '@/components/Filter';
-import { useInvoicesContext } from '@/hooks/useContextHooks/useInvoicesContext';
+import { FilterModal } from '@/components/FilterModal';
+import { InvoicesContext } from '@/context/InvoicesContext';
+import { useContext } from 'react';
 import styles from './InvoicesPageControls.module.css';
-export const InvoicesPageControls = ({
-  invoicesData,
-  setShowInvoiceForm,
-  filterInvoices,
-  filters,
-  setFilters,
-}) => {
 
-  const { dispatch} = useInvoicesContext();
+export const InvoicesPageControls = ({ invoicesData }) => {
+  const { dispatch } = useContext(InvoicesContext);
 
-  
   return (
     <div className={styles.invoicesPageController}>
       <div className={styles.invoicesControllerLeftSide}>
@@ -24,19 +18,13 @@ export const InvoicesPageControls = ({
       </div>
 
       <div className={styles.invoicesControllerRightSide}>
-        {/* Filter invoices compontent */}
-        <Filter
-          filterInvoices={filterInvoices}
-          filters={filters}
-          setFilters={setFilters}
-        />
+        {/* FilterModal invoices compontent */}
+        <FilterModal />
 
         {/* Button shows new invoice form */}
         <Button
           plusIcon
-          onClick={() =>
-            dispatch({ type: "toggleInvoiceForm"})
-          }>
+          onClick={() => dispatch({ type: 'toggleInvoiceForm' })}>
           New
         </Button>
       </div>

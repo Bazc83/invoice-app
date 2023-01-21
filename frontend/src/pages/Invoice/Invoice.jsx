@@ -6,17 +6,16 @@ import { InvoiceItems } from '@/components/InvoiceItems';
 import { InvoiceItemsAmountDue } from '@/components/InvoiceItemsAmountDue';
 import { InvoiceItemsTable } from '@/components/InvoiceItemsTable';
 import { PaymentStatus } from '@/components/PaymentStatus';
+import { InvoiceContext } from '@/context/InvoiceContext';
 import { useDeleteInvoice } from '@/hooks/reactQueryHooks/useDeleteInvoice';
 import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
-import { useInvoiceContext } from '@/hooks/useContextHooks/useInvoiceContext';
 import { useFormatDate } from '@/hooks/useFormatDate';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from './Invoice.module.css';
 
 export const Invoice = () => {
-  const { showEditForm, dispatch } = useInvoiceContext();
-
+  const { showEditForm, dispatch } = useContext(InvoiceContext);
 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
@@ -44,8 +43,6 @@ export const Invoice = () => {
     if (!showEditForm) return;
     dispatch({ type: 'hideEditForm' });
   };
-
-
 
   if (isLoading) return 'Loading...';
 

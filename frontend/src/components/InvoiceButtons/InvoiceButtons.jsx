@@ -1,10 +1,11 @@
 import { Button } from '@/components/Button';
+import { InvoiceContext } from '@/context/InvoiceContext';
 import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
 import { useUpdateInvoice } from '@/hooks/reactQueryHooks/useUpdateInvoice';
-import { useInvoiceContext } from '@/hooks/useContextHooks/useInvoiceContext';
+import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 export const InvoiceButtons = ({ setShowDeleteModal }) => {
-  const { dispatch } = useInvoiceContext();
+  const { dispatch } = useContext(InvoiceContext)
 
   const { invoiceId } = useParams();
 

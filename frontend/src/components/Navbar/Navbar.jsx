@@ -1,5 +1,5 @@
 import { DarkModeContext } from '@/App';
-import { useAuthContext } from '@/hooks/useContextHooks/useAuthContext';
+import { AuthContext } from '@/context/AuthContext';
 import { useLogout } from '@/hooks/useLogout';
 
 import { useContext } from 'react';
@@ -10,7 +10,7 @@ import styles from './Navbar.module.css';
 export const Navbar = () => {
   const { theme, toggleDarkMode } = useContext(DarkModeContext);
 
-  const { user } = useAuthContext();
+  const {user} = useContext(AuthContext)
 
   const { logout } = useLogout();
 

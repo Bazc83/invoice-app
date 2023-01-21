@@ -1,14 +1,14 @@
+import { InvoicesContext } from '@/context/InvoicesContext';
 import { useAddNewInvoice } from '@/hooks/reactQueryHooks/useAddNewInvoice';
 import { useUpdateInvoiceId } from '@/hooks/reactQueryHooks/useUpdateInvoiceId';
 import { setInvoiceDates } from '@/hooks/setInvoiceDates';
-import { useInvoicesContext } from '@/hooks/useContextHooks/useInvoicesContext';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { InvoiceForm } from '../InvoiceForm';
 
 export const NewInvoiceForm = () => {
-  const { dispatch } = useInvoicesContext();
+  const { dispatch } = useContext(InvoicesContext)
 
   const { todaysDate } = setInvoiceDates();
 

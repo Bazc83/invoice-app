@@ -1,12 +1,12 @@
+import { InvoiceContext } from '@/context/InvoiceContext';
 import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
 import { useUpdateInvoice } from '@/hooks/reactQueryHooks/useUpdateInvoice';
-import { useInvoiceContext } from '@/hooks/useContextHooks/useInvoiceContext';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { InvoiceForm } from '../InvoiceForm';
 
 export const EditInvoiceForm = () => {
-  const { dispatch } = useInvoiceContext();
+  const { dispatch } = useContext(InvoiceContext)
 
   const { invoiceId } = useParams();
 
