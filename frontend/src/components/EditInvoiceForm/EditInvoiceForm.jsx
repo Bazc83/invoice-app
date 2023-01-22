@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { InvoiceForm } from '../InvoiceForm';
 
 export const EditInvoiceForm = () => {
-  const { dispatch } = useContext(InvoiceContext)
+  const { state, dispatch } = useContext(InvoiceContext);
 
   const { invoiceId } = useParams();
 
@@ -17,7 +17,11 @@ export const EditInvoiceForm = () => {
     error,
   } = useFilterInvoiceById(invoiceId);
 
-  const [formData, setFormData] = useState(invoiceData);
+  useEffect(() => {
+    if (invoiceData !== undefined) {
+      dispatch({ type: 'setFormData', payload: invoiceData });
+    }
+  }, [invoiceData, dispatch]);
 
   const [itemsArray, setItemsArray] = useState(invoiceData?.items);
 
@@ -28,7 +32,7 @@ export const EditInvoiceForm = () => {
     e.preventDefault();
     updateInvoiceMutation.mutate({
       invoiceId: invoiceId,
-      invoiceData: formData,
+      invoiceData: state.formData,
     });
 
     dispatch({ type: 'hideEditForm' });
@@ -41,8 +45,8 @@ export const EditInvoiceForm = () => {
   };
 
   useEffect(() => {
-    setFormData((prev) => ({ ...prev, items: itemsArray }));
-  }, [itemsArray, setFormData]);
+    dispatch({ type: 'setFormDataItems', payload: itemsArray });
+  }, [itemsArray, dispatch]);
 
   if (isLoading) return 'Loading...';
 
@@ -50,8 +54,7 @@ export const EditInvoiceForm = () => {
 
   return (
     <InvoiceForm
-      formData={formData}
-      setFormData={setFormData}
+      formData={state.formData}
       itemsArray={itemsArray}
       setItemsArray={setItemsArray}
       handleFormSubmit={handleFormSubmit}

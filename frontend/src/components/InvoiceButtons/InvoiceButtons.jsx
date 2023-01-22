@@ -4,8 +4,8 @@ import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceBy
 import { useUpdateInvoice } from '@/hooks/reactQueryHooks/useUpdateInvoice';
 import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
-export const InvoiceButtons = ({ setShowDeleteModal }) => {
-  const { dispatch } = useContext(InvoiceContext)
+export const InvoiceButtons = () => {
+  const { dispatch } = useContext(InvoiceContext);
 
   const { invoiceId } = useParams();
 
@@ -38,7 +38,9 @@ export const InvoiceButtons = ({ setShowDeleteModal }) => {
           Edit
         </Button>
       )}
-      <Button btnStyle='btnFive' onClick={() => setShowDeleteModal(true)}>
+      <Button
+        btnStyle='btnFive'
+        onClick={() => dispatch({ type: 'showDeleteModal' })}>
         {isLoading ? '...Deleting' : 'Delete'}
       </Button>
 

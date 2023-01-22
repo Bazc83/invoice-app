@@ -7,21 +7,16 @@ import { InvoiceItemsAmountDue } from '@/components/InvoiceItemsAmountDue';
 import { InvoiceItemsTable } from '@/components/InvoiceItemsTable';
 import { PaymentStatus } from '@/components/PaymentStatus';
 import { InvoiceContext } from '@/context/InvoiceContext';
-import { useDeleteInvoice } from '@/hooks/reactQueryHooks/useDeleteInvoice';
 import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
 import { useFormatDate } from '@/hooks/useFormatDate';
-import { useContext, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useContext } from 'react';
+import { useParams } from 'react-router-dom';
 import styles from './Invoice.module.css';
 
 export const Invoice = () => {
-  const { showEditForm, dispatch } = useContext(InvoiceContext);
-
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const { state, dispatch } = useContext(InvoiceContext);
 
   const { getDate } = useFormatDate();
-
-  const navigate = useNavigate();
 
   const { invoiceId } = useParams();
 
@@ -32,15 +27,8 @@ export const Invoice = () => {
     error,
   } = useFilterInvoiceById(invoiceId);
 
-  const { deleteSelectedInvoice } = useDeleteInvoice();
-
-  const handleDeleteInvoice = async () => {
-    await deleteSelectedInvoice(invoiceId);
-    navigate('/');
-  };
-
   const handleCloseForm = () => {
-    if (!showEditForm) return;
+    if (!state.showEditForm) return;
     dispatch({ type: 'hideEditForm' });
   };
 
@@ -51,21 +39,16 @@ export const Invoice = () => {
   return (
     <div
       className={`${styles.invoice} ${
-        showDeleteModal && styles.confirmModalOpen
+        state.showDeleteModal && styles.confirmModalOpen
       }`}>
-      {showDeleteModal && (
-        <ConfirmDeleteModal
-          setShowDeleteModal={setShowDeleteModal}
-          handleDeleteInvoice={handleDeleteInvoice}
-        />
-      )}
+      {state.showDeleteModal && <ConfirmDeleteModal />}
 
-      {showEditForm && <EditInvoiceForm />}
+      {state.showEditForm && <EditInvoiceForm />}
 
       <div
         onClick={handleCloseForm}
         className={`${styles.mainWrapper} ${
-          showEditForm && styles.mainWrapperOverlay
+          state.showEditForm && styles.mainWrapperOverlay
         }`}>
         <div className={` container ${styles.invoiceWrapper} text`}>
           {/* Go back to invoices page link */}
@@ -81,7 +64,7 @@ export const Invoice = () => {
 
             {/* Another InvoiceButtons component further down */}
             <div className={styles.buttonWrapperTop}>
-              <InvoiceButtons setShowDeleteModal={setShowDeleteModal} />
+              <InvoiceButtons />
             </div>
           </div>
 
@@ -153,7 +136,7 @@ export const Invoice = () => {
 
         {/* Other InvoiceButtons component */}
         <div className={`secondary-bg container ${styles.buttonWrapperBottom}`}>
-          <InvoiceButtons setShowDeleteModal={setShowDeleteModal} />
+          <InvoiceButtons />
         </div>
       </div>
     </div>

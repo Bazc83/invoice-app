@@ -1,19 +1,22 @@
 import { FormItems } from '@/components/FormItems';
 import { InvoiceFormInput } from '@/components/InvoiceFormInput';
 import { InvoiceFormSelect } from '@/components/InvoiceFormSelect';
+import { InvoiceContext } from '@/context/InvoiceContext';
+
 import { setInvoiceDates } from '@/hooks/setInvoiceDates';
 import { Button } from '@components/Button';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styles from './InvoiceForm.module.css';
 
 export const InvoiceForm = ({
   formData,
-  setFormData,
   itemsArray,
   setItemsArray,
   handleFormSubmit,
   handleCancel,
 }) => {
+  const { dispatch } = useContext(InvoiceContext);
+
   const { todaysDate, fifteenDays, twentyOneDays } = setInvoiceDates(
     formData?.createdAt
   );
@@ -32,34 +35,22 @@ export const InvoiceForm = ({
 
   // Update formdata when form values change
   const inputOnChange = (e) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
+    dispatch({ type: 'changeFormData', payload: e });
   };
 
   useEffect(() => {
-    setFormData((prevState) => ({
-      ...prevState,
-      paymentTerms: selectedPaymentTerm,
-    }));
-  }, [selectedPaymentTerm, setFormData]);
+    dispatch({ type: 'setFormDataPaymentTerms', payload: selectedPaymentTerm });
+  }, [selectedPaymentTerm, dispatch]);
 
   useEffect(() => {
     if (selectedPaymentTerm === '0') {
-      setFormData((prev) => ({ ...prev, paymentDue: todaysDate }));
+      dispatch({ type: 'setFormDataPaymentDueDate', payload: todaysDate });
     } else if (selectedPaymentTerm === '15') {
-      setFormData((prev) => ({ ...prev, paymentDue: fifteenDays }));
+      dispatch({ type: 'setFormDataPaymentDueDate', payload: fifteenDays });
     } else if (selectedPaymentTerm === '21') {
-      setFormData((prev) => ({ ...prev, paymentDue: twentyOneDays }));
+      dispatch({ type: 'setFormDataPaymentDueDate', payload: twentyOneDays });
     }
-  }, [
-    fifteenDays,
-    selectedPaymentTerm,
-    setFormData,
-    todaysDate,
-    twentyOneDays,
-  ]);
+  }, [fifteenDays, selectedPaymentTerm, todaysDate, twentyOneDays, dispatch]);
 
   return (
     <div className={styles.invoiceForm}>
