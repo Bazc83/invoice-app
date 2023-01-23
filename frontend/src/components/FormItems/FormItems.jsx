@@ -1,7 +1,7 @@
 import { Button } from '@/components/Button';
 import { InvoiceFormItem } from '@/components/InvoiceFormItem';
 import { useState } from 'react';
-import { NewInvoiceItem } from '../NewInvoiceItem/NewInvoiceItem';
+import { AddNewItem } from '../AddNewItem/AddNewItem';
 import styles from './FormItems.module.css';
 
 export const FormItems = ({
@@ -25,7 +25,7 @@ export const FormItems = ({
     }
   };
 
-  const addNewItem = (item) => {
+  const addItem = (item) => {
     setItemsArray((prev) => [...prev, item]);
   };
 
@@ -55,8 +55,8 @@ export const FormItems = ({
         ))}
 
         {showNewItemInput && (
-          <NewInvoiceItem
-            addNewItem={addNewItem}
+          <AddNewItem
+            addItem={addItem}
             setShowNewItemInput={setShowNewItemInput}
           />
         )}

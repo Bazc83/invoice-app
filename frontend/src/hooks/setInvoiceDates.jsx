@@ -15,7 +15,6 @@ export const setInvoiceDates = ({ paymentTermsValue, createdAtDate }) => {
   const fifteenDays = formatISO(addFifteenDays, { representation: 'date' });
   const twentyOneDays = formatISO(addTwentyOneDays, { representation: 'date' });
 
-  console.log('paymentTermsValue, ', paymentTermsValue);
   switch (paymentTermsValue) {
     case 'Cash':
       return todaysDate;

@@ -3,7 +3,7 @@ import { EditInvoiceForm } from '@/components/EditInvoiceForm';
 import { GoBackLink } from '@/components/GoBackLink';
 import { InvoiceButtons } from '@/components/InvoiceButtons';
 import { InvoiceItems } from '@/components/InvoiceItems';
-import { InvoiceItemsAmountDue } from '@/components/InvoiceItemsAmountDue';
+import { AmountDueTotal } from '@/components/AmountDueTotal';
 import { InvoiceItemsTable } from '@/components/InvoiceItemsTable';
 import { PaymentStatus } from '@/components/PaymentStatus';
 import { InvoiceContext } from '@/context/InvoiceContext';
@@ -129,7 +129,7 @@ export const Invoice = () => {
               {/* Hidden screens bigger than 678px */}
               <InvoiceItems items={invoiceData?.items} />
 
-              <InvoiceItemsAmountDue amountDue={invoiceData?.amountDueTotal} />
+              <AmountDueTotal amountDue={invoiceData?.amountDueTotal} />
             </div>
           </div>
         </div>

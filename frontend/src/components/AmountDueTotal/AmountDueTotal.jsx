@@ -1,7 +1,5 @@
-import styles from './InvoiceItemsAmountDue.module.css';
-export const InvoiceItemsAmountDue = ({ amountDue}) => {
-
-
+import styles from './AmountDueTotal.module.css';
+export const AmountDueTotal = ({ amountDue }) => {
   return (
     <div className={styles.amountDue}>
       <p className='text-xs'>Amount Due</p>

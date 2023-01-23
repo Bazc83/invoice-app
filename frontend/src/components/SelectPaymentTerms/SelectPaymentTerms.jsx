@@ -2,9 +2,9 @@ import { InvoiceContext } from '@/context/InvoiceContext';
 import { setInvoiceDates } from '@/hooks/setInvoiceDates';
 import { useContext } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
-import styles from './InvoiceFormSelect.module.css';
+import styles from './SelectPaymentTerms.module.css';
 
-export const InvoiceFormSelect = () => {
+export const SelectPaymentTerms = () => {
   const { state, dispatch } = useContext(InvoiceContext);
 
   const onItemSelected = (option) => {
@@ -27,7 +27,7 @@ export const InvoiceFormSelect = () => {
   if (state.formData === undefined) return 'Loading...';
 
   return (
-    <div className={styles.invoiceFormSelect}>
+    <div className={styles.SelectPaymentTerms}>
       <label htmlFor='paymentTerms' className='text-faded'>
         Payment Terms
       </label>

@@ -4,8 +4,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { Button } from '../Button';
 import { InvoiceFormInput } from '../InvoiceFormInput';
 
-import styles from './NewInvoiceItem.module.css';
-export const NewInvoiceItem = ({ addNewItem, setShowNewItemInput }) => {
+import styles from './AddNewItem.module.css';
+export const AddNewItem = ({ addItem, setShowNewItemInput }) => {
   const newId = uuidv4();
 
   const [formItem, setFormItem] = useState({
@@ -35,9 +35,9 @@ export const NewInvoiceItem = ({ addNewItem, setShowNewItemInput }) => {
     setItemTotal(formItem.price, formItem.quantity);
   };
 
-  const addItem = (e) => {
+  const addItemToItemsArray = (e) => {
     e.preventDefault();
-    addNewItem(formItem);
+    addItem(formItem);
     setShowNewItemInput((prev) => !prev);
   };
 
@@ -122,7 +122,7 @@ export const NewInvoiceItem = ({ addNewItem, setShowNewItemInput }) => {
         <Button onClick={handleCancel} btnStyle={'btnFour'}>
           Cancel
         </Button>
-        <Button onClick={(e) => addItem(e)} btnStyle={'btnFive'}>
+        <Button onClick={(e) => addItemToItemsArray(e)} btnStyle={'btnFive'}>
           Add Item To Invoice
         </Button>
       </div>
