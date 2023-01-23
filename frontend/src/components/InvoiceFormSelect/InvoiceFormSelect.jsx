@@ -1,34 +1,30 @@
-import { useEffect, useState } from 'react';
+import { InvoiceContext } from '@/context/InvoiceContext';
+import { setInvoiceDates } from '@/hooks/setInvoiceDates';
+import { useContext } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import styles from './InvoiceFormSelect.module.css';
-export const InvoiceFormSelect = ({
-  paymentOptions,
-  setSelectedPaymentTerm,
-  selectedPaymentTerm,
-  showPaymentTermOptions,
-  setShowPaymentTermOptions,
-}) => {
-  const [inputValue, setInputValue] = useState('');
+
+export const InvoiceFormSelect = () => {
+  const { state, dispatch } = useContext(InvoiceContext);
 
   const onItemSelected = (option) => {
-    setSelectedPaymentTerm(option.key);
-    setInputValue(option.value);
-    setShowPaymentTermOptions(false);
+    dispatch({
+      type: 'setPaymentTermsAndPaymentDueDate',
+      payload: {
+        paymentTerms: option,
+        paymentDue: setInvoiceDates({
+          paymentTermsValue: option,
+          createdAtDate: state.formData.createdAt,
+        }),
+      },
+    });
   };
 
   const onInputClick = () => {
-    setShowPaymentTermOptions((prev) => !prev);
+    dispatch({ type: 'toggleShowPaymentTermOptions' });
   };
 
-  useEffect(() => {
-    if (!paymentOptions) return;
-    if (selectedPaymentTerm) {
-      setInputValue(
-        paymentOptions.find((o) => o.key === selectedPaymentTerm)?.value
-      );
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  if (state.formData === undefined) return 'Loading...';
 
   return (
     <div className={styles.invoiceFormSelect}>
@@ -38,9 +34,14 @@ export const InvoiceFormSelect = ({
 
       <div className={styles.dropdownContainer}>
         <div className={styles.inputContainer} onClick={onInputClick}>
-          <input type='text' readOnly value={inputValue} className='text' />
+          <input
+            type='text'
+            readOnly
+            value={state.formData.paymentTerms || ''}
+            className='text'
+          />
 
-          {showPaymentTermOptions ? (
+          {state.showPaymentTermOptions ? (
             <FaChevronUp className={styles.icon} />
           ) : (
             <FaChevronDown className={styles.icon} />
@@ -49,18 +50,23 @@ export const InvoiceFormSelect = ({
 
         <div
           className={`${styles.dropdown} ${
-            showPaymentTermOptions && styles.visible
+            state.showPaymentTermOptions && styles.visible
           }`}>
-          {paymentOptions.map((option) => {
-            return (
-              <div
-                key={option.key}
-                onClick={() => onItemSelected(option)}
-                className={`${styles.option} text`}>
-                {option.value}
-              </div>
-            );
-          })}
+          <div
+            onClick={() => onItemSelected('Cash')}
+            className={`${styles.option} text`}>
+            Cash
+          </div>
+          <div
+            onClick={() => onItemSelected('15 days from invoice date')}
+            className={`${styles.option} text`}>
+            15 days from invoice date
+          </div>
+          <div
+            onClick={() => onItemSelected('21 days from invoice date')}
+            className={`${styles.option} text`}>
+            21 days from invoice date
+          </div>
         </div>
       </div>
     </div>

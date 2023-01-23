@@ -1,6 +1,6 @@
 import { addDays, formatISO, parseISO } from 'date-fns';
 
-export const setInvoiceDates = (createdAtDate) => {
+export const setInvoiceDates = ({ paymentTermsValue, createdAtDate }) => {
   const newDate = new Date();
 
   const createdAt = createdAtDate ? parseISO(createdAtDate) : '';
@@ -15,5 +15,15 @@ export const setInvoiceDates = (createdAtDate) => {
   const fifteenDays = formatISO(addFifteenDays, { representation: 'date' });
   const twentyOneDays = formatISO(addTwentyOneDays, { representation: 'date' });
 
-  return { todaysDate, fifteenDays, twentyOneDays };
+  console.log('paymentTermsValue, ', paymentTermsValue);
+  switch (paymentTermsValue) {
+    case 'Cash':
+      return todaysDate;
+    case '15 days from invoice date':
+      return fifteenDays;
+    case '21 days from invoice date':
+      return twentyOneDays;
+    default:
+      return;
+  }
 };

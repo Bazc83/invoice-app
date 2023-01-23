@@ -2,61 +2,28 @@ import { FormItems } from '@/components/FormItems';
 import { InvoiceFormInput } from '@/components/InvoiceFormInput';
 import { InvoiceFormSelect } from '@/components/InvoiceFormSelect';
 import { InvoiceContext } from '@/context/InvoiceContext';
-
-import { setInvoiceDates } from '@/hooks/setInvoiceDates';
 import { Button } from '@components/Button';
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import styles from './InvoiceForm.module.css';
 
 export const InvoiceForm = ({
-  formData,
   itemsArray,
   setItemsArray,
   handleFormSubmit,
   handleCancel,
 }) => {
-  const { dispatch } = useContext(InvoiceContext);
-
-  const { todaysDate, fifteenDays, twentyOneDays } = setInvoiceDates(
-    formData?.createdAt
-  );
-
-  const [selectedPaymentTerm, setSelectedPaymentTerm] = useState(
-    formData?.paymentTerms
-  );
-
-  const [showPaymentTermOptions, setShowPaymentTermOptions] = useState(false);
-
-  const paymentOptions = [
-    { key: '0', value: 'Cash' },
-    { key: '15', value: '15 days from invoice date' },
-    { key: '21', value: '21 days from invoice date' },
-  ];
+  const { state, dispatch } = useContext(InvoiceContext);
 
   // Update formdata when form values change
   const inputOnChange = (e) => {
     dispatch({ type: 'changeFormData', payload: e });
   };
 
-  useEffect(() => {
-    dispatch({ type: 'setFormDataPaymentTerms', payload: selectedPaymentTerm });
-  }, [selectedPaymentTerm, dispatch]);
-
-  useEffect(() => {
-    if (selectedPaymentTerm === '0') {
-      dispatch({ type: 'setFormDataPaymentDueDate', payload: todaysDate });
-    } else if (selectedPaymentTerm === '15') {
-      dispatch({ type: 'setFormDataPaymentDueDate', payload: fifteenDays });
-    } else if (selectedPaymentTerm === '21') {
-      dispatch({ type: 'setFormDataPaymentDueDate', payload: twentyOneDays });
-    }
-  }, [fifteenDays, selectedPaymentTerm, todaysDate, twentyOneDays, dispatch]);
-
   return (
     <div className={styles.invoiceForm}>
       <h2>
         Edit <span className={styles.invoiceFormHeaderAccent}>#</span>
-        {formData?.id}
+        {state.formData?.id}
       </h2>
 
       <form className={styles.form}>
@@ -64,32 +31,32 @@ export const InvoiceForm = ({
           <InvoiceFormInput
             itemName='id'
             itemLabel='invoice id'
-            value={formData.id || ''}
+            value={state.formData.id || ''}
             setValue={inputOnChange}
           />
           <h4 className={styles.formSectionHeader}>Bill From</h4>
           <InvoiceFormInput
             itemName='senderStreet'
             itemLabel='Street Address'
-            value={formData.senderStreet || ''}
+            value={state.formData.senderStreet || ''}
             setValue={inputOnChange}
           />
           <InvoiceFormInput
             itemName='senderCity'
             itemLabel='City'
-            value={formData.senderCity || ''}
+            value={state.formData.senderCity || ''}
             setValue={inputOnChange}
           />
           <InvoiceFormInput
             itemName='senderPostCode'
             itemLabel='Postcode'
-            value={formData.senderPostCode || ''}
+            value={state.formData.senderPostCode || ''}
             setValue={inputOnChange}
           />
           <InvoiceFormInput
             itemName='senderCountry'
             itemLabel='Country'
-            value={formData.senderCountry || ''}
+            value={state.formData.senderCountry || ''}
             setValue={inputOnChange}
           />
         </div>
@@ -99,39 +66,39 @@ export const InvoiceForm = ({
           <InvoiceFormInput
             itemName='clientName'
             itemLabel="Client's Name"
-            value={formData.clientName || ''}
+            value={state.formData.clientName || ''}
             setValue={inputOnChange}
           />
           <InvoiceFormInput
             type='email'
             itemName='clientEmail'
             itemLabel="Client's Email"
-            value={formData.clientEmail || ''}
+            value={state.formData.clientEmail || ''}
             setValue={inputOnChange}
           />
 
           <InvoiceFormInput
             itemName='clientStreet'
             itemLabel='Street Address'
-            value={formData.clientStreet || ''}
+            value={state.formData.clientStreet || ''}
             setValue={inputOnChange}
           />
           <InvoiceFormInput
             itemName='clientCity'
             itemLabel='City'
-            value={formData.clientCity || ''}
+            value={state.formData.clientCity || ''}
             setValue={inputOnChange}
           />
           <InvoiceFormInput
             itemName='clientPostCode'
             itemLabel='Post Code'
-            value={formData.clientPostCode || ''}
+            value={state.formData.clientPostCode || ''}
             setValue={inputOnChange}
           />
           <InvoiceFormInput
             itemName='clientCountry'
             itemLabel='Country'
-            value={formData.clientCountry || ''}
+            value={state.formData.clientCountry || ''}
             setValue={inputOnChange}
           />
 
@@ -140,34 +107,24 @@ export const InvoiceForm = ({
               type='date'
               itemName='createdAt'
               itemLabel='Created at'
-              value={formData.createdAt || ''}
-              // setValue={inputOnChange}
+              value={state.formData.createdAt || ''}
               disabled
             />
 
-            {/* // todo tempory as needs to be created at plus days to payment terms date */}
             <InvoiceFormInput
               type='date'
               itemName='paymentDue'
               itemLabel='Payment Due'
-              value={formData.paymentDue || ''}
-              setValue={inputOnChange}
+              value={state.formData.paymentDue || ''}
               disabled
             />
 
-            <InvoiceFormSelect
-              paymentOptions={paymentOptions}
-              selectedPaymentTerm={selectedPaymentTerm}
-              placeholder={'type to search'}
-              setSelectedPaymentTerm={setSelectedPaymentTerm}
-              showPaymentTermOptions={showPaymentTermOptions}
-              setShowPaymentTermOptions={setShowPaymentTermOptions}
-            />
+            <InvoiceFormSelect />
           </div>
           <InvoiceFormInput
             itemName='description'
             itemLabel='Project/Description'
-            value={formData.description || ''}
+            value={state.formData.description || ''}
             setValue={inputOnChange}
           />
         </div>

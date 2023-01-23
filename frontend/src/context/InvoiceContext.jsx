@@ -32,22 +32,22 @@ export const invoiceReducer = (state, action) => {
           [action.payload.target.name]: action.payload.target.value,
         },
       };
-    case 'setFormDataPaymentTerms':
+    case 'setPaymentTermsAndPaymentDueDate':
       return {
         ...state,
         formData: {
           ...state.formData,
-          paymentTerms: action.payload,
+          paymentTerms: action.payload.paymentTerms,
+          paymentDue: action.payload.paymentDue,
         },
+        showPaymentTermOptions: false,
       };
-    case 'setFormDataPaymentDueDate':
+    case 'toggleShowPaymentTermOptions':
       return {
         ...state,
-        formData: {
-          ...state.formData,
-          paymentDue: action.payload,
-        },
+        showPaymentTermOptions: !state.showPaymentTermOptions,
       };
+
     default:
       throw new Error('invoiceContextReducer error');
   }
@@ -59,6 +59,7 @@ export const InvoiceContextProvider = ({ children }) => {
     showDeleteModal: false,
     formData: {},
     itemsArray: [],
+    showPaymentTermOptions: false,
   });
 
   return (
