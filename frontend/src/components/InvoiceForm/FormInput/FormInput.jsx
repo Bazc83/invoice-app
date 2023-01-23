@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
-import styles from './InvoiceFormInput.module.css';
+import styles from './FormInput.module.css';
 
-export const InvoiceFormInput = ({
+export const FormInput = ({
   type,
   className,
   itemName,

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { FaTrashAlt } from 'react-icons/fa';
 import { v4 as uuidv4 } from 'uuid';
-import { Button } from '../Button';
-import { InvoiceFormInput } from '../InvoiceFormInput';
+import { Button } from '../../Button';
+import { FormInput } from '../FormInput';
 
 import styles from './AddNewItem.module.css';
 export const AddNewItem = ({ addItem, setShowNewItemInput }) => {
@@ -70,7 +70,7 @@ export const AddNewItem = ({ addItem, setShowNewItemInput }) => {
     <div>
       <h4 style={{ paddingBottom: '0.5rem' }}>Add A New Item</h4>
       <div className={styles.invoiceFormItem}>
-        <InvoiceFormInput
+        <FormInput
           type='text'
           itemName='name'
           itemLabel='Item Names'
@@ -79,7 +79,7 @@ export const AddNewItem = ({ addItem, setShowNewItemInput }) => {
           setValue={handleInputChange}
         />
 
-        <InvoiceFormInput
+        <FormInput
           type='number'
           itemName='quantity'
           itemLabel='Qty.'
@@ -90,7 +90,7 @@ export const AddNewItem = ({ addItem, setShowNewItemInput }) => {
           onBlur={validateQty}
         />
 
-        <InvoiceFormInput
+        <FormInput
           type='number'
           itemName='price'
           itemLabel='Price'
@@ -102,7 +102,7 @@ export const AddNewItem = ({ addItem, setShowNewItemInput }) => {
           onBlur={validatePrice}
         />
 
-        <InvoiceFormInput
+        <FormInput
           type='number'
           itemName='total'
           itemLabel='Total'

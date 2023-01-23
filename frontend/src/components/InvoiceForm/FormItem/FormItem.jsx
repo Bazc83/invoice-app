@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { FaTrashAlt } from 'react-icons/fa';
-import { InvoiceFormInput } from '../InvoiceFormInput';
-import styles from './InvoiceFormItem.module.css';
+import { InvoiceFormInput } from '../FormInput';
+import styles from './FormItem.module.css';
 
-export const InvoiceFormItem = ({ item, onItemChange, handleDeleteItem }) => {
+export const FormItem = ({ item, onItemChange, handleDeleteItem }) => {
   const [formItem, setFormItem] = useState({
     itemId: item?.id,
     name: item?.name,

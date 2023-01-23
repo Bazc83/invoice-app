@@ -1,4 +1,4 @@
-import { FormItems } from '@/components/FormItems';
+import { FormItems } from '@/components/InvoiceForm/FormItems';
 import { InvoiceContext } from '@/context/InvoiceContext';
 import { useContext } from 'react';
 import { FormButtons } from './FormButtons';
@@ -20,7 +20,7 @@ export const InvoiceForm = ({
   };
 
   if (!state.formData) return 'Loading ...';
-  
+
   return (
     <div className={styles.invoiceForm}>
       <FormId state={state} />

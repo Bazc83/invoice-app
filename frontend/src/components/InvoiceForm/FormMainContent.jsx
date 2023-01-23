@@ -1,37 +1,37 @@
-import { InvoiceFormInput } from '../InvoiceFormInput';
-import { SelectPaymentTerms } from '../SelectPaymentTerms';
+import { FormInput } from './FormInput';
 import styles from './InvoiceForm.module.css';
+import { SelectPaymentTerms } from './SelectPaymentTerms';
 
 export function FormMainContent({ inputOnChange, state }) {
   return (
     <>
       <div className={styles.formSection}>
-        <InvoiceFormInput
+        <FormInput
           itemName='id'
           itemLabel='invoice id'
           value={state.formData.id || ''}
           setValue={inputOnChange}
         />
         <h4 className={styles.formSectionHeader}>Bill From</h4>
-        <InvoiceFormInput
+        <FormInput
           itemName='senderStreet'
           itemLabel='Street Address'
           value={state.formData.senderStreet || ''}
           setValue={inputOnChange}
         />
-        <InvoiceFormInput
+        <FormInput
           itemName='senderCity'
           itemLabel='City'
           value={state.formData.senderCity || ''}
           setValue={inputOnChange}
         />
-        <InvoiceFormInput
+        <FormInput
           itemName='senderPostCode'
           itemLabel='Postcode'
           value={state.formData.senderPostCode || ''}
           setValue={inputOnChange}
         />
-        <InvoiceFormInput
+        <FormInput
           itemName='senderCountry'
           itemLabel='Country'
           value={state.formData.senderCountry || ''}
@@ -41,13 +41,13 @@ export function FormMainContent({ inputOnChange, state }) {
 
       <div className={styles.formSection}>
         <h4 className={styles.formSectionHeader}>Bill To</h4>
-        <InvoiceFormInput
+        <FormInput
           itemName='clientName'
           itemLabel="Client's Name"
           value={state.formData.clientName || ''}
           setValue={inputOnChange}
         />
-        <InvoiceFormInput
+        <FormInput
           type='email'
           itemName='clientEmail'
           itemLabel="Client's Email"
@@ -55,25 +55,25 @@ export function FormMainContent({ inputOnChange, state }) {
           setValue={inputOnChange}
         />
 
-        <InvoiceFormInput
+        <FormInput
           itemName='clientStreet'
           itemLabel='Street Address'
           value={state.formData.clientStreet || ''}
           setValue={inputOnChange}
         />
-        <InvoiceFormInput
+        <FormInput
           itemName='clientCity'
           itemLabel='City'
           value={state.formData.clientCity || ''}
           setValue={inputOnChange}
         />
-        <InvoiceFormInput
+        <FormInput
           itemName='clientPostCode'
           itemLabel='Post Code'
           value={state.formData.clientPostCode || ''}
           setValue={inputOnChange}
         />
-        <InvoiceFormInput
+        <FormInput
           itemName='clientCountry'
           itemLabel='Country'
           value={state.formData.clientCountry || ''}
@@ -81,7 +81,7 @@ export function FormMainContent({ inputOnChange, state }) {
         />
 
         <div className='grid-row-half'>
-          <InvoiceFormInput
+          <FormInput
             type='date'
             itemName='createdAt'
             itemLabel='Created at'
@@ -89,7 +89,7 @@ export function FormMainContent({ inputOnChange, state }) {
             disabled
           />
 
-          <InvoiceFormInput
+          <FormInput
             type='date'
             itemName='paymentDue'
             itemLabel='Payment Due'
@@ -97,13 +97,11 @@ export function FormMainContent({ inputOnChange, state }) {
             disabled
           />
 
-
-
           {/* Select payment terms */}
           <SelectPaymentTerms />
         </div>
 
-        <InvoiceFormInput
+        <FormInput
           itemName='description'
           itemLabel='Project/Description'
           value={state.formData.description || ''}
