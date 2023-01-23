@@ -1,4 +1,4 @@
-import { InvoicePreview } from '@/components/InvoicePreview';
+import { InvoicePreview } from '@/pages/Invoices/InvoicePreview';
 import { InvoicesPageControls } from '@/components/InvoicesPageControls';
 import { NewInvoiceForm } from '@/components/NewInvoiceForm';
 import { NoInvoices } from '@/components/NoInvoices';

@@ -54,7 +54,7 @@
   --fs-lg: clamp(1.25rem, 5vw, 1.5rem);
   --fs-md: 1rem;
   --fs-h4: clamp(0.8125rem, 5vw, 1rem);
-  --fs-sm: 0.8125rem;
+  --fs-sm: 0.812rem;
   --fs-xs: 0.75rem;
 }
 
@@ -137,7 +137,7 @@ h4 {
 .text,
 .text-faded {
   font-weight: 500;
-  font-size: var(--fs-sm);
+  font-size: var(--fs-md);
   line-height: 15px;
   letter-spacing: 0.25px;
 }
@@ -165,6 +165,9 @@ h4 {
 .text-faded-lg {
   font-weight: 500;
   font-size: var(--fs-lg);
+}
+
+.text-faded-lg {
   color: var(--text-faded-secondary);
 }
 

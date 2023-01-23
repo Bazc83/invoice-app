@@ -3,7 +3,6 @@
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
   position: relative;
-  
 }
 
 .confirmModalOpen:before {
@@ -26,10 +25,11 @@
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 20;
   height: 100%;
-  width: 100%;
+
   position: absolute;
   inset: 0;
 }
+
 @media (min-width: 768px) {
   .invoice {
     grid-template-columns: repeat(12, 1fr);
@@ -48,53 +48,61 @@
   grid-row: 1/-1;
   grid-column: 1/-1;
 }
+
 .invoiceContent {
   display: flex;
   flex-direction: column;
   gap: 1.75rem;
 }
+
+.statusAndButtons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--invoiceShadow);
+  padding: 1rem;
+}
+
 .status {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-block: 1.75rem;
-  gap: 1rem;
-  box-shadow: var(--invoiceShadow);
-}
-
-.buttonWrapperTop {
-  display: none;
-}
-
-.buttonWrapperBottom {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   gap: 0.5rem;
+  padding: 1rem;
   width: 100%;
-  padding: 1.75rem 1.5rem;
-  box-shadow: var(--invoiceShadow);
-  grid-column: 1/-1;
-  z-index: 20;
 }
 
-@media (min-width: 700px) {
+.buttonsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+@media (min-width: 600px) {
   .statusAndButtons {
-    display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
     box-shadow: var(--invoiceShadow);
-  }
-  .buttonWrapperBottom {
-    display: none;
+    gap: 1rem;
   }
 
-  .buttonWrapperTop {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
+  .status {
     justify-content: center;
+    width: auto;
+  }
+
+  .buttonsWrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.75rem;
+    padding-top: 0;
+    justify-content: flex-end;
+    width: 100%;
   }
 }
 
@@ -109,11 +117,13 @@
     'clientEmail clientEmail ... ...'
     'items items items items';
   box-shadow: var(--invoiceShadow);
+  max-width: 100%;
 }
 
 @media (min-width: 700px) {
   .invoiceMain {
     display: grid;
+
     padding: 1.75rem;
     row-gap: 1.25rem;
     grid-template-areas:

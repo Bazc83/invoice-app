@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { FaTrashAlt } from 'react-icons/fa';
-import { InvoiceFormInput } from '../FormInput';
+import { FormInput } from '../FormInput';
 import styles from './FormItem.module.css';
 
 export const FormItem = ({ item, onItemChange, handleDeleteItem }) => {
@@ -56,7 +56,7 @@ export const FormItem = ({ item, onItemChange, handleDeleteItem }) => {
 
   return (
     <div className={styles.invoiceFormItem}>
-      <InvoiceFormInput
+      <FormInput
         type='text'
         itemName='name'
         itemLabel='Item Name'
@@ -65,7 +65,7 @@ export const FormItem = ({ item, onItemChange, handleDeleteItem }) => {
         setValue={handleInputChange}
       />
 
-      <InvoiceFormInput
+      <FormInput
         type='number'
         itemName='quantity'
         itemLabel='Qty.'
@@ -79,7 +79,7 @@ export const FormItem = ({ item, onItemChange, handleDeleteItem }) => {
         onBlur={validateQty}
       />
 
-      <InvoiceFormInput
+      <FormInput
         type='number'
         itemName='price'
         itemLabel='Price'
@@ -92,7 +92,7 @@ export const FormItem = ({ item, onItemChange, handleDeleteItem }) => {
         onBlur={validatePrice}
       />
 
-      <InvoiceFormInput
+      <FormInput
         type='number'
         itemName='total'
         itemLabel='Total'

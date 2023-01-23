@@ -4,6 +4,9 @@ import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceBy
 import { useUpdateInvoice } from '@/hooks/reactQueryHooks/useUpdateInvoice';
 import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
+
+import styles from './InvoiceButtons.module.css';
+
 export const InvoiceButtons = () => {
   const { dispatch } = useContext(InvoiceContext);
 
@@ -32,30 +35,48 @@ export const InvoiceButtons = () => {
   return (
     <>
       {invoiceData?.status === 'draft' && (
-        <Button
-          btnStyle='btnThree'
-          onClick={() => dispatch({ type: 'showEditForm' })}>
-          Edit
-        </Button>
+        <div className={styles.invoiceBtn}>
+          <Button
+            btnStyle='btnThree'
+            onClick={() => dispatch({ type: 'showEditForm' })}
+            fullWidth>
+            Edit
+          </Button>
+        </div>
       )}
-      <Button
-        btnStyle='btnFive'
-        onClick={() => dispatch({ type: 'showDeleteModal' })}>
-        {isLoading ? '...Deleting' : 'Delete'}
-      </Button>
+      <div className={styles.invoiceBtn}>
+        <Button
+          btnStyle='btnFive'
+          onClick={() => dispatch({ type: 'showDeleteModal' })}
+          fullWidth>
+          {isLoading ? '...Deleting' : 'Delete'}
+        </Button>
+      </div>
 
       {invoiceData?.status !== 'paid' && invoiceData?.status !== 'draft' && (
-        <Button onClick={() => setStatus('paid')}>Mark as Paid</Button>
+        <div className={styles.invoiceBtn}>
+          <Button onClick={() => setStatus('paid')} fullWidth>
+            Paid
+          </Button>
+        </div>
       )}
 
       {invoiceData?.status === 'draft' && (
-        <Button onClick={() => setStatus('pending')}>Mark as Pending</Button>
+        <div className={styles.invoiceBtn}>
+          <Button onClick={() => setStatus('pending')} fullWidth>
+            Pending
+          </Button>
+        </div>
       )}
 
       {invoiceData?.status !== 'draft' &&
         invoiceData?.status === 'pending' &&
         invoiceData?.status !== 'paid' && (
-          <Button onClick={() => setStatus('draft')}>Draft</Button>
+          <div className={styles.invoiceBtn}>
+            <Button onClick={() => setStatus('draft')} fullWidth>
+              Draft
+            </Button>
+          </div>
         )}
     </>
   );

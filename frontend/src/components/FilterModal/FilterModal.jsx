@@ -1,4 +1,4 @@
-import { FilterModalItem } from '@/components/FilterModalItem';
+import { FilterModalItem } from '@/components/FilterModal/FilterModalItem';
 import { InvoicesContext } from '@/context/InvoicesContext';
 import { PageLayoutContext } from '@/pages/PageLayout';
 import { useContext } from 'react';
