@@ -1,7 +1,8 @@
 import { AuthContext } from '@/context/AuthContext';
 import { useQuery } from '@tanstack/react-query';
 import { useContext } from 'react';
-import { useCheckToken } from '../useCheckToken';
+
+import { useAuth } from './useAuth';
 
 const getInvoices = async (userToken) => {
   const response = await fetch('/api/invoices/', {
@@ -21,11 +22,12 @@ const getInvoices = async (userToken) => {
 export const useInvoices = () => {
   const { user } = useContext(AuthContext);
 
-  const { jwtValid } = useCheckToken();
+  const {authData} = useAuth();
+
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ['invoices'],
     queryFn: () => getInvoices(user.token),
-    enabled: !!jwtValid,
+    enabled: authData?.jwtValid === true,
   });
 
   return { data, isLoading, isError, error };

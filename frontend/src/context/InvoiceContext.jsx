@@ -47,6 +47,14 @@ export const invoiceReducer = (state, action) => {
         ...state,
         showPaymentTermOptions: !state.showPaymentTermOptions,
       };
+    case 'resetInvoice':
+      return {
+        showEditForm: false,
+        showDeleteModal: false,
+        formData: {},
+        itemsArray: [],
+        showPaymentTermOptions: false,
+      };
 
     default:
       throw new Error('invoiceContextReducer error');

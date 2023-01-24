@@ -1,10 +1,10 @@
 import { ConfirmDeleteModal } from '@/components/ConfirmDeleteModal';
 import { EditInvoiceForm } from '@/components/EditInvoiceForm';
 import { GoBackLink } from '@/components/GoBackLink';
-import { InvoiceButtons } from '@/pages/Invoice/InvoiceButtons';
 import { PaymentStatus } from '@/components/PaymentStatus';
 import { InvoiceContext } from '@/context/InvoiceContext';
 import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
+import { InvoiceButtons } from '@/pages/Invoice/InvoiceButtons';
 import { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './Invoice.module.css';
@@ -28,8 +28,8 @@ export const Invoice = () => {
   };
 
   useEffect(() => {
-    handleCloseForm();
-  }, []);
+    return () => dispatch({ type: 'resetInvoice' });
+  }, [dispatch]);
 
   if (isLoading) return 'Loading...';
 
@@ -49,8 +49,6 @@ export const Invoice = () => {
         className={`${styles.mainWrapper} ${
           state.showEditForm && styles.mainWrapperOverlay
         }`}>
-
-          
         <div className={` container ${styles.invoiceWrapper} text`}>
           {/* Go back to invoices page link */}
           <GoBackLink linkPath={'/invoices'} />
