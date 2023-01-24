@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 
 export const useCheckToken = () => {
-  const [jwtValid, setJwtValid] = useState(false);
-  const user = JSON.parse(localStorage.getItem('user'));
+  
+  const [jwtValid, setJwtValid] = useState(null);
 
-   
+  
+  const user = JSON.parse(localStorage.getItem('user'));
 
   const checkToken = async (userVal) => {
     const { token } = userVal;
@@ -23,6 +24,7 @@ export const useCheckToken = () => {
         setJwtValid(false);
       }
       return json;
+
     } catch (error) {
       console.log(error);
       return error;
@@ -30,7 +32,12 @@ export const useCheckToken = () => {
   };
 
   useEffect(() => {
-    checkToken(user);
+    if(user){
+      checkToken(user);
+    } else{
+      setJwtValid(false)
+    }
+    
   }, [user]);
 
   return { checkToken, jwtValid };

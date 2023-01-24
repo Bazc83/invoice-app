@@ -19,16 +19,17 @@ export const AuthContextProvider = ({ children }) => {
     user: null,
   });
 
-
-  const { jwtValid} = useCheckToken();
-
+  const { jwtValid } = useCheckToken();
 
   // check for jwt token
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
 
-    if (user) {
-      console.log(jwtValid)
+    console.log(jwtValid)
+    if (user && jwtValid === false) {
+      dispatch({ type: 'LOGOUT' });
+    }
+    if (user && jwtValid === true) {
       dispatch({ type: 'LOGIN', payload: user });
     }
   }, [jwtValid]);

@@ -6,7 +6,7 @@ const createToken = (_id) => {
 
   // jwt.sign({payload}, secret, {options})
   // 3d === 3 days
-  return jwt.sign({ _id: _id }, process.env.TOKEN_SECRET, { expiresIn: '3d' });
+  return jwt.sign({ _id: _id }, process.env.TOKEN_SECRET, { expiresIn: '3s' });
 };
 
 // Login user
@@ -49,7 +49,7 @@ const checkToken = async (req, res) => {
 
   let jwtValid = false;
 
-  if (currentDay > expiryDay) {
+  if (currentDay >= expiryDay) {
     
     return res.status(200).json({ "jwtValid" : false });
   } else {
