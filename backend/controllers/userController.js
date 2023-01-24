@@ -6,7 +6,7 @@ const createToken = (_id, res) => {
 
   // jwt.sign({payload}, secret, {options})
   // 3d === 3 days
-  return jwt.sign({ _id: _id }, process.env.TOKEN_SECRET, { expiresIn: "3d" });
+  return jwt.sign({ _id: _id }, process.env.TOKEN_SECRET, { expiresIn: "90d"});
 };
 
 // Login user
@@ -44,15 +44,12 @@ const checkToken = async (req, res) => {
   const { token } = req.body;
 
   const jwtPayload = jwt.decode(token, process.env.TOKEN_SECRET);
-  const currentDay = (Date.now() / (1000 * 60 * 60 * 24)).toFixed(1);
-  const expiryDay = (jwtPayload.exp / (60 * 60 * 24)).toFixed(1);
+  const currentTime = Date.now() / 1000;
+  const expiryTime = jwtPayload.exp;
 
-  let jwtValid = false;
-
-  if (currentDay >= expiryDay) {
+  if (currentTime >= expiryTime) {
     return res.status(200).json({ jwtValid: false });
   } else {
-    jwtValid = true;
     return res.status(200).json({ jwtValid: true });
   }
 };

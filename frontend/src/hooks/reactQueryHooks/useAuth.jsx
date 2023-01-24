@@ -1,16 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
 
-const checkToken = async (userVal) => {
-  const { token } = userVal;
+const checkToken = async () => {
+  const user = JSON.parse(localStorage.getItem('user'));
+  const { token } = user;
+
   try {
     const response = await fetch('/api/user/checktoken', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ token }),
     });
-
     const json = await response.json();
-
     return json;
   } catch (error) {
     console.log(error);
@@ -19,11 +19,14 @@ const checkToken = async (userVal) => {
 };
 
 export const useAuth = () => {
-  const user = JSON.parse(localStorage.getItem('user'));
-
-  const { data: authData } = useQuery({
+  const {
+    data: authData,
+    isLoading: authLoading,
+    error: authError,
+    isError: authIsError,
+  } = useQuery({
     queryKey: ['authContext'],
-    queryFn: () => checkToken(user),
+    queryFn: () => checkToken(),
   });
-  return { authData };
+  return { authData, authLoading, authError, authIsError };
 };

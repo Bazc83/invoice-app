@@ -1,3 +1,4 @@
+import { useAuth } from '@/hooks/reactQueryHooks/useAuth';
 import { createContext, useEffect, useReducer } from 'react';
 
 export const AuthContext = createContext();
@@ -18,18 +19,19 @@ export const AuthContextProvider = ({ children }) => {
     user: null,
   });
 
+  const { authData } = useAuth();
+
   // check for jwt token
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
-
-    if (user) {
+    if (authData?.jwtValid && user) {
       dispatch({ type: 'LOGIN', payload: user });
     }
 
-    if (!user) {
+    if (!authData?.jwtValid && user) {
       dispatch({ type: 'LOGOUT' });
     }
-  }, []);
+  }, [authData]);
 
   return (
     <AuthContext.Provider value={{ ...state, dispatch }}>

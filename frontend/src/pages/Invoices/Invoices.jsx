@@ -1,9 +1,9 @@
-import { InvoicePreview } from '@/pages/Invoices/InvoicePreview';
 import { InvoicesPageControls } from '@/components/InvoicesPageControls';
 import { NewInvoiceForm } from '@/components/NewInvoiceForm';
 import { NoInvoices } from '@/components/NoInvoices';
 import { InvoicesContext } from '@/context/InvoicesContext';
 import { useInvoices } from '@/hooks/reactQueryHooks/useInvoices';
+import { InvoicePreview } from '@/pages/Invoices/InvoicePreview';
 import { useContext, useEffect } from 'react';
 import styles from './Invoices.module.css';
 
