@@ -22,7 +22,7 @@ const getInvoices = async (userToken) => {
 export const useInvoices = () => {
   const { user } = useContext(AuthContext);
 
-  const {authData} = useAuth();
+  const { authData } = useAuth();
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ['invoices'],

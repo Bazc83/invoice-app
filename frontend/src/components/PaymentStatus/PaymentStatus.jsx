@@ -1,21 +1,12 @@
-import styles from './PaymentStatus.module.css';
-
 export const PaymentStatus = ({ status, className }) => {
   let paymentStatusColor;
   if (status === 'paid') {
-    paymentStatusColor = '#33d69f';
+    paymentStatusColor = 'text-emerald-600 ';
   } else if (status === 'pending') {
-    paymentStatusColor = '#ff8f00';
+    paymentStatusColor = 'text-orange-500 ';
   } else if (status === 'draft') {
-    paymentStatusColor = 'var(--paymentStatusDraft)';
+    paymentStatusColor = 'text-white';
   }
-  return (
-    <div
-      className={`${styles.paymentStatus} ${className}`}
-      // --paymentStatusColor set from paymentStatusColor variable above
-      style={{ '--paymentStatusColor': `${paymentStatusColor}` }}>
-      <div className={styles.customBullet}></div>
-      <h4>{status}</h4>
-    </div>
-  );
+
+  return <p className={`${className} ${paymentStatusColor} `}>{status}</p>;
 };

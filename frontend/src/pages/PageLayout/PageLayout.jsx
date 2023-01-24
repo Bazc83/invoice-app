@@ -13,8 +13,6 @@ export const PageLayout = () => {
     setShowModal(false);
   };
 
-
-
   return (
     <PageLayoutContext.Provider value={{ showModal, setShowModal }}>
       <div className={styles.pageLayout} onClick={handleCloseModal}>

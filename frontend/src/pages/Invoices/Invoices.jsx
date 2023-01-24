@@ -1,11 +1,11 @@
 import { InvoicesPageControls } from '@/components/InvoicesPageControls';
 import { NewInvoiceForm } from '@/components/NewInvoiceForm';
 import { NoInvoices } from '@/components/NoInvoices';
+import { Container } from '@/components/ui';
 import { InvoicesContext } from '@/context/InvoicesContext';
 import { useInvoices } from '@/hooks/reactQueryHooks/useInvoices';
 import { InvoicePreview } from '@/pages/Invoices/InvoicePreview';
 import { useContext, useEffect } from 'react';
-import styles from './Invoices.module.css';
 
 export const Invoices = () => {
   const { state, dispatch } = useContext(InvoicesContext);
@@ -20,7 +20,7 @@ export const Invoices = () => {
   if (isError) return 'An error has occurred: ' + error.message;
 
   return (
-    <div className={`container main-bg`}>
+    <Container className={'bg-gray-800'}>
       {/* Page controls contains filter modal */}
       <InvoicesPageControls invoicesData={invoices?.length} />
 
@@ -29,13 +29,14 @@ export const Invoices = () => {
 
       {/* No invoice component */}
       {state.filteredInvoices?.length === 0 && <NoInvoices />}
-      <div className={styles.invoicesWrapper}>
+      
+      <div className={'flex flex-col gap-4 pb-28'}>
         {/* invoice previews */}
         {invoices?.length > 0 &&
           state.filteredInvoices?.map((invoice) => {
             return <InvoicePreview invoice={invoice} key={invoice?.id} />;
           })}
       </div>
-    </div>
+    </Container>
   );
 };

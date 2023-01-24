@@ -15,7 +15,7 @@ export const Button = (props) => {
       type={type || 'button'}
       className={`${btnStyling} ${styles.btn} ${
         plusIcon && styles.btnWithIcon
-      } ${fullWidth && styles.fullWidth}`}>
+      } ${fullWidth && styles.fullWidth} bg-black`}>
       {plusIcon && (
         <div className={styles.btnIcon}>
           <FaPlus />
