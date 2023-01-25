@@ -1,16 +1,22 @@
-import { DarkModeContext } from '@/App';
-import { AuthContext } from '@/context/AuthContext';
-import { useLogout } from '@/hooks/useLogout';
+import { DarkModeContext } from "@/App";
+import { AuthContext } from "@/context/AuthContext";
+import { useLogout } from "@/hooks/useLogout";
+import { useContext } from "react";
+import {
+  FaMoon,
+  FaSignInAlt,
+  FaSignOutAlt,
+  FaSun,
+  FaUserEdit,
+} from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { RandomLogo } from "../RandomLogo";
 
-import { useContext } from 'react';
-import { FaSignInAlt, FaSignOutAlt, FaUserEdit } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import styles from './Navbar.module.css';
 
 export const Navbar = () => {
   const { theme, toggleDarkMode } = useContext(DarkModeContext);
 
-  const {user} = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
 
   const { logout } = useLogout();
 
@@ -19,41 +25,41 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className={styles.navbar}>
-      <div className={styles.navLogo}>
-        <img src='/images/logo.svg' alt='company logo' />
-      </div>
+    <nav className="flex h-20 items-center justify-between bg-gray-900 p-4 text-gray-50 lg:fixed lg:h-screen lg:w-20 lg:flex-col">
+      {/* Random logo */}
+      <RandomLogo />
 
-      <div className={styles.navbarRightSide}>
-        <div className={styles.authOptions}>
-          {user && (
-            <div>
-              <FaSignOutAlt onClick={handleLogout} />
-            </div>
-          )}
-
-          {!user && (
-            <div className={styles.loginSignupWrapper}>
-              <Link to='/login'>
-                <FaSignInAlt />
-              </Link>
-              <Link to='/signup'>
-                <FaUserEdit />
-              </Link>
-            </div>
-          )}
-        </div>
-        <div onClick={toggleDarkMode} className={styles.darkModeToggle}>
-          {theme === 'dark' ? (
-            <img src='/images/icon-sun.svg' alt='sun icon' />
+      <div className="flex items-center justify-center gap-4 px-6 lg:flex-col lg:gap-4 lg:p-0 lg:pb-6">
+        {/* Dark mode toggle */}
+        <div onClick={toggleDarkMode} >
+          {theme === "dark" ? (
+            <FaSun className="text-xl transition-colors hover:text-gray-400" />
           ) : (
-            <img src='/images/icon-moon.svg' alt='moon icon' />
+            <FaMoon className="text-xl transition-colors hover:text-gray-400" />
           )}
         </div>
-        <div className={styles.navbarBorderLine}></div>
-        <div className={styles.navbarAvatar}>
-          <img src='/images/image-avatar.jpg' alt='' />
-        </div>
+
+        {/* Logout */}
+        {user && (
+          <FaSignOutAlt
+            onClick={handleLogout}
+            className="text-xl transition-colors hover:text-gray-400"
+          />
+        )}
+
+        {/* Login */}
+        {!user && (
+          <Link to="/login">
+            <FaSignInAlt className="text-xl transition-colors hover:text-gray-400" />
+          </Link>
+        )}
+
+        {/* Register / signup */}
+        {!user && (
+          <Link to="/signup">
+            <FaUserEdit className="text-xl transition-colors hover:text-gray-400" />
+          </Link>
+        )}
       </div>
     </nav>
   );

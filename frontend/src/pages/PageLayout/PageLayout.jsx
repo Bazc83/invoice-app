@@ -15,7 +15,7 @@ export const PageLayout = () => {
   return (
     <PageLayoutContext.Provider value={{ showModal, setShowModal }}>
       <div
-        className='flex flex-col min-h-screen h-max primary-bg relative lg:grid lg:grid-cols-[72px_1fr]'
+        className='flex flex-col min-h-screen h-max primary-bg relative lg:grid lg:grid-cols-[80px_1fr]'
         onClick={handleCloseModal}>
         <Navbar />
 

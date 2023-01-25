@@ -1,11 +1,10 @@
-import { Button } from '@/components/Button';
-import { FilterModal } from '@/components/FilterModal';
-import { NewInvoiceForm } from '@/components/NewInvoiceForm';
-import { NoInvoices } from '@/components/NoInvoices';
-import { InvoicesContext } from '@/context/InvoicesContext';
-import { useInvoices } from '@/hooks/reactQueryHooks/useInvoices';
-import { InvoicePreview } from '@/pages/Invoices/InvoicePreview';
-import { useContext, useEffect } from 'react';
+import { FilterModal } from "@/components/FilterModal";
+import { NewInvoiceForm } from "@/components/NewInvoiceForm";
+import { NoInvoices } from "@/components/NoInvoices";
+import { InvoicesContext } from "@/context/InvoicesContext";
+import { useInvoices } from "@/hooks/reactQueryHooks/useInvoices";
+import { InvoicePreview } from "@/pages/Invoices/InvoicePreview";
+import { useContext, useEffect } from "react";
 
 export const Invoices = () => {
   const { state, dispatch } = useContext(InvoicesContext);
@@ -13,29 +12,28 @@ export const Invoices = () => {
   const { isLoading, isError, error, data: invoices } = useInvoices();
 
   useEffect(() => {
-    dispatch({ type: 'filterInvoices', payload: invoices });
+    dispatch({ type: "filterInvoices", payload: invoices });
   }, [invoices, dispatch, state.filters]);
 
-  if (isLoading) return 'Loading...';
-  if (isError) return 'An error has occurred: ' + error.message;
+  if (isLoading) return "Loading...";
+  if (isError) return "An error has occurred: " + error.message;
 
   return (
-    <div className='primary-bg flex flex-col px-6  md:px-8 '>
+    <div className="primary-bg flex flex-col px-6  md:px-8 ">
       {/* Page controls contains filter modal */}
 
-      <div className='flex justify-between items-center  px-8 py-4 mt-8 mb-4 secondary-bg rounded-md'>
-
+      <div className="secondary-bg mt-6 mb-3  flex items-center justify-between rounded-md px-8 py-4 lg:mb-2">
         {/* Button shows new invoice form */}
-        <Button
-          plusIcon
-          onClick={() => dispatch({ type: 'toggleInvoiceForm' })}>
-          New
-        </Button>
+        <button
+          className="flex items-center gap-2 rounded-md bg-green-900 px-4 py-2 text-sm text-gray-50 lg:text-base"
+          onClick={() => dispatch({ type: "toggleInvoiceForm" })}
+        >
+          Add Invoice
+        </button>
 
         {/* FilterModal invoices compontent */}
         <FilterModal />
       </div>
-
 
       {/* Add new invoice */}
       {state.showInvoiceForm && <NewInvoiceForm />}
@@ -43,7 +41,7 @@ export const Invoices = () => {
       {/* No invoice component */}
       {state.filteredInvoices?.length === 0 && <NoInvoices />}
 
-      <div className={'flex flex-col gap-8 pb-8 pt-4 '}>
+      <div className={"flex flex-col gap-6 pb-6 pt-3 lg:gap-6 "}>
         {/* invoice previews */}
         {invoices?.length > 0 &&
           state.filteredInvoices?.map((invoice) => {

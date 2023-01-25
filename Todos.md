@@ -1,5 +1,9 @@
 ## Required features
 
+### pagination
+
+#### only return a given number of invoices
+
 ### error handling
 
 #### add toast messages for different actions

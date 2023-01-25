@@ -1,122 +1,16 @@
-.invoice {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
-  position: relative;
-}
 
-.confirmModalOpen:before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  height: 100%;
-  width: 100%;
-  z-index: 100;
-}
-
-.mainWrapper {
-  grid-column: 1/-1;
-  grid-row: 1/-1;
-}
-
-.mainWrapperOverlay:after {
-  content: '';
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: 20;
-  height: 100%;
-
-  position: absolute;
-  inset: 0;
-}
-
-@media (min-width: 768px) {
-  .invoice {
-    grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: 1fr;
-  }
-}
-
-.invoiceWrapper {
-  padding-block: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  background-color: var(--main-bg);
-  max-width: 715px;
-  position: relative;
-  grid-row: 1/-1;
-  grid-column: 1/-1;
-}
-
-.invoiceContent {
-  display: flex;
-  flex-direction: column;
-  gap: 1.75rem;
-}
-
-.statusAndButtons {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  box-shadow: var(--invoiceShadow);
-  padding: 1rem;
-}
-
-.status {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
-  padding: 1rem;
-  width: 100%;
-}
-
-.buttonsWrapper {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-@media (min-width: 600px) {
-  .statusAndButtons {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: var(--invoiceShadow);
-    gap: 1rem;
-  }
-
-  .status {
-    justify-content: center;
-    width: auto;
-  }
-
-  .buttonsWrapper {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 0.75rem;
-    padding-top: 0;
-    justify-content: flex-end;
-    width: 100%;
-  }
-}
 
 .invoiceMain {
   display: grid;
   padding: 1.75rem;
   gap: 1.75rem 0.5rem;
   grid-template-areas:
-    'refAndDesc refAndDesc refAndDesc ...'
-    'address ... ... ... '
-    'dates clientDetails clientDetails clientDetails'
-    'clientEmail clientEmail ... ...'
-    'items items items items';
-  box-shadow: var(--invoiceShadow);
+    "refAndDesc refAndDesc refAndDesc ..."
+    "address ... ... ... "
+    "dates clientDetails clientDetails clientDetails"
+    "clientEmail clientEmail ... ..."
+    "items items items items";
+  /* box-shadow: var(--invoiceShadow); */
   max-width: 100%;
 }
 
@@ -127,9 +21,9 @@
     padding: 1.75rem;
     row-gap: 1.25rem;
     grid-template-areas:
-      'refAndDesc ... ... ... ...  address address'
-      'dates ... clientDetails clientDetails ...  clientEmail ...'
-      'items items items items items items items';
+      "refAndDesc ... ... ... ...  address address"
+      "dates ... clientDetails clientDetails ...  clientEmail ..."
+      "items items items items items items items";
   }
 }
 
