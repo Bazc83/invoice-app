@@ -8,9 +8,9 @@
   }
   .secondary-bg {
     @apply dark:bg-gray-900 bg-gray-50 dark:text-gray-50 text-gray-900 shadow-md;
-}
+  }
 
-.secondary-text {
-  @apply dark:text-gray-400 text-gray-600
-}
+  .secondary-text {
+    @apply dark:text-gray-400 text-gray-600;
+  }
 }

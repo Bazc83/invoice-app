@@ -18,7 +18,13 @@ export const PageLayout = () => {
         className='flex flex-col min-h-screen h-max primary-bg relative lg:grid lg:grid-cols-[72px_1fr]'
         onClick={handleCloseModal}>
         <Navbar />
-        <div className='lg:col-start-2'>
+
+        {/* Show overlay when showModal is true */}
+        <div
+          className={`lg:col-start-2 ${
+            showModal &&
+            'before:bg-black before:h-full before:w-full before:z-10 before:absolute before:opacity-50'
+          } `}>
           <Outlet />
         </div>
       </div>

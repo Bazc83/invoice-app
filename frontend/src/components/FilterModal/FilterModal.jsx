@@ -2,7 +2,6 @@ import { FilterModalItem } from '@/components/FilterModal/FilterModalItem';
 import { InvoicesContext } from '@/context/InvoicesContext';
 import { PageLayoutContext } from '@/pages/PageLayout';
 import { useContext } from 'react';
-import styles from './FilterModal.module.css';
 
 export const FilterModal = () => {
   const { state } = useContext(InvoicesContext);
@@ -12,18 +11,17 @@ export const FilterModal = () => {
     setShowModal((prev) => !prev);
   };
   return (
-    <div className='relative'>
-      <div
-        className='flex gap-3 cursor-pointer relative items-baseline'
+    <div className='relative z-40'>
+      {/* Show/Hide modal button */}
+      <button
+        className='flex items-center gap-2 bg-gray-800 px-4 py-2 rounded-md text-xs text-gray-50'
         onClick={handleShowModal}>
-        <button className='flex items-center gap-2 dark:bg-gray-800 px-4 py-2 rounded-md text-xs text-gray-50'>
-          {showModal ? 'Hide Filters' : 'Show Filters'}
-        </button>
-      </div>
+        {showModal ? 'Hide Filters' : 'Show Filters'}
+      </button>
 
       {showModal && (
-        <div className='absolute top-9 -left-9 p-6 secondary-bg'>
-          <form className={styles.modalForm}>
+        <div className='absolute top-10 -left-7 p-6 secondary-bg rounded-md'>
+          <form className='flex flex-col gap-4'>
             {/* Filter modal options */}
             {state.filters.map((filter) => (
               <FilterModalItem filter={filter} key={filter.filterValue} />
