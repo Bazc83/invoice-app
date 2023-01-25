@@ -20,7 +20,7 @@ export const Invoices = () => {
   if (isError) return 'An error has occurred: ' + error.message;
 
   return (
-    <Container className={'bg-gray-800'}>
+    <Container className={'primary-bg'}>
       {/* Page controls contains filter modal */}
       <InvoicesPageControls invoicesData={invoices?.length} />
 
@@ -30,7 +30,7 @@ export const Invoices = () => {
       {/* No invoice component */}
       {state.filteredInvoices?.length === 0 && <NoInvoices />}
       
-      <div className={'flex flex-col gap-4 pb-28'}>
+      <div className={'flex flex-col gap-8 pb-8 pt-4 '}>
         {/* invoice previews */}
         {invoices?.length > 0 &&
           state.filteredInvoices?.map((invoice) => {

@@ -13,16 +13,15 @@ export const useFormatDate = () => {
     'Nov',
     'Dec',
   ];
-  const getDate = (dateToFormat) =>{
+  const getDate = (dateToFormat) => {
     const splitDate = dateToFormat.split('-');
 
     const year = splitDate[0];
     const month = monthsOfTheYear[+splitDate[1] - 1];
     const day = splitDate[2];
-    const dueDate = `Due ${day} ${month} ${year}`;
+    const dueDate = `${day} ${month} ${year}`;
     return dueDate;
-  }
-
+  };
 
   return { getDate };
 };

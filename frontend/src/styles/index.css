@@ -3,7 +3,14 @@
 @tailwind utilities;
 
 @layer components {
-  body {
-    @apply text-white;
+  .primary-bg {
+    @apply bg-gray-800 dark:bg-white text-gray-50 dark:text-gray-900 font-semibold;
   }
+  .secondary-bg {
+    @apply bg-gray-900 dark:bg-gray-50 text-gray-50 dark:text-gray-900 shadow-md;
+}
+
+.secondary-text {
+  @apply text-gray-400 dark:text-gray-600
+}
 }

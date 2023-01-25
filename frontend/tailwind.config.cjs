@@ -1,11 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    fontFamily: {
-      "body": ['Helvetica', 'Arial', 'sans-serif'],
+    extend: {
+      screens: {
+        sm: '400px',
+        md: '640px',
+        lg: '1024px',
+      },
     },
-    extend: {},
   },
   plugins: [],
 };
