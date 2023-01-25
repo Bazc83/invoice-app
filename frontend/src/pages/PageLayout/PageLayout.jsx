@@ -1,7 +1,6 @@
 import { Navbar } from '@/components/Navbar';
 import { createContext, useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import styles from './PageLayout.module.css';
 
 export const PageLayoutContext = createContext();
 
@@ -15,9 +14,11 @@ export const PageLayout = () => {
 
   return (
     <PageLayoutContext.Provider value={{ showModal, setShowModal }}>
-      <div className={styles.pageLayout} onClick={handleCloseModal}>
+      <div
+        className='flex flex-col min-h-screen h-max primary-bg relative lg:grid lg:grid-cols-[72px_1fr]'
+        onClick={handleCloseModal}>
         <Navbar />
-        <div className={styles.outletDiv}>
+        <div className='lg:col-start-2'>
           <Outlet />
         </div>
       </div>

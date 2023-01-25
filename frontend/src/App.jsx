@@ -1,5 +1,5 @@
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { createContext, useContext } from 'react';
+import { createContext, useContext, useEffect } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import useLocalStorage from 'use-local-storage';
 import { AuthContext } from './context/AuthContext';
@@ -17,9 +17,16 @@ function App() {
   const [theme, setTheme] = useLocalStorage('theme' ? 'dark' : 'light');
 
   const toggleDarkMode = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
     setTheme(newTheme);
   };
+
+  useEffect(() => {
+    if (theme === undefined) {
+      setTheme('dark');
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const { user } = useContext(AuthContext);
 

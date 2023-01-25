@@ -16,7 +16,7 @@ export const InvoicePreview = ({ invoice }) => {
   return (
     <div
       onClick={() => showFullInvoice(invoice.id)}
-      className={`secondary-bg rounded-md p-8 sm:p-10 lg:p-8 cursor-pointer lg:grid lg:grid-cols-12 max-w-4xl`}>
+      className={`secondary-bg rounded-md p-8 sm:p-10 lg:p-8 cursor-pointer lg:grid lg:grid-cols-12 `}>
       {/* Invoice id and paymentDue date */}
 
       <div className='flex justify-between text-xs sm:text-base lg:text-inherit secondary-text pb-4 lg:pb-0   gap-2 lg:col-start-1 lg:col-end-4 '>

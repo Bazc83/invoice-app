@@ -1,7 +1,7 @@
-import { InvoicesPageControls } from '@/components/InvoicesPageControls';
+import { Button } from '@/components/Button';
+import { FilterModal } from '@/components/FilterModal';
 import { NewInvoiceForm } from '@/components/NewInvoiceForm';
 import { NoInvoices } from '@/components/NoInvoices';
-import { Container } from '@/components/ui';
 import { InvoicesContext } from '@/context/InvoicesContext';
 import { useInvoices } from '@/hooks/reactQueryHooks/useInvoices';
 import { InvoicePreview } from '@/pages/Invoices/InvoicePreview';
@@ -20,16 +20,29 @@ export const Invoices = () => {
   if (isError) return 'An error has occurred: ' + error.message;
 
   return (
-    <Container className={'primary-bg'}>
+    <div className='primary-bg flex flex-col px-6  md:px-8 '>
       {/* Page controls contains filter modal */}
-      <InvoicesPageControls invoicesData={invoices?.length} />
+
+      <div className='flex justify-between items-center  px-8 py-4 mt-8 mb-4 secondary-bg rounded-md'>
+
+        {/* Button shows new invoice form */}
+        <Button
+          plusIcon
+          onClick={() => dispatch({ type: 'toggleInvoiceForm' })}>
+          New
+        </Button>
+
+        {/* FilterModal invoices compontent */}
+        <FilterModal />
+      </div>
+
 
       {/* Add new invoice */}
       {state.showInvoiceForm && <NewInvoiceForm />}
 
       {/* No invoice component */}
       {state.filteredInvoices?.length === 0 && <NoInvoices />}
-      
+
       <div className={'flex flex-col gap-8 pb-8 pt-4 '}>
         {/* invoice previews */}
         {invoices?.length > 0 &&
@@ -37,6 +50,6 @@ export const Invoices = () => {
             return <InvoicePreview invoice={invoice} key={invoice?.id} />;
           })}
       </div>
-    </Container>
+    </div>
   );
 };

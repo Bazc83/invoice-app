@@ -4,13 +4,13 @@
 
 @layer components {
   .primary-bg {
-    @apply bg-gray-800 dark:bg-white text-gray-50 dark:text-gray-900 font-semibold;
+    @apply dark:bg-gray-800 bg-white dark:text-gray-50 text-gray-900 font-semibold;
   }
   .secondary-bg {
-    @apply bg-gray-900 dark:bg-gray-50 text-gray-50 dark:text-gray-900 shadow-md;
+    @apply dark:bg-gray-900 bg-gray-50 dark:text-gray-50 text-gray-900 shadow-md;
 }
 
 .secondary-text {
-  @apply text-gray-400 dark:text-gray-600
+  @apply dark:text-gray-400 text-gray-600
 }
 }
