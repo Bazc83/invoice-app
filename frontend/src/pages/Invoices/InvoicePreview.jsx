@@ -16,20 +16,21 @@ export const InvoicePreview = ({ invoice }) => {
   return (
     <div
       onClick={() => showFullInvoice(invoice.id)}
-      className={`secondary-bg cursor-pointer rounded-md py-6 px-8 shadow-md lg:grid lg:grid-cols-12 lg:p-8`}
+      className={`secondary-bg cursor-pointer items-baseline justify-center rounded-md py-6 px-8 shadow-md md:grid md:grid-cols-12 md:p-8 md:px-6 `}
     >
       {/* Invoice id and paymentDue date */}
 
-      <div className="flex justify-between gap-2 pb-4   text-xs sm:text-base   lg:col-start-1 lg:col-end-4 lg:pb-0 ">
-        <p className="secondary-text lg:default-text">#{id}</p>
+      <div className="flex  items-baseline justify-between  gap-2  pb-4 text-xs md:col-start-1  md:col-end-5  md:pb-0 md:text-base lg:col-end-4">
+        <p className="secondary-text md:default-text text-xs lg:text-base">
+          #{id}
+        </p>
         <p>Due {getDate(paymentDue)}</p>
       </div>
 
-      <p className="pb-4 lg:col-start-5 lg:col-end-8 lg:pb-0 lg:text-center">
-        {clientName}{" "}
-      </p>
-
-      <div className="flex items-center justify-between gap-2 lg:col-start-10 lg:col-end-13 lg:gap-4 ">
+      <div className=" pb-4 md:col-start-5 md:col-end-9  md:pb-0 md:text-center lg:col-end-8">
+        <p>{clientName} </p>
+      </div>
+      <div className="flex items-center justify-between gap-2  md:col-start-9 md:col-end-13  lg:col-start-10  lg:gap-4">
         <p>
           {new Intl.NumberFormat("en", {
             style: "currency",
