@@ -5,6 +5,7 @@ import { InvoicesContext } from "@/context/InvoicesContext";
 import { useInvoices } from "@/hooks/reactQueryHooks/useInvoices";
 import { InvoicePreview } from "@/pages/Invoices/InvoicePreview";
 import { useContext, useEffect } from "react";
+import { ShowFiltersAndClear } from "./ShowFiltersAndClear";
 
 export const Invoices = () => {
   const { state, dispatch } = useContext(InvoicesContext);
@@ -17,12 +18,9 @@ export const Invoices = () => {
 
   if (isLoading) return "Loading...";
   if (isError) return "An error has occurred: " + error.message;
-
   return (
     <div className="primary-bg flex flex-col px-6  md:px-8 ">
-      {/* Page controls contains filter modal */}
-
-      <div className="secondary-bg mt-6 mb-3  flex items-center justify-between rounded-md px-8 py-4 lg:mb-2">
+      <div className="secondary-bg mt-6 mb-2  flex items-center justify-between rounded-md px-8 py-4 lg:mb-2">
         {/* Button shows new invoice form */}
         <button
           className="flex items-center gap-2 rounded-md bg-green-900 px-4 py-2 text-sm text-gray-50 lg:text-base"
@@ -34,6 +32,9 @@ export const Invoices = () => {
         {/* FilterModal invoices compontent */}
         <FilterModal />
       </div>
+
+      {/* Shows current filters and a button to clear all filters*/}
+      {state.checkedFilters?.length > 0 && <ShowFiltersAndClear />}
 
       {/* Add new invoice */}
       {state.showInvoiceForm && <NewInvoiceForm />}

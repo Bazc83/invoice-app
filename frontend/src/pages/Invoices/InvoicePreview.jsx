@@ -19,7 +19,6 @@ export const InvoicePreview = ({ invoice }) => {
       className={`secondary-bg cursor-pointer items-baseline justify-center rounded-md py-6 px-8 shadow-md md:grid md:grid-cols-12 md:p-8 md:px-6 `}
     >
       {/* Invoice id and paymentDue date */}
-
       <div className="flex  items-baseline justify-between  gap-2  pb-4 text-xs md:col-start-1  md:col-end-5  md:pb-0 md:text-base lg:col-end-4">
         <p className="secondary-text md:default-text text-xs lg:text-base">
           #{id}
