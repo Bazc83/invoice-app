@@ -1,15 +1,14 @@
-import { InvoicesContext } from '@/context/InvoicesContext';
-import { useAddNewInvoice } from '@/hooks/reactQueryHooks/useAddNewInvoice';
-import { useUpdateInvoiceId } from '@/hooks/reactQueryHooks/useUpdateInvoiceId';
-import { setInvoiceDates } from '@/hooks/setInvoiceDates';
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import { useContext, useEffect, useState } from 'react';
-import { InvoiceForm } from '../InvoiceForm';
+import { InvoicesContext } from "@/context/InvoicesContext";
+import { useAddNewInvoice } from "@/hooks/reactQueryHooks/useAddNewInvoice";
+import { useUpdateInvoiceId } from "@/hooks/reactQueryHooks/useUpdateInvoiceId";
+import { setInvoiceDates } from "@/hooks/setInvoiceDates";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { useContext, useEffect, useState } from "react";
+import { InvoiceForm } from "../InvoiceForm";
 
 export const NewInvoiceForm = () => {
-  
-  const { dispatch } = useContext(InvoicesContext)
+  const { dispatch } = useContext(InvoicesContext);
 
   const { todaysDate } = setInvoiceDates();
 
@@ -17,9 +16,9 @@ export const NewInvoiceForm = () => {
 
   const useInvoiceId = () =>
     useQuery({
-      queryKey: ['invoiceId'],
+      queryKey: ["invoiceId"],
       queryFn: async () => {
-        const response = await axios.get('/api/invoiceId');
+        const response = await axios.get("/api/invoiceId");
         return response.data[0].invoiceId;
       },
     });
@@ -28,22 +27,22 @@ export const NewInvoiceForm = () => {
 
   const [formData, setFormData] = useState({
     id: invoiceId,
-    senderCity: '',
-    senderStreet: '',
-    senderPostCode: '',
-    senderCountry: '',
-    clientEmail: '',
-    clientName: '',
-    clientCity: '',
-    clientStreet: '',
-    clientCountry: '',
-    clientPostCode: '',
-    description: '',
-    invoiceDate: '',
+    senderCity: "",
+    senderStreet: "",
+    senderPostCode: "",
+    senderCountry: "",
+    clientEmail: "",
+    clientName: "",
+    clientCity: "",
+    clientStreet: "",
+    clientCountry: "",
+    clientPostCode: "",
+    description: "",
+    invoiceDate: "",
     createdAt: todaysDate,
     paymentDue: todaysDate,
-    paymentTerms: '0',
-    status: 'draft',
+    paymentTerms: "0",
+    status: "draft",
     amountDueTotal: 0,
     items: itemsArray,
   });
@@ -68,13 +67,13 @@ export const NewInvoiceForm = () => {
     // increase invoice id by one
     updateIdMutation.mutate();
 
-    dispatch({ type: 'toggleInvoiceForm' });
+    dispatch({ type: "toggleInvoiceForm" });
   };
 
   const handleCancel = (e) => {
     e.preventDefault();
     newInvoiceMutation.reset();
-    dispatch({ type: 'hideInvoiceForm' });
+    dispatch({ type: "hideInvoiceForm" });
   };
 
   useEffect(() => {
@@ -85,7 +84,7 @@ export const NewInvoiceForm = () => {
     setFormData((prev) => ({ ...prev, createdAt: todaysDate }));
   }, [todaysDate, setFormData]);
 
-  if (isLoading) return 'Loading....';
+  if (isLoading) return "Loading....";
   if (isError) return `An error has occurred ${error}`;
 
   return (

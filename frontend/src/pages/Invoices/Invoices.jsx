@@ -20,7 +20,11 @@ export const Invoices = () => {
   if (isError) return "An error has occurred: " + error.message;
   return (
     <div className="primary-bg flex flex-col px-6  md:px-8 ">
+      {/* Invoices page controls */}
       <div className="secondary-bg mt-6 mb-2  flex items-center justify-between rounded-md px-8 py-4 lg:mb-2">
+        {/* FilterModal invoices compontent */}
+        <FilterModal />
+
         {/* Button shows new invoice form */}
         <button
           className="flex items-center gap-2 rounded-md bg-green-900 px-4 py-2 text-sm text-gray-50 lg:text-base"
@@ -28,9 +32,6 @@ export const Invoices = () => {
         >
           Add Invoice
         </button>
-
-        {/* FilterModal invoices compontent */}
-        <FilterModal />
       </div>
 
       {/* Shows current filters and a button to clear all filters*/}
@@ -42,6 +43,7 @@ export const Invoices = () => {
       {/* No invoice component */}
       {state.filteredInvoices?.length === 0 && <NoInvoices />}
 
+      {/* Invoice previews  */}
       <div className={"flex flex-col gap-6 pb-6 pt-3 lg:gap-6 "}>
         {/* invoice previews */}
         {invoices?.length > 0 &&
