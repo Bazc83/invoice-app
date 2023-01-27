@@ -1,16 +1,18 @@
 import { ConfirmDeleteModal } from "@/components/ConfirmDeleteModal";
 import { EditInvoiceForm } from "@/components/EditInvoiceForm";
 import { GoBackLink } from "@/components/GoBackLink";
-import { PaymentStatus } from "@/components/PaymentStatus";
 import { InvoiceContext } from "@/context/InvoiceContext";
 import { useFilterInvoiceById } from "@/hooks/reactQueryHooks/useFilterInvoiceById";
 import { InvoiceButtons } from "@/pages/Invoice/InvoiceButtons";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
+import { HiOutlineMenu, HiOutlineX } from "react-icons/hi";
 import { useParams } from "react-router-dom";
 import { InvoiceMainContent } from "./InvoiceMainContent";
 
 export const Invoice = () => {
   const { state, dispatch } = useContext(InvoiceContext);
+
+  const [showInvoiceControls, setShowInvoiceControls] = useState(false);
 
   const { invoiceId } = useParams();
 
@@ -45,6 +47,9 @@ export const Invoice = () => {
 
       {state.showEditForm && <EditInvoiceForm />}
 
+      {/* //// */}
+      {/* TODO MAYBE COMBINE THIS WITH THE TOP DIV */}
+      {/* //// */}
       <div
         onClick={handleCloseForm}
         className={`col-span-full col-start-1  ${
@@ -55,22 +60,23 @@ export const Invoice = () => {
         <div
           className={`primary-bg relative flex max-w-3xl flex-col gap-6 py-6 md:px-4 `}
         >
-          {/* Go back to invoices page link */}
-          <GoBackLink linkPath={"/invoices"} />
+          <div className="flex items-baseline justify-between">
+            {/* Go back to invoices page link */}
+            <GoBackLink linkPath={"/invoices"} />
 
-          <div
-            className={`secondary-bg flex flex-col items-center justify-center gap-8 p-8 lg:flex-row lg:justify-between`}
-          >
-            <div
-              className={`secondary-bg flex w-full items-center justify-between gap-2 lg:justify-center`}
+            <button
+              onClick={() => setShowInvoiceControls((prev) => !prev)}
+              className={`cursor-pointer rounded-md border-2 py-1 px-1 text-lg font-semibold text-gray-50 outline-none transition-colors md:hidden ${
+                showInvoiceControls
+                  ? " border-red-800  text-red-800 "
+                  : "border-emerald-600 text-emerald-600"
+              }`}
             >
-              <p className="text">Status</p>
-              <PaymentStatus status={invoiceData?.status} />
-            </div>
-            <div className="flex w-full flex-wrap items-center justify-center gap-4 ">
-              <InvoiceButtons />
-            </div>
+              {showInvoiceControls ? <HiOutlineX /> : <HiOutlineMenu />}
+            </button>
           </div>
+
+          <InvoiceButtons showInvoiceControls={showInvoiceControls} />
 
           {/* Invoice main content */}
           <InvoiceMainContent invoiceData={invoiceData} />

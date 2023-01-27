@@ -19,15 +19,15 @@ export const Invoices = () => {
   if (isLoading) return "Loading...";
   if (isError) return "An error has occurred: " + error.message;
   return (
-    <div className="primary-bg flex flex-col px-6  md:px-8 ">
+    <div className="primary-bg flex flex-col  px-6 md:px-8">
       {/* Invoices page controls */}
-      <div className="secondary-bg mt-6 mb-2  flex items-center justify-between rounded-md px-8 py-4 lg:mb-2">
+      <div className="secondary-bg mt-6 mb-2 flex items-center sm:justify-between rounded-md p-6 lg:mb-2 flex-wrap-reverse justify-center gap-2 shadow-md">
         {/* FilterModal invoices compontent */}
         <FilterModal />
 
         {/* Button shows new invoice form */}
         <button
-          className="flex items-center gap-2 rounded-md bg-green-900 px-4 py-2 text-sm text-gray-50 lg:text-base"
+          className="flex items-center gap-2 rounded-md bg-green-900 px-4 py-2 text-sm text-gray-50 lg:text-base w-full sm:w-auto justify-center"
           onClick={() => dispatch({ type: "toggleInvoiceForm" })}
         >
           Add Invoice

@@ -11,11 +11,11 @@ export const FilterModal = () => {
     setShowModal((prev) => !prev);
   };
   return (
-    <div className="relative z-40">
+    <div className="relative z-40 w-full sm:w-auto">
       {/* Show/Hide modal button */}
       <button
         disabled={state.filteredInvoices?.length === 0}
-        className={`flex items-center justify-center  gap-2 rounded-md px-4 py-2 text-sm lg:text-base ${
+        className={`flex w-full items-center  justify-center gap-2 rounded-md px-4 py-2 text-sm sm:w-auto lg:text-base ${
           state.filteredInvoices?.length === 0
             ? "secondary-bg text-gray-50 dark:text-gray-800 "
             : " bg-gray-700   text-gray-50 "

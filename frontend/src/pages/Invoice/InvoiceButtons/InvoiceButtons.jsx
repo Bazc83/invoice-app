@@ -4,7 +4,7 @@ import { useUpdateInvoice } from "@/hooks/reactQueryHooks/useUpdateInvoice";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
 
-export const InvoiceButtons = () => {
+export const InvoiceButtons = ({ showInvoiceControls }) => {
   const { dispatch } = useContext(InvoiceContext);
 
   const { invoiceId } = useParams();
@@ -30,51 +30,53 @@ export const InvoiceButtons = () => {
   if (isError) return "An error has occurred: " + error.message;
 
   return (
-    <>
-      {invoiceData?.status === "draft" && (
-        <button
-          onClick={() => dispatch({ type: "showEditForm" })}
-          className="btn |  w-full border border-gray-900 text-gray-900 transition-colors hover:border-gray-900 hover:bg-gray-900 hover:text-gray-50  dark:border-gray-50  dark:text-gray-50 dark:hover:border-gray-900 lg:w-auto "
-        >
-          Edit
-        </button>
-      )}
-
+    <div
+      className={`secondary-bg  flex-col-reverse items-center justify-center gap-4 rounded-md p-8 md:flex md:flex-row md:justify-between shadow-md ${
+        showInvoiceControls ? "flex" : "hidden"
+      } `}
+    >
       <button
         onClick={() => dispatch({ type: "showDeleteModal" })}
-        className="btn | w-full border border-red-500 text-red-500 lg:w-auto"
+        className="btn | w-full border border-red-600 text-red-600 hover:bg-red-600 hover:text-white  sm:max-w-[500px] md:w-auto"
       >
         {isLoading ? "...Deleting" : "Delete"}
       </button>
 
-      {invoiceData?.status !== "paid" && invoiceData?.status !== "draft" && (
+      <div className="flex w-full flex-col-reverse items-center justify-center gap-4  sm:max-w-[500px] md:w-auto md:flex-row ">
         <button
-          onClick={() => setStatus("paid")}
-          className="btn |     w-full border border-emerald-600 bg-emerald-600 text-white transition-colors hover:bg-transparent hover:text-emerald-900 dark:bg-transparent dark:text-emerald-600   dark:hover:bg-emerald-600 dark:hover:text-white lg:w-auto "
+          onClick={() => dispatch({ type: "showEditForm" })}
+          className="btn | w-full  border border-gray-900 text-gray-900  hover:border-gray-900 hover:bg-gray-900 hover:text-gray-50  dark:border-gray-50  dark:text-gray-50 dark:hover:border-gray-900 md:w-auto "
         >
-          Paid
+          Edit
         </button>
-      )}
 
-      {invoiceData?.status === "draft" && (
-        <button
-          onClick={() => setStatus("pending")}
-          className="btn |     w-full border border-gray-900 text-gray-900 transition-colors hover:border-gray-900 hover:bg-gray-900 hover:text-gray-50  dark:border-gray-50  dark:text-gray-50 dark:hover:border-gray-900 lg:w-auto "
-        >
-          Pending
-        </button>
-      )}
-
-      {invoiceData?.status !== "draft" &&
-        invoiceData?.status === "pending" &&
-        invoiceData?.status !== "paid" && (
+        {invoiceData?.status !== "draft" && (
           <button
             onClick={() => setStatus("draft")}
-            className="btn |     w-full border border-gray-900 text-gray-900 transition-colors hover:border-gray-900 hover:bg-gray-900 hover:text-gray-50  dark:border-gray-50  dark:text-gray-50 dark:hover:border-gray-900 lg:w-auto "
+            className="btn |  w-full    border border-gray-700   bg-gray-700  text-white hover:border-gray-900 hover:bg-gray-900 hover:text-white dark:text-white md:w-auto "
           >
             Draft
           </button>
         )}
-    </>
+
+        {invoiceData?.status !== "pending" && (
+          <button
+            onClick={() => setStatus("pending")}
+            className="btn | w-full   border border-orange-600 bg-orange-600 text-white   hover:border-orange-900 hover:bg-orange-900 md:w-auto "
+          >
+            Pending
+          </button>
+        )}
+
+        {invoiceData?.status !== "paid" && (
+          <button
+            onClick={() => setStatus("paid")}
+            className="btn |  w-full   border border-emerald-600 bg-emerald-600 text-white  hover:border-emerald-900   hover:bg-emerald-900  md:w-auto "
+          >
+            Paid
+          </button>
+        )}
+      </div>
+    </div>
   );
 };
