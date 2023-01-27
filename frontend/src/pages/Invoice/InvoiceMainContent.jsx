@@ -7,9 +7,9 @@ export const InvoiceMainContent = ({ invoiceData }) => {
 
   return (
     <div
-      className={`secondary-bg grid grid-cols-1 gap-4 border border-black p-8  shadow-md text-sm sm:text-base md:p-10`}
+      className={`secondary-bg flex flex-col gap-6 px-8 py-10 text-sm shadow-md sm:px-10 sm:py-20 sm:text-base `}
     >
-      <div className="flex justify-between ">
+      <div className="flex items-center justify-between gap-2 text-xs sm:text-sm md:text-base">
         <div>
           <p>Company Name</p>
           <p>{invoiceData?.senderStreet}</p>
@@ -21,7 +21,7 @@ export const InvoiceMainContent = ({ invoiceData }) => {
         <h1 className="text-2xl">Invoice</h1>
       </div>
 
-      <div className="flex justify-between ">
+      <div className="flex justify-between gap-2 text-xs sm:text-sm ">
         <div>
           <p className="secondary-text">Bill To</p>
 
@@ -34,8 +34,8 @@ export const InvoiceMainContent = ({ invoiceData }) => {
           </div>
         </div>
 
-        <div className="flex flex-col ">
-          <div className="flex flex-col justify-between gap-2">
+        <div className="flex flex-col  ">
+          <div className="flex flex-col justify-between gap-1">
             <div className="flex flex-col ">
               <p className="secondary-text">Invoice Id:</p>
               <p>#{invoiceData?.id}</p>
@@ -55,20 +55,23 @@ export const InvoiceMainContent = ({ invoiceData }) => {
         </div>
       </div>
 
-      <div className="flex justify-between ">
+      <div className="flex justify-between gap-2 text-xs sm:text-sm">
         <div className="flex flex-col">
           <p className="secondary-text">Invoice Reference:</p>
           <p>{invoiceData?.description}</p>
         </div>
 
         <div className="flex flex-col">
-          <p className="secondary-text">Sent to</p>
-          <h3>{invoiceData?.clientEmail}</h3>
+          <p className="secondary-text">Email Address:</p>
+          <p>{invoiceData?.clientEmail || "awaiting Email"}</p>
         </div>
       </div>
-      <div>
-        <InvoiceItems items={invoiceData?.items} />
 
+      <div>
+        <div className="flex flex-col gap-2 text-xs sm:text-sm">
+          <p className="secondary-text">Invoice Items:</p>
+          <InvoiceItems items={invoiceData?.items} />
+        </div>
         <AmountDueTotal amountDue={invoiceData?.amountDueTotal} />
       </div>
     </div>

@@ -1,9 +1,8 @@
 import { InvoiceItem } from './InvoiceItem';
-import styles from './InvoiceItems.module.css';
 
 export const InvoiceItems = ({ items }) => {
   return (
-    <div className={styles.invoiceItems}>
+    <div className="flex flex-col justify-center gap-6 primary-bg p-4 rounded-t-sm">
       {items?.map((item, i) => {
         return <InvoiceItem item={item} key={`item${i}`} />;
       })}

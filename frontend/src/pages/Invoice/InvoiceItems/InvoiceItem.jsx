@@ -1,12 +1,11 @@
-import styles from './InvoiceItems.module.css';
 
 export const InvoiceItem = ({ item }) => {
   return (
-    <div className={styles.invoiceItem}>
-      <div>
-        <h4>{item?.name}</h4>
+    <div className="flex justify-between items-center gap-2 text-xs">
+      <div className='flex flex-col gap-2'>
+        <p>{item?.name}</p>
 
-        <p className={`text ${styles.quantityXPrice}`}>
+        <p className="text-gray-700 dark:text-gray-400 text-xs">
           {item?.quantity} x{' '}
           {new Intl.NumberFormat('en', {
             style: 'currency',
@@ -14,12 +13,12 @@ export const InvoiceItem = ({ item }) => {
           }).format(item?.price)}
         </p>
       </div>
-      <h4>
+      <p>
         {new Intl.NumberFormat('en', {
           style: 'currency',
           currency: 'GBP',
         }).format(item?.total)}
-      </h4>
+      </p>
     </div>
   );
 };
