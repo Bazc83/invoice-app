@@ -1,4 +1,4 @@
-.invoiceForm {
+/* .invoiceForm {
   width: 100%;
   height: max-content;
   z-index: 100;
@@ -23,16 +23,16 @@
     grid-row: 1/-1;
     grid-column: 1/ 7;
   }
-}
+} */
 
 .invoiceFormHeaderAccent {
   color: var(--invoiceFormHeaderAccent);
 }
 
-.form {
+/* .form {
   display: flex;
   flex-direction: column;
-}
+} */
 
 .formSectionHeader {
   color: var(--primary-600);

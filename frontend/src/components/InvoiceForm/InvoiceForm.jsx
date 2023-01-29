@@ -4,7 +4,6 @@ import { useContext } from 'react';
 import { FormButtons } from './FormButtons';
 import { FormId } from './FormId';
 import { FormMainContent } from './FormMainContent';
-import styles from './InvoiceForm.module.css';
 
 export const InvoiceForm = ({
   itemsArray,
@@ -22,10 +21,10 @@ export const InvoiceForm = ({
   if (!state.formData) return 'Loading ...';
 
   return (
-    <div className={styles.invoiceForm}>
+    <div className="h-max z-50 secondary-bg flex flex-col gap-8 p-8 ">
       <FormId state={state} />
 
-      <form className={styles.form}>
+      <form className="flex flex-col">
         <FormMainContent inputOnChange={inputOnChange} state={state} />
 
         <FormItems itemsArray={itemsArray} setItemsArray={setItemsArray} />
