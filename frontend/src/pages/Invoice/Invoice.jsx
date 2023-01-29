@@ -66,11 +66,7 @@ export const Invoice = () => {
 
             <button
               onClick={() => setShowInvoiceControls((prev) => !prev)}
-              className={`cursor-pointer rounded-md border-2 py-1 px-1 text-lg font-semibold text-gray-50 outline-none transition-colors md:hidden ${
-                showInvoiceControls
-                  ? " border-red-800  text-red-800 "
-                  : "border-emerald-600 text-emerald-600"
-              }`}
+              className={`cursor-pointer rounded-md border-2 border-gray-800 py-1 px-1 text-lg font-semibold text-gray-800 outline-none transition-colors dark:border-gray-50 dark:text-gray-50  md:hidden `}
             >
               {showInvoiceControls ? <HiOutlineX /> : <HiOutlineMenu />}
             </button>
