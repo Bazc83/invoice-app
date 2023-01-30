@@ -1,5 +1,7 @@
+import { InvoiceContext } from "@/context/InvoiceContext";
 import { useFilterInvoiceById } from "@/hooks/reactQueryHooks/useFilterInvoiceById";
 import { FormItemInput } from "@/ui/FormItemInput";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { FormItems } from "./FormItems";
@@ -10,10 +12,11 @@ export const InvoiceForm = ({
   setItemsArray,
   handleFormSubmit,
   handleCancel,
-  handleAddItemToQuery
+  handleAddItemToQuery,
 }) => {
   const { invoiceId } = useParams();
   const { data, isLoading, isError, error } = useFilterInvoiceById(invoiceId);
+
 
 
   const { register, handleSubmit, errors } = useForm({
@@ -30,7 +33,6 @@ export const InvoiceForm = ({
       clientPostCode: data["clientPostCode"],
       clientCountry: data["clientCountry"],
       description: data["description"],
-      items: data["items"],
     },
   });
 
@@ -155,7 +157,11 @@ export const InvoiceForm = ({
           />
         </FormItemInput>
 
-        <FormItems itemsArray={itemsArray} setItemsArray={setItemsArray} handleAddItemToQuery={handleAddItemToQuery}/>
+        <FormItems
+          itemsArray={itemsArray}
+          setItemsArray={setItemsArray}
+          handleAddItemToQuery={handleAddItemToQuery}
+        />
 
         <button type="submit">Submit Changes</button>
       </form>

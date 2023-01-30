@@ -8,7 +8,7 @@ export const FormItem = ({
   onItemChange,
   handleDeleteItem,
   itemIndex,
-
+  handleAddItemToQuery,
 }) => {
   const [formItem, setFormItem] = useState({
     itemId: item?.id,
@@ -65,11 +65,11 @@ export const FormItem = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formItem]);
 
-  const handleSaveChanges = ()=>{
-    console.log(formItem)
+  const handleSaveChanges = () => {
+    console.log(formItem);
 
-    onItemChange(formItem)
-  }
+    handleAddItemToQuery();
+  };
 
   return (
     <div className="flex flex-col gap-2">
@@ -123,8 +123,15 @@ export const FormItem = ({
           />
         </FormItemInput>
 
-        <button type="button"  className="btn mt-4 flex items-center justify-center gap-2 bg-green-700  text-sm hover:bg-green-900" onClick={handleSaveChanges}>Save Changes</button>
-        <button type="button"
+        <button
+          type="button"
+          className="btn mt-4 flex items-center justify-center gap-2 bg-green-700  text-sm hover:bg-green-900"
+          onClick={handleSaveChanges}
+        >
+          Save Changes
+        </button>
+        <button
+          type="button"
           className=" btn mt-4 flex items-center justify-center gap-2 bg-red-700  text-sm hover:bg-red-900"
           onClick={handleDelete}
         >

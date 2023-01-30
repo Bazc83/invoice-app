@@ -1,31 +1,30 @@
-import { createContext, useReducer } from 'react';
+import { createContext, useReducer } from "react";
 
 export const InvoiceContext = createContext();
 
 export const invoiceReducer = (state, action) => {
   switch (action.type) {
-    case 'toggleEditForm':
+    case "toggleEditForm":
       return { ...state, showEditForm: !state.showEditForm };
-    case 'hideEditForm':
+    case "hideEditForm":
       return { ...state, showEditForm: false };
-    case 'showEditForm':
+    case "showEditForm":
       return { ...state, showEditForm: true };
-    case 'showDeleteModal':
+    case "showDeleteModal":
       return { ...state, showDeleteModal: true };
-    case 'hideDeleteModal':
+    case "hideDeleteModal":
       return { ...state, showDeleteModal: false };
-    case 'setFormData':
+    case "setFormData":
       return {
         ...state,
         formData: action.payload,
       };
-    case 'setFormDataItems':
-    
+    case "setFormDataItems":
       return {
         ...state,
         formData: { ...state.formData, items: action.payload },
       };
-    case 'changeFormData':
+    case "changeFormData":
       return {
         ...state,
         formData: {
@@ -33,7 +32,7 @@ export const invoiceReducer = (state, action) => {
           [action.payload.target.name]: action.payload.target.value,
         },
       };
-    case 'setPaymentTermsAndPaymentDueDate':
+    case "setPaymentTermsAndPaymentDueDate":
       return {
         ...state,
         formData: {
@@ -43,12 +42,12 @@ export const invoiceReducer = (state, action) => {
         },
         showPaymentTermOptions: false,
       };
-    case 'toggleShowPaymentTermOptions':
+    case "toggleShowPaymentTermOptions":
       return {
         ...state,
         showPaymentTermOptions: !state.showPaymentTermOptions,
       };
-    case 'resetInvoice':
+    case "resetInvoice":
       return {
         showEditForm: false,
         showDeleteModal: false,
@@ -58,7 +57,7 @@ export const invoiceReducer = (state, action) => {
       };
 
     default:
-      throw new Error('invoiceContextReducer error');
+      throw new Error("invoiceContextReducer error");
   }
 };
 
