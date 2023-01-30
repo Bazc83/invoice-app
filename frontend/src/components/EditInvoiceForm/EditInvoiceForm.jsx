@@ -2,7 +2,7 @@ import { InvoiceContext } from "@/context/InvoiceContext";
 import { useFilterInvoiceById } from "@/hooks/reactQueryHooks/useFilterInvoiceById";
 import { useUpdateInvoice } from "@/hooks/reactQueryHooks/useUpdateInvoice";
 import { useContext, useEffect, useState } from "react";
-import { json, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import { InvoiceForm } from "../InvoiceForm";
 
 export const EditInvoiceForm = () => {
@@ -23,7 +23,6 @@ export const EditInvoiceForm = () => {
   const { updateInvoiceMutation } = useUpdateInvoice();
 
   const handleFormSubmit = (data) => {
-    // e.preventDefault();
     updateInvoiceMutation.mutate({
       invoiceId: invoiceId,
       invoiceData: data,
@@ -39,16 +38,33 @@ export const EditInvoiceForm = () => {
   };
 
 
-
   useEffect(() => {
     if (invoiceData !== undefined) {
       dispatch({ type: "setFormData", payload: invoiceData });
     }
   }, [invoiceData, dispatch]);
 
+
+
+
   useEffect(() => {
     dispatch({ type: "setFormDataItems", payload: itemsArray });
+   
   }, [itemsArray, dispatch]);
+
+ 
+
+  const handleAddItemToQuery = ()=>{
+    updateInvoiceMutation.mutate({
+      invoiceId: invoiceId,
+      invoiceData: state.formData,
+    });
+  }
+
+
+
+
+
 
   if (isLoading) return "Loading...";
 
@@ -61,6 +77,7 @@ export const EditInvoiceForm = () => {
       setItemsArray={setItemsArray}
       handleFormSubmit={handleFormSubmit}
       handleCancel={handleCancel}
+      handleAddItemToQuery={handleAddItemToQuery}
     />
   );
 };

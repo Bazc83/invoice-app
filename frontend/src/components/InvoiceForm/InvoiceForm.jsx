@@ -1,7 +1,8 @@
 import { useFilterInvoiceById } from "@/hooks/reactQueryHooks/useFilterInvoiceById";
-import { FormItem } from "@/ui/FormItem";
+import { FormItemInput } from "@/ui/FormItemInput";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
+import { FormItems } from "./FormItems";
 
 export const InvoiceForm = ({
   formData,
@@ -9,9 +10,11 @@ export const InvoiceForm = ({
   setItemsArray,
   handleFormSubmit,
   handleCancel,
+  handleAddItemToQuery
 }) => {
   const { invoiceId } = useParams();
   const { data, isLoading, isError, error } = useFilterInvoiceById(invoiceId);
+
 
   const { register, handleSubmit, errors } = useForm({
     defaultValues: {
@@ -27,13 +30,9 @@ export const InvoiceForm = ({
       clientPostCode: data["clientPostCode"],
       clientCountry: data["clientCountry"],
       description: data["description"],
-      items: [],
+      items: data["items"],
     },
   });
-
-  const onSubmit = (data) => {
-    handleFormSubmit(data);
-  };
 
   if (isLoading) return "Loading ...";
   if (isError) return `Error ... ${error}`;
@@ -41,8 +40,11 @@ export const InvoiceForm = ({
   return (
     <div className="secondary-bg z-50 col-span-full row-span-full flex h-max flex-col  gap-8 p-8">
       <h2 className="text-xl">Edit #{formData?.id}</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <FormItem>
+      <form
+        onSubmit={handleSubmit(handleFormSubmit)}
+        className="flex flex-col gap-4"
+      >
+        <FormItemInput>
           <label className="secondary-text" htmlFor="senderStreet">
             Sender Street
           </label>
@@ -51,8 +53,8 @@ export const InvoiceForm = ({
             type="text"
             {...register("senderStreet")}
           />
-        </FormItem>
-        <FormItem>
+        </FormItemInput>
+        <FormItemInput>
           <label className="secondary-text" htmlFor="senderCity">
             Sender City
           </label>
@@ -61,8 +63,8 @@ export const InvoiceForm = ({
             type="text"
             {...register("senderCity")}
           />
-        </FormItem>
-        <FormItem>
+        </FormItemInput>
+        <FormItemInput>
           <label className="secondary-text" htmlFor="senderPostCode">
             Sender Postcode
           </label>
@@ -71,8 +73,8 @@ export const InvoiceForm = ({
             type="text"
             {...register("senderPostCode")}
           />
-        </FormItem>
-        <FormItem>
+        </FormItemInput>
+        <FormItemInput>
           <label className="secondary-text" htmlFor="senderCountry">
             Sender Country
           </label>
@@ -81,8 +83,8 @@ export const InvoiceForm = ({
             type="text"
             {...register("senderCountry")}
           />
-        </FormItem>
-        <FormItem>
+        </FormItemInput>
+        <FormItemInput>
           <label className="secondary-text" htmlFor="clientName">
             Client Name
           </label>
@@ -91,8 +93,8 @@ export const InvoiceForm = ({
             type="text"
             {...register("clientName")}
           />
-        </FormItem>
-        <FormItem>
+        </FormItemInput>
+        <FormItemInput>
           <label className="secondary-text" htmlFor="clientEmail">
             Client Email
           </label>
@@ -101,8 +103,8 @@ export const InvoiceForm = ({
             type="email"
             {...register("clientEmail")}
           />
-        </FormItem>
-        <FormItem>
+        </FormItemInput>
+        <FormItemInput>
           <label className="secondary-text" htmlFor="clientStreet">
             Client Street
           </label>
@@ -111,8 +113,8 @@ export const InvoiceForm = ({
             type="text"
             {...register("clientStreet")}
           />
-        </FormItem>
-        <FormItem>
+        </FormItemInput>
+        <FormItemInput>
           <label className="secondary-text" htmlFor="clientCity">
             Client City
           </label>
@@ -121,8 +123,8 @@ export const InvoiceForm = ({
             type="text"
             {...register("clientCity")}
           />
-        </FormItem>
-        <FormItem>
+        </FormItemInput>
+        <FormItemInput>
           <label className="secondary-text" htmlFor="clientPostCode">
             Client Postcode
           </label>
@@ -131,8 +133,8 @@ export const InvoiceForm = ({
             type="text"
             {...register("clientPostCode")}
           />
-        </FormItem>
-        <FormItem>
+        </FormItemInput>
+        <FormItemInput>
           <label className="secondary-text" htmlFor="clientCountry">
             Client Country
           </label>
@@ -141,8 +143,8 @@ export const InvoiceForm = ({
             type="text"
             {...register("clientCountry")}
           />
-        </FormItem>
-        <FormItem>
+        </FormItemInput>
+        <FormItemInput>
           <label className="secondary-text" htmlFor="description">
             Description
           </label>
@@ -151,9 +153,11 @@ export const InvoiceForm = ({
             type="text"
             {...register("description")}
           />
-        </FormItem>
+        </FormItemInput>
 
-        <button type="submit">Submit form</button>
+        <FormItems itemsArray={itemsArray} setItemsArray={setItemsArray} handleAddItemToQuery={handleAddItemToQuery}/>
+
+        <button type="submit">Submit Changes</button>
       </form>
     </div>
   );

@@ -22,8 +22,8 @@
 
 .qty {
   grid-area: qty;
-}
 
+}
 .price {
   grid-area: price;
 }

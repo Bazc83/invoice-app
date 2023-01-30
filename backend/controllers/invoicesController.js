@@ -113,7 +113,7 @@ const updateInvoice = asyncHandler(async (req, res) => {
     items,
   } = req.body;
 
-  console.log(req.body);
+
   if (!clientName | !id ) {
     
     res.status(400);

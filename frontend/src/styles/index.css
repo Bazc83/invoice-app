@@ -21,4 +21,18 @@
   .btn {
     @apply cursor-pointer rounded-md py-2 px-6 font-semibold outline-none transition-colors;
   }
+
+  form {
+    @apply text-sm md:text-base;
+  }
+  form input {
+    @apply primary-bg rounded-md px-4 py-2;
+  }
+  form input[disabled]{
+    @apply dark:bg-gray-900 dark:text-gray-500 bg-gray-600 text-gray-200  rounded-md px-4 py-2;
+  }
+
+  form label {
+    @apply secondary-text;
+  }
 }

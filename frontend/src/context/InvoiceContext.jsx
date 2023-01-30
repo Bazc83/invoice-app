@@ -20,6 +20,7 @@ export const invoiceReducer = (state, action) => {
         formData: action.payload,
       };
     case 'setFormDataItems':
+    
       return {
         ...state,
         formData: { ...state.formData, items: action.payload },

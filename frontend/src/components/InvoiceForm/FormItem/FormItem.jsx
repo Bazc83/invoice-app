@@ -1,9 +1,15 @@
-import { useEffect, useState } from 'react';
-import { FaTrashAlt } from 'react-icons/fa';
-import { FormInput } from '../FormInput';
-import styles from './FormItem.module.css';
+import { useEffect, useState } from "react";
+import { FaTrashAlt } from "react-icons/fa";
 
-export const FormItem = ({ item, onItemChange, handleDeleteItem }) => {
+import { FormItemInput } from "@/ui/FormItemInput";
+
+export const FormItem = ({
+  item,
+  onItemChange,
+  handleDeleteItem,
+  itemIndex,
+
+}) => {
   const [formItem, setFormItem] = useState({
     itemId: item?.id,
     name: item?.name,
@@ -12,12 +18,17 @@ export const FormItem = ({ item, onItemChange, handleDeleteItem }) => {
     total: item?.total,
   });
 
+  const handleDelete = (e) => {
+    e.preventDefault();
+    handleDeleteItem(item.itemId);
+  };
+
   const setItemTotal = (itemPrice, itemQuantity) => {
     setFormItem((prev) => ({ ...prev, total: +itemPrice * +itemQuantity }));
   };
 
   const handleInputChange = (e) => {
-    if (e.target.name === 'price' || e.target.name === 'quantity') {
+    if (e.target.name === "price" || e.target.name === "quantity") {
       setFormItem((prev) => ({ ...prev, [e.target.name]: +e.target.value }));
     } else {
       setFormItem((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -54,59 +65,72 @@ export const FormItem = ({ item, onItemChange, handleDeleteItem }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formItem]);
 
+  const handleSaveChanges = ()=>{
+    console.log(formItem)
+
+    onItemChange(formItem)
+  }
+
   return (
-    <div className={styles.invoiceFormItem}>
-      <FormInput
-        type='text'
-        itemName='name'
-        itemLabel='Item Name'
-        value={formItem?.name}
-        className={styles.name}
-        setValue={handleInputChange}
-      />
+    <div className="flex flex-col gap-2">
+      <h2>Item {itemIndex + 1}</h2>
+      <div className="flex flex-row flex-wrap gap-2">
+        <FormItemInput>
+          <label htmlFor="name">Item Name</label>
+          <input
+            type="text"
+            name="name"
+            value={formItem?.name}
+            onChange={handleInputChange}
+            className="md:w-max"
+          />
+        </FormItemInput>
 
-      <FormInput
-        type='number'
-        itemName='quantity'
-        itemLabel='Qty.'
-        value={formItem?.quantity}
-        maxWidth={'max-content'}
-        className={styles.qty}
-        setValue={handleInputChange}
-        min={1}
-        max={100}
-        step={1}
-        onBlur={validateQty}
-      />
+        <FormItemInput>
+          <label htmlFor="quantity">Qty</label>
+          <input
+            type="number"
+            name="quantity"
+            value={formItem?.quantity}
+            onChange={handleInputChange}
+            min={1}
+            max={100}
+            step={1}
+            onBlur={validateQty}
+            className="text-center md:w-[80px]"
+          />
+        </FormItemInput>
 
-      <FormInput
-        type='number'
-        itemName='price'
-        itemLabel='Price'
-        value={formItem?.price}
-        setValue={handleInputChange}
-        maxWidth={'max-content'}
-        className={styles.price}
-        min={0.01}
-        step={0.01}
-        onBlur={validatePrice}
-      />
+        <FormItemInput>
+          <label htmlFor="price">Price</label>
+          <input
+            type="number"
+            name="price"
+            value={formItem?.price}
+            onChange={handleInputChange}
+            min={0.01}
+            step={0.01}
+            onBlur={validatePrice}
+          />
+        </FormItemInput>
+        <FormItemInput>
+          <label htmlFor="total">Total</label>
+          <input
+            type="number"
+            name="total"
+            value={formItem?.total.toFixed(2)}
+            disabled={true}
+          />
+        </FormItemInput>
 
-      <FormInput
-        type='number'
-        itemName='total'
-        itemLabel='Total'
-        value={formItem.total.toFixed(2)}
-        maxWidth={'max-content'}
-        className={styles.total}
-        disabled
-        noBg
-      />
-
-      <div
-        className={styles.icon}
-        onClick={() => handleDeleteItem(item.itemId)}>
-        <FaTrashAlt className={styles.trashIcon} />
+        <button type="button"  className="btn mt-4 flex items-center justify-center gap-2 bg-green-700  text-sm hover:bg-green-900" onClick={handleSaveChanges}>Save Changes</button>
+        <button type="button"
+          className=" btn mt-4 flex items-center justify-center gap-2 bg-red-700  text-sm hover:bg-red-900"
+          onClick={handleDelete}
+        >
+          Delete Item {itemIndex + 1}
+          <FaTrashAlt />
+        </button>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-export const FormItem = ({children}) => {
+export const FormItemInput = ({children}) => {
   return (
     <div className="flex flex-col gap-2">{children}</div>
   )

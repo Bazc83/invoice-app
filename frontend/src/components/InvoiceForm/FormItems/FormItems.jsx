@@ -1,10 +1,9 @@
-import { Button } from '@/components/Button';
-import { FormItem } from '@/components/InvoiceForm/FormItem';
-import { useState } from 'react';
-import { AddNewItem } from '../AddNewItem/AddNewItem';
-import styles from './FormItems.module.css';
+import { Button } from "@/components/Button";
+import { useState } from "react";
+import { AddNewItem } from "../AddNewItem/AddNewItem";
+import { FormItem } from "../FormItem/FormItem";
 
-export const FormItems = ({ itemsArray, setItemsArray }) => {
+export const FormItems = ({ itemsArray, setItemsArray, handleAddItemToQuery}) => {
   const [showNewItemInput, setShowNewItemInput] = useState(false);
 
   const onItemChange = (itemVal) => {
@@ -20,6 +19,8 @@ export const FormItems = ({ itemsArray, setItemsArray }) => {
         ...prev.slice(itemIndex + 1),
       ]);
     }
+
+    
   };
 
   const addItem = (item) => {
@@ -38,15 +39,19 @@ export const FormItems = ({ itemsArray, setItemsArray }) => {
   };
 
   return (
-    <div className={styles.formItemsSection}>
-      <h2>Item List</h2>
-      <div className={styles.items}>
+    <div className={"flex flex-col gap-2"}>
+      <h2 className="secondary-text text-lg font-semibold my-4">Item List</h2>
+      <div className="flex flex-col gap-6">
+    
         {itemsArray.map((item, i) => (
+      
           <FormItem
+            itemIndex={i}
             item={item}
             key={item.itemId}
             onItemChange={onItemChange}
             handleDeleteItem={handleDeleteItem}
+            handleAddItemToQuery={handleAddItemToQuery}
           />
         ))}
 
@@ -58,9 +63,10 @@ export const FormItems = ({ itemsArray, setItemsArray }) => {
         )}
       </div>
       <Button
-        btnStyle='btnThree'
+        btnStyle="btnThree"
         fullWidth
-        onClick={(e) => handleShowNewItemForm(e)}>
+        onClick={(e) => handleShowNewItemForm(e)}
+      >
         + Add New Item
       </Button>
     </div>
