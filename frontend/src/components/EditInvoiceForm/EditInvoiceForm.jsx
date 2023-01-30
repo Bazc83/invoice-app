@@ -1,9 +1,9 @@
-import { InvoiceContext } from '@/context/InvoiceContext';
-import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
-import { useUpdateInvoice } from '@/hooks/reactQueryHooks/useUpdateInvoice';
-import { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { InvoiceForm } from '../InvoiceForm';
+import { InvoiceContext } from "@/context/InvoiceContext";
+import { useFilterInvoiceById } from "@/hooks/reactQueryHooks/useFilterInvoiceById";
+import { useUpdateInvoice } from "@/hooks/reactQueryHooks/useUpdateInvoice";
+import { useContext, useEffect, useState } from "react";
+import { json, useParams } from "react-router-dom";
+import { InvoiceForm } from "../InvoiceForm";
 
 export const EditInvoiceForm = () => {
   const { state, dispatch } = useContext(InvoiceContext);
@@ -17,40 +17,42 @@ export const EditInvoiceForm = () => {
     error,
   } = useFilterInvoiceById(invoiceId);
 
-  useEffect(() => {
-    if (invoiceData !== undefined) {
-      dispatch({ type: 'setFormData', payload: invoiceData });
-    }
-  }, [invoiceData, dispatch]);
-
   const [itemsArray, setItemsArray] = useState(invoiceData?.items);
 
   // Update Invoice
   const { updateInvoiceMutation } = useUpdateInvoice();
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
+  const handleFormSubmit = (data) => {
+    // e.preventDefault();
     updateInvoiceMutation.mutate({
       invoiceId: invoiceId,
-      invoiceData: state.formData,
+      invoiceData: data,
     });
 
-    dispatch({ type: 'hideEditForm' });
+    dispatch({ type: "hideEditForm" });
   };
 
   const handleCancel = (e) => {
     e.preventDefault();
     updateInvoiceMutation.reset();
-    dispatch({ type: 'hideEditForm' });
+    dispatch({ type: "hideEditForm" });
   };
 
+
+
   useEffect(() => {
-    dispatch({ type: 'setFormDataItems', payload: itemsArray });
+    if (invoiceData !== undefined) {
+      dispatch({ type: "setFormData", payload: invoiceData });
+    }
+  }, [invoiceData, dispatch]);
+
+  useEffect(() => {
+    dispatch({ type: "setFormDataItems", payload: itemsArray });
   }, [itemsArray, dispatch]);
 
-  if (isLoading) return 'Loading...';
+  if (isLoading) return "Loading...";
 
-  if (isError) return 'An error has occurred: ' + error.message;
+  if (isError) return "An error has occurred: " + error.message;
 
   return (
     <InvoiceForm

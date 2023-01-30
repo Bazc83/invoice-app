@@ -1,38 +1,10 @@
-/* .invoiceForm {
-  width: 100%;
-  height: max-content;
-  z-index: 100;
-  background-color: var(--main-bg);
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  background-color: var(--main-bg);
-  padding: 2rem;
-  grid-row: 1/-1;
-  grid-column: 1/ 10;
-}
 
-@media (min-width: 768px) {
-  .invoiceForm {
-    grid-row: 1/-1;
-    grid-column: 1/ 10;
-  }
-}
-@media (min-width: 1000px) {
-  .invoiceForm {
-    grid-row: 1/-1;
-    grid-column: 1/ 7;
-  }
-} */
 
 .invoiceFormHeaderAccent {
   color: var(--invoiceFormHeaderAccent);
 }
 
-/* .form {
-  display: flex;
-  flex-direction: column;
-} */
+
 
 .formSectionHeader {
   color: var(--primary-600);

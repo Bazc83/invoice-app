@@ -8,6 +8,8 @@ export const useUpdateInvoice = () => {
   const { user } = useContext(AuthContext);
 
   const updateInvoice = async (invoiceId, invoiceData) => {
+
+    console.log(invoiceData)
     const response = await fetch(`/api/invoices/${invoiceId}`, {
       method: 'PUT',
       body: JSON.stringify(invoiceData),

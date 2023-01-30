@@ -1,20 +1,7 @@
-.invoiceFormInput {
-  display: flex;
-  flex-direction: column;
-  gap: 0.625rem;
-}
 
-.invoiceFormInput label {
-  color: var(--text-faded-secondary);
-}
 
-.invoiceFormInput input {
-  background-color: var(--secondary-bg);
-  border: 1px solid var(--formItemBorderColor);
-  padding: 1rem 1.5rem;
-  color: var(--text);
-  border-radius: 8px;
-}
+
+
 
 .invoiceFormInput.noBg input {
   background-color: transparent;

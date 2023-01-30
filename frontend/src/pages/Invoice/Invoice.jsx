@@ -38,7 +38,7 @@ export const Invoice = () => {
 
   return (
     <div
-      className={`relative mx-auto w-full  max-w-xl px-6 ${
+      className={`relative mx-auto grid w-full max-w-xl grid-cols-1  grid-rows-1 px-6 ${
         state.showDeleteModal &&
         "before:fixed before:inset-0 before:z-10 before:h-full before:w-full before:bg-black before:bg-opacity-60"
       }`}
@@ -52,7 +52,7 @@ export const Invoice = () => {
       {/* //// */}
       <div
         onClick={handleCloseForm}
-        className={`col-span-full col-start-1  ${
+        className={`col-span-full row-span-full ${
           state.showEditForm &&
           "before:fixed before:inset-0 before:z-10 before:h-full before:w-full before:bg-black before:bg-opacity-60"
         }`}

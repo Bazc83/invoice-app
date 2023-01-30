@@ -1,16 +1,11 @@
-import { useEffect, useState } from 'react';
-
-import styles from './FormInput.module.css';
+import { useEffect, useState } from "react";
 
 export const FormInput = ({
   type,
-  className,
   itemName,
   itemLabel,
-  inputError,
-  maxWidth,
   disabled,
-  noBg,
+  className,
   value,
   setValue,
   min,
@@ -31,22 +26,17 @@ export const FormInput = ({
   }, [value]);
 
   return (
-    <div
-      className={`${styles.invoiceFormInput} ${
-        inputError ? styles.inputError : ''
-      }  ${maxWidth === 'max-content' ? styles.maxContent : ''} ${
-        noBg ? styles.noBg : ''
-      }  ${className ? className : ''}`}>
-      <label htmlFor={itemName} className='text-faded'>
+    <div className={`flex flex-col gap-2    ${className ? className : ""}`}>
+      <label htmlFor={itemName} className="secondary-text ">
         {itemLabel}
       </label>
       <input
         min={min}
         max={max}
         onBlur={onBlur}
-        type={type ? type : 'text'}
+        type={type ? type : "text"}
         name={itemName}
-        className={`text`}
+        className={"primary-bg rounded-md border py-2 px-4"}
         value={itemValue}
         onChange={handleChange}
         disabled={disabled}

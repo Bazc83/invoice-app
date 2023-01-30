@@ -54,6 +54,7 @@ const addInvoice = asyncHandler(async (req, res) => {
   } = req.body;
 
   if (!clientEmail || !clientName || !id) {
+   
     res.status(400);
     throw new Error('Please add required fields');
   }
@@ -112,7 +113,9 @@ const updateInvoice = asyncHandler(async (req, res) => {
     items,
   } = req.body;
 
-  if (!clientName || !id) {
+  console.log(req.body);
+  if (!clientName | !id ) {
+    
     res.status(400);
     throw new Error('Please add required fields');
   }
