@@ -24,10 +24,17 @@ export const EditInvoiceForm = () => {
 
   const handleFormSubmit = (data) => {
     const payloadData = { ...data, items: itemsArray };
-    console.log(payloadData)
     dispatch({ type: "setFormData", payload: payloadData });
+
+    updateInvoiceMutation.mutate({
+      invoiceId: invoiceId,
+      invoiceData: payloadData,
+    });
+
     dispatch({ type: "hideEditForm" });
   };
+
+
 
 
   const handleCancel = (e) => {
@@ -35,6 +42,8 @@ export const EditInvoiceForm = () => {
     updateInvoiceMutation.reset();
     dispatch({ type: "hideEditForm" });
   };
+
+
 
   useEffect(() => {
     if (invoiceData !== undefined) {
@@ -53,12 +62,14 @@ export const EditInvoiceForm = () => {
     });
   };
 
-  useEffect(() => {
-    updateInvoiceMutation.mutate({
-      invoiceId: invoiceId,
-      invoiceData: state.formData,
-    });
-  }, [state.formData]);
+  // Should only run when form is saved/submitted
+
+  // useEffect(() => {
+  //   updateInvoiceMutation.mutate({
+  //     invoiceId: invoiceId,
+  //     invoiceData: state.formData,
+  //   });
+  // }, [state.formData]);
 
   if (isLoading) return "Loading...";
 

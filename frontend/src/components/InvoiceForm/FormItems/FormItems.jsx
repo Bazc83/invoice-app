@@ -1,12 +1,15 @@
-import { Button } from "@/components/Button";
 import { useState } from "react";
 import { AddNewItem } from "../AddNewItem/AddNewItem";
 import { FormItem } from "../FormItem/FormItem";
 
-export const FormItems = ({ itemsArray, setItemsArray, handleAddItemToQuery}) => {
+export const FormItems = ({
+  itemsArray,
+  setItemsArray,
+  handleAddItemToQuery,
+}) => {
   const [showNewItemInput, setShowNewItemInput] = useState(false);
 
-  const onItemChange = (itemVal) => {
+  const onItemSave = (itemVal) => {
     const itemIndex = itemsArray.findIndex(
       (indexVal) => indexVal.itemId === itemVal.itemId
     );
@@ -19,8 +22,6 @@ export const FormItems = ({ itemsArray, setItemsArray, handleAddItemToQuery}) =>
         ...prev.slice(itemIndex + 1),
       ]);
     }
-
-    
   };
 
   const addItem = (item) => {
@@ -39,17 +40,15 @@ export const FormItems = ({ itemsArray, setItemsArray, handleAddItemToQuery}) =>
   };
 
   return (
-    <div className={"flex flex-col gap-2"}>
-      <h2 className="secondary-text text-lg font-semibold my-4">Item List</h2>
+    <div className={"flex flex-col gap-4"}>
+      <h2 className="secondary-text text-lg font-semibold">Item List</h2>
       <div className="flex flex-col gap-6">
-    
         {itemsArray.map((item, i) => (
-      
           <FormItem
             itemIndex={i}
             item={item}
             key={item.itemId}
-            onItemChange={onItemChange}
+            onItemSave={onItemSave}
             handleDeleteItem={handleDeleteItem}
             handleAddItemToQuery={handleAddItemToQuery}
           />
@@ -62,13 +61,8 @@ export const FormItems = ({ itemsArray, setItemsArray, handleAddItemToQuery}) =>
           />
         )}
       </div>
-      <Button
-        btnStyle="btnThree"
-        fullWidth
-        onClick={(e) => handleShowNewItemForm(e)}
-      >
-        + Add New Item
-      </Button>
+
+      <button className="btn secondary-bg " onClick={(e) => handleShowNewItemForm(e)}>+ Add New Item</button>
     </div>
   );
 };

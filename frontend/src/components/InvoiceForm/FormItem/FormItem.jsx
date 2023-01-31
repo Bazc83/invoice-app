@@ -1,142 +1,140 @@
-import { useEffect, useState } from "react";
-import { FaTrashAlt } from "react-icons/fa";
-
 import { FormItemInput } from "@/ui/FormItemInput";
+import { useEffect, useReducer } from "react";
+import { useFormItemReducer } from "./useFormItemReducer";
 
 export const FormItem = ({
   item,
-  onItemChange,
+  onItemSave,
   handleDeleteItem,
   itemIndex,
-  handleAddItemToQuery,
 }) => {
-  const [formItem, setFormItem] = useState({
+  const { itemReducer } = useFormItemReducer();
+
+  const initialValue = {
     itemId: item?.id,
     name: item?.name,
     quantity: item?.quantity,
     price: item?.price,
     total: item?.total,
+  };
+  const [state, dispatch] = useReducer(itemReducer, {
+    formItem: { ...initialValue },
   });
 
-  const handleDelete = (e) => {
+  // state de-structured
+  const { formItem } = state;
+
+  const handleDelete = (itemId, e) => {
     e.preventDefault();
-    handleDeleteItem(item.itemId);
+    handleDeleteItem(itemId);
   };
 
-  const setItemTotal = (itemPrice, itemQuantity) => {
-    setFormItem((prev) => ({ ...prev, total: +itemPrice * +itemQuantity }));
-  };
-
-  const handleInputChange = (e) => {
-    if (e.target.name === "price" || e.target.name === "quantity") {
-      setFormItem((prev) => ({ ...prev, [e.target.name]: +e.target.value }));
-    } else {
-      setFormItem((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    }
-    setItemTotal(formItem.price, formItem.quantity);
-  };
-
-  const validatePrice = (e) => {
-    if (+e.target.value >= 0.0) {
-      setFormItem((prev) => ({ ...prev, price: prev.price }));
-    } else if (+e.target.value < 0.0 || e.target.value === undefined) {
-      setFormItem((prev) => ({ ...prev, price: 0.0 }));
-    }
-  };
-
-  const validateQty = (e) => {
-    if (+e.target.value >= 1) {
-      return setFormItem((prev) => ({ ...prev, quantity: prev.quantity }));
-    } else if (+e.target.value < 1 || e.target.value === undefined) {
-      setFormItem((prev) => ({ ...prev, quantity: 1 }));
-    }
-  };
 
   useEffect(() => {
-    setItemTotal(formItem.price, formItem.quantity);
+    dispatch({ type: "itemTotal" });
   }, [formItem.price, formItem.quantity]);
 
   useEffect(() => {
-    setFormItem((prev) => ({ ...prev, itemId: item.itemId }));
-  }, [item.itemId, setFormItem]);
-
-  useEffect(() => {
-    onItemChange(formItem);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formItem]);
-
-  const handleSaveChanges = () => {
-    console.log(formItem);
-
-    handleAddItemToQuery();
-  };
+    dispatch({ type: "itemId", payload: { itemId: item.itemId } });
+  }, [item.itemId]);
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-4 ">
       <h2>Item {itemIndex + 1}</h2>
-      <div className="flex flex-row flex-wrap gap-2">
-        <FormItemInput>
+      <div className="grid grid-cols-6 grid-rows-2 gap-2">
+        {/* Item Name */}
+        <FormItemInput className={"col-span-full col-start-1 row-start-1 "}>
           <label htmlFor="name">Item Name</label>
           <input
             type="text"
             name="name"
             value={formItem?.name}
-            onChange={handleInputChange}
-            className="md:w-max"
+            onChange={(e) =>
+              dispatch({ type: "itemName", payload: { value: e.target.value } })
+            }
           />
         </FormItemInput>
 
-        <FormItemInput>
+        {/* Item Quantity */}
+        <FormItemInput
+          className={"col-span-2 col-start-1 row-start-2  text-center"}
+        >
           <label htmlFor="quantity">Qty</label>
           <input
             type="number"
             name="quantity"
             value={formItem?.quantity}
-            onChange={handleInputChange}
+            onChange={(e) =>
+              dispatch({
+                type: "itemQuantity",
+                payload: { value: e.target.value },
+              })
+            }
             min={1}
             max={100}
             step={1}
-            onBlur={validateQty}
-            className="text-center md:w-[80px]"
+            onBlur={(e) =>
+              dispatch({
+                type: "validateQuantity",
+                payload: { value: +e.target.value },
+              })
+            }
+            className="text-center"
           />
         </FormItemInput>
 
-        <FormItemInput>
+        {/* Item Price */}
+        <FormItemInput
+          className={"col-span-2 col-start-3 row-start-2 text-center "}
+        >
           <label htmlFor="price">Price</label>
           <input
             type="number"
             name="price"
             value={formItem?.price}
-            onChange={handleInputChange}
-            min={0.01}
-            step={0.01}
-            onBlur={validatePrice}
+            onChange={(e) =>
+              dispatch({
+                type: "itemPrice",
+                payload: { value: e.target.value },
+              })
+            }
+            onBlur={(e) =>
+              dispatch({
+                type: "validatePrice",
+                payload: { value: e.target.value },
+              })
+            }
+            className="text-center"
           />
         </FormItemInput>
-        <FormItemInput>
+
+        {/* Item Total **input disabled*** just to show value */}
+        <FormItemInput
+          className={"col-span-2 col-start-5 row-start-2 text-center"}
+        >
           <label htmlFor="total">Total</label>
           <input
             type="number"
             name="total"
             value={formItem?.total.toFixed(2)}
             disabled={true}
+            className="text-center"
           />
         </FormItemInput>
 
         <button
           type="button"
-          className="btn mt-4 flex items-center justify-center gap-2 bg-green-700  text-sm hover:bg-green-900"
-          onClick={handleSaveChanges}
+          onClick={() => onItemSave(state.formItem)}
+          className=" btn  col-span-3 col-start-1 row-start-3 flex items-center justify-center  gap-2 bg-emerald-700 text-sm hover:bg-emerald-900"
         >
-          Save Changes
+          Save
         </button>
         <button
           type="button"
-          className=" btn mt-4 flex items-center justify-center gap-2 bg-red-700  text-sm hover:bg-red-900"
-          onClick={handleDelete}
+          className=" btn text- col-span-3 col-start-4 flex items-center  justify-center gap-2 bg-red-700 hover:bg-red-900"
+          onClick={(e) => handleDelete(item.itemId, e)}
         >
-          Delete Item {itemIndex + 1}
-          <FaTrashAlt />
+          Delete Item
         </button>
       </div>
     </div>

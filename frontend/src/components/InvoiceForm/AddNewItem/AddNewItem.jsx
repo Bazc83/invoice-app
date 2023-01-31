@@ -46,7 +46,7 @@ export const AddNewItem = ({ addItem, setShowNewItemInput }) => {
     setShowNewItemInput((prev) => !prev);
   };
 
-  const validatePrice = (e) => {
+  const validatePrice = (setFormItem, e) => {
     if (+e.target.value >= 0.0) {
       setFormItem((prev) => ({ ...prev, price: prev.price.toFixed(2) }));
     } else if (+e.target.value < 0.0 || e.target.value === undefined) {
@@ -54,7 +54,7 @@ export const AddNewItem = ({ addItem, setShowNewItemInput }) => {
     }
   };
 
-  const validateQty = (e) => {
+  const validateQty = (setFormItem, e) => {
     if (+e.target.value >= 1) {
       return setFormItem((prev) => ({ ...prev, quantity: prev.quantity }));
     } else if (+e.target.value < 1 || e.target.value === undefined) {
@@ -87,7 +87,7 @@ export const AddNewItem = ({ addItem, setShowNewItemInput }) => {
           maxWidth={'max-content'}
           className={styles.qty}
           setValue={handleInputChange}
-          onBlur={validateQty}
+          onBlur={(e)=>validateQty(setFormItem, e)}
         />
 
         <FormInput
@@ -99,7 +99,7 @@ export const AddNewItem = ({ addItem, setShowNewItemInput }) => {
           maxWidth={'max-content'}
           className={styles.price}
           step={0.01}
-          onBlur={validatePrice}
+          onBlur={(e)=> validatePrice(setFormItem, e)}
         />
 
         <FormInput

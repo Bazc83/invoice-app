@@ -1,7 +1,5 @@
-import { InvoiceContext } from "@/context/InvoiceContext";
 import { useFilterInvoiceById } from "@/hooks/reactQueryHooks/useFilterInvoiceById";
 import { FormItemInput } from "@/ui/FormItemInput";
-import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { FormItems } from "./FormItems";
@@ -19,7 +17,7 @@ export const InvoiceForm = ({
 
 
 
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit } = useForm({
     defaultValues: {
       id: invoiceId,
       senderStreet: data["senderStreet"],

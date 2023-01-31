@@ -1,5 +1,3 @@
-export const FormItemInput = ({children}) => {
-  return (
-    <div className="flex flex-col gap-2">{children}</div>
-  )
-}
+export const FormItemInput = ({ children, className }) => {
+  return <div className={`flex flex-col gap-2 ${className}`}>{children}</div>;
+};
