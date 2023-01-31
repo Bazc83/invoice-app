@@ -23,6 +23,7 @@ export const Invoice = () => {
     error,
   } = useFilterInvoiceById(invoiceId);
 
+
   const handleCloseForm = () => {
     if (!state.showEditForm) return;
     dispatch({ type: "hideEditForm" });
@@ -45,7 +46,7 @@ export const Invoice = () => {
     >
       {state.showDeleteModal && <ConfirmDeleteModal />}
 
-      {state.showEditForm && <EditInvoiceForm />}
+      {state.showEditForm && <EditInvoiceForm invoiceId={invoiceId} />}
 
       {/* //// */}
       {/* TODO MAYBE COMBINE THIS WITH THE TOP DIV */}

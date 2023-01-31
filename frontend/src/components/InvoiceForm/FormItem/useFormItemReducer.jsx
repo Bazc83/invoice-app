@@ -14,7 +14,7 @@ export const useFormItemReducer = () => {
           ...state,
           formItem: {
             ...state.formItem,
-            quantity: +payload?.value >= 1 ? payload.value: "",
+            quantity: +payload?.value >= 1 ? payload.value : "",
           },
         };
       case "itemName":
@@ -31,10 +31,12 @@ export const useFormItemReducer = () => {
           ...state,
           formItem: {
             ...state.formItem,
-            price: +payload.value >= 0.01 ? parseFloat(state.formItem.price).toFixed(2) : 0.01,
+            price:
+              +payload.value >= 0.01
+                ? parseFloat(state.formItem.price).toFixed(2)
+                : 0.01,
           },
         };
-
 
       case "validateQuantity":
         return {
@@ -60,6 +62,10 @@ export const useFormItemReducer = () => {
             ...state.formItem,
             itemId: payload.itemId,
           },
+        };
+      case "resetItemForm":
+        return {
+          ...payload,
         };
       default:
         throw new Error("formItemReducer error");

@@ -1,37 +1,23 @@
-import { useState } from "react";
+import { InvoiceContext } from "@/context/InvoiceContext";
+import { useContext, useState } from "react";
 import { AddNewItem } from "../AddNewItem/AddNewItem";
 import { FormItem } from "../FormItem/FormItem";
 
-export const FormItems = ({
-  itemsArray,
-  setItemsArray,
-  handleAddItemToQuery,
-}) => {
+export const FormItems = () => {
   const [showNewItemInput, setShowNewItemInput] = useState(false);
 
+  const { state, dispatch } = useContext(InvoiceContext);
+
   const onItemSave = (itemVal) => {
-    const itemIndex = itemsArray.findIndex(
-      (indexVal) => indexVal.itemId === itemVal.itemId
-    );
-    if (itemIndex === -1) {
-      return;
-    } else {
-      setItemsArray((prev) => [
-        ...prev.slice(0, itemIndex),
-        itemVal,
-        ...prev.slice(itemIndex + 1),
-      ]);
-    }
+    dispatch({ type: "updateItem", payload: itemVal });
   };
 
   const addItem = (item) => {
-    setItemsArray((prev) => [...prev, item]);
+    dispatch({ type: "addItem", payload: item });
   };
 
-  const handleDeleteItem = (itemToDeleteId) => {
-    setItemsArray((prev) =>
-      prev.filter((item) => item.itemId !== itemToDeleteId)
-    );
+  const handleDeleteItem = (itemToDelete) => {
+    dispatch({ type: "deleteItem", payload: itemToDelete });
   };
 
   const handleShowNewItemForm = (e) => {
@@ -43,14 +29,13 @@ export const FormItems = ({
     <div className={"flex flex-col gap-4"}>
       <h2 className="secondary-text text-lg font-semibold">Item List</h2>
       <div className="flex flex-col gap-6">
-        {itemsArray.map((item, i) => (
+        {state.itemsArray.map((item, i) => (
           <FormItem
             itemIndex={i}
             item={item}
             key={item.itemId}
             onItemSave={onItemSave}
             handleDeleteItem={handleDeleteItem}
-            handleAddItemToQuery={handleAddItemToQuery}
           />
         ))}
 
@@ -58,11 +43,18 @@ export const FormItems = ({
           <AddNewItem
             addItem={addItem}
             setShowNewItemInput={setShowNewItemInput}
+            handleDeleteItem={handleDeleteItem}
+            onItemSave={onItemSave}
           />
         )}
       </div>
 
-      <button className="btn secondary-bg " onClick={(e) => handleShowNewItemForm(e)}>+ Add New Item</button>
+      <button
+        className="btn secondary-bg "
+        onClick={(e) => handleShowNewItemForm(e)}
+      >
+        + Add New Item
+      </button>
     </div>
   );
 };

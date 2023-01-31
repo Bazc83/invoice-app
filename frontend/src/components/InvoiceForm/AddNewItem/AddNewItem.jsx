@@ -1,131 +1,64 @@
-import { useEffect, useState } from 'react';
-import { FaTrashAlt } from 'react-icons/fa';
-import { v4 as uuidv4 } from 'uuid';
-import { Button } from '../../Button';
-import { FormInput } from '../FormInput';
+import { useEffect, useReducer } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { useFormItemReducer } from "../FormItem/useFormItemReducer";
+import { ItemForm } from "../ItemForm";
 
-import styles from './AddNewItem.module.css';
-export const AddNewItem = ({ addItem, setShowNewItemInput }) => {
+export const AddNewItem = ({
+  addItem,
+  setShowNewItemInput,
+  handleDeleteItem,
+  onItemSave,
+}) => {
   const newId = uuidv4();
 
-  const [formItem, setFormItem] = useState({
+  const initialValue = {
     itemId: newId,
-    name: '',
+    name: "",
     quantity: 1,
-    price: 0.0,
+    price: 0.01,
     total: 0.0,
-  });
-
-  const setItemTotal = (itemPrice, itemQuantity) => {
-    setFormItem((prev) => ({ ...prev, total: +itemPrice * +itemQuantity }));
   };
 
-  const handleInputChange = (e) => {
-    if (e.target.name === 'price') {
-      setFormItem((prev) => ({
-        ...prev,
-        [e.target.name]: +e.target.value,
-      }));
-    } else if (e.target.name === 'quantity') {
-      setFormItem((prev) => ({ ...prev, [e.target.name]: +e.target.value }));
-    } else {
-      setFormItem((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    }
+  const { itemReducer } = useFormItemReducer();
 
-    setItemTotal(formItem.price, formItem.quantity);
+  const [state, dispatch] = useReducer(itemReducer, { formItem: initialValue });
+
+  const { formItem } = state;
+
+  const handleSave = (formItem) => {
+    onItemSave(formItem);
   };
 
-  const addItemToItemsArray = (e) => {
+  const handleDelete = (itemId, e) => {
     e.preventDefault();
-    addItem(formItem);
-    setShowNewItemInput((prev) => !prev);
-  };
 
-  const handleCancel = (e) => {
-    e.preventDefault();
-    setShowNewItemInput((prev) => !prev);
-  };
-
-  const validatePrice = (setFormItem, e) => {
-    if (+e.target.value >= 0.0) {
-      setFormItem((prev) => ({ ...prev, price: prev.price.toFixed(2) }));
-    } else if (+e.target.value < 0.0 || e.target.value === undefined) {
-      setFormItem((prev) => ({ ...prev, price: 0.0 }));
-    }
-  };
-
-  const validateQty = (setFormItem, e) => {
-    if (+e.target.value >= 1) {
-      return setFormItem((prev) => ({ ...prev, quantity: prev.quantity }));
-    } else if (+e.target.value < 1 || e.target.value === undefined) {
-      setFormItem((prev) => ({ ...prev, quantity: 1 }));
-    }
+    handleDeleteItem(itemId);
   };
 
   useEffect(() => {
-    setItemTotal(formItem.price, formItem.quantity);
+    dispatch({ type: "itemTotal" });
   }, [formItem.price, formItem.quantity]);
 
+  const addItemToItemsArray = () => {
+    addItem(state.formItem);
+    dispatch({ type: "resetItemForm", payload: initialValue });
+    setShowNewItemInput(false);
+  };
+
+  const handleCancelAddNewItem = (e) => {
+    e.preventDefault();
+    setShowNewItemInput(false);
+  };
+
   return (
-    <div>
-      <h4 style={{ paddingBottom: '0.5rem' }}>Add A New Item</h4>
-      <div className={styles.invoiceFormItem}>
-        <FormInput
-          type='text'
-          itemName='name'
-          itemLabel='Item Names'
-          value={formItem.name}
-          className={styles.name}
-          setValue={handleInputChange}
-        />
-
-        <FormInput
-          type='number'
-          itemName='quantity'
-          itemLabel='Qty.'
-          value={formItem.quantity}
-          maxWidth={'max-content'}
-          className={styles.qty}
-          setValue={handleInputChange}
-          onBlur={(e)=>validateQty(setFormItem, e)}
-        />
-
-        <FormInput
-          type='number'
-          itemName='price'
-          itemLabel='Price'
-          value={formItem.price}
-          setValue={handleInputChange}
-          maxWidth={'max-content'}
-          className={styles.price}
-          step={0.01}
-          onBlur={(e)=> validatePrice(setFormItem, e)}
-        />
-
-        <FormInput
-          type='number'
-          itemName='total'
-          itemLabel='Total'
-          value={formItem.total.toFixed(2)}
-          maxWidth={'max-content'}
-          className={styles.total}
-          disabled
-          noBg
-        />
-
-        <div className={styles.icon}>
-          <FaTrashAlt className={styles.trashIcon} />
-        </div>
-      </div>
-
-      <div className={styles.btnWrapper}>
-        <Button onClick={handleCancel} btnStyle={'btnFour'}>
-          Cancel
-        </Button>
-        <Button onClick={(e) => addItemToItemsArray(e)} btnStyle={'btnFive'}>
-          Add Item To Invoice
-        </Button>
-      </div>
-    </div>
+    <ItemForm
+      formItem={formItem}
+      dispatch={dispatch}
+      handleSave={handleSave}
+      handleDelete={handleDelete}
+      newForm={true}
+      addItemToItemsArray={addItemToItemsArray}
+      handleCancelAddNewItem={handleCancelAddNewItem}
+    />
   );
 };

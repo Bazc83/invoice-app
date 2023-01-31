@@ -2,10 +2,16 @@ import { createContext, useReducer } from "react";
 
 export const InvoiceContext = createContext();
 
+const initialValue = {
+  showEditForm: false,
+  showDeleteModal: false,
+  formData: {},
+  itemsArray: [],
+  showPaymentTermOptions: false,
+};
+
 export const invoiceReducer = (state, action) => {
   switch (action.type) {
-    case "toggleEditForm":
-      return { ...state, showEditForm: !state.showEditForm };
     case "hideEditForm":
       return { ...state, showEditForm: false };
     case "showEditForm":
@@ -19,11 +25,42 @@ export const invoiceReducer = (state, action) => {
         ...state,
         formData: action.payload,
       };
-    case "setFormDataItems":
+    case "addItems":
       return {
         ...state,
-        formData: { ...state.formData, items: action.payload },
+        itemsArray: [...action.payload],
       };
+    case "addItem":
+      return {
+        ...state,
+        itemsArray: [...state.itemsArray, action.payload],
+      };
+    case "updateItem":
+      const itemIndex = state.itemsArray.findIndex(
+        (indexVal) => indexVal.itemId === action.payload.itemId
+      );
+
+      if (itemIndex !== -1) {
+        return {
+          ...state,
+          itemsArray: [
+            ...state.itemsArray.slice(0, itemIndex),
+            action.payload,
+            ...state.itemsArray.slice(itemIndex + 1),
+          ],
+        };
+      } else {
+        return { ...state };
+      }
+
+    case "deleteItem":
+      return {
+        ...state,
+        itemsArray: [
+          ...state.itemsArray.filter((item) => item.itemId !== action.payload),
+        ],
+      };
+
     case "changeFormData":
       return {
         ...state,
@@ -49,11 +86,7 @@ export const invoiceReducer = (state, action) => {
       };
     case "resetInvoice":
       return {
-        showEditForm: false,
-        showDeleteModal: false,
-        formData: {},
-        itemsArray: [],
-        showPaymentTermOptions: false,
+        ...initialValue,
       };
 
     default:
@@ -62,13 +95,7 @@ export const invoiceReducer = (state, action) => {
 };
 
 export const InvoiceContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(invoiceReducer, {
-    showEditForm: false,
-    showDeleteModal: false,
-    formData: {},
-    itemsArray: [],
-    showPaymentTermOptions: false,
-  });
+  const [state, dispatch] = useReducer(invoiceReducer, initialValue);
 
   return (
     <InvoiceContext.Provider value={{ state, dispatch }}>

@@ -5,17 +5,13 @@ import { useParams } from "react-router-dom";
 import { FormItems } from "./FormItems";
 
 export const InvoiceForm = ({
-  formData,
-  itemsArray,
-  setItemsArray,
+  // itemsArray,
+  // setItemsArray,
   handleFormSubmit,
   handleCancel,
-  handleAddItemToQuery,
 }) => {
   const { invoiceId } = useParams();
   const { data, isLoading, isError, error } = useFilterInvoiceById(invoiceId);
-
-
 
   const { register, handleSubmit } = useForm({
     defaultValues: {
@@ -39,7 +35,7 @@ export const InvoiceForm = ({
 
   return (
     <div className="secondary-bg z-50 col-span-full row-span-full flex h-max flex-col  gap-8 p-8">
-      <h2 className="text-xl">Edit #{formData?.id}</h2>
+      <h2 className="text-xl">Edit #{invoiceId}</h2>
       <form
         onSubmit={handleSubmit(handleFormSubmit)}
         className="flex flex-col gap-4"
@@ -155,11 +151,8 @@ export const InvoiceForm = ({
           />
         </FormItemInput>
 
-        <FormItems
-          itemsArray={itemsArray}
-          setItemsArray={setItemsArray}
-          handleAddItemToQuery={handleAddItemToQuery}
-        />
+        {/* itemsArray={itemsArray} setItemsArray={setItemsArray} */}
+        <FormItems  />
 
         <button type="submit">Submit Changes</button>
       </form>
