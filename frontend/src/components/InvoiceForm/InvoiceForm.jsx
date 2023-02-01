@@ -1,15 +1,12 @@
-import { useFilterInvoiceById } from "@/hooks/reactQueryHooks/useFilterInvoiceById";
-import { FormItemInput } from "@/ui/FormItemInput";
-import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
-import { FormItems } from "./FormItems";
+import { useForm } from 'react-hook-form';
+import { useParams } from 'react-router-dom';
 
-export function InvoiceForm({
-  // itemsArray,
-  // setItemsArray,
-  handleFormSubmit,
-  handleCancel,
-}) {
+import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
+import { FormItemInput } from '@/ui/FormItemInput';
+
+import { FormItems } from './FormItems';
+
+export function InvoiceForm({ handleFormSubmit, handleCancel }) {
   const { invoiceId } = useParams();
   const { data, isLoading, isError, error } = useFilterInvoiceById(invoiceId);
 
@@ -30,7 +27,7 @@ export function InvoiceForm({
     },
   });
 
-  if (isLoading) return "Loading ...";
+  if (isLoading) return 'Loading ...';
   if (isError) return `Error ... ${error}`;
 
   return (
@@ -40,24 +37,26 @@ export function InvoiceForm({
         onSubmit={handleSubmit(handleFormSubmit)}
         className="flex flex-col gap-4"
       >
-        <FormItemInput>
-          <label className="secondary-text" htmlFor="senderStreet">
-            Sender Street
-          </label>
+        <label className="secondary-text" htmlFor="senderStreet">
+          Sender Street
           <input
+            id="senderStreet"
+            name="senderStreet"
             className="primary-bg"
             type="text"
-            {...register("senderStreet")}
+            {...register('senderStreet')}
           />
-        </FormItemInput>
+        </label>
+
         <FormItemInput>
           <label className="secondary-text" htmlFor="senderCity">
             Sender City
           </label>
           <input
+            name="senderCity"
             className="primary-bg"
             type="text"
-            {...register("senderCity")}
+            {...register('senderCity')}
           />
         </FormItemInput>
         <FormItemInput>
@@ -67,7 +66,7 @@ export function InvoiceForm({
           <input
             className="primary-bg"
             type="text"
-            {...register("senderPostCode")}
+            {...register('senderPostCode')}
           />
         </FormItemInput>
         <FormItemInput>
@@ -75,9 +74,10 @@ export function InvoiceForm({
             Sender Country
           </label>
           <input
-            className="primary-bg"
             type="text"
-            {...register("senderCountry")}
+            name="senderCountry"
+            className="primary-bg"
+            {...register('senderCountry')}
           />
         </FormItemInput>
         <FormItemInput>
@@ -87,7 +87,7 @@ export function InvoiceForm({
           <input
             className="primary-bg"
             type="text"
-            {...register("clientName")}
+            {...register('clientName')}
           />
         </FormItemInput>
         <FormItemInput>
@@ -97,7 +97,7 @@ export function InvoiceForm({
           <input
             className="primary-bg"
             type="email"
-            {...register("clientEmail")}
+            {...register('clientEmail')}
           />
         </FormItemInput>
         <FormItemInput>
@@ -107,7 +107,7 @@ export function InvoiceForm({
           <input
             className="primary-bg"
             type="text"
-            {...register("clientStreet")}
+            {...register('clientStreet')}
           />
         </FormItemInput>
         <FormItemInput>
@@ -117,7 +117,7 @@ export function InvoiceForm({
           <input
             className="primary-bg"
             type="text"
-            {...register("clientCity")}
+            {...register('clientCity')}
           />
         </FormItemInput>
         <FormItemInput>
@@ -127,7 +127,7 @@ export function InvoiceForm({
           <input
             className="primary-bg"
             type="text"
-            {...register("clientPostCode")}
+            {...register('clientPostCode')}
           />
         </FormItemInput>
         <FormItemInput>
@@ -137,7 +137,7 @@ export function InvoiceForm({
           <input
             className="primary-bg"
             type="text"
-            {...register("clientCountry")}
+            {...register('clientCountry')}
           />
         </FormItemInput>
         <FormItemInput>
@@ -147,14 +147,19 @@ export function InvoiceForm({
           <input
             className="primary-bg"
             type="text"
-            {...register("description")}
+            {...register('description')}
           />
         </FormItemInput>
 
         <FormItems />
 
+        <button type="button" onClick={handleCancel}>
+          Submit Changes
+        </button>
         <button type="submit">Submit Changes</button>
       </form>
     </div>
   );
 }
+
+export default InvoiceForm;

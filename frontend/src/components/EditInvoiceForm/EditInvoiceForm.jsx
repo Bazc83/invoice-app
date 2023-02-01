@@ -1,10 +1,12 @@
-import { InvoiceContext } from "@/context/InvoiceContext";
-import { useFilterInvoiceById } from "@/hooks/reactQueryHooks/useFilterInvoiceById";
-import { useUpdateInvoice } from "@/hooks/reactQueryHooks/useUpdateInvoice";
-import { useContext, useEffect } from "react";
-import { InvoiceForm } from "../InvoiceForm";
+import { useContext, useEffect } from 'react';
 
-export const EditInvoiceForm = ({ invoiceId }) => {
+import { InvoiceContext } from '@/context/InvoiceContext';
+import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
+import { useUpdateInvoice } from '@/hooks/reactQueryHooks/useUpdateInvoice';
+
+import { InvoiceForm } from '../InvoiceForm';
+
+export function EditInvoiceForm({ invoiceId }) {
   const { state, dispatch } = useContext(InvoiceContext);
 
   const {
@@ -21,35 +23,35 @@ export const EditInvoiceForm = ({ invoiceId }) => {
 
   const handleFormSubmit = (data) => {
     const payloadData = { ...data, items: state.itemsArray };
-    dispatch({ type: "setFormData", payload: payloadData });
+    dispatch({ type: 'setFormData', payload: payloadData });
 
     updateInvoiceMutation.mutate({
-      invoiceId: invoiceId,
+      invoiceId,
       invoiceData: payloadData,
     });
 
-    dispatch({ type: "hideEditForm" });
+    dispatch({ type: 'hideEditForm' });
   };
 
   const handleCancel = (e) => {
     e.preventDefault();
     updateInvoiceMutation.reset();
-    dispatch({ type: "hideEditForm" });
+    dispatch({ type: 'hideEditForm' });
   };
 
   useEffect(() => {
     if (invoiceData !== undefined) {
-      dispatch({ type: "setFormData", payload: invoiceData });
+      dispatch({ type: 'setFormData', payload: invoiceData });
 
       if (invoiceData.items.length > 0) {
-        dispatch({ type: "addItems", payload: invoiceData.items });
+        dispatch({ type: 'addItems', payload: invoiceData.items });
       }
     }
   }, [invoiceData, dispatch]);
 
-  if (isLoading) return "Loading...";
+  if (isLoading) return 'Loading...';
 
-  if (isError) return "An error has occurred: " + error.message;
+  if (isError) return `An error has occurred: ${error.message}`;
 
   return (
     <InvoiceForm
@@ -58,4 +60,6 @@ export const EditInvoiceForm = ({ invoiceId }) => {
       handleCancel={handleCancel}
     />
   );
-};
+}
+
+export default EditInvoiceForm;
