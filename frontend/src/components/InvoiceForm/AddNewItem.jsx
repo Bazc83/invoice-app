@@ -44,11 +44,11 @@ export function AddNewItem({
   const addItemToItemsArray = () => {
     addItem(state.formItem);
     dispatch({ type: 'resetItemForm', payload: initialValue });
+
     setShowNewItemInput(false);
   };
 
-  const handleCancelAddNewItem = (e) => {
-    e.preventDefault();
+  const cancelAddNewItem = () => {
     setShowNewItemInput(false);
   };
 
@@ -60,7 +60,7 @@ export function AddNewItem({
       handleDelete={handleDelete}
       newForm
       addItemToItemsArray={addItemToItemsArray}
-      handleCancelAddNewItem={handleCancelAddNewItem}
+      cancelAddNewItem={cancelAddNewItem}
     />
   );
 }

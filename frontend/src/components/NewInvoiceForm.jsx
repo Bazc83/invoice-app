@@ -1,13 +1,16 @@
+import { useContext, useEffect, useState } from 'react';
+
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+
 import { InvoicesContext } from '@/context/InvoicesContext';
 import { useAddNewInvoice } from '@/hooks/reactQueryHooks/useAddNewInvoice';
 import { useUpdateInvoiceId } from '@/hooks/reactQueryHooks/useUpdateInvoiceId';
 import { setInvoiceDates } from '@/hooks/setInvoiceDates';
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import { useContext, useEffect, useState } from 'react';
+
 import { InvoiceForm } from './InvoiceForm';
 
-export const NewInvoiceForm = () => {
+export function NewInvoiceForm() {
   const { dispatch } = useContext(InvoicesContext);
 
   const { todaysDate } = setInvoiceDates();
@@ -61,7 +64,7 @@ export const NewInvoiceForm = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     newInvoiceMutation.mutate({
-      invoiceId: invoiceId,
+      invoiceId,
       invoiceData: { ...formData },
     });
     // increase invoice id by one
@@ -97,6 +100,6 @@ export const NewInvoiceForm = () => {
       handleCancel={handleCancel}
     />
   );
-};
+}
 
 export default NewInvoiceForm;

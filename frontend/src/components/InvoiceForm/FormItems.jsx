@@ -30,17 +30,22 @@ export function FormItems() {
   return (
     <div className="flex flex-col gap-4 ">
       <h2 className="secondary-text text-lg font-semibold">Items</h2>
-
-      <div className="flex flex-col gap-6 rounded-md bg-gray-400 p-3 pb-8 dark:bg-gray-900 sm:p-6 sm:pb-10 ">
-        {state.itemsArray.map((item, i) => (
-          <FormItem
-            itemIndex={i}
-            item={item}
-            key={item.itemId}
-            onItemSave={onItemSave}
-            handleDeleteItem={handleDeleteItem}
-          />
-        ))}
+      <div
+        className={`flex flex-col gap-6 rounded-md bg-gray-400 p-3  dark:bg-gray-900  ${
+          state.itemsArray.length === 0 && !showNewItemInput && 'hidden'
+        }`}
+      >
+        {/* Map state.itemsArray if array is not empty */}
+        {state.itemsArray.length !== 0 &&
+          state.itemsArray.map((item, i) => (
+            <FormItem
+              itemIndex={i}
+              item={item}
+              key={item.itemId}
+              onItemSave={onItemSave}
+              handleDeleteItem={handleDeleteItem}
+            />
+          ))}
 
         {showNewItemInput && (
           <AddNewItem
@@ -50,15 +55,17 @@ export function FormItems() {
             onItemSave={onItemSave}
           />
         )}
-
-        <button
-          type="button"
-          className=" btn  col-span-3 col-start-4 row-start-3 flex items-center justify-center  gap-2 bg-emerald-700  hover:bg-emerald-900 "
-          onClick={(e) => handleShowNewItemForm(e)}
-        >
-          + Add New Item
-        </button>
       </div>
+
+      <button
+        type="button"
+        className=" btn   col-span-3 col-start-4 
+        btn | flex items-center  justify-center gap-2 border border-gray-200 text-gray-200 hover:bg-gray-200 hover:text-gray-900 mt-2"
+        
+        onClick={(e) => handleShowNewItemForm(e)}
+      >
+        + Add Item
+      </button>
     </div>
   );
 }

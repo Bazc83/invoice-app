@@ -37,8 +37,10 @@ export function InvoiceForm({ handleFormSubmit, handleCancel }) {
         onSubmit={handleSubmit(handleFormSubmit)}
         className="flex flex-col gap-4"
       >
-        <label className="secondary-text" htmlFor="senderStreet">
-          Sender Street
+        <FormItemInput>
+          <label className="secondary-text" htmlFor="senderStreet">
+            Sender Street{' '}
+          </label>
           <input
             id="senderStreet"
             name="senderStreet"
@@ -46,7 +48,7 @@ export function InvoiceForm({ handleFormSubmit, handleCancel }) {
             type="text"
             {...register('senderStreet')}
           />
-        </label>
+        </FormItemInput>
 
         <FormItemInput>
           <label className="secondary-text" htmlFor="senderCity">
@@ -153,10 +155,21 @@ export function InvoiceForm({ handleFormSubmit, handleCancel }) {
 
         <FormItems />
 
-        <button type="button" onClick={handleCancel}>
-          Submit Changes
-        </button>
-        <button type="submit">Submit Changes</button>
+        <div className="mt-6 flex justify-between gap-4">
+          <button
+            type="button"
+            className="btn | flex items-center  justify-center gap-2 border border-red-900 text-red-700 hover:bg-red-800 hover:text-white"
+            onClick={handleCancel}
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            className="btn | flex items-center  justify-center gap-2 bg-green-800 hover:bg-green-900  text-white"
+          >
+            Submit Changes
+          </button>
+        </div>
       </form>
     </div>
   );

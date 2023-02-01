@@ -77,7 +77,7 @@ export function InvoiceButtons({ showInvoiceControls }) {
           <button
             type="button"
             onClick={() => setStatus('paid')}
-            className="btn |  w-full   border border-emerald-600 bg-emerald-600 text-white  hover:border-emerald-900   hover:bg-emerald-900  md:w-auto "
+            className="btn |  w-full   border border-green-600 bg-green-600 text-white  hover:border-green-900   hover:bg-green-900  md:w-auto "
           >
             Paid
           </button>

@@ -1,7 +1,7 @@
 export function PaymentStatus({ status, className }) {
   let paymentStatusColor;
   if (status === 'paid') {
-    paymentStatusColor = 'text-emerald-600 border-emerald-600';
+    paymentStatusColor = 'text-green-600 border-green-600';
   } else if (status === 'pending') {
     paymentStatusColor = 'text-orange-600 border-orange-600 ';
   } else if (status === 'draft') {
