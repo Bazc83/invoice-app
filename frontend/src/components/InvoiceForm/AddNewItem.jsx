@@ -1,19 +1,21 @@
-import { useEffect, useReducer } from "react";
-import { v4 as uuidv4 } from "uuid";
-import { useFormItemReducer } from "../FormItem/useFormItemReducer";
-import { ItemForm } from "../ItemForm";
+import { useEffect, useReducer } from 'react';
 
-export const AddNewItem = ({
+import { v4 as uuidv4 } from 'uuid';
+
+import { useFormItemReducer } from './FormItem/useFormItemReducer';
+import { ItemForm } from './ItemForm';
+
+export function AddNewItem({
   addItem,
   setShowNewItemInput,
   handleDeleteItem,
   onItemSave,
-}) => {
+}) {
   const newId = uuidv4();
 
   const initialValue = {
     itemId: newId,
-    name: "",
+    name: '',
     quantity: 1,
     price: 0.01,
     total: 0.0,
@@ -25,8 +27,8 @@ export const AddNewItem = ({
 
   const { formItem } = state;
 
-  const handleSave = (formItem) => {
-    onItemSave(formItem);
+  const handleSave = (formItemValue) => {
+    onItemSave(formItemValue);
   };
 
   const handleDelete = (itemId, e) => {
@@ -36,12 +38,12 @@ export const AddNewItem = ({
   };
 
   useEffect(() => {
-    dispatch({ type: "itemTotal" });
+    dispatch({ type: 'itemTotal' });
   }, [formItem.price, formItem.quantity]);
 
   const addItemToItemsArray = () => {
     addItem(state.formItem);
-    dispatch({ type: "resetItemForm", payload: initialValue });
+    dispatch({ type: 'resetItemForm', payload: initialValue });
     setShowNewItemInput(false);
   };
 
@@ -56,9 +58,11 @@ export const AddNewItem = ({
       dispatch={dispatch}
       handleSave={handleSave}
       handleDelete={handleDelete}
-      newForm={true}
+      newForm
       addItemToItemsArray={addItemToItemsArray}
       handleCancelAddNewItem={handleCancelAddNewItem}
     />
   );
-};
+}
+
+export default AddNewItem;

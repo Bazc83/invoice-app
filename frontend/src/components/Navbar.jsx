@@ -1,19 +1,20 @@
-import { DarkModeContext } from "@/App";
-import { AuthContext } from "@/context/AuthContext";
-import { useLogout } from "@/hooks/useLogout";
-import { useContext } from "react";
+import { useContext } from 'react';
 import {
   FaMoon,
   FaSignInAlt,
   FaSignOutAlt,
   FaSun,
   FaUserEdit,
-} from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { RandomLogo } from "../RandomLogo";
+} from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
+import { DarkModeContext } from '@/App';
+import { AuthContext } from '@/context/AuthContext';
+import { useLogout } from '@/hooks/useLogout';
 
-export const Navbar = () => {
+import { RandomLogo } from './RandomLogo';
+
+export function Navbar() {
   const { theme, toggleDarkMode } = useContext(DarkModeContext);
 
   const { user } = useContext(AuthContext);
@@ -31,13 +32,13 @@ export const Navbar = () => {
 
       <div className="flex items-center justify-center gap-4 px-6 lg:flex-col lg:gap-4 lg:p-0 lg:pb-6">
         {/* Dark mode toggle */}
-        <div onClick={toggleDarkMode} >
-          {theme === "dark" ? (
+        <button onClick={toggleDarkMode} type="button">
+          {theme === 'dark' ? (
             <FaSun className="text-xl transition-colors hover:text-gray-400" />
           ) : (
             <FaMoon className="text-xl transition-colors hover:text-gray-400" />
           )}
-        </div>
+        </button>
 
         {/* Logout */}
         {user && (
@@ -63,4 +64,5 @@ export const Navbar = () => {
       </div>
     </nav>
   );
-};
+}
+export default Navbar;

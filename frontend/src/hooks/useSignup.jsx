@@ -1,10 +1,11 @@
-import { AuthContext } from '@/context/AuthContext';
 import { useContext, useState } from 'react';
+
+import { AuthContext } from '@/context/AuthContext';
 
 export const useSignup = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
-  const { dispatch } = useContext(AuthContext)
+  const { dispatch } = useContext(AuthContext);
 
   const signup = async (email, password) => {
     setIsLoading(true);
@@ -36,3 +37,5 @@ export const useSignup = () => {
 
   return { signup, isLoading, error };
 };
+
+export default useSignup;

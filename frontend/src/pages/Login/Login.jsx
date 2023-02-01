@@ -1,6 +1,8 @@
-import { useLogin } from '@/hooks/useLogin';
 import { useState } from 'react';
-export const Login = () => {
+
+import { useLogin } from '@/hooks/useLogin';
+
+export function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -17,21 +19,23 @@ export const Login = () => {
 
       <label> Email:</label>
       <input
-        type='email'
+        type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
 
       <label> Password:</label>
       <input
-        type='password'
+        type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
 
-      <button disabled={isLoading}>Log in</button>
+      <button type="button" disabled={isLoading}>Log in</button>
 
       {error && <div>{error}</div>}
     </form>
   );
-};
+}
+
+export default Login;

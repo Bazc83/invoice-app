@@ -1,6 +1,9 @@
-import { AuthContext } from '@/context/AuthContext';
-import { useQuery } from '@tanstack/react-query';
 import { useContext } from 'react';
+
+import { useQuery } from '@tanstack/react-query';
+
+import { AuthContext } from '@/context/AuthContext';
+
 import { useAuth } from './useAuth';
 
 const getInvoiceById = async (userToken, invoiceId) => {
@@ -12,6 +15,8 @@ const getInvoiceById = async (userToken, invoiceId) => {
   if (response.ok) {
     return json;
   }
+
+  return json.error;
 };
 
 export const useFilterInvoiceById = (invoiceId) => {
@@ -27,3 +32,5 @@ export const useFilterInvoiceById = (invoiceId) => {
 
   return { ...queryResponse };
 };
+
+export default useFilterInvoiceById;

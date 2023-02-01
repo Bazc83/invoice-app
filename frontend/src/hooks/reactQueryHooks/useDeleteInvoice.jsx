@@ -1,9 +1,11 @@
-import { AuthContext } from '@/context/AuthContext';
-import { useMutation } from '@tanstack/react-query';
 import { useContext } from 'react';
 
+import { useMutation } from '@tanstack/react-query';
+
+import { AuthContext } from '@/context/AuthContext';
+
 export const useDeleteInvoice = () => {
-  const { user } = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
 
   const deleteInvoice = async (invoiceId) => {
     const response = await fetch(`/api/invoices/${invoiceId}`, {
@@ -18,6 +20,8 @@ export const useDeleteInvoice = () => {
     if (response.ok) {
       return json;
     }
+
+    return json.error;
   };
 
   const { mutateAsync, isLoading } = useMutation(deleteInvoice);
@@ -27,9 +31,11 @@ export const useDeleteInvoice = () => {
     try {
       await mutateAsync(invoiceId);
     } catch (error) {
-      console.log(error);
+      throw new Error(error);
     }
   };
 
   return { deleteSelectedInvoice, isLoading };
 };
+
+export default useDeleteInvoice;

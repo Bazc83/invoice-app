@@ -1,11 +1,10 @@
-
-export const InvoiceItem = ({ item }) => {
+export function InvoiceItem({ item }) {
   return (
-    <div className="flex justify-between items-center gap-2 text-xs">
-      <div className='flex flex-col gap-2'>
+    <div className="flex items-center justify-between gap-2 text-xs">
+      <div className="flex flex-col gap-2">
         <p>{item?.name}</p>
 
-        <p className="text-gray-700 dark:text-gray-400 text-xs">
+        <p className="text-xs text-gray-700 dark:text-gray-400">
           {item?.quantity} x{' '}
           {new Intl.NumberFormat('en', {
             style: 'currency',
@@ -21,4 +20,5 @@ export const InvoiceItem = ({ item }) => {
       </p>
     </div>
   );
-};
+}
+export default InvoiceItem;

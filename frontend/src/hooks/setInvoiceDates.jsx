@@ -23,6 +23,8 @@ export const setInvoiceDates = ({ paymentTermsValue, createdAtDate }) => {
     case '21 days from invoice date':
       return twentyOneDays;
     default:
-      return;
+      return paymentTermsValue;
   }
 };
+
+export default setInvoiceDates;

@@ -1,9 +1,10 @@
-import { FilterModalItem } from "@/components/FilterModal/FilterModalItem";
-import { InvoicesContext } from "@/context/InvoicesContext";
-import { PageLayoutContext } from "@/pages/PageLayout";
-import { useContext } from "react";
+import { useContext } from 'react';
 
-export const FilterModal = () => {
+import { FilterModalItem } from '@/components/FilterModal/FilterModalItem';
+import { InvoicesContext } from '@/context/InvoicesContext';
+import { PageLayoutContext } from '@/pages/PageLayout';
+
+export function FilterModal() {
   const { state } = useContext(InvoicesContext);
   const { showModal, setShowModal } = useContext(PageLayoutContext);
 
@@ -14,15 +15,16 @@ export const FilterModal = () => {
     <div className="relative z-40 w-full sm:w-auto">
       {/* Show/Hide modal button */}
       <button
+        type="button"
         disabled={state.filteredInvoices?.length === 0}
         className={`flex w-full items-center  justify-center gap-2 rounded-md px-4 py-2 text-sm sm:w-auto lg:text-base ${
           state.filteredInvoices?.length === 0
-            ? "secondary-bg text-gray-50 dark:text-gray-800 "
-            : " bg-gray-700   text-gray-50 "
+            ? 'secondary-bg text-gray-50 dark:text-gray-800 '
+            : ' bg-gray-700   text-gray-50 '
         }`}
         onClick={handleShowModal}
       >
-        {showModal ? "Hide Filters" : "Show Filters"}
+        {showModal ? 'Hide Filters' : 'Show Filters'}
       </button>
 
       {showModal && (
@@ -37,4 +39,5 @@ export const FilterModal = () => {
       )}
     </div>
   );
-};
+}
+export default FilterModal;

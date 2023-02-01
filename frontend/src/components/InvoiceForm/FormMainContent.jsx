@@ -1,14 +1,16 @@
-import { InvoiceContext } from "@/context/InvoiceContext";
-import { useContext } from "react";
-import { FormInput } from "./FormInput";
-import styles from "./InvoiceForm.module.css";
-import { SelectPaymentTerms } from "./SelectPaymentTerms";
+import { useContext } from 'react';
+
+import { InvoiceContext } from '@/context/InvoiceContext';
+
+import { FormInput } from './FormInput';
+import styles from './InvoiceForm.module.css';
+import { SelectPaymentTerms } from './SelectPaymentTerms';
 
 export function FormMainContent() {
   const { state, dispatch } = useContext(InvoiceContext);
 
   const inputOnChange = (e) => {
-    dispatch({ type: "changeFormData", payload: e });
+    dispatch({ type: 'changeFormData', payload: e });
   };
 
   return (
@@ -20,25 +22,25 @@ export function FormMainContent() {
           <FormInput
             itemName="senderStreet"
             itemLabel="Street Address"
-            value={state.formData.senderStreet || ""}
+            value={state.formData.senderStreet || ''}
             setValue={inputOnChange}
           />
           <FormInput
             itemName="senderCity"
             itemLabel="City"
-            value={state.formData.senderCity || ""}
+            value={state.formData.senderCity || ''}
             setValue={inputOnChange}
           />
           <FormInput
             itemName="senderPostCode"
             itemLabel="Postcode"
-            value={state.formData.senderPostCode || ""}
+            value={state.formData.senderPostCode || ''}
             setValue={inputOnChange}
           />
           <FormInput
             itemName="senderCountry"
             itemLabel="Country"
-            value={state.formData.senderCountry || ""}
+            value={state.formData.senderCountry || ''}
             setValue={inputOnChange}
           />
         </div>
@@ -50,39 +52,39 @@ export function FormMainContent() {
           <FormInput
             itemName="clientName"
             itemLabel="Client's Name"
-            value={state.formData.clientName || ""}
+            value={state.formData.clientName || ''}
             setValue={inputOnChange}
           />
           <FormInput
             type="email"
             itemName="clientEmail"
             itemLabel="Client's Email"
-            value={state.formData.clientEmail || ""}
+            value={state.formData.clientEmail || ''}
             setValue={inputOnChange}
           />
 
           <FormInput
             itemName="clientStreet"
             itemLabel="Street Address"
-            value={state.formData.clientStreet || ""}
+            value={state.formData.clientStreet || ''}
             setValue={inputOnChange}
           />
           <FormInput
             itemName="clientCity"
             itemLabel="City"
-            value={state.formData.clientCity || ""}
+            value={state.formData.clientCity || ''}
             setValue={inputOnChange}
           />
           <FormInput
             itemName="clientPostCode"
             itemLabel="Post Code"
-            value={state.formData.clientPostCode || ""}
+            value={state.formData.clientPostCode || ''}
             setValue={inputOnChange}
           />
           <FormInput
             itemName="clientCountry"
             itemLabel="Country"
-            value={state.formData.clientCountry || ""}
+            value={state.formData.clientCountry || ''}
             setValue={inputOnChange}
           />
 
@@ -92,7 +94,7 @@ export function FormMainContent() {
           <FormInput
             itemName="description"
             itemLabel="Project/Description"
-            value={state.formData.description || ""}
+            value={state.formData.description || ''}
             setValue={inputOnChange}
           />
         </section>
@@ -100,3 +102,5 @@ export function FormMainContent() {
     </div>
   );
 }
+
+export default FormMainContent;

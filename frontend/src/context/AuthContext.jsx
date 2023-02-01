@@ -1,5 +1,6 @@
-import { useAuth } from '@/hooks/reactQueryHooks/useAuth';
 import { createContext, useEffect, useReducer } from 'react';
+
+import { useAuth } from '@/hooks/reactQueryHooks/useAuth';
 
 export const AuthContext = createContext();
 
@@ -14,7 +15,7 @@ export const authReducer = (state, action) => {
   }
 };
 
-export const AuthContextProvider = ({ children }) => {
+export function AuthContextProvider({ children }) {
   const [state, dispatch] = useReducer(authReducer, {
     user: null,
   });
@@ -34,8 +35,9 @@ export const AuthContextProvider = ({ children }) => {
   }, [authData]);
 
   return (
+    // eslint-disable-next-line react/jsx-no-constructed-context-values
     <AuthContext.Provider value={{ ...state, dispatch }}>
       {children}
     </AuthContext.Provider>
   );
-};
+}

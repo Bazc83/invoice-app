@@ -1,7 +1,8 @@
-import { useSignup } from '@/hooks/useSignup';
 import { useState } from 'react';
 
-export const Signup = () => {
+import { useSignup } from '@/hooks/useSignup';
+
+export function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { signup, isLoading, error } = useSignup();
@@ -16,21 +17,24 @@ export const Signup = () => {
 
       <label> Email:</label>
       <input
-        type='email'
+        type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
 
       <label> Password:</label>
       <input
-        type='password'
+        type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
 
-      <button disabled={isLoading}>Sign Up</button>
+      <button type="button" disabled={isLoading}>
+        Sign Up
+      </button>
 
       {error && <div>{error}</div>}
     </form>
   );
-};
+}
+export default Signup;

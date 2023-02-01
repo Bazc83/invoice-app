@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer } from 'react';
 
 export const InvoiceContext = createContext();
 
@@ -12,30 +12,30 @@ const initialValue = {
 
 export const invoiceReducer = (state, action) => {
   switch (action.type) {
-    case "hideEditForm":
+    case 'hideEditForm':
       return { ...state, showEditForm: false };
-    case "showEditForm":
+    case 'showEditForm':
       return { ...state, showEditForm: true };
-    case "showDeleteModal":
+    case 'showDeleteModal':
       return { ...state, showDeleteModal: true };
-    case "hideDeleteModal":
+    case 'hideDeleteModal':
       return { ...state, showDeleteModal: false };
-    case "setFormData":
+    case 'setFormData':
       return {
         ...state,
         formData: action.payload,
       };
-    case "addItems":
+    case 'addItems':
       return {
         ...state,
         itemsArray: [...action.payload],
       };
-    case "addItem":
+    case 'addItem':
       return {
         ...state,
         itemsArray: [...state.itemsArray, action.payload],
       };
-    case "updateItem":
+    case 'updateItem': {
       const itemIndex = state.itemsArray.findIndex(
         (indexVal) => indexVal.itemId === action.payload.itemId
       );
@@ -49,11 +49,10 @@ export const invoiceReducer = (state, action) => {
             ...state.itemsArray.slice(itemIndex + 1),
           ],
         };
-      } else {
-        return { ...state };
       }
-
-    case "deleteItem":
+      return { ...state };
+    }
+    case 'deleteItem':
       return {
         ...state,
         itemsArray: [
@@ -61,7 +60,7 @@ export const invoiceReducer = (state, action) => {
         ],
       };
 
-    case "changeFormData":
+    case 'changeFormData':
       return {
         ...state,
         formData: {
@@ -69,7 +68,7 @@ export const invoiceReducer = (state, action) => {
           [action.payload.target.name]: action.payload.target.value,
         },
       };
-    case "setPaymentTermsAndPaymentDueDate":
+    case 'setPaymentTermsAndPaymentDueDate':
       return {
         ...state,
         formData: {
@@ -79,27 +78,28 @@ export const invoiceReducer = (state, action) => {
         },
         showPaymentTermOptions: false,
       };
-    case "toggleShowPaymentTermOptions":
+    case 'toggleShowPaymentTermOptions':
       return {
         ...state,
         showPaymentTermOptions: !state.showPaymentTermOptions,
       };
-    case "resetInvoice":
+    case 'resetInvoice':
       return {
         ...initialValue,
       };
 
     default:
-      throw new Error("invoiceContextReducer error");
+      throw new Error('invoiceContextReducer error');
   }
 };
 
-export const InvoiceContextProvider = ({ children }) => {
+export function InvoiceContextProvider({ children }) {
   const [state, dispatch] = useReducer(invoiceReducer, initialValue);
 
   return (
+    // eslint-disable-next-line react/jsx-no-constructed-context-values
     <InvoiceContext.Provider value={{ state, dispatch }}>
       {children}
     </InvoiceContext.Provider>
   );
-};
+}

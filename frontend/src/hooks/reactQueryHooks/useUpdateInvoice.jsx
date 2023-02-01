@@ -1,6 +1,8 @@
-import { AuthContext } from '@/context/AuthContext';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useContext } from 'react';
+
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+
+import { AuthContext } from '@/context/AuthContext';
 
 export const useUpdateInvoice = () => {
   const queryClient = useQueryClient();
@@ -8,8 +10,6 @@ export const useUpdateInvoice = () => {
   const { user } = useContext(AuthContext);
 
   const updateInvoice = async (invoiceId, invoiceData) => {
-
-   
     const response = await fetch(`/api/invoices/${invoiceId}`, {
       method: 'PUT',
       body: JSON.stringify(invoiceData),
@@ -20,12 +20,11 @@ export const useUpdateInvoice = () => {
     });
     const json = await response.json();
 
-    if (!response.ok) {
-      console.log(json.error);
-    }
     if (response.ok) {
       return json;
     }
+
+    return json.error;
   };
 
   // update invoice on db with invoiceData
@@ -39,3 +38,5 @@ export const useUpdateInvoice = () => {
 
   return { updateInvoiceMutation };
 };
+
+export default useUpdateInvoice;

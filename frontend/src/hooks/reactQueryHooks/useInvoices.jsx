@@ -1,6 +1,8 @@
-import { AuthContext } from '@/context/AuthContext';
-import { useQuery } from '@tanstack/react-query';
 import { useContext } from 'react';
+
+import { useQuery } from '@tanstack/react-query';
+
+import { AuthContext } from '@/context/AuthContext';
 
 import { useAuth } from './useAuth';
 
@@ -11,12 +13,11 @@ const getInvoices = async (userToken) => {
     },
   });
   const json = await response.json();
-  if (json?.error) {
-    return json;
-  }
+
   if (response.ok) {
     return json;
   }
+  return json.error;
 };
 
 export const useInvoices = () => {
@@ -32,3 +33,5 @@ export const useInvoices = () => {
 
   return { data, isLoading, isError, error };
 };
+
+export default useInvoices;

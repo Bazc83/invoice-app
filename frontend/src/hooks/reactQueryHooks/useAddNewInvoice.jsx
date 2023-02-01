@@ -1,6 +1,8 @@
-import { AuthContext } from '@/context/AuthContext';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useContext } from 'react';
+
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+
+import { AuthContext } from '@/context/AuthContext';
 
 export const useAddNewInvoice = () => {
   const queryClient = useQueryClient();
@@ -21,9 +23,8 @@ export const useAddNewInvoice = () => {
 
     if (response.ok) {
       return json;
-    } else {
-      console.log(json.error);
     }
+    return json.error;
   };
 
   // update invoice on db with invoiceData
@@ -37,3 +38,5 @@ export const useAddNewInvoice = () => {
 
   return { newInvoiceMutation };
 };
+
+export default useAddNewInvoice;

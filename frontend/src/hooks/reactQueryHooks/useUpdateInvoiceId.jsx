@@ -18,3 +18,5 @@ export const useUpdateInvoiceId = () => {
 
   return { updateIdMutation };
 };
+
+export default useUpdateInvoiceId;

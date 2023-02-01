@@ -1,7 +1,7 @@
 export const useFormItemReducer = () => {
   const itemReducer = (state, { type, payload }) => {
     switch (type) {
-      case "itemPrice":
+      case 'itemPrice':
         return {
           ...state,
           formItem: {
@@ -9,15 +9,15 @@ export const useFormItemReducer = () => {
             price: payload.value,
           },
         };
-      case "itemQuantity":
+      case 'itemQuantity':
         return {
           ...state,
           formItem: {
             ...state.formItem,
-            quantity: +payload?.value >= 1 ? payload.value : "",
+            quantity: +payload.value >= 1 ? payload.value : '',
           },
         };
-      case "itemName":
+      case 'itemName':
         return {
           ...state,
           formItem: {
@@ -26,7 +26,7 @@ export const useFormItemReducer = () => {
           },
         };
 
-      case "validatePrice":
+      case 'validatePrice':
         return {
           ...state,
           formItem: {
@@ -38,7 +38,7 @@ export const useFormItemReducer = () => {
           },
         };
 
-      case "validateQuantity":
+      case 'validateQuantity':
         return {
           ...state,
           formItem: {
@@ -47,7 +47,7 @@ export const useFormItemReducer = () => {
           },
         };
 
-      case "itemTotal":
+      case 'itemTotal':
         return {
           ...state,
           formItem: {
@@ -55,7 +55,7 @@ export const useFormItemReducer = () => {
             total: +state.formItem.price * +state.formItem.quantity,
           },
         };
-      case "itemId":
+      case 'itemId':
         return {
           ...state,
           formItem: {
@@ -63,13 +63,15 @@ export const useFormItemReducer = () => {
             itemId: payload.itemId,
           },
         };
-      case "resetItemForm":
+      case 'resetItemForm':
         return {
           ...payload,
         };
       default:
-        throw new Error("formItemReducer error");
+        throw new Error('formItemReducer error');
     }
   };
   return { itemReducer };
 };
+
+export default useFormItemReducer;

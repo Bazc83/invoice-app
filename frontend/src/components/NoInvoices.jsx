@@ -1,4 +1,4 @@
-export const NoInvoices = () => {
+export function NoInvoices() {
   return (
     <div className="flex items-center justify-center">
       <div className="flex max-w-[clamp(217px,_40vw,_250px)] flex-col items-center justify-center gap-8 pt-6">
@@ -15,4 +15,6 @@ export const NoInvoices = () => {
       </div>
     </div>
   );
-};
+}
+
+export default NoInvoices;

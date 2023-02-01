@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 const useSetInvoiceData = (data) => {
-  const [invoiceData, setInvoiceData] = useState(prev => data);
+  const [invoiceData, setInvoiceData] = useState(data);
 
   useEffect(() => {
     setInvoiceData({
@@ -26,12 +26,11 @@ const useSetInvoiceData = (data) => {
       items: data?.items,
     });
     return () => {};
-  }, [ data]);
+  }, [data]);
 
   return {
     invoiceData,
     setInvoiceData,
-
   };
 };
 

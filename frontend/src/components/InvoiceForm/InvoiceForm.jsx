@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 
+import { FormItemInput } from '@/components/FormItemInput';
 import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
-import { FormItemInput } from '@/ui/FormItemInput';
 
 import { FormItems } from './FormItems';
 

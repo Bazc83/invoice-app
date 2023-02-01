@@ -1,8 +1,8 @@
-import { AmountDueTotal } from "@/components/AmountDueTotal";
-import { useFormatDate } from "@/hooks/useFormatDate";
-import { InvoiceItems } from "@/pages/Invoice/InvoiceItems";
+import { AmountDueTotal } from '@/components/AmountDueTotal';
+import { useFormatDate } from '@/hooks/useFormatDate';
+import { InvoiceItems } from '@/pages/Invoice/InvoiceItems';
 
-export const InvoiceMainContent = ({ invoiceData }) => {
+export function InvoiceMainContent({ invoiceData }) {
   const { getDate } = useFormatDate();
 
   return (
@@ -60,7 +60,7 @@ export const InvoiceMainContent = ({ invoiceData }) => {
           <p>{getDate(invoiceData?.createdAt)}</p>
         </div>
 
-        {invoiceData?.status !== "paid" && (
+        {invoiceData?.status !== 'paid' && (
           <div className="flex flex-col">
             <p className="secondary-text">Payment Due: </p>
             <p>{getDate(invoiceData?.paymentDue)}</p>
@@ -75,4 +75,5 @@ export const InvoiceMainContent = ({ invoiceData }) => {
       </div>
     </div>
   );
-};
+}
+export default InvoiceMainContent;

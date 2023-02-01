@@ -1,4 +1,4 @@
-export const PaymentStatus = ({ status, className }) => {
+export function PaymentStatus({ status, className }) {
   let paymentStatusColor;
   if (status === 'paid') {
     paymentStatusColor = 'text-emerald-600 border-emerald-600';
@@ -11,8 +11,11 @@ export const PaymentStatus = ({ status, className }) => {
 
   return (
     <div
-      className={`flex border-[1px] w-[100px] items-center justify-center  ${paymentStatusColor} py-2 px-4 text-sm capitalize rounded-md font-semibold`}>
+      className={`flex w-[100px] items-center justify-center border-[1px]  ${paymentStatusColor} rounded-md py-2 px-4 text-sm font-semibold capitalize`}
+    >
       <p className={`${className} `}>{status}</p>
     </div>
   );
-};
+}
+
+export default PaymentStatus;

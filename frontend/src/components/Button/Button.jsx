@@ -1,8 +1,9 @@
 import { FaPlus } from 'react-icons/fa';
+
 import styles from './Button.module.css';
 
-export const Button = (props) => {
-  const { children, onClick, type, plusIcon, btnStyle, fullWidth } = props;
+export function Button(props) {
+  const { children, onClick, plusIcon, btnStyle, fullWidth } = props;
 
   // If light set css to light variant
   const btnStyling = `${
@@ -12,10 +13,11 @@ export const Button = (props) => {
   return (
     <button
       onClick={onClick}
-      type={type || 'button'}
+      type='button'
       className={`${btnStyling} ${styles.btn} ${
         plusIcon && styles.btnWithIcon
-      } ${fullWidth && styles.fullWidth} bg-black`}>
+      } ${fullWidth && styles.fullWidth} bg-black`}
+    >
       {plusIcon && (
         <div className={styles.btnIcon}>
           <FaPlus />
@@ -24,4 +26,6 @@ export const Button = (props) => {
       {children}
     </button>
   );
-};
+}
+
+export default Button;

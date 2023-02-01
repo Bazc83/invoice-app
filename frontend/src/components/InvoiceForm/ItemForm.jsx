@@ -1,6 +1,6 @@
-import { FormItemInput } from "@/ui/FormItemInput";
+import { FormItemInput } from '@/components/FormItemInput';
 
-export const ItemForm = ({
+export function ItemForm({
   formItem,
   dispatch,
   handleSave,
@@ -8,29 +8,24 @@ export const ItemForm = ({
   newForm,
   addItemToItemsArray,
   handleCancelAddNewItem,
-}) => {
+}) {
   return (
     <div className="secondary-bg grid grid-cols-6  gap-y-4 gap-x-4 rounded-md  px-4 py-4 text-xs sm:gap-4  sm:px-6 sm:text-sm">
-  
       {/* Item Name */}
-      <FormItemInput className={"col-span-full col-start-1  "}>
-        <label htmlFor="name">
-          Item Name
-        </label>
+      <FormItemInput className="col-span-full col-start-1  ">
+        <label htmlFor="name">Item Name</label>
         <input
           type="text"
           name="name"
           value={formItem?.name}
           onChange={(e) =>
-            dispatch({ type: "itemName", payload: { value: e.target.value } })
+            dispatch({ type: 'itemName', payload: { value: e.target.value } })
           }
         />
       </FormItemInput>
 
       {/* Item Quantity */}
-      <FormItemInput
-        className={"col-span-2 col-start-1  text-center"}
-      >
+      <FormItemInput className="col-span-2 col-start-1  text-center">
         <label htmlFor="quantity">Qty</label>
         <input
           type="number"
@@ -38,7 +33,7 @@ export const ItemForm = ({
           value={formItem?.quantity}
           onChange={(e) =>
             dispatch({
-              type: "itemQuantity",
+              type: 'itemQuantity',
               payload: { value: e.target.value },
             })
           }
@@ -46,7 +41,7 @@ export const ItemForm = ({
           step={1}
           onBlur={(e) =>
             dispatch({
-              type: "validateQuantity",
+              type: 'validateQuantity',
               payload: { value: +e.target.value },
             })
           }
@@ -55,9 +50,7 @@ export const ItemForm = ({
       </FormItemInput>
 
       {/* Item Price */}
-      <FormItemInput
-        className={"col-span-2 col-start-3  text-center "}
-      >
+      <FormItemInput className="col-span-2 col-start-3  text-center ">
         <label htmlFor="price">Price</label>
         <input
           type="number"
@@ -65,13 +58,13 @@ export const ItemForm = ({
           value={formItem?.price}
           onChange={(e) =>
             dispatch({
-              type: "itemPrice",
+              type: 'itemPrice',
               payload: { value: e.target.value },
             })
           }
           onBlur={(e) =>
             dispatch({
-              type: "validatePrice",
+              type: 'validatePrice',
               payload: { value: e.target.value },
             })
           }
@@ -80,15 +73,13 @@ export const ItemForm = ({
       </FormItemInput>
 
       {/* Item Total **input disabled*** just to show value */}
-      <FormItemInput
-        className={"col-span-2 col-start-5 text-center"}
-      >
+      <FormItemInput className="col-span-2 col-start-5 text-center">
         <label htmlFor="total">Total</label>
         <input
           type="number"
           name="total"
           value={formItem?.total.toFixed(2)}
-          disabled={true}
+          disabled
           className="text-center"
         />
       </FormItemInput>
@@ -118,7 +109,7 @@ export const ItemForm = ({
             onClick={addItemToItemsArray}
             className=" btn |  flex items-center justify-center  gap-2 bg-emerald-700  hover:bg-emerald-900 "
           >
-            ADD NEW
+            Save new Item
           </button>
         ) : (
           <button
@@ -133,4 +124,6 @@ export const ItemForm = ({
       </div>
     </div>
   );
-};
+}
+
+export default ItemForm;

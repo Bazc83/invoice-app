@@ -1,14 +1,14 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer } from 'react';
 
 export const InvoicesContext = createContext();
 
-export const invoicesContextReducer = function (state, action) {
+export const invoicesContextReducer = (state, action) => {
   switch (action.type) {
-    case "toggleInvoiceForm":
+    case 'toggleInvoiceForm':
       return { ...state, showInvoiceForm: !state.showInvoiceForm };
-    case "hideInvoiceForm":
+    case 'hideInvoiceForm':
       return { ...state, showInvoiceForm: false };
-    case "setFilters":
+    case 'setFilters':
       return {
         ...state,
         filters: [
@@ -18,7 +18,7 @@ export const invoicesContextReducer = function (state, action) {
             .map((filter) => ({ ...filter, checked: !filter.checked })),
         ].sort((a, b) => b.id - a.id),
       };
-    case "filterInvoices":
+    case 'filterInvoices': {
       if (state.filters.length === 0) {
         return { ...state, filteredInvoices: action.payload };
       }
@@ -38,25 +38,24 @@ export const invoicesContextReducer = function (state, action) {
           filteredInvoices: action.payload,
           checkedFilters: [...filterStringsArr],
         };
-      } else {
-        return {
-          ...state,
-          filteredInvoices: action.payload.filter((filterVal) =>
-            filterStringsArr.includes(filterVal.status)
-          ),
-          checkedFilters: [...filterStringsArr],
-        };
       }
-
-    case "clearFilters":
+      return {
+        ...state,
+        filteredInvoices: action.payload.filter((filterVal) =>
+          filterStringsArr.includes(filterVal.status)
+        ),
+        checkedFilters: [...filterStringsArr],
+      };
+    }
+    case 'clearFilters':
       return {
         ...state,
         filteredInvoices: [],
         checkedFilters: [],
         filters: [
-          { id: 1, filterValue: "paid", checked: false },
-          { id: 2, filterValue: "pending", checked: false },
-          { id: 3, filterValue: "draft", checked: false },
+          { id: 1, filterValue: 'paid', checked: false },
+          { id: 2, filterValue: 'pending', checked: false },
+          { id: 3, filterValue: 'draft', checked: false },
         ].sort((a, b) => b.id - a.id),
       };
     default:
@@ -64,21 +63,22 @@ export const invoicesContextReducer = function (state, action) {
   }
 };
 
-export const InvoicesContextProvider = ({ children }) => {
+export function InvoicesContextProvider({ children }) {
   const [state, dispatch] = useReducer(invoicesContextReducer, {
     showInvoiceForm: false,
     filters: [
-      { id: 1, filterValue: "paid", checked: false },
-      { id: 2, filterValue: "pending", checked: false },
-      { id: 3, filterValue: "draft", checked: false },
+      { id: 1, filterValue: 'paid', checked: false },
+      { id: 2, filterValue: 'pending', checked: false },
+      { id: 3, filterValue: 'draft', checked: false },
     ].sort((a, b) => b.id - a.id),
     filteredInvoices: [],
     checkedFilters: [],
   });
 
   return (
+    // eslint-disable-next-line react/jsx-no-constructed-context-values
     <InvoicesContext.Provider value={{ state, dispatch }}>
       {children}
     </InvoicesContext.Provider>
   );
-};
+}

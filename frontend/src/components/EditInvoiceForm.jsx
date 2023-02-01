@@ -4,7 +4,7 @@ import { InvoiceContext } from '@/context/InvoiceContext';
 import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
 import { useUpdateInvoice } from '@/hooks/reactQueryHooks/useUpdateInvoice';
 
-import { InvoiceForm } from '../InvoiceForm';
+import { InvoiceForm } from './InvoiceForm';
 
 export function EditInvoiceForm({ invoiceId }) {
   const { state, dispatch } = useContext(InvoiceContext);

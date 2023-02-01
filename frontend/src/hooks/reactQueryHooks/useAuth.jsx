@@ -13,7 +13,6 @@ const checkToken = async () => {
     const json = await response.json();
     return json;
   } catch (error) {
-    console.log(error);
     return error;
   }
 };
@@ -30,3 +29,5 @@ export const useAuth = () => {
   });
   return { authData, authLoading, authError, authIsError };
 };
+
+export default useAuth;

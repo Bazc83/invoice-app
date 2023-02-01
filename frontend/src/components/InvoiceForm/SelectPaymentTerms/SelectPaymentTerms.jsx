@@ -1,10 +1,12 @@
-import { InvoiceContext } from '@/context/InvoiceContext';
-import { setInvoiceDates } from '@/hooks/setInvoiceDates';
 import { useContext } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
+
+import { InvoiceContext } from '@/context/InvoiceContext';
+import { setInvoiceDates } from '@/hooks/setInvoiceDates';
+
 import styles from './SelectPaymentTerms.module.css';
 
-export const SelectPaymentTerms = () => {
+export function SelectPaymentTerms() {
   const { state, dispatch } = useContext(InvoiceContext);
 
   const onItemSelected = (option) => {
@@ -28,17 +30,21 @@ export const SelectPaymentTerms = () => {
 
   return (
     <div className={styles.SelectPaymentTerms}>
-      <label htmlFor='paymentTerms' className='text-faded'>
+      <label htmlFor="paymentTerms" className="text-faded">
         Payment Terms
       </label>
 
       <div className={styles.dropdownContainer}>
-        <div className={styles.inputContainer} onClick={onInputClick}>
+        <div
+          className={styles.inputContainer}
+          onClick={onInputClick}
+          aria-hidden="true"
+        >
           <input
-            type='text'
+            type="text"
             readOnly
             value={state.formData.paymentTerms || ''}
-            className='text'
+            className="text"
           />
 
           {state.showPaymentTermOptions ? (
@@ -51,24 +57,33 @@ export const SelectPaymentTerms = () => {
         <div
           className={`${styles.dropdown} ${
             state.showPaymentTermOptions && styles.visible
-          }`}>
-          <div
+          }`}
+        >
+          <button
+            type="button"
             onClick={() => onItemSelected('Cash')}
-            className={`${styles.option} text`}>
+            className={`${styles.option} text`}
+          >
             Cash
-          </div>
-          <div
+          </button>
+          <button
+            type="button"
             onClick={() => onItemSelected('15 days from invoice date')}
-            className={`${styles.option} text`}>
+            className={`${styles.option} text`}
+          >
             15 days from invoice date
-          </div>
-          <div
+          </button>
+          <button
+            type="button"
             onClick={() => onItemSelected('21 days from invoice date')}
-            className={`${styles.option} text`}>
+            className={`${styles.option} text`}
+          >
             21 days from invoice date
-          </div>
+          </button>
         </div>
       </div>
     </div>
   );
-};
+}
+
+export default SelectPaymentTerms;

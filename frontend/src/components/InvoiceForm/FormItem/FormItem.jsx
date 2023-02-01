@@ -1,6 +1,7 @@
-import { useEffect, useReducer } from "react";
-import { ItemForm } from "../ItemForm";
-import { useFormItemReducer } from "./useFormItemReducer";
+import { useEffect, useReducer } from 'react';
+
+import { ItemForm } from '../ItemForm';
+import { useFormItemReducer } from './useFormItemReducer';
 
 export function FormItem({ item, onItemSave, handleDeleteItem, itemIndex }) {
   const { itemReducer } = useFormItemReducer();
@@ -20,8 +21,8 @@ export function FormItem({ item, onItemSave, handleDeleteItem, itemIndex }) {
   // state de-structured
   const { formItem } = state;
 
-  const handleSave = (formItem) => {
-    onItemSave(formItem);
+  const handleSave = (formItemValue) => {
+    onItemSave(formItemValue);
   };
 
   const handleDelete = (itemId, e) => {
@@ -31,11 +32,11 @@ export function FormItem({ item, onItemSave, handleDeleteItem, itemIndex }) {
   };
 
   useEffect(() => {
-    dispatch({ type: "itemTotal" });
+    dispatch({ type: 'itemTotal' });
   }, [formItem.price, formItem.quantity]);
 
   useEffect(() => {
-    dispatch({ type: "itemId", payload: { itemId: item.itemId } });
+    dispatch({ type: 'itemId', payload: { itemId: item.itemId } });
   }, [item.itemId]);
 
   return (
@@ -48,3 +49,5 @@ export function FormItem({ item, onItemSave, handleDeleteItem, itemIndex }) {
     />
   );
 }
+
+export default FormItem;

@@ -1,7 +1,10 @@
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+/* eslint-disable react/jsx-no-constructed-context-values */
 import { createContext, useContext, useEffect } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import useLocalStorage from 'use-local-storage';
+
 import { AuthContext } from './context/AuthContext';
 import { InvoiceContextProvider } from './context/InvoiceContext';
 import { InvoicesContextProvider } from './context/InvoicesContext';
@@ -11,9 +14,11 @@ import { Login } from './pages/Login';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { PageLayout } from './pages/PageLayout';
 import { Signup } from './pages/Signup.jsx';
+
 export const DarkModeContext = createContext();
 
 function App() {
+  // eslint-disable-next-line no-constant-condition
   const [theme, setTheme] = useLocalStorage('theme' ? 'dark' : 'light');
 
   const toggleDarkMode = () => {
@@ -25,7 +30,7 @@ function App() {
     if (theme === undefined) {
       setTheme('dark');
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const { user } = useContext(AuthContext);
@@ -40,29 +45,29 @@ function App() {
                 <Route element={<PageLayout />}>
                   <Route
                     index
-                    element={user ? <Invoices /> : <Navigate to='/login' />}
+                    element={user ? <Invoices /> : <Navigate to="/login" />}
                   />
 
                   <Route
-                    path='/invoices/:invoiceId'
-                    element={user ? <Invoice /> : <Navigate to='/login' />}
+                    path="/invoices/:invoiceId"
+                    element={user ? <Invoice /> : <Navigate to="/login" />}
                   />
 
                   <Route
-                    path='/invoices'
-                    element={user ? <Invoices /> : <Navigate to='/login' />}
+                    path="/invoices"
+                    element={user ? <Invoices /> : <Navigate to="/login" />}
                   />
 
                   <Route
-                    path='/login'
-                    element={!user ? <Login /> : <Navigate to='/' />}
+                    path="/login"
+                    element={!user ? <Login /> : <Navigate to="/" />}
                   />
                   <Route
-                    path='/signup'
-                    element={!user ? <Signup /> : <Navigate to='/' />}
+                    path="/signup"
+                    element={!user ? <Signup /> : <Navigate to="/" />}
                   />
 
-                  <Route path='*' element={<NotFoundPage />} />
+                  <Route path="*" element={<NotFoundPage />} />
                 </Route>
               </Routes>
             </BrowserRouter>

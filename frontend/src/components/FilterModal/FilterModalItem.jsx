@@ -1,18 +1,20 @@
-import { InvoicesContext } from "@/context/InvoicesContext";
-import { useContext } from "react";
-import { FaCheck } from "react-icons/fa";
+import { useContext } from 'react';
+import { FaCheck } from 'react-icons/fa';
 
-export const FilterModalItem = ({ filter }) => {
+import { InvoicesContext } from '@/context/InvoicesContext';
+
+export function FilterModalItem({ filter }) {
   const { dispatch } = useContext(InvoicesContext);
 
-  const handleChecked = (e) => {
-    dispatch({ type: "setFilters", payload: filter.filterValue });
+  const handleChecked = () => {
+    dispatch({ type: 'setFilters', payload: filter.filterValue });
   };
 
   return (
     <div
       className={` relative z-40 flex cursor-pointer gap-3 rounded-sm pl-8 after:absolute after:top-0 after:left-0 after:h-5 after:w-5 after:rounded-sm after:bg-gray-400 dark:after:bg-gray-600 `}
       onClick={handleChecked}
+      aria-hidden="true"
     >
       <input
         type="checkbox"
@@ -22,11 +24,13 @@ export const FilterModalItem = ({ filter }) => {
       />
 
       {filter.checked && (
-        <FaCheck className={`absolute top-[2px] left-[2px] z-50`} />
+        <FaCheck className="absolute top-[2px] left-[2px] z-50" />
       )}
       <label htmlFor={filter.filterValue} className="cursor-pointer capitalize">
         {filter.filterValue}
       </label>
     </div>
   );
-};
+}
+
+export default FilterModalItem;
