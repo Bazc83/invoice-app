@@ -4,7 +4,7 @@
 
 @layer components {
   .primary-bg {
-    @apply bg-gray-50 font-semibold text-gray-900 dark:bg-gray-700 dark:text-white;
+    @apply bg-gray-100 font-semibold text-gray-900 dark:bg-gray-700 dark:text-white;
   }
   .secondary-bg {
     @apply bg-white text-gray-900  dark:bg-gray-800 dark:text-gray-50;
@@ -19,20 +19,20 @@
   }
 
   .btn {
-    @apply cursor-pointer rounded-md py-2 px-6 font-semibold outline-none transition-colors;
+    @apply cursor-pointer rounded-md py-2 px-3 outline-none transition-colors;
   }
 
   form {
-    @apply text-sm md:text-base;
+    @apply text-xs sm:text-sm md:text-base ;
   }
   form input {
-    @apply primary-bg rounded-md px-4 py-2;
+    @apply primary-bg rounded-md px-3 py-2;
   }
   form input[disabled]{
-    @apply dark:bg-gray-900 dark:text-gray-500 bg-gray-600 text-gray-200  rounded-md px-4 py-2;
+    @apply dark:bg-gray-900 dark:text-gray-500 bg-gray-600 text-gray-200  rounded-md px-3 py-2;
   }
 
   form label {
-    @apply secondary-text;
+    @apply secondary-text ;
   }
 }

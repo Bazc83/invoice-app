@@ -26,9 +26,10 @@ export const FormItems = () => {
   };
 
   return (
-    <div className={"flex flex-col gap-4"}>
-      <h2 className="secondary-text text-lg font-semibold">Item List</h2>
-      <div className="flex flex-col gap-6">
+    <div className={"flex flex-col gap-4 "}>
+      <h2 className="secondary-text text-lg font-semibold">Items</h2>
+
+      <div className="flex flex-col gap-6 rounded-md bg-gray-400 p-3 pb-8 sm:p-6 sm:pb-10 dark:bg-gray-900 ">
         {state.itemsArray.map((item, i) => (
           <FormItem
             itemIndex={i}
@@ -47,14 +48,14 @@ export const FormItems = () => {
             onItemSave={onItemSave}
           />
         )}
-      </div>
 
-      <button
-        className="btn secondary-bg "
-        onClick={(e) => handleShowNewItemForm(e)}
-      >
-        + Add New Item
-      </button>
+        <button
+          className=" btn  col-span-3 col-start-4 row-start-3 flex items-center justify-center  gap-2 bg-emerald-700  hover:bg-emerald-900 "
+          onClick={(e) => handleShowNewItemForm(e)}
+        >
+          + Add New Item
+        </button>
+      </div>
     </div>
   );
 };

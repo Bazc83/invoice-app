@@ -4,29 +4,29 @@ import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { FormItems } from "./FormItems";
 
-export const InvoiceForm = ({
+export function InvoiceForm({
   // itemsArray,
   // setItemsArray,
   handleFormSubmit,
   handleCancel,
-}) => {
+}) {
   const { invoiceId } = useParams();
   const { data, isLoading, isError, error } = useFilterInvoiceById(invoiceId);
 
   const { register, handleSubmit } = useForm({
     defaultValues: {
       id: invoiceId,
-      senderStreet: data["senderStreet"],
-      senderCity: data["senderCity"],
-      senderPostCode: data["senderPostCode"],
-      senderCountry: data["senderCountry"],
-      clientName: data["clientName"],
-      clientEmail: data["clientEmail"],
-      clientStreet: data["clientStreet"],
-      clientCity: data["clientCity"],
-      clientPostCode: data["clientPostCode"],
-      clientCountry: data["clientCountry"],
-      description: data["description"],
+      senderStreet: data.senderStreet,
+      senderCity: data.senderCity,
+      senderPostCode: data.senderPostCode,
+      senderCountry: data.senderCountry,
+      clientName: data.clientName,
+      clientEmail: data.clientEmail,
+      clientStreet: data.clientStreet,
+      clientCity: data.clientCity,
+      clientPostCode: data.clientPostCode,
+      clientCountry: data.clientCountry,
+      description: data.description,
     },
   });
 
@@ -34,7 +34,7 @@ export const InvoiceForm = ({
   if (isError) return `Error ... ${error}`;
 
   return (
-    <div className="secondary-bg z-50 col-span-full row-span-full flex h-max flex-col  gap-8 p-8">
+    <div className="secondary-bg z-50 col-span-full row-span-full flex h-max flex-col  gap-8 p-4 sm:p-8">
       <h2 className="text-xl">Edit #{invoiceId}</h2>
       <form
         onSubmit={handleSubmit(handleFormSubmit)}
@@ -151,11 +151,10 @@ export const InvoiceForm = ({
           />
         </FormItemInput>
 
-        {/* itemsArray={itemsArray} setItemsArray={setItemsArray} */}
-        <FormItems  />
+        <FormItems />
 
         <button type="submit">Submit Changes</button>
       </form>
     </div>
   );
-};
+}

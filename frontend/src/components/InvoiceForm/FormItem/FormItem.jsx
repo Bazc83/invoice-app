@@ -2,7 +2,7 @@ import { useEffect, useReducer } from "react";
 import { ItemForm } from "../ItemForm";
 import { useFormItemReducer } from "./useFormItemReducer";
 
-export const FormItem = ({ item, onItemSave, handleDeleteItem, }) => {
+export function FormItem({ item, onItemSave, handleDeleteItem, itemIndex }) {
   const { itemReducer } = useFormItemReducer();
 
   const initialValue = {
@@ -44,6 +44,7 @@ export const FormItem = ({ item, onItemSave, handleDeleteItem, }) => {
       dispatch={dispatch}
       handleSave={handleSave}
       handleDelete={handleDelete}
+      itemIndex={itemIndex}
     />
   );
-};
+}
