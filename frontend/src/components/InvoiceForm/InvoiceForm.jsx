@@ -5,6 +5,7 @@ import { FormItemInput } from '@/components/FormItemInput';
 import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
 
 import { FormItems } from './FormItems';
+import { SelectPaymentTerms } from './SelectPaymentTerms';
 
 export function InvoiceForm({ handleFormSubmit, handleCancel }) {
   const { invoiceId } = useParams();
@@ -166,6 +167,7 @@ export function InvoiceForm({ handleFormSubmit, handleCancel }) {
           />
         </FormItemInput>
 
+        <SelectPaymentTerms />
         <FormItems />
 
         <div className="mt-6 flex justify-between gap-4">
@@ -178,7 +180,7 @@ export function InvoiceForm({ handleFormSubmit, handleCancel }) {
           </button>
           <button
             type="submit"
-            className="btn | flex items-center  justify-center gap-2 bg-green-800 hover:bg-green-900  text-white"
+            className="btn | flex items-center  justify-center gap-2 bg-green-800 text-white  hover:bg-green-900"
           >
             Submit Changes
           </button>

@@ -4,8 +4,6 @@ import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { InvoiceContext } from '@/context/InvoiceContext';
 import { setInvoiceDates } from '@/hooks/setInvoiceDates';
 
-import styles from './SelectPaymentTerms.module.css';
-
 export function SelectPaymentTerms() {
   const { state, dispatch } = useContext(InvoiceContext);
 
@@ -29,14 +27,14 @@ export function SelectPaymentTerms() {
   if (state.formData === undefined) return 'Loading...';
 
   return (
-    <div className={styles.SelectPaymentTerms}>
-      <label htmlFor="paymentTerms" className="text-faded">
+    <div className="flex flex-col gap-2">
+      <label htmlFor="paymentTerms" className="secondary-text">
         Payment Terms
       </label>
 
-      <div className={styles.dropdownContainer}>
+      <div className="relative cursor-pointer">
         <div
-          className={styles.inputContainer}
+          className="primary-bg relative flex w-full items-baseline justify-between rounded-md pr-2 "
           onClick={onInputClick}
           aria-hidden="true"
         >
@@ -44,42 +42,34 @@ export function SelectPaymentTerms() {
             type="text"
             readOnly
             value={state.formData.paymentTerms || ''}
-            className="text"
           />
 
-          {state.showPaymentTermOptions ? (
-            <FaChevronUp className={styles.icon} />
-          ) : (
-            <FaChevronDown className={styles.icon} />
-          )}
+          {state.showPaymentTermOptions ? <FaChevronUp /> : <FaChevronDown />}
         </div>
 
         <div
-          className={`${styles.dropdown} ${
-            state.showPaymentTermOptions && styles.visible
+          className={`primary-bg absolute z-20 mt-1 w-full rounded-md  p-4 shadow-md ${
+            state.showPaymentTermOptions ? 'flex flex-col gap-4' : 'hidden'
           }`}
         >
-          <button
-            type="button"
+          <option
             onClick={() => onItemSelected('Cash')}
-            className={`${styles.option} text`}
+            className="secondary-bg flex cursor-pointer justify-center rounded-md py-2  px-4 "
           >
             Cash
-          </button>
-          <button
-            type="button"
+          </option>
+          <option
             onClick={() => onItemSelected('15 days from invoice date')}
-            className={`${styles.option} text`}
+            className="secondary-bg flex cursor-pointer justify-center rounded-md py-2  px-4 "
           >
             15 days from invoice date
-          </button>
-          <button
-            type="button"
+          </option>
+          <option
             onClick={() => onItemSelected('21 days from invoice date')}
-            className={`${styles.option} text`}
+            className="secondary-bg flex cursor-pointer justify-center rounded-md py-2  px-4 "
           >
             21 days from invoice date
-          </button>
+          </option>
         </div>
       </div>
     </div>

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { InvoiceContext } from '@/context/InvoiceContext';
 import { useDeleteInvoice } from '@/hooks/reactQueryHooks/useDeleteInvoice';
 
-import ConfirmActionModalTemplate from './ui/ConfirmActionModalTemplate';
+import ConfirmActionModalTemplate from './ConfirmActionModalTemplate';
 
 export function ConfirmDeleteModal({ invoiceId }) {
   const { dispatch } = useContext(InvoiceContext);

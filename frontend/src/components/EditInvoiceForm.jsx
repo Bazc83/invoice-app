@@ -22,7 +22,12 @@ export function EditInvoiceForm({ invoiceId }) {
   const { updateInvoiceMutation } = useUpdateInvoice();
 
   const handleFormSubmit = (data) => {
-    const payloadData = { ...data, items: state.itemsArray };
+    const payloadData = {
+      ...data,
+      items: state.itemsArray,
+      paymentTerms: state.formData.paymentTerms,
+      paymentDue: state.formData.paymentDue,
+    };
     dispatch({ type: 'setFormData', payload: payloadData });
 
     updateInvoiceMutation.mutate({
