@@ -21,7 +21,7 @@ export function Invoices() {
   if (isLoading) return 'Loading...';
   if (isError) return `An error has occurred: ${error.message}`;
   return (
-    <div className="primary-bg flex flex-col  px-6 md:px-8">
+    <div className="primary-bg relative flex  flex-col px-6 md:px-8">
       {/* Invoices page controls */}
       <div className="secondary-bg mt-6 mb-2 flex flex-wrap-reverse items-center justify-center gap-2 rounded-md p-6 shadow-md sm:justify-between lg:mb-2">
         {/* FilterModal invoices compontent */}

@@ -4,9 +4,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { InvoiceContext } from '@/context/InvoiceContext';
 import { useDeleteInvoice } from '@/hooks/reactQueryHooks/useDeleteInvoice';
 
-import { Button } from '../Button';
-import styles from './ConfirmDeleteModal.module.css';
-
 export function ConfirmDeleteModal() {
   const { dispatch } = useContext(InvoiceContext);
 
@@ -22,22 +19,28 @@ export function ConfirmDeleteModal() {
   };
 
   return (
-    <div className={`${styles.confirmDeleteModal}`}>
-      <h1>Confirm Delete</h1>
-      <p className="text-faded-lg">
+    <div className="secondary-bg absolute top-[20%] left-[50%] z-50 flex  w-[calc(100%_-_2rem)] max-w-lg -translate-x-[50%] -translate-y-[20%] flex-col items-start justify-center gap-6 rounded-md p-6">
+      <h1 className="text-xl font-semibold">Confirm Delete</h1>
+      <p className="secondary-text text-lg">
         Are you sure you want to delete invoice {invoiceId}? This action cannot
         be undone
       </p>
-      <div>
-        <Button
+      <div className="flex w-full justify-end gap-4 ">
+        <button
+          type="button"
+          className="btn | flex items-center  justify-center gap-2 border border-gray-200 text-gray-200 hover:border-gray-900 hover:bg-gray-900 "
           onClick={() => dispatch({ type: 'hideDeleteModal' })}
-          btnStyle="btnThree"
         >
           Cancel
-        </Button>
-        <Button onClick={handleDeleteInvoice} btnStyle="btnFive">
+        </button>
+
+        <button
+          type="button"
+          className="btn | flex items-center  justify-center gap-2   bg-red-700 text-white hover:bg-red-900"
+          onClick={handleDeleteInvoice}
+        >
           Delete
-        </Button>
+        </button>
       </div>
     </div>
   );

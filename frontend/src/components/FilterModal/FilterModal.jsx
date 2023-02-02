@@ -11,8 +11,9 @@ export function FilterModal() {
   const handleShowModal = () => {
     setShowModal((prev) => !prev);
   };
+
   return (
-    <div className="relative z-40 w-full sm:w-auto">
+    <div className={`relative  w-full sm:w-auto ${showModal && 'z-30'}`}>
       {/* Show/Hide modal button */}
       <button
         type="button"
@@ -28,7 +29,7 @@ export function FilterModal() {
       </button>
 
       {showModal && (
-        <div className="secondary-bg absolute top-11 -left-3 rounded-md p-6">
+        <div className="secondary-bg absolute top-11 -left-3 rounded-md p-6 ">
           <form className="flex flex-col gap-4">
             {/* Filter modal options */}
             {state.filters.map((filter) => (
