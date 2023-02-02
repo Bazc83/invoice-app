@@ -27,7 +27,11 @@ export function InvoicePreview({ invoice }) {
         </p>
 
         {/* Only show payment due date if not paid */}
-        {status !== 'paid' ? <p>n/a</p> : <p>Due {getDate(paymentDue)}</p>}
+        {status === 'paid' ? (
+          <p>Invoice Paid</p>
+        ) : (
+          <p>Due {getDate(paymentDue)}</p>
+        )}
       </div>
 
       <div className=" pb-4 md:col-start-5 md:col-end-9  md:pb-0 md:text-center lg:col-end-8">
