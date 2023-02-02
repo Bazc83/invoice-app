@@ -33,7 +33,7 @@ export function InvoiceMainContent({ invoiceData }) {
         <div>
           <p className="secondary-text">Bill From:</p>
           <div>
-            <p>Company Name</p>
+            <p>{invoiceData?.companyName}</p>
             <p>{invoiceData?.senderStreet}</p>
             <p>{invoiceData?.senderCity}</p>
             <p>{invoiceData?.senderPostCode}</p>

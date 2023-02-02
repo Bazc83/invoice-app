@@ -24,6 +24,7 @@ export function InvoiceForm({ handleFormSubmit, handleCancel }) {
       clientPostCode: data.clientPostCode,
       clientCountry: data.clientCountry,
       description: data.description,
+      companyName: data.companyName,
     },
   });
 
@@ -37,6 +38,18 @@ export function InvoiceForm({ handleFormSubmit, handleCancel }) {
         onSubmit={handleSubmit(handleFormSubmit)}
         className="flex flex-col gap-4"
       >
+        <FormItemInput>
+          <label className="secondary-text" htmlFor="companyName">
+            CompanyName{' '}
+          </label>
+          <input
+            id="companyName"
+            name="companyName"
+            className="primary-bg"
+            type="text"
+            {...register('companyName')}
+          />
+        </FormItemInput>
         <FormItemInput>
           <label className="secondary-text" htmlFor="senderStreet">
             Sender Street{' '}

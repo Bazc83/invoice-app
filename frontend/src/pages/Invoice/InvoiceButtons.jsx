@@ -36,6 +36,7 @@ export function InvoiceButtons({ showInvoiceControls }) {
         showInvoiceControls ? 'flex' : 'hidden'
       } `}
     >
+      {/* Delete Button */}
       <button
         type="button"
         onClick={() => dispatch({ type: 'showDeleteModal' })}
@@ -45,6 +46,7 @@ export function InvoiceButtons({ showInvoiceControls }) {
       </button>
 
       <div className="flex w-full flex-col-reverse items-center justify-center gap-4  sm:max-w-[500px] md:w-auto md:flex-row ">
+        {/* Edit Button */}
         <button
           type="button"
           onClick={() => dispatch({ type: 'showEditForm' })}
@@ -53,6 +55,7 @@ export function InvoiceButtons({ showInvoiceControls }) {
           Edit
         </button>
 
+        {/* Draft button */}
         {invoiceData?.status !== 'draft' && (
           <button
             type="button"
@@ -63,6 +66,7 @@ export function InvoiceButtons({ showInvoiceControls }) {
           </button>
         )}
 
+        {/* Pending Button */}
         {invoiceData?.status !== 'pending' && (
           <button
             type="button"
@@ -73,6 +77,7 @@ export function InvoiceButtons({ showInvoiceControls }) {
           </button>
         )}
 
+        {/* Paid Button */}
         {invoiceData?.status !== 'paid' && (
           <button
             type="button"

@@ -1,14 +1,17 @@
 // requires the following props
+
+// modalContent={
 // header ="string",
 // text = "string",
+// }
 // confirmActionFunction = function
 // cancelActionFunction = function
 
-function ConfirmActionModal(props) {
+function ConfirmActionModalTemplate(props) {
   return (
     <div className="absolute top-[20%] left-[50%] z-50 flex w-[calc(100%_-_2rem)] max-w-lg  -translate-x-[50%] -translate-y-[20%] flex-col items-start justify-center gap-6 rounded-md bg-gray-100 p-6 dark:bg-gray-800 ">
-      <h1 className="text-xl font-semibold">{props?.header}</h1>
-      <p className="secondary-text text-lg">{props?.text}</p>
+      <h1 className="text-xl font-semibold">{props?.modalContent?.header}</h1>
+      <p className="secondary-text text-lg">{props?.modalContent?.text}</p>
       <div className="flex w-full justify-end gap-4 ">
         <button
           type="button"
@@ -30,4 +33,4 @@ function ConfirmActionModal(props) {
   );
 }
 
-export default ConfirmActionModal;
+export default ConfirmActionModalTemplate;

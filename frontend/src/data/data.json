@@ -16,6 +16,7 @@
     "clientCity": "Sharrington",
     "clientPostCode": "NR24 5WQ",
     "clientCountry": "United Kingdom",
+    "companyName": "Fake Company Ltd",
     "items": [
       {
         "itemId": "aslkfjsdkl",
@@ -44,6 +45,7 @@
     "clientCity": "Bradford",
     "clientPostCode": "BD1 9PB",
     "clientCountry": "United Kingdom",
+    "companyName": "Fake Company Ltd",
     "items": [
       {
         "itemId": "asasfdsf",
@@ -79,6 +81,7 @@
     "clientCity": "Westhall",
     "clientPostCode": "IP19 3PF",
     "clientCountry": "United Kingdom",
+    "companyName": "Fake Company Ltd",
     "items": [
       {
         "itemId": "fdsafdsaslkfjsdkl",
@@ -107,6 +110,7 @@
     "clientCity": "Carlisle",
     "clientPostCode": "CA20 2TG",
     "clientCountry": "United Kingdom",
+    "companyName": "Fake Company Ltd",
     "items": [
       {
         "itemId": "77ghafdsfslkfjsdkl",
@@ -135,6 +139,7 @@
     "clientCity": "Cambridge",
     "clientPostCode": "CB5 6EG",
     "clientCountry": "United Kingdom",
+    "companyName": "Fake Company Ltd",
     "items": [
       {
         "itemId": "afds5544aslkfjsdkl",
@@ -170,6 +175,7 @@
     "clientCity": "Gotham",
     "clientPostCode": "60457",
     "clientCountry": "United States of America",
+    "companyName": "Fake Company Ltd",
     "items": [
       {
         "itemId": "34343aslkfjsdkl",
@@ -198,6 +204,7 @@
     "clientCity": "",
     "clientPostCode": "",
     "clientCountry": "",
+    "companyName": "Fake Company Ltd",
     "items": [
       {
         "itemId": "asl243243kfjsdkl",

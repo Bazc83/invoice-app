@@ -51,6 +51,7 @@ const addInvoice = asyncHandler(async (req, res) => {
     status,
     amountDueTotal,
     items,
+    companyName
   } = req.body;
 
   if (!clientEmail || !clientName || !id) {
@@ -60,6 +61,7 @@ const addInvoice = asyncHandler(async (req, res) => {
   }
 
   const invoice = await Invoice.create({
+    companyName,
     senderStreet,
     senderCity,
     senderPostCode,
@@ -93,6 +95,7 @@ const updateInvoice = asyncHandler(async (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
 
   const {
+    companyName,
     senderCity,
     senderStreet,
     senderCountry,
@@ -123,6 +126,7 @@ const updateInvoice = asyncHandler(async (req, res) => {
   const invoice = await Invoice.findOneAndUpdate(
     { id: req.params.id },
     {
+      companyName,
       senderCity,
       senderStreet,
       senderCountry,

@@ -38,7 +38,7 @@ export function Invoice() {
         'before:fixed before:inset-0 before:z-10 before:h-full  before:w-full before:bg-black before:bg-opacity-60 '
       }`}
     >
-      {state.showDeleteModal && <ConfirmDeleteModal />}
+      {state.showDeleteModal && <ConfirmDeleteModal invoiceId={invoiceId} />}
 
       {state.showEditForm && <EditInvoiceForm invoiceId={invoiceId} />}
 

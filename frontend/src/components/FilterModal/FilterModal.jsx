@@ -6,15 +6,14 @@ import { PageLayoutContext } from '@/pages/PageLayout';
 
 export function FilterModal() {
   const { state } = useContext(InvoicesContext);
-  const { filterModal,  dispatch} = useContext(PageLayoutContext);
+  const { showFilterModal, setShowFilterModal } = useContext(PageLayoutContext);
 
   const handleShowModal = () => {
-    dispatch({type: "toggleFilterModal"})
-    
+    setShowFilterModal((prev) => !prev);
   };
 
   return (
-    <div className={`relative  w-full sm:w-auto ${filterModal && 'z-30'}`}>
+    <div className={`relative  w-full sm:w-auto ${showFilterModal && 'z-30'}`}>
       {/* Show/Hide modal button */}
       <button
         type="button"
@@ -26,10 +25,10 @@ export function FilterModal() {
         }`}
         onClick={handleShowModal}
       >
-        {filterModal ? 'Hide Filters' : 'Show Filters'}
+        {showFilterModal ? 'Hide Filters' : 'Show Filters'}
       </button>
 
-      {filterModal && (
+      {showFilterModal && (
         <div className="secondary-bg absolute top-11 -left-3 rounded-md p-6 ">
           <form className="flex flex-col gap-4">
             {/* Filter modal options */}
