@@ -5,7 +5,7 @@ import { InvoiceContext } from '@/context/InvoiceContext';
 import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
 import { useUpdateInvoice } from '@/hooks/reactQueryHooks/useUpdateInvoice';
 
-export function InvoiceButtons({ showInvoiceControls }) {
+export function InvoiceButtons() {
   const { dispatch } = useContext(InvoiceContext);
 
   const { invoiceId } = useParams();
@@ -26,21 +26,22 @@ export function InvoiceButtons({ showInvoiceControls }) {
     });
   };
 
+  // {
+  //   showInvoiceControls ? 'flex' : 'hidden'
+  // }
   if (isLoading) return 'Loading...';
 
   if (isError) return `An error has occurred: ${error.message}`;
 
   return (
     <div
-      className={`secondary-bg  flex-col-reverse items-center justify-center gap-4 rounded-md p-8 shadow-md md:flex md:flex-row md:justify-between ${
-        showInvoiceControls ? 'flex' : 'hidden'
-      } `}
+      className={`secondary-bg  flex flex-col-reverse  items-center justify-center gap-4 rounded-md pt-8 text-sm md:flex-row md:justify-between md:shadow-none `}
     >
       {/* Delete Button */}
       <button
         type="button"
         onClick={() => dispatch({ type: 'showDeleteModal' })}
-        className="btn | w-full border border-red-600 text-red-600 hover:bg-red-600 hover:text-white  sm:max-w-[500px] md:w-auto"
+        className="btn | w-full border border-red-600 text-red-600  hover:bg-red-600 hover:text-white  sm:max-w-[500px] md:w-auto"
       >
         {isLoading ? '...Deleting' : 'Delete'}
       </button>
