@@ -1,45 +1,39 @@
 import { useForm } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
 
 import { FormItemInput } from '@/components/FormItemInput';
-import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
 
 import { FormItems } from './FormItems';
 import { SelectPaymentTerms } from './SelectPaymentTerms';
 
-export function InvoiceForm({ handleFormSubmit, handleCancel }) {
-  const { invoiceId } = useParams();
-  const { data, isLoading, isError, error } = useFilterInvoiceById(invoiceId);
-
+export function InvoiceForm({ invoiceData, handleFormSubmit, handleCancel }) {
+  
   const { register, handleSubmit } = useForm({
     defaultValues: {
-      id: invoiceId,
-      senderStreet: data.senderStreet,
-      senderCity: data.senderCity,
-      senderPostCode: data.senderPostCode,
-      senderCountry: data.senderCountry,
-      clientName: data.clientName,
-      clientEmail: data.clientEmail,
-      clientStreet: data.clientStreet,
-      clientCity: data.clientCity,
-      clientPostCode: data.clientPostCode,
-      clientCountry: data.clientCountry,
-      description: data.description,
-      companyName: data.companyName,
+      id: invoiceData.id,
+      senderStreet: invoiceData.senderStreet,
+      senderCity: invoiceData.senderCity,
+      senderPostCode: invoiceData.senderPostCode,
+      senderCountry: invoiceData.senderCountry,
+      clientName: invoiceData.clientName,
+      clientEmail: invoiceData.clientEmail,
+      clientStreet: invoiceData.clientStreet,
+      clientCity: invoiceData.clientCity,
+      clientPostCode: invoiceData.clientPostCode,
+      clientCountry: invoiceData.clientCountry,
+      description: invoiceData.description,
+      companyName: invoiceData.companyName,
+      paymentTerms: invoiceData.paymentTerms,
     },
   });
 
-  if (isLoading) return 'Loading ...';
-  if (isError) return `Error ... ${error}`;
-
   return (
     <div className="secondary-bg z-50 col-span-full row-span-full flex h-max flex-col  gap-8 p-4 sm:p-8">
-      <h2 className="text-xl">Edit #{invoiceId}</h2>
+      <h2 className="text-xl">Edit #{invoiceData.id}</h2>
       <form
         onSubmit={handleSubmit(handleFormSubmit)}
         className="flex flex-col gap-4"
       >
-        <h2 className=' text-lg'>Sender Details:</h2>
+        <h2 className=" text-lg">Sender Details:</h2>
         <FormItemInput>
           <label className="secondary-text" htmlFor="companyName">
             Company Name{' '}
@@ -98,7 +92,7 @@ export function InvoiceForm({ handleFormSubmit, handleCancel }) {
           />
         </FormItemInput>
 
-        <h2 className='pt-6 text-lg'>Client Details:</h2>
+        <h2 className="pt-6 text-lg">Client Details:</h2>
         <FormItemInput>
           <label className="secondary-text" htmlFor="clientName">
             Client Name
@@ -160,8 +154,7 @@ export function InvoiceForm({ handleFormSubmit, handleCancel }) {
           />
         </FormItemInput>
 
-
-        <h2 className='pt-6 text-lg'>Invoice Information:</h2>
+        <h2 className="pt-6 text-lg">Invoice Information:</h2>
         <FormItemInput>
           <label className="secondary-text" htmlFor="description">
             Description
@@ -181,7 +174,7 @@ export function InvoiceForm({ handleFormSubmit, handleCancel }) {
         <div className="mt-6 flex justify-between gap-4">
           <button
             type="button"
-            className="btn | flex items-center  justify-center gap-2  text-white bg-red-800 hover:bg-red-900"
+            className="btn | flex items-center  justify-center gap-2  bg-red-800 text-white hover:bg-red-900"
             onClick={handleCancel}
           >
             Cancel

@@ -7,10 +7,13 @@ import { InvoicesContext } from '@/context/InvoicesContext';
 import { useInvoices } from '@/hooks/reactQueryHooks/useInvoices';
 import { InvoicePreview } from '@/pages/Invoices/InvoicePreview';
 
+import { PageLayoutContext } from '../PageLayout';
 import { ShowFiltersAndClear } from './ShowFiltersAndClear';
 
 export function Invoices() {
   const { state, dispatch } = useContext(InvoicesContext);
+  const { showNewInvoiceForm, setShowNewInvoiceForm } =
+    useContext(PageLayoutContext);
 
   const { isLoading, isError, error, data: invoices } = useInvoices();
 
@@ -31,7 +34,7 @@ export function Invoices() {
         <button
           type="button"
           className="flex w-full items-center justify-center gap-2 rounded-md bg-green-900 px-4 py-2 text-sm text-gray-50 sm:w-auto lg:text-base"
-          onClick={() => dispatch({ type: 'toggleInvoiceForm' })}
+          onClick={() => setShowNewInvoiceForm(prev=> !prev)}
         >
           Add Invoice
         </button>
@@ -41,7 +44,7 @@ export function Invoices() {
       {state.checkedFilters?.length > 0 && <ShowFiltersAndClear />}
 
       {/* Add new invoice */}
-      {state.showInvoiceForm && <NewInvoiceForm />}
+      {showNewInvoiceForm && <NewInvoiceForm />}
 
       {/* No invoice component */}
       {state.filteredInvoices?.length === 0 && <NoInvoices />}

@@ -41,7 +41,7 @@ export function SelectPaymentTerms() {
           <input
             type="text"
             readOnly
-            value={state.formData.paymentTerms || ''}
+            value={state?.formData?.paymentTerms || ''}
           />
 
           {state.showPaymentTermOptions ? <FaChevronUp /> : <FaChevronDown />}

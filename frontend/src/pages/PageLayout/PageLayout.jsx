@@ -8,14 +8,23 @@ export const PageLayoutContext = createContext();
 export function PageLayout() {
   const [showFilterModal, setShowFilterModal] = useState(false);
 
+  const [showNewInvoiceForm, setShowNewInvoiceForm] = useState(false);
+
   const handleCloseModal = () => {
     if (!showFilterModal) return;
     setShowFilterModal(false);
   };
 
   return (
-    // eslint-disable-next-line react/jsx-no-constructed-context-values
-    <PageLayoutContext.Provider value={{ showFilterModal, setShowFilterModal }}>
+    <PageLayoutContext.Provider
+      // eslint-disable-next-line react/jsx-no-constructed-context-values
+      value={{
+        showFilterModal,
+        setShowFilterModal,
+        showNewInvoiceForm,
+        setShowNewInvoiceForm,
+      }}
+    >
       <div
         className="primary-bg relative flex h-max min-h-screen flex-col lg:grid lg:grid-cols-[80px_1fr] "
         onClick={handleCloseModal}

@@ -16,8 +16,6 @@ export function EditInvoiceForm({ invoiceId }) {
     error,
   } = useFilterInvoiceById(invoiceId);
 
-  // const [itemsArray, setItemsArray] = useState(invoiceData?.items);
-
   // Update Invoice
   const { updateInvoiceMutation } = useUpdateInvoice();
 
@@ -60,7 +58,7 @@ export function EditInvoiceForm({ invoiceId }) {
 
   return (
     <InvoiceForm
-      formData={state.formData}
+      invoiceData={invoiceData}
       handleFormSubmit={handleFormSubmit}
       handleCancel={handleCancel}
     />
