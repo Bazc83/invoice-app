@@ -5,7 +5,7 @@ import { InvoiceContext } from '@/context/InvoiceContext';
 import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
 import { useUpdateInvoice } from '@/hooks/reactQueryHooks/useUpdateInvoice';
 
-export function InvoiceButtons() {
+export function InvoiceButtons({ showInvoiceControls }) {
   const { dispatch } = useContext(InvoiceContext);
 
   const { invoiceId } = useParams();
@@ -26,16 +26,15 @@ export function InvoiceButtons() {
     });
   };
 
-  // {
-  //   showInvoiceControls ? 'flex' : 'hidden'
-  // }
   if (isLoading) return 'Loading...';
 
   if (isError) return `An error has occurred: ${error.message}`;
 
   return (
     <div
-      className={`secondary-bg  flex flex-col-reverse  items-center justify-center gap-4 rounded-md pt-8 text-sm md:flex-row md:justify-between md:shadow-none `}
+      className={`secondary-bg  flex-col-reverse  items-center justify-center gap-4 rounded-md pt-4 text-sm  md:flex-row md:px-4 md:shadow-none lg:pt-0 ${
+        showInvoiceControls ? 'flex' : 'hidden md:flex'
+      }`}
     >
       {/* Delete Button */}
       <button
