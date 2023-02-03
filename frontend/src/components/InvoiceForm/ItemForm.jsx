@@ -73,7 +73,7 @@ export function ItemForm({
           {showMessage.message}
         </p>
       ) : (
-        <div className="secondary-bg relative grid  grid-cols-6 gap-3  rounded-md px-4 py-4 text-xs  sm:gap-4 sm:px-6 sm:text-sm">
+        <div className="secondary-bg relative grid  grid-cols-6  rounded-md px-4 py-4   gap-y-6 gap-x-2 sm:px-6 text-sm">
           {/* Item Name */}
           <FormItemInput className="col-span-full col-start-1  ">
             <label htmlFor="name">Item Name</label>
@@ -150,19 +150,19 @@ export function ItemForm({
             />
           </FormItemInput>
 
-          <div className="col-span-full flex w-full  justify-between">
+          <div className="col-span-full flex w-full  justify-between md:justify-end md:gap-6">
             {newForm ? (
               <button
                 onClick={handleCancelAddNewItem}
                 type="button"
-                className="btn | flex items-center  justify-center gap-2 border border-red-900 text-red-700 hover:bg-red-800 hover:text-white"
+                className="btn | flex items-center  justify-center gap-2  text-white bg-red-800 hover:bg-red-900 "
               >
                 Cancel
               </button>
             ) : (
               <button
                 type="button"
-                className="btn | flex items-center  justify-center gap-2 border border-red-900 text-red-700 hover:bg-red-800 hover:text-white"
+                className="btn | flex items-center  justify-center gap-2  text-white bg-red-800 hover:bg-red-900"
                 onClick={handleDeleteItem}
               >
                 Delete Item

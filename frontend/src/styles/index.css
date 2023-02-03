@@ -23,13 +23,13 @@
   }
 
   form {
-    @apply text-xs sm:text-sm md:text-base ;
+    @apply text-sm md:text-base ;
   }
   form input {
     @apply primary-bg rounded-md px-3 py-2;
   }
   form input[disabled]{
-    @apply dark:bg-gray-900 dark:text-gray-500 bg-gray-600 text-gray-200  rounded-md px-3 py-2;
+    @apply dark:bg-gray-900 dark:text-gray-500 bg-gray-600 text-gray-200  rounded-md px-3 py-2 font-semibold;
   }
 
   form label {

@@ -60,7 +60,8 @@ export function FormItems() {
       <button
         type="button"
         className=" btn   col-span-3 col-start-4 
-        btn | flex items-center  justify-center gap-2 border border-gray-200 text-gray-200 hover:bg-gray-200 hover:text-gray-900 mt-2"
+        btn | flex items-center  justify-center gap-2 border hover:bg-gray-700 hover:text-white
+        border-gray-700 dark:border-gray-200 text-gray-700 dark:text-gray-300 dark:hover:bg-gray-300 dark:hover:text-gray-900 mt-2"
         
         onClick={(e) => handleShowNewItemForm(e)}
       >

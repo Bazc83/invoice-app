@@ -8,10 +8,10 @@ function ItemsSection({ invoiceData }) {
       </p>
 
       {/* Invoice items */}
-      <div className="primary-bg col-span-10  col-start-2 flex flex-col  justify-center  rounded-md  border-2 border-gray-300  text-sm dark:border-gray-600 sm:text-sm">
+      <div className="primary-bg col-span-10  col-start-2 flex flex-col  justify-center  rounded-sm  border-2 border-gray-300  text-sm dark:border-gray-600 sm:text-sm">
         {/* invoice items headers for screens md and above else hidden */}
         <div
-          className=" grid grid-cols-[0.5rem_repeat(10,_1fr)_0.5rem] gap-2 rounded-t-md border-b-2 border-gray-300 py-1
+          className=" grid grid-cols-[0.5rem_repeat(10,_1fr)_0.5rem] gap-2 rounded-t-md border-b-2 border-gray-300 py-2
          dark:border-gray-600  md:gap-4 "
         >
           <h3 className="col-start-2 col-end-6 text-start md:col-end-6 ">

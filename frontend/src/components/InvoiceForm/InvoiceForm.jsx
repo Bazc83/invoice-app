@@ -39,9 +39,10 @@ export function InvoiceForm({ handleFormSubmit, handleCancel }) {
         onSubmit={handleSubmit(handleFormSubmit)}
         className="flex flex-col gap-4"
       >
+        <h2 className=' text-lg'>Sender Details:</h2>
         <FormItemInput>
           <label className="secondary-text" htmlFor="companyName">
-            CompanyName{' '}
+            Company Name{' '}
           </label>
           <input
             id="companyName"
@@ -96,6 +97,8 @@ export function InvoiceForm({ handleFormSubmit, handleCancel }) {
             {...register('senderCountry')}
           />
         </FormItemInput>
+
+        <h2 className='pt-6 text-lg'>Client Details:</h2>
         <FormItemInput>
           <label className="secondary-text" htmlFor="clientName">
             Client Name
@@ -156,6 +159,9 @@ export function InvoiceForm({ handleFormSubmit, handleCancel }) {
             {...register('clientCountry')}
           />
         </FormItemInput>
+
+
+        <h2 className='pt-6 text-lg'>Invoice Information:</h2>
         <FormItemInput>
           <label className="secondary-text" htmlFor="description">
             Description
@@ -168,12 +174,14 @@ export function InvoiceForm({ handleFormSubmit, handleCancel }) {
         </FormItemInput>
 
         <SelectPaymentTerms />
+
+        {/* Form Items section */}
         <FormItems />
 
         <div className="mt-6 flex justify-between gap-4">
           <button
             type="button"
-            className="btn | flex items-center  justify-center gap-2 border border-red-900 text-red-700 hover:bg-red-800 hover:text-white"
+            className="btn | flex items-center  justify-center gap-2  text-white bg-red-800 hover:bg-red-900"
             onClick={handleCancel}
           >
             Cancel
