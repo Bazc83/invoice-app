@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router';
 
-import { PaymentStatus } from '@/components/PaymentStatus';
 import { useFormatDate } from '@/hooks/useFormatDate';
+import usePaymentStatusColor from '@/hooks/usePaymentStatusColor';
 
 export function InvoicePreview({ invoice }) {
   const { status, id, clientName, amountDueTotal, paymentDue } = invoice;
@@ -14,6 +14,8 @@ export function InvoicePreview({ invoice }) {
     navigate(`/invoices/${invoiceId}`);
   };
 
+  const { state } = usePaymentStatusColor(status);
+
   return (
     <div
       onClick={() => showFullInvoice(invoice.id)}
@@ -21,10 +23,8 @@ export function InvoicePreview({ invoice }) {
       aria-hidden="true"
     >
       {/* Invoice id and paymentDue date */}
-      <div className="flex  items-baseline justify-between  gap-2  pb-4 text-xs md:col-start-1  md:col-end-5  md:pb-0 md:text-base lg:col-end-4">
-        <p className="secondary-text md:default-text text-xs lg:text-base">
-          #{id}
-        </p>
+      <div className="flex  items-baseline justify-between  gap-2  pb-4  md:col-start-1  md:col-end-5  md:pb-0  lg:col-end-4">
+        <p className="secondary-text md:default-text ">#{id}</p>
 
         {/* Only show payment due date if not paid */}
         {status === 'paid' ? (
@@ -44,7 +44,12 @@ export function InvoicePreview({ invoice }) {
             currency: 'GBP',
           }).format(+amountDueTotal)}
         </p>
-        <PaymentStatus status={status} />
+
+        <div
+          className={`flex w-[100px] items-center justify-center border-[1px]  ${state?.paymentStatusColor} rounded-md py-2 px-4 text-sm font-semibold capitalize`}
+        >
+          <p>{status}</p>
+        </div>
       </div>
     </div>
   );
