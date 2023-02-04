@@ -73,7 +73,7 @@ export function ItemForm({
           {showMessage.message}
         </p>
       ) : (
-        <div className="secondary-bg relative grid  grid-cols-6  rounded-md px-4 py-4   gap-y-6 gap-x-2 sm:px-6 text-sm">
+        <div className="secondary-bg relative grid  grid-cols-6  gap-y-6 gap-x-2 rounded-md   px-4 py-4 text-sm sm:px-6">
           {/* Item Name */}
           <FormItemInput className="col-span-full col-start-1  ">
             <label htmlFor="name">Item Name</label>
@@ -91,8 +91,10 @@ export function ItemForm({
           </FormItemInput>
 
           {/* Item Quantity */}
-          <FormItemInput className="col-span-2 col-start-1  text-center">
-            <label htmlFor="quantity">Qty</label>
+          <FormItemInput className="col-span-2 col-start-1  text-start ">
+            <label className="text-center" htmlFor="quantity">
+              Qty
+            </label>
             <input
               type="number"
               name="quantity"
@@ -116,8 +118,10 @@ export function ItemForm({
           </FormItemInput>
 
           {/* Item Price */}
-          <FormItemInput className="col-span-2 col-start-3  text-center ">
-            <label htmlFor="price">Price</label>
+          <FormItemInput className="col-span-2 col-start-3  text-start ">
+            <label className="text-center" htmlFor="price">
+              Price
+            </label>
             <input
               type="number"
               name="price"
@@ -139,8 +143,10 @@ export function ItemForm({
           </FormItemInput>
 
           {/* Item Total **input disabled*** just to show value */}
-          <FormItemInput className="col-span-2 col-start-5 text-center">
-            <label htmlFor="total">Total</label>
+          <FormItemInput className="col-span-2 col-start-5 text-start ">
+            <label className="text-center" htmlFor="total">
+              Total
+            </label>
             <input
               type="number"
               name="total"
@@ -155,14 +161,14 @@ export function ItemForm({
               <button
                 onClick={handleCancelAddNewItem}
                 type="button"
-                className="btn | flex items-center  justify-center gap-2  text-white bg-red-800 hover:bg-red-900 "
+                className="btn | flex items-center  justify-center gap-2  bg-red-800 text-white hover:bg-red-900 "
               >
                 Cancel
               </button>
             ) : (
               <button
                 type="button"
-                className="btn | flex items-center  justify-center gap-2  text-white bg-red-800 hover:bg-red-900"
+                className="btn | flex items-center  justify-center gap-2  bg-red-800 text-white hover:bg-red-900"
                 onClick={handleDeleteItem}
               >
                 Delete Item

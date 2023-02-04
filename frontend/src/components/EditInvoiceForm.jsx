@@ -38,8 +38,9 @@ export function EditInvoiceForm({ invoiceId }) {
 
   const handleCancel = (e) => {
     e.preventDefault();
-    updateInvoiceMutation.reset();
-    dispatch({ type: 'hideEditForm' });
+    dispatch({ type: 'showConfirmation' });
+    // updateInvoiceMutation.reset();
+    // dispatch({ type: 'hideEditForm' });
   };
 
   useEffect(() => {

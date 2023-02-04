@@ -10,6 +10,8 @@ export function PageLayout() {
 
   const [showNewInvoiceForm, setShowNewInvoiceForm] = useState(false);
 
+
+  
   const handleCloseModal = () => {
     if (!showFilterModal) return;
     setShowFilterModal(false);

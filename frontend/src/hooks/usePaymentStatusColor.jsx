@@ -33,6 +33,8 @@ const usePaymentStatusColor = (status) => {
 
   useEffect(() => dispatch({ type: status }), [status]);
 
-  return { state, dispatch };
+  const { paymentStatusColor } = state;
+
+  return { paymentStatusColor, state, dispatch };
 };
 export default usePaymentStatusColor;

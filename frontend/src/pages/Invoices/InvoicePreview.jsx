@@ -14,42 +14,42 @@ export function InvoicePreview({ invoice }) {
     navigate(`/invoices/${invoiceId}`);
   };
 
-  const { state } = usePaymentStatusColor(status);
+  const { paymentStatusColor } = usePaymentStatusColor(status);
 
   return (
     <div
       onClick={() => showFullInvoice(invoice.id)}
-      className={`secondary-bg cursor-pointer items-baseline justify-center rounded-md py-6 px-8 shadow-md md:grid md:grid-cols-12 md:p-8 md:px-6 `}
+      className="secondary-bg  flex cursor-pointer flex-col gap-2 rounded-md py-4 px-8 shadow-md md:grid md:grid-cols-[1rem_repeat(10,_1fr)_1rem] md:items-baseline md:justify-center md:gap-1 md:px-0 lg:gap-2"
       aria-hidden="true"
     >
       {/* Invoice id and paymentDue date */}
-      <div className="flex  items-baseline justify-between  gap-2  pb-4  md:col-start-1  md:col-end-5  md:pb-0  lg:col-end-4">
+      <div className="flex  items-baseline justify-between    gap-1  md:col-start-2     md:col-end-5">
         <p className="secondary-text md:default-text ">#{id}</p>
 
         {/* Only show payment due date if not paid */}
         {status === 'paid' ? (
-          <p>Invoice Paid</p>
+          <p >Invoice Paid</p>
         ) : (
-          <p>Due {getDate(paymentDue)}</p>
+          <p><span className='md:hidden'>Due</span> {getDate(paymentDue)}</p>
         )}
       </div>
 
-      <div className=" pb-4 md:col-start-5 md:col-end-9  md:pb-0 md:text-center lg:col-end-8">
+      <div className="  md:col-start-6 md:col-end-9   md:text-start lg:text-center">
         <p>{clientName} </p>
       </div>
-      <div className="flex items-center justify-between gap-2  md:col-start-9 md:col-end-13  lg:col-start-10  lg:gap-4">
-        <p>
+      <div className="flex items-center justify-between  gap-2 md:col-start-9 md:col-end-12 md:w-full md:gap-6">
+        <p className="   w-full md:text-end lg:text-center">
           {new Intl.NumberFormat('en', {
             style: 'currency',
             currency: 'GBP',
           }).format(+amountDueTotal)}
         </p>
 
-        <div
-          className={`flex w-[100px] items-center justify-center border-[1px]  ${state?.paymentStatusColor} rounded-md py-2 px-4 text-sm font-semibold capitalize`}
+        <p
+          className={`shrink-1 w-[170px] text-center   ${paymentStatusColor} rounded-md border py-2 px-1 text-sm capitalize`}
         >
-          <p>{status}</p>
-        </div>
+          {status}
+        </p>
       </div>
     </div>
   );

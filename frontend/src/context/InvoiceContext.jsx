@@ -5,7 +5,7 @@ export const InvoiceContext = createContext();
 const initialValue = {
   showEditForm: false,
   showDeleteModal: false,
-  showActionModal: false,
+  showConfirmationModal: false,
   invoiceId: '',
   formData: {},
   itemsArray: [],
@@ -20,10 +20,10 @@ export const invoiceReducer = (state, action) => {
       return { ...state, showEditForm: true };
     case 'showDeleteModal':
       return { ...state, showDeleteModal: true };
-    case 'showActionModal':
-      return { ...state, showActionModal: true };
-    case 'hideActionModal':
-      return { ...state, showActionModal: false };
+    case 'showConfirmation':
+      return { ...state, showConfirmationModal: true };
+    case 'hideConfirmation':
+      return { ...state, showConfirmationModal: false };
     case 'hideDeleteModal':
       return { ...state, showDeleteModal: false };
     case 'setFormData':

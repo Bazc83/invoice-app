@@ -2,7 +2,7 @@ import InvoiceItem from './InvoiceItem';
 
 function ItemsSection({ invoiceData }) {
   return (
-    <div className="grid grid-cols-12 gap-2 text-sm lg:text-base ">
+    <div className="grid grid-cols-12 gap-5 text-sm lg:text-base ">
       <p className="secondary-text col-span-full col-start-2 ">
         Invoice Items:
       </p>
@@ -17,13 +17,13 @@ function ItemsSection({ invoiceData }) {
           <h3 className="col-start-2 col-end-6 text-start md:col-end-6 ">
             Item
           </h3>
-          <h3 className="hidden text-center md:col-start-7 md:col-end-8 md:block ">
+          <h3 className="hidden text-end md:col-start-7 md:col-end-8 md:block ">
             Qty
           </h3>
-          <h3 className="hidden text-center md:col-start-8 md:col-end-10  md:block">
+          <h3 className="hidden text-end md:col-start-8 md:col-end-10  md:block">
             Price
           </h3>
-          <h3 className="col-start-7 col-end-12 text-end sm:text-center md:col-start-10 ">
+          <h3 className="col-start-7 col-end-12 text-end  md:col-start-10 ">
             Item Total
           </h3>
         </div>
@@ -32,10 +32,9 @@ function ItemsSection({ invoiceData }) {
         {invoiceData?.items?.map((item) => (
           <InvoiceItem item={item} key={item.itemId} />
         ))}
-
         {/* Total amount due */}
-        <div className="primary-bg  col-span-full flex flex-wrap items-center justify-end gap-2 px-4 py-2  text-sm md:gap-4 ">
-          <p>Amount Due</p>
+        <div className="primary-bg col-span-full gap-2 flex flex-wrap items-center justify-end py-2 text-sm md:gap-1 pr-5">
+          <p >Amount Due</p>
           <h3>
             {new Intl.NumberFormat('en', {
               style: 'currency',

@@ -1,12 +1,14 @@
+import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { FormItemInput } from '@/components/FormItemInput';
+import { InvoiceContext } from '@/context/InvoiceContext';
 
+import ConfirmCancelModal from '../ConfirmCancelModal';
 import { FormItems } from './FormItems';
 import { SelectPaymentTerms } from './SelectPaymentTerms';
 
 export function InvoiceForm({ invoiceData, handleFormSubmit, handleCancel }) {
-  
   const { register, handleSubmit } = useForm({
     defaultValues: {
       id: invoiceData.id,
@@ -26,9 +28,15 @@ export function InvoiceForm({ invoiceData, handleFormSubmit, handleCancel }) {
     },
   });
 
+  const { state } = useContext(InvoiceContext);
+
   return (
-    <div className="secondary-bg z-50 col-span-full row-span-full flex h-max flex-col  gap-8 p-4 sm:p-8">
+    <div className="secondary-bg relative z-50 col-span-full row-span-full flex h-max  flex-col gap-8 p-4 sm:p-8">
+      {/* confirm cancel modal */}
+      {state.showConfirmationModal && <ConfirmCancelModal />}
+
       <h2 className="text-xl">Edit #{invoiceData.id}</h2>
+
       <form
         onSubmit={handleSubmit(handleFormSubmit)}
         className="flex flex-col gap-4"
@@ -171,7 +179,7 @@ export function InvoiceForm({ invoiceData, handleFormSubmit, handleCancel }) {
         {/* Form Items section */}
         <FormItems />
 
-        <div className="mt-6 flex justify-between gap-4">
+        <div className=" mt-6 flex justify-between gap-4 ">
           <button
             type="button"
             className="btn | flex items-center  justify-center gap-2  bg-red-800 text-white hover:bg-red-900"
