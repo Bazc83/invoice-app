@@ -5,13 +5,12 @@ import useUpdateInvoice from '@/hooks/reactQueryHooks/useUpdateInvoice';
 
 import ConfirmActionModalTemplate from './ConfirmActionModalTemplate';
 
-function ConfirmCancelModal() {
+function CancelEditFormModal() {
   const { dispatch } = useContext(InvoiceContext);
   const { updateInvoiceMutation } = useUpdateInvoice();
 
   const confirmActionFunction = () => {
     updateInvoiceMutation.reset();
-
     dispatch({ type: 'hideEditForm' });
   };
   const cancelActionFunction = () => {
@@ -21,6 +20,8 @@ function ConfirmCancelModal() {
   const modalContent = {
     header: 'Confirm Cancel',
     text: `Are you sure you want to cancel ? Changes will not be saved.`,
+    confirmBtn: "Cancel Edit",
+    cancelBtn: "Back"
   };
 
   return (
@@ -32,4 +33,4 @@ function ConfirmCancelModal() {
   );
 }
 
-export default ConfirmCancelModal;
+export default CancelEditFormModal;

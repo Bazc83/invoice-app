@@ -11,6 +11,8 @@ export function InvoicePreview({ invoice }) {
   const navigate = useNavigate();
 
   const showFullInvoice = (invoiceId) => {
+
+
     navigate(`/invoices/${invoiceId}`);
   };
 
@@ -28,9 +30,11 @@ export function InvoicePreview({ invoice }) {
 
         {/* Only show payment due date if not paid */}
         {status === 'paid' ? (
-          <p >Invoice Paid</p>
+          <p>Invoice Paid</p>
         ) : (
-          <p><span className='md:hidden'>Due</span> {getDate(paymentDue)}</p>
+          <p>
+            <span className="md:hidden">Due</span> {getDate(paymentDue)}
+          </p>
         )}
       </div>
 

@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { FormItemInput } from '@/components/FormItemInput';
 import { InvoiceContext } from '@/context/InvoiceContext';
 
-import ConfirmCancelModal from '../ConfirmCancelModal';
+import CancelEditFormModal from '../CancelEditFormModal';
 import { FormItems } from './FormItems';
 import { SelectPaymentTerms } from './SelectPaymentTerms';
 
@@ -33,7 +33,7 @@ export function InvoiceForm({ invoiceData, handleFormSubmit, handleCancel }) {
   return (
     <div className="secondary-bg relative z-50 col-span-full row-span-full flex h-max  flex-col gap-8 p-4 sm:p-8">
       {/* confirm cancel modal */}
-      {state.showConfirmationModal && <ConfirmCancelModal />}
+      {state.showConfirmationModal && <CancelEditFormModal />}
 
       <h2 className="text-xl">Edit #{invoiceData.id}</h2>
 

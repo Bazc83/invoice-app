@@ -42,7 +42,7 @@ function App() {
           <InvoiceContextProvider>
             <BrowserRouter>
               <Routes>
-                <Route element={<PageLayout />}>
+                <Route element={<PageLayout  theme={theme}/>}>
                   <Route
                     index
                     element={user ? <Invoices /> : <Navigate to="/login" />}

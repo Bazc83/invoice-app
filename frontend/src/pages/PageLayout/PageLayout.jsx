@@ -1,17 +1,18 @@
 import { createContext, useState } from 'react';
 import { Outlet } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 import { Navbar } from '@/components/Navbar';
 
+import 'react-toastify/dist/ReactToastify.css';
+
 export const PageLayoutContext = createContext();
 
-export function PageLayout() {
+export function PageLayout({ theme }) {
   const [showFilterModal, setShowFilterModal] = useState(false);
 
   const [showNewInvoiceForm, setShowNewInvoiceForm] = useState(false);
 
-
-  
   const handleCloseModal = () => {
     if (!showFilterModal) return;
     setShowFilterModal(false);
@@ -41,6 +42,17 @@ export function PageLayout() {
             'before:absolute before:z-10 before:h-full before:w-full before:bg-black before:opacity-70'
           } `}
         >
+          <ToastContainer
+            position="top-right"
+            autoClose={1000}
+            hideProgressBar
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            pauseOnHover
+            theme={theme}
+          />
           <Outlet />
         </div>
       </div>

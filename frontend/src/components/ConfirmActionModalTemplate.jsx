@@ -3,6 +3,8 @@
 // modalContent={
 // header ="string",
 // text = "string",
+// confirmBtn= "string",
+// cancelBtn = "string"
 // }
 // confirmActionFunction = function
 // cancelActionFunction = function
@@ -19,7 +21,7 @@ function ConfirmActionModalTemplate(props) {
             className="btn | flex items-center  justify-center gap-2 border border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white  dark:border-gray-200 dark:text-gray-200 hover:dark:border-gray-900 hover:dark:bg-gray-900"
             onClick={props?.cancelActionFunction}
           >
-            Cancel
+            {props?.modalContent?.cancelBtn}
           </button>
 
           <button
@@ -27,7 +29,7 @@ function ConfirmActionModalTemplate(props) {
             className="btn | flex items-center  justify-center gap-2   bg-red-700 text-white hover:bg-red-900"
             onClick={props?.confirmActionFunction}
           >
-            Confirm
+            {props?.modalContent?.confirmBtn}
           </button>
         </div>
       </div>

@@ -15,9 +15,9 @@ const initialValue = {
 export const invoiceReducer = (state, action) => {
   switch (action.type) {
     case 'hideEditForm':
-      return { ...state, showEditForm: false };
+      return { ...state, showEditForm: false, showConfirmationModal: false };
     case 'showEditForm':
-      return { ...state, showEditForm: true };
+      return { ...state, showEditForm: true, showConfirmationModal: false };
     case 'showDeleteModal':
       return { ...state, showDeleteModal: true };
     case 'showConfirmation':
