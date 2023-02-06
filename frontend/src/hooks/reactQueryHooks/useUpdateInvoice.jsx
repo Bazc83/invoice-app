@@ -24,7 +24,7 @@ export const useUpdateInvoice = () => {
       return json;
     }
 
-    return json.error;
+    throw new Error(json.error);
   };
 
   // update invoice on db with invoiceData

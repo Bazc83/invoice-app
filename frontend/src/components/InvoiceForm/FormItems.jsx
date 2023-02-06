@@ -23,6 +23,7 @@ export function FormItems() {
 
   const handleShowNewItemForm = (e) => {
     e.preventDefault();
+    
     setShowNewItemInput((prev) => !prev);
   };
 
@@ -42,6 +43,7 @@ export function FormItems() {
               key={item.itemId}
               onItemSave={onItemSave}
               handleDelete={handleDelete}
+              
             />
           ))}
 

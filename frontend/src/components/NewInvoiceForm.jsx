@@ -12,6 +12,8 @@ import { PageLayoutContext } from '@/pages/PageLayout';
 import { InvoiceForm } from './InvoiceForm';
 
 export function NewInvoiceForm() {
+  const [showModal, setShowModal] = useState(false);
+
   const { state, dispatch } = useContext(InvoiceContext);
   const { setShowNewInvoiceForm } = useContext(PageLayoutContext);
 
@@ -81,11 +83,13 @@ export function NewInvoiceForm() {
     setShowNewInvoiceForm(false);
   };
 
-  const handleCancel = (e) => {
-    e.preventDefault();
+  const handleCancel = () => {
+    setShowModal(true);
+
     newInvoiceMutation.reset();
 
     dispatch({ type: 'resetInvoice' });
+
     setShowNewInvoiceForm(false);
   };
 
@@ -122,6 +126,8 @@ export function NewInvoiceForm() {
       handleFormSubmit={handleFormSubmit}
       handleCancel={handleCancel}
       newForm
+      showModal={showModal}
+      setShowModal={setShowModal}
     />
   );
 }

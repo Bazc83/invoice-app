@@ -25,7 +25,7 @@ export const useFilterInvoiceById = (invoiceId) => {
   const { authData } = useAuth();
 
   const queryResponse = useQuery({
-    queryKey: ['filteredInvoice', invoiceId],
+    queryKey: ["invoice", invoiceId],
     queryFn: () => getInvoiceById(user.token, invoiceId),
     enabled: authData?.jwtValid === true,
   });

@@ -43,7 +43,7 @@ function ItemFormTemplate({
   );
 
   const handleSaveItem = (formItemValue) => {
-    toast.success('Item updated', { className: 'mx-4 md:mx-0 top-5 md:top-0' });
+    // toast.success('Item updated', { className: 'mx-4 md:mx-0 top-5 md:top-0' });
 
     setTimeout(() => {
       onItemSave(formItemValue);
@@ -62,7 +62,6 @@ function ItemFormTemplate({
 
     setTimeout(() => {
       addItem(itemValue);
-      // dispatch({ type: 'resetItemForm', payload: newForm ? newFormInitialValue : initialValue });
 
       setShowNewItemInput(false);
     }, 1000);
@@ -76,6 +75,38 @@ function ItemFormTemplate({
     setTimeout(() => {
       setShowNewItemInput(false);
     }, 1000);
+  };
+
+  const handleQuantityOnBlur = (val, e) => {
+    dispatch({
+      type: 'validateQuantity',
+      payload: { value: +e.target.value },
+    });
+
+    if (newForm) {
+      handleAddItem(val);
+    } else {
+      handleSaveItem(val);
+    }
+  };
+  const handleNameOnBlur = (val) => {
+    if (newForm) {
+      handleAddItem(val);
+    } else {
+      handleSaveItem(val);
+    }
+  };
+  const handlePriceOnBlur = (val, e) => {
+    dispatch({
+      type: 'validatePrice',
+      payload: { value: e.target.value },
+    });
+
+    if (newForm) {
+      handleAddItem(val);
+    } else {
+      handleSaveItem(val);
+    }
   };
 
   useEffect(() => {
@@ -99,6 +130,7 @@ function ItemFormTemplate({
                 payload: { value: e.target.value },
               })
             }
+            onBlur={() => handleNameOnBlur(state.formItem)}
           />
         </FormItemInput>
 
@@ -119,12 +151,7 @@ function ItemFormTemplate({
             }
             min={1}
             step={1}
-            onBlur={(e) =>
-              dispatch({
-                type: 'validateQuantity',
-                payload: { value: +e.target.value },
-              })
-            }
+            onBlur={(e) => handleQuantityOnBlur(state.formItem, e)}
             className="text-center"
           />
         </FormItemInput>
@@ -144,12 +171,7 @@ function ItemFormTemplate({
                 payload: { value: e.target.value },
               })
             }
-            onBlur={(e) =>
-              dispatch({
-                type: 'validatePrice',
-                payload: { value: e.target.value },
-              })
-            }
+            onBlur={(e) => handlePriceOnBlur(state.formItem, e)}
             className="text-center"
           />
         </FormItemInput>
@@ -187,7 +209,7 @@ function ItemFormTemplate({
             </button>
           )}
 
-          {newForm ? (
+          {newForm && (
             <button
               type="button"
               onClick={() => handleAddItem(state.formItem)}
@@ -195,15 +217,15 @@ function ItemFormTemplate({
             >
               Save new Item
             </button>
-          ) : (
-            <button
-              type="button"
-              onClick={() => handleSaveItem(state?.formItem)}
-              className=" btn | flex items-center justify-center  gap-2 bg-green-800  text-white hover:bg-green-900"
-            >
-              Update Item
-            </button>
           )}
+
+          {/* <button
+            type="button"
+            onClick={() => handleSaveItem(state?.formItem)}
+            className=" btn | flex items-center justify-center  gap-2 bg-green-800  text-white hover:bg-green-900"
+          >
+            Update Item
+          </button> */}
         </div>
       </div>
     </div>

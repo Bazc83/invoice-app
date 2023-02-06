@@ -6,44 +6,52 @@
 
 ## no invoices found show noInvoices
 
+
+# Add Invoice
+
+## Show invoice form
+
+## generate an ID for invoice
+
+## Add new item shows add an item form
+
+## submit all form data to database (inputs and form items)
+
+
+## on cancel show confirm cancel modal 
+
+## if cancel reset form and hide
+
+
+
 # Single invoice
 
-## get single invoice
+## show single invoice
 
-## on edit button click show form
+## on edit button click show Invoice edit form
 
-# context
+## allow editing of fields
 
-## array of invoice objects
+##  allow add another item
 
 
-{
-    clientAddress: {
-      city: '',
-      street: '',
-      postCode: '',
-      country: '',
-    },
-    clientEmail: '',
-    clientName: '',
-    description: '',
-    id: '',
-    items: [
-      {
-        name: '',
-        price: 0.0,
-        quantity: 0,
-        total: 0,
-      },
-    ],
-    paymentDue: '',
-    paymentTerms: 1,
-    senderAddress: {
-      city: '',
-      street: '',
-      postCode: '',
-      country: '',
-    },
-    status: '',
-    total: '',
-  }
+
+mutate form when form data is submited for either edited or new form
+
+
+## invoices page
+"invoices" query returns all invoices (useInvoices)
+
+they are filtered via app state, filteredInvoices show as invoice previews
+
+shown using invoicePreview componenet
+
+## invoice
+useFilterInvoiceById returns selected single invoice data
+
+
+
+
+
+
+

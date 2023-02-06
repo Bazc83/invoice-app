@@ -11,8 +11,6 @@ export function InvoicePreview({ invoice }) {
   const navigate = useNavigate();
 
   const showFullInvoice = (invoiceId) => {
-
-
     navigate(`/invoices/${invoiceId}`);
   };
 
