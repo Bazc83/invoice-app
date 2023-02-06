@@ -1,10 +1,15 @@
 import { useEffect, useReducer } from 'react';
 
-import { ItemForm } from '../ItemForm';
-import { useFormItemReducer } from './useFormItemReducer';
+import ItemFormTemplate from '../InvoiceForm/ItemFormTemplate';
+import itemReducer from './itemReducer';
 
-export function FormItem({ item, onItemSave, handleDeleteItem, itemIndex }) {
-  const { itemReducer } = useFormItemReducer();
+export function EditFormItem({
+  item,
+  onItemSave,
+  handleDeleteItem,
+  itemIndex
+}) {
+
 
   const initialValue = {
     itemId: item?.id,
@@ -12,14 +17,10 @@ export function FormItem({ item, onItemSave, handleDeleteItem, itemIndex }) {
     quantity: item?.quantity,
     price: item?.price,
     total: item?.total,
+    error: false,
   };
 
-  const [state, dispatch] = useReducer(itemReducer, {
-    formItem: initialValue,
-  });
-
-  // state de-structured
-  const { formItem } = state;
+  const [state, dispatch] = useReducer(itemReducer, initialValue);
 
   const handleSave = (formItemValue) => {
     onItemSave(formItemValue);
@@ -27,21 +28,20 @@ export function FormItem({ item, onItemSave, handleDeleteItem, itemIndex }) {
 
   const handleDelete = (itemId, e) => {
     e.preventDefault();
-
     handleDeleteItem(itemId);
   };
 
   useEffect(() => {
     dispatch({ type: 'itemTotal' });
-  }, [formItem.price, formItem.quantity]);
+  }, [state.price, state.quantity]);
 
   useEffect(() => {
     dispatch({ type: 'itemId', payload: { itemId: item.itemId } });
   }, [item.itemId]);
 
   return (
-    <ItemForm
-      formItem={formItem}
+    <ItemFormTemplate
+      state={state}
       dispatch={dispatch}
       handleSave={handleSave}
       handleDelete={handleDelete}
@@ -50,4 +50,4 @@ export function FormItem({ item, onItemSave, handleDeleteItem, itemIndex }) {
   );
 }
 
-export default FormItem;
+export default EditFormItem;

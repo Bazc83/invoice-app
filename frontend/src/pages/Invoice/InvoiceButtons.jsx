@@ -60,7 +60,7 @@ export function InvoiceButtons({ showInvoiceControls }) {
           <button
             type="button"
             onClick={() => setStatus('draft')}
-            className="btn |  w-full    border border-gray-700   bg-gray-700  text-white hover:border-gray-900 hover:bg-gray-900 hover:text-white dark:text-white md:w-auto "
+            className="w-full    border border-gray-700   bg-gray-700  text-white hover:border-gray-900 hover:bg-gray-900 hover:text-white dark:text-white md:w-auto "
           >
             Draft
           </button>

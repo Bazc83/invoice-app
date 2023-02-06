@@ -67,27 +67,29 @@ export function InvoiceForm({ invoiceData, handleFormSubmit, handleCancel }) {
           />
         </FormItemInput>
 
-        <FormItemInput>
-          <label className="secondary-text" htmlFor="senderCity">
-            Sender City
-          </label>
-          <input
-            name="senderCity"
-            className="primary-bg"
-            type="text"
-            {...register('senderCity')}
-          />
-        </FormItemInput>
-        <FormItemInput>
-          <label className="secondary-text" htmlFor="senderPostCode">
-            Sender Postcode
-          </label>
-          <input
-            className="primary-bg"
-            type="text"
-            {...register('senderPostCode')}
-          />
-        </FormItemInput>
+        <div className='grid grid-cols-2 gap-2'>
+          <FormItemInput>
+            <label className="secondary-text" htmlFor="senderCity">
+              Sender City
+            </label>
+            <input
+              name="senderCity"
+              className="primary-bg"
+              type="text"
+              {...register('senderCity')}
+            />
+          </FormItemInput>
+          <FormItemInput>
+            <label className="secondary-text" htmlFor="senderPostCode">
+              Sender Postcode
+            </label>
+            <input
+              className="primary-bg"
+              type="text"
+              {...register('senderPostCode')}
+            />
+          </FormItemInput>
+        </div>
         <FormItemInput>
           <label className="secondary-text" htmlFor="senderCountry">
             Sender Country

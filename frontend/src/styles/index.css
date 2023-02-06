@@ -19,7 +19,7 @@
   }
 
   .btn {
-    @apply cursor-pointer rounded-md py-2 px-3 outline-none transition-colors;
+    @apply cursor-pointer rounded-md py-2 px-4 outline-none transition-colors;
   }
 
   form {

@@ -2,8 +2,7 @@ import { useContext, useState } from 'react';
 
 import { InvoiceContext } from '@/context/InvoiceContext';
 
-import { AddNewItem } from './AddNewItem';
-import { FormItem } from './FormItem/FormItem';
+import ItemFormTemplate from './ItemFormTemplate';
 
 export function FormItems() {
   const [showNewItemInput, setShowNewItemInput] = useState(false);
@@ -18,7 +17,7 @@ export function FormItems() {
     dispatch({ type: 'addItem', payload: item });
   };
 
-  const handleDeleteItem = (itemToDelete) => {
+  const handleDelete = (itemToDelete) => {
     dispatch({ type: 'deleteItem', payload: itemToDelete });
   };
 
@@ -28,41 +27,40 @@ export function FormItems() {
   };
 
   return (
-    <div className="flex flex-col gap-4 ">
-      <h2 className="secondary-text text-lg font-semibold">Items</h2>
+    <div className="flex flex-col gap-4">
+      <h2 className="pt-6 text-lg">Items:</h2>
       <div
-        className={`flex flex-col gap-6 rounded-md bg-gray-400 p-3  dark:bg-gray-900  ${
+        className={`flex flex-col gap-6 rounded-md    ${
           state.itemsArray.length === 0 && !showNewItemInput && 'hidden'
         }`}
       >
         {/* Map state.itemsArray if array is not empty */}
         {state.itemsArray.length !== 0 &&
-          state.itemsArray.map((item, i) => (
-            <FormItem
-              itemIndex={i}
+          state.itemsArray.map((item) => (
+            <ItemFormTemplate
               item={item}
               key={item.itemId}
               onItemSave={onItemSave}
-              handleDeleteItem={handleDeleteItem}
+              handleDelete={handleDelete}
             />
           ))}
 
         {showNewItemInput && (
-          <AddNewItem
+          <ItemFormTemplate
             addItem={addItem}
             setShowNewItemInput={setShowNewItemInput}
-            handleDeleteItem={handleDeleteItem}
+            handleDelete={handleDelete}
             onItemSave={onItemSave}
+            newForm
           />
         )}
       </div>
 
       <button
         type="button"
-        className=" btn   col-span-3 col-start-4 
-        btn | flex items-center  justify-center gap-2 border hover:bg-gray-700 hover:text-white
-        border-gray-700 dark:border-gray-200 text-gray-700 dark:text-gray-300 dark:hover:bg-gray-300 dark:hover:text-gray-900 mt-2"
-        
+        className=" btn   btn | 
+        col-span-3 col-start-4 mt-2 flex  items-center justify-center gap-2 border border-gray-700
+        text-gray-700 hover:bg-gray-700 hover:text-white dark:border-gray-200 dark:text-gray-300 dark:hover:bg-gray-300 dark:hover:text-gray-900"
         onClick={(e) => handleShowNewItemForm(e)}
       >
         + Add Item

@@ -121,6 +121,7 @@ export function NewInvoiceForm() {
       invoiceData={state.formData}
       handleFormSubmit={handleFormSubmit}
       handleCancel={handleCancel}
+      newForm
     />
   );
 }

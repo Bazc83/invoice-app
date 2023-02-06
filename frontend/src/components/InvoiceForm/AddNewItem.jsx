@@ -2,8 +2,8 @@ import { useEffect, useReducer } from 'react';
 
 import { v4 as uuidv4 } from 'uuid';
 
-import { useFormItemReducer } from './FormItem/useFormItemReducer';
-import { ItemForm } from './ItemForm';
+import itemReducer from '../EditFormItem/itemReducer';
+import ItemFormTemplate from './ItemFormTemplate';
 
 export function AddNewItem({
   addItem,
@@ -11,6 +11,8 @@ export function AddNewItem({
   handleDeleteItem,
   onItemSave,
 }) {
+
+  
   const newId = uuidv4();
 
   const initialValue = {
@@ -19,13 +21,10 @@ export function AddNewItem({
     quantity: 1,
     price: 0.01,
     total: 0.0,
+    error: false,
   };
 
-  const { itemReducer } = useFormItemReducer();
-
-  const [state, dispatch] = useReducer(itemReducer, { formItem: initialValue });
-
-  const { formItem } = state;
+  const [state, dispatch] = useReducer(itemReducer, initialValue);
 
   const handleSave = (formItemValue) => {
     onItemSave(formItemValue);
@@ -39,10 +38,10 @@ export function AddNewItem({
 
   useEffect(() => {
     dispatch({ type: 'itemTotal' });
-  }, [formItem.price, formItem.quantity]);
+  }, [state.price, state.quantity]);
 
   const addItemToItemsArray = () => {
-    addItem(state.formItem);
+    addItem(state);
     dispatch({ type: 'resetItemForm', payload: initialValue });
 
     setShowNewItemInput(false);
@@ -53,8 +52,8 @@ export function AddNewItem({
   };
 
   return (
-    <ItemForm
-      formItem={formItem}
+    <ItemFormTemplate
+      state={state}
       dispatch={dispatch}
       handleSave={handleSave}
       handleDelete={handleDelete}

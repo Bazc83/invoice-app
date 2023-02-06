@@ -25,6 +25,9 @@ export function Invoices() {
   if (isError) return `An error has occurred: ${error.message}`;
   return (
     <div className="primary-bg relative flex  flex-col gap-4 px-6 pb-8 md:px-8">
+      {/* Add new invoice */}
+      {showNewInvoiceForm && <NewInvoiceForm />}
+
       {/* Invoices page controls */}
       <div className="secondary-bg mt-4 flex  flex-wrap-reverse items-center justify-center gap-2 rounded-md p-6 shadow-md sm:justify-between lg:mt-6 ">
         {/* FilterModal invoices compontent */}
@@ -59,9 +62,6 @@ export function Invoices() {
 
       {/* Shows current filters and a button to clear all filters */}
       {state.checkedFilters?.length > 0 && <ShowFiltersAndClear />}
-
-      {/* Add new invoice */}
-      {showNewInvoiceForm && <NewInvoiceForm />}
 
       {/* No invoice component */}
       {state.filteredInvoices?.length === 0 && <NoInvoices />}

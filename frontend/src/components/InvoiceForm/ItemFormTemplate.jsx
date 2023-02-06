@@ -1,37 +1,70 @@
+import { useEffect, useReducer } from 'react';
 import { toast } from 'react-toastify';
+
+import { v4 as uuidv4 } from 'uuid';
 
 import { FormItemInput } from '@/components/FormItemInput';
 
-export function ItemForm({
-  formItem,
-  dispatch,
-  handleSave,
-  handleDelete,
-  newForm,
-  addItemToItemsArray,
-  cancelAddNewItem,
-}) {
-  const handleAddItem = () => {
-    toast.success('Item added', { className: 'mx-4 md:mx-0 top-5 md:top-0' });
+import itemReducer from '../EditFormItem/itemReducer';
 
-    setTimeout(() => {
-      addItemToItemsArray();
-    }, 1000);
+function ItemFormTemplate({
+  item,
+  newForm,
+  onItemSave,
+  handleDelete,
+  addItem,
+  setShowNewItemInput,
+}) {
+  const newId = uuidv4();
+
+  const newFormInitialValue = {
+    formItem: {
+      itemId: newId,
+      name: '',
+      quantity: 1,
+      price: 0.01,
+      total: 0.0,
+    },
   };
 
-  const handleSaveItem = () => {
+  const initialValue = {
+    formItem: {
+      itemId: item?.id,
+      name: item?.name,
+      quantity: item?.quantity,
+      price: item?.price,
+      total: item?.total,
+    },
+  };
+
+  const [state, dispatch] = useReducer(
+    itemReducer,
+    newForm ? newFormInitialValue : initialValue
+  );
+
+  const handleSaveItem = (formItemValue) => {
     toast.success('Item updated', { className: 'mx-4 md:mx-0 top-5 md:top-0' });
 
     setTimeout(() => {
-      handleSave(formItem);
+      onItemSave(formItemValue);
     }, 1000);
   };
 
-  const handleDeleteItem = (e) => {
+  const handleDeleteItem = (itemId) => {
     toast.warning('Item Deleted', { className: 'mx-4 md:mx-0 top-5 md:top-0' });
+    setTimeout(() => {
+      handleDelete(itemId);
+    }, 1000);
+  };
+
+  const handleAddItem = (itemValue) => {
+    toast.success('Item added', { className: 'mx-4 md:mx-0 top-5 md:top-0' });
 
     setTimeout(() => {
-      handleDelete(formItem.itemId, e);
+      addItem(itemValue);
+      // dispatch({ type: 'resetItemForm', payload: newForm ? newFormInitialValue : initialValue });
+
+      setShowNewItemInput(false);
     }, 1000);
   };
 
@@ -41,20 +74,25 @@ export function ItemForm({
     });
 
     setTimeout(() => {
-      cancelAddNewItem();
+      setShowNewItemInput(false);
     }, 1000);
   };
 
+  useEffect(() => {
+    if (!item) return;
+    dispatch({ type: 'itemId', payload: { itemId: item.itemId } });
+  }, [item?.itemId, item]);
+
   return (
     <div className="relative ">
-      <div className="secondary-bg relative grid  grid-cols-6  gap-y-6 gap-x-2 rounded-md   px-4 py-4 text-sm sm:px-6 ">
+      <div className="secondary-bg relative grid  grid-cols-6  gap-y-6 gap-x-2 rounded-md text-sm  ">
         {/* Item Name */}
         <FormItemInput className="col-span-full col-start-1  ">
           <label htmlFor="name">Item Name</label>
           <input
             type="text"
             name="name"
-            value={formItem?.name}
+            value={state?.formItem?.name}
             onChange={(e) =>
               dispatch({
                 type: 'itemName',
@@ -72,7 +110,7 @@ export function ItemForm({
           <input
             type="number"
             name="quantity"
-            value={formItem?.quantity}
+            value={+state.formItem.quantity}
             onChange={(e) =>
               dispatch({
                 type: 'itemQuantity',
@@ -99,7 +137,7 @@ export function ItemForm({
           <input
             type="number"
             name="price"
-            value={formItem?.price}
+            value={state.formItem.price}
             onChange={(e) =>
               dispatch({
                 type: 'itemPrice',
@@ -124,7 +162,7 @@ export function ItemForm({
           <input
             type="number"
             name="total"
-            value={formItem?.total.toFixed(2)}
+            value={state.formItem.total.toFixed(2)}
             disabled
             className="text-center"
           />
@@ -143,7 +181,7 @@ export function ItemForm({
             <button
               type="button"
               className="btn | flex items-center  justify-center gap-2  bg-red-800 text-white hover:bg-red-900"
-              onClick={handleDeleteItem}
+              onClick={() => handleDeleteItem(state?.formItem?.itemId)}
             >
               Delete Item
             </button>
@@ -152,7 +190,7 @@ export function ItemForm({
           {newForm ? (
             <button
               type="button"
-              onClick={handleAddItem}
+              onClick={() => handleAddItem(state.formItem)}
               className=" btn |  flex items-center justify-center  gap-2 bg-green-800  text-white hover:bg-green-900 "
             >
               Save new Item
@@ -160,7 +198,7 @@ export function ItemForm({
           ) : (
             <button
               type="button"
-              onClick={handleSaveItem}
+              onClick={() => handleSaveItem(state?.formItem)}
               className=" btn | flex items-center justify-center  gap-2 bg-green-800  text-white hover:bg-green-900"
             >
               Update Item
@@ -172,4 +210,4 @@ export function ItemForm({
   );
 }
 
-export default ItemForm;
+export default ItemFormTemplate;
