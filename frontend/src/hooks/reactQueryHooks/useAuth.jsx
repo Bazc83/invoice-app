@@ -2,6 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 
 const checkToken = async () => {
   const user = JSON.parse(localStorage.getItem('user'));
+
+  if(!user) return null;
+
   const { token } = user;
 
   try {

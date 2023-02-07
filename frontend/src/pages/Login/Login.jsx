@@ -8,13 +8,13 @@ export function Login() {
 
   const { login, error, isLoading } = useLogin();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, emailVal, passwordVal) => {
     e.preventDefault();
-    await login(email, password);
+    await login(emailVal, passwordVal);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={(e) => handleSubmit(e, email, password)}>
       <h3>Login</h3>
 
       <label> Email:</label>
@@ -31,7 +31,9 @@ export function Login() {
         onChange={(e) => setPassword(e.target.value)}
       />
 
-      <button type="button" disabled={isLoading}>Log in</button>
+      <button type="submit" disabled={isLoading}>
+        Log in
+      </button>
 
       {error && <div>{error}</div>}
     </form>

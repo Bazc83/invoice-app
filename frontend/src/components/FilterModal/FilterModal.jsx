@@ -2,18 +2,23 @@ import { useContext } from 'react';
 
 import { FilterModalItem } from '@/components/FilterModal/FilterModalItem';
 import { InvoicesContext } from '@/context/InvoicesContext';
-import { PageLayoutContext } from '@/pages/PageLayout';
+import useModalStore from '@/context/useModalStore';
+
 
 export function FilterModal() {
+  const toggleFilterModal = useModalStore((state) => state.toggleFilterModal);
+  const filterModal = useModalStore((state) => state.filterModal);
+
   const { state } = useContext(InvoicesContext);
-  const { showFilterModal, setShowFilterModal } = useContext(PageLayoutContext);
+
 
   const handleShowModal = () => {
-    setShowFilterModal((prev) => !prev);
+    toggleFilterModal();
+  
   };
 
   return (
-    <div className={`relative  w-full sm:w-auto ${showFilterModal && 'z-30'}`}>
+    <div className={`relative  w-full sm:w-auto ${filterModal && 'z-30'}`}>
       {/* Show/Hide modal button */}
       <button
         type="button"
@@ -25,10 +30,10 @@ export function FilterModal() {
         }`}
         onClick={handleShowModal}
       >
-        {showFilterModal ? 'Hide Filters' : 'Show Filters'}
+        {filterModal ? 'Hide Filters' : 'Show Filters'}
       </button>
 
-      {showFilterModal && (
+      {filterModal && (
         <div className="secondary-bg absolute top-11 -left-3 rounded-md p-6 ">
           <form className="flex flex-col gap-4">
             {/* Filter modal options */}

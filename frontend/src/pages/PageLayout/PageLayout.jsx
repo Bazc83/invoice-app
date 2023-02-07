@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
 import { Navbar } from '@/components/Navbar';
+import useModalStore from '@/context/useModalStore';
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -13,9 +14,15 @@ export function PageLayout({ theme }) {
 
   const [showNewInvoiceForm, setShowNewInvoiceForm] = useState(false);
 
+  const filterModal = useModalStore((state) => state.filterModal);
+  const mobileMenu = useModalStore((state) => state.mobileMenu);
+
+  const hideAllModals = useModalStore((state) => state.hideAllModals);
+
   const handleCloseModal = () => {
-    if (!showFilterModal) return;
-    setShowFilterModal(false);
+    if (filterModal || mobileMenu) {
+      hideAllModals();
+    }
   };
 
   return (
@@ -29,7 +36,7 @@ export function PageLayout({ theme }) {
       }}
     >
       <div
-        className="primary-bg relative flex h-max min-h-screen flex-col lg:grid lg:grid-cols-[80px_1fr] "
+        className="primary-bg relative flex h-max min-h-screen flex-col lg:grid lg:grid-cols-[200px_10fr] "
         onClick={handleCloseModal}
         aria-hidden="true"
       >
@@ -38,7 +45,7 @@ export function PageLayout({ theme }) {
         {/* Show overlay when showFilterModal is true */}
         <div
           className={`lg:col-start-2 ${
-            showFilterModal &&
+            (filterModal || mobileMenu) &&
             'before:absolute before:z-10 before:h-full before:w-full before:bg-black before:opacity-70'
           } `}
         >
