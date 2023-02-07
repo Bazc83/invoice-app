@@ -1,7 +1,6 @@
-import { useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { InvoiceContext } from '@/context/InvoiceContext';
+import useModalStore from '@/context/useModalStore';
 import { useDeleteInvoice } from '@/hooks/reactQueryHooks/useDeleteInvoice';
 
 import ConfirmActionModalTemplate from './ConfirmActionModalTemplate';
@@ -9,19 +8,19 @@ import ConfirmActionModalTemplate from './ConfirmActionModalTemplate';
 export function ConfirmDeleteModal() {
   const { invoiceId } = useParams();
 
-  const { dispatch } = useContext(InvoiceContext);
-
+  const hideDeleteModal = useModalStore((s) => s.hideDeleteModal);
   const { deleteSelectedInvoice } = useDeleteInvoice();
 
   const navigate = useNavigate();
 
   const confirmActionFunction = async () => {
     await deleteSelectedInvoice(invoiceId);
+
     navigate('/');
   };
 
   const cancelActionFunction = () => {
-    dispatch({ type: 'hideDeleteModal' });
+    hideDeleteModal();
   };
 
   const modalContent = {

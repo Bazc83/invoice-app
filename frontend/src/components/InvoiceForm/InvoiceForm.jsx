@@ -1,14 +1,15 @@
-import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { FormItemInput } from '@/components/FormItemInput';
-import { InvoiceContext } from '@/context/InvoiceContext';
+import useModalStore from '@/context/useModalStore';
 
 import CancelEditFormModal from '../CancelEditFormModal';
 import { FormItems } from './FormItems';
 import { SelectPaymentTerms } from './SelectPaymentTerms';
 
 export function InvoiceForm({ invoiceData, handleFormSubmit, handleCancel }) {
+  const confirmationModal = useModalStore((s) => s.confirmationModal);
+
   const { register, handleSubmit } = useForm({
     defaultValues: {
       id: invoiceData.id,
@@ -28,12 +29,10 @@ export function InvoiceForm({ invoiceData, handleFormSubmit, handleCancel }) {
     },
   });
 
-  const { state } = useContext(InvoiceContext);
-
   return (
-    <div className="secondary-bg relative z-50 col-span-full row-span-full flex h-max  flex-col gap-8 p-4 sm:p-8">
+    <div className="secondary-bg relative z-50  row-span-1 row-start-1 flex h-max flex-col gap-8 p-4 sm:p-8">
       {/* confirm cancel modal */}
-      {state.showConfirmationModal && <CancelEditFormModal />}
+      {confirmationModal && <CancelEditFormModal />}
 
       <h2 className="text-xl">Edit #{invoiceData.id}</h2>
 

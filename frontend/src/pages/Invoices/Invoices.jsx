@@ -1,19 +1,17 @@
 import { useContext, useEffect } from 'react';
 
-import { FilterModal } from '@/components/FilterModal';
 import { NewInvoiceForm } from '@/components/NewInvoiceForm';
 import { NoInvoices } from '@/components/NoInvoices';
 import { InvoicesContext } from '@/context/InvoicesContext';
+import useModalStore from '@/context/useModalStore';
 import { useInvoices } from '@/hooks/reactQueryHooks/useInvoices';
 import { InvoicePreview } from '@/pages/Invoices/InvoicePreview';
 
-import { PageLayoutContext } from '../PageLayout';
 import { ShowFiltersAndClear } from './ShowFiltersAndClear';
 
 export function Invoices() {
   const { state, dispatch } = useContext(InvoicesContext);
-  const { showNewInvoiceForm, setShowNewInvoiceForm } =
-    useContext(PageLayoutContext);
+  const newInvoiceForm = useModalStore((s) => s.newInvoiceForm);
 
   const { isLoading, isError, error, data: invoices } = useInvoices();
 
@@ -26,22 +24,7 @@ export function Invoices() {
   return (
     <div className="primary-bg relative flex  flex-col gap-4 px-6 pb-8 md:px-8">
       {/* Add new invoice */}
-      {showNewInvoiceForm && <NewInvoiceForm />}
-
-      {/* Invoices page controls */}
-      <div className="secondary-bg mt-4 flex  flex-wrap-reverse items-center justify-center gap-2 rounded-md p-6 shadow-md sm:justify-between lg:mt-6 ">
-        {/* FilterModal invoices compontent */}
-        <FilterModal />
-
-        {/* Button shows new invoice form */}
-        <button
-          type="button"
-          className="flex w-full items-center justify-center gap-2 rounded-md bg-green-900 px-4 py-2 text-sm text-gray-50 sm:w-auto lg:text-base"
-          onClick={() => setShowNewInvoiceForm((prev) => !prev)}
-        >
-          Add Invoice
-        </button>
-      </div>
+      {newInvoiceForm && <NewInvoiceForm />}
 
       {/* Invoice preview headers md screen and greater */}
       <div className="secondary-bg hidden  gap-1 rounded-md  py-2 shadow-md md:grid  md:grid-cols-[1rem_repeat(10,_1fr)_1rem] md:items-baseline  lg:gap-2">

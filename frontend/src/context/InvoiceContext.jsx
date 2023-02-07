@@ -3,9 +3,6 @@ import { createContext, useReducer } from 'react';
 export const InvoiceContext = createContext();
 
 const initialValue = {
-  showEditForm: false,
-  showDeleteModal: false,
-  showConfirmationModal: false,
   invoiceId: '',
   formData: {},
   itemsArray: [],
@@ -14,18 +11,6 @@ const initialValue = {
 
 export const invoiceReducer = (state, action) => {
   switch (action.type) {
-    case 'hideEditForm':
-      return { ...state, showEditForm: false, showConfirmationModal: false };
-    case 'showEditForm':
-      return { ...state, showEditForm: true, showConfirmationModal: false };
-    case 'showDeleteModal':
-      return { ...state, showDeleteModal: true };
-    case 'showConfirmation':
-      return { ...state, showConfirmationModal: true };
-    case 'hideConfirmation':
-      return { ...state, showConfirmationModal: false };
-    case 'hideDeleteModal':
-      return { ...state, showDeleteModal: false };
     case 'setFormData':
       return {
         ...state,

@@ -4,7 +4,7 @@ import { FaMinus } from 'react-icons/fa';
 import { InvoicesContext } from '@/context/InvoicesContext';
 
 export function ShowFiltersAndClear() {
-  // todo add close x icon to buttons
+ 
   const { state, dispatch } = useContext(InvoicesContext);
 
   // Clear all Filters

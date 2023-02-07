@@ -1,13 +1,12 @@
-import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { InvoiceContext } from '@/context/InvoiceContext';
+import useModalStore from '@/context/useModalStore';
 import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
 import { useUpdateInvoice } from '@/hooks/reactQueryHooks/useUpdateInvoice';
 
 export function InvoiceButtons({ showInvoiceControls }) {
-  const { dispatch } = useContext(InvoiceContext);
-
+  const showDeleteModal = useModalStore((s) => s.showDeleteModal);
+  const showEditInvoiceForm = useModalStore((s) => s.showEditInvoiceForm);
   const { invoiceId } = useParams();
 
   const {
@@ -39,7 +38,7 @@ export function InvoiceButtons({ showInvoiceControls }) {
       {/* Delete Button */}
       <button
         type="button"
-        onClick={() => dispatch({ type: 'showDeleteModal' })}
+        onClick={showDeleteModal}
         className="btn | w-full border border-red-600 text-red-600  hover:bg-red-600 hover:text-white  sm:max-w-[500px] md:w-auto"
       >
         {isLoading ? '...Deleting' : 'Delete'}
@@ -49,7 +48,7 @@ export function InvoiceButtons({ showInvoiceControls }) {
         {/* Edit Button */}
         <button
           type="button"
-          onClick={() => dispatch({ type: 'showEditForm' })}
+          onClick={showEditInvoiceForm}
           className="btn | w-full  border border-gray-900 text-gray-900  hover:border-gray-900 hover:bg-gray-900 hover:text-gray-50  dark:border-gray-50  dark:text-gray-50 dark:hover:border-gray-900 md:w-auto "
         >
           Edit
@@ -60,7 +59,7 @@ export function InvoiceButtons({ showInvoiceControls }) {
           <button
             type="button"
             onClick={() => setStatus('draft')}
-            className="w-full    border border-gray-700   bg-gray-700  text-white hover:border-gray-900 hover:bg-gray-900 hover:text-white dark:text-white md:w-auto "
+            className="btn | w-full border border-gray-700 bg-gray-700  text-white hover:border-gray-900 hover:bg-gray-900 hover:text-white dark:text-white md:w-auto "
           >
             Draft
           </button>

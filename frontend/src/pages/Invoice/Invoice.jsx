@@ -6,6 +6,7 @@ import { ConfirmDeleteModal } from '@/components/ConfirmDeleteModal';
 import { EditInvoiceForm } from '@/components/EditInvoiceForm';
 import { GoBackLink } from '@/components/GoBackLink';
 import { InvoiceContext } from '@/context/InvoiceContext';
+import useModalStore from '@/context/useModalStore';
 import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
 import useFormatDate from '@/hooks/useFormatDate';
 import { InvoiceButtons } from '@/pages/Invoice/InvoiceButtons';
@@ -13,9 +14,12 @@ import { InvoiceButtons } from '@/pages/Invoice/InvoiceButtons';
 import ItemsSection from './ItemsSection';
 
 export function Invoice() {
+  const editInvoiceForm = useModalStore((s) => s.editInvoiceForm);
+  const deleteModal = useModalStore((s) => s.deleteModal);
+
   const { getDate } = useFormatDate();
 
-  const { state, dispatch } = useContext(InvoiceContext);
+  const { dispatch } = useContext(InvoiceContext);
 
   const [showInvoiceControls, setShowInvoiceControls] = useState(false);
 
@@ -37,13 +41,13 @@ export function Invoice() {
   return (
     <div
       className={`primary-bg relative mx-auto grid max-w-2xl grid-cols-1 grid-rows-1 gap-6  p-6   ${
-        (state.showDeleteModal || state.showEditForm) &&
+        (deleteModal || editInvoiceForm) &&
         'before:fixed before:inset-0 before:z-10 before:h-full  before:w-full before:bg-black before:bg-opacity-60 '
       }`}
     >
-      {state.showDeleteModal && <ConfirmDeleteModal />}
+      {deleteModal && <ConfirmDeleteModal />}
 
-      {state.showEditForm && <EditInvoiceForm invoiceId={invoiceId} />}
+      {editInvoiceForm && <EditInvoiceForm invoiceId={invoiceId} />}
 
       {/* invoice wrapper */}
       <div className=" secondary-bg relative flex flex-col rounded-md  p-6  md:flex-row md:items-center md:justify-between">

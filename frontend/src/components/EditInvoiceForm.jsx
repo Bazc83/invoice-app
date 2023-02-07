@@ -1,6 +1,7 @@
 import { useContext, useEffect } from 'react';
 
 import { InvoiceContext } from '@/context/InvoiceContext';
+import useModalStore from '@/context/useModalStore';
 import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
 import { useUpdateInvoice } from '@/hooks/reactQueryHooks/useUpdateInvoice';
 
@@ -8,7 +9,8 @@ import { InvoiceForm } from './InvoiceForm';
 
 export function EditInvoiceForm({ invoiceId }) {
   const { state, dispatch } = useContext(InvoiceContext);
-
+  const hideInvoiceForm = useModalStore((s) => s.hideInvoiceForm);
+  const showConfirmationModal = useModalStore((s) => s.showConfirmationModal);
   const {
     data: invoiceData,
     isLoading,
@@ -33,14 +35,12 @@ export function EditInvoiceForm({ invoiceId }) {
       invoiceData: payloadData,
     });
 
-    dispatch({ type: 'hideEditForm' });
+    hideInvoiceForm();
   };
 
   const handleCancel = (e) => {
     e.preventDefault();
-    dispatch({ type: 'showConfirmation' });
-    // updateInvoiceMutation.reset();
-    // dispatch({ type: 'hideEditForm' });
+    showConfirmationModal();
   };
 
   useEffect(() => {

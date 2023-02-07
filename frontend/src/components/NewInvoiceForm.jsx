@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 import { InvoiceContext } from '@/context/InvoiceContext';
+import useModalStore from '@/context/useModalStore';
 import { useAddNewInvoice } from '@/hooks/reactQueryHooks/useAddNewInvoice';
 import { useUpdateInvoiceId } from '@/hooks/reactQueryHooks/useUpdateInvoiceId';
 import { setInvoiceDates } from '@/hooks/setInvoiceDates';
@@ -14,6 +15,7 @@ import { InvoiceForm } from './InvoiceForm';
 export function NewInvoiceForm() {
   const [showModal, setShowModal] = useState(false);
 
+  const hideNewInvoiceForm = useModalStore((s) => s.hideNewInvoiceForm);
   const { state, dispatch } = useContext(InvoiceContext);
   const { setShowNewInvoiceForm } = useContext(PageLayoutContext);
 
@@ -83,6 +85,8 @@ export function NewInvoiceForm() {
     setShowNewInvoiceForm(false);
   };
 
+
+  // todo should show confirmation that user wishes to cancel adding new invoice
   const handleCancel = () => {
     setShowModal(true);
 
@@ -90,7 +94,7 @@ export function NewInvoiceForm() {
 
     dispatch({ type: 'resetInvoice' });
 
-    setShowNewInvoiceForm(false);
+    hideNewInvoiceForm();
   };
 
   useEffect(() => {
