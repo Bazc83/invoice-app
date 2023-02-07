@@ -43,7 +43,6 @@ export function Navbar() {
         <MobileNavMenu user={user} handleLogout={handleLogout} />
       </div>
 
-      
       <nav className="z-50 col-span-full row-span-full flex h-20 items-center justify-between bg-gray-900 p-4 text-gray-50 lg:fixed lg:h-screen lg:w-[200px] lg:flex-col">
         <div className="flex items-center gap-2 ">
           {/* Random logo */}
