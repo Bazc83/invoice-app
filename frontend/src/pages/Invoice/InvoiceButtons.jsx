@@ -1,13 +1,13 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import useModalStore from '@/context/useModalStore';
 import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
 import { useUpdateInvoice } from '@/hooks/reactQueryHooks/useUpdateInvoice';
 
-export function InvoiceButtons({ showInvoiceControls }) {
+export function InvoiceButtons({ showInvoiceControls, invoiceId }) {
   const showDeleteModal = useModalStore((s) => s.showDeleteModal);
-  const showEditInvoiceForm = useModalStore((s) => s.showEditInvoiceForm);
-  const { invoiceId } = useParams();
+
+  const navigate = useNavigate();
 
   const {
     data: invoiceData,
@@ -18,12 +18,17 @@ export function InvoiceButtons({ showInvoiceControls }) {
 
   const { updateInvoiceMutation } = useUpdateInvoice();
 
+
+  const handleEditInvoice = (invoiceIdVal)=>
+     navigate(`/editinvoice/${invoiceIdVal}`)
+  
   const setStatus = (statusValue) => {
     updateInvoiceMutation.mutate({
       invoiceId,
       invoiceData: { ...invoiceData, status: statusValue },
     });
   };
+
 
   if (isLoading) return 'Loading...';
 
@@ -48,7 +53,7 @@ export function InvoiceButtons({ showInvoiceControls }) {
         {/* Edit Button */}
         <button
           type="button"
-          onClick={showEditInvoiceForm}
+          onClick={()=> handleEditInvoice(invoiceId)}
           className="btn | w-full  border border-gray-900 text-gray-900  hover:border-gray-900 hover:bg-gray-900 hover:text-gray-50  dark:border-gray-50  dark:text-gray-50 dark:hover:border-gray-900 md:w-auto "
         >
           Edit

@@ -1,17 +1,17 @@
+import { useNavigate } from 'react-router';
+
 import useModalStore from '@/context/useModalStore';
-import useUpdateInvoice from '@/hooks/reactQueryHooks/useUpdateInvoice';
 
 import ConfirmActionModalTemplate from './ConfirmActionModalTemplate';
 
 function CancelEditFormModal() {
-  const { updateInvoiceMutation } = useUpdateInvoice();
-
   const hideConfirmationModal = useModalStore((s) => s.hideConfirmationModal);
-  const hideAllModals = useModalStore((s) => s.hideAllModals);
 
+  const navigate = useNavigate();
   const confirmActionFunction = () => {
-    hideAllModals();
-    updateInvoiceMutation.reset();
+    hideConfirmationModal();
+
+    return navigate('/');
   };
 
   const cancelActionFunction = () => {

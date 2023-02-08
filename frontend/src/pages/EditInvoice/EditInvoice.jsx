@@ -1,16 +1,21 @@
 import { useContext, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router';
 
 import { InvoiceContext } from '@/context/InvoiceContext';
 import useModalStore from '@/context/useModalStore';
 import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
 import { useUpdateInvoice } from '@/hooks/reactQueryHooks/useUpdateInvoice';
 
-import { InvoiceForm } from './InvoiceForm';
+import { InvoiceForm } from '../../components/InvoiceForm';
 
-export function EditInvoiceForm({ invoiceId }) {
+export function EditInvoice() {
+  const { invoiceId } = useParams();
+
+ 
   const { state, dispatch } = useContext(InvoiceContext);
-  const hideInvoiceForm = useModalStore((s) => s.hideInvoiceForm);
+
   const showConfirmationModal = useModalStore((s) => s.showConfirmationModal);
+
   const {
     data: invoiceData,
     isLoading,
@@ -20,6 +25,8 @@ export function EditInvoiceForm({ invoiceId }) {
 
   // Update Invoice
   const { updateInvoiceMutation } = useUpdateInvoice();
+
+  const navigate = useNavigate();
 
   const handleFormSubmit = (data) => {
     const payloadData = {
@@ -35,11 +42,10 @@ export function EditInvoiceForm({ invoiceId }) {
       invoiceData: payloadData,
     });
 
-    hideInvoiceForm();
+    navigate('/');
   };
 
-  const handleCancel = (e) => {
-    e.preventDefault();
+  const handleCancel = () => {
     showConfirmationModal();
   };
 
@@ -66,4 +72,4 @@ export function EditInvoiceForm({ invoiceId }) {
   );
 }
 
-export default EditInvoiceForm;
+export default EditInvoice;

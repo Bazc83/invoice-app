@@ -7,27 +7,38 @@ import CancelEditFormModal from '../CancelEditFormModal';
 import { FormItems } from './FormItems';
 import { SelectPaymentTerms } from './SelectPaymentTerms';
 
-export function InvoiceForm({ invoiceData, handleFormSubmit, handleCancel }) {
+export function InvoiceForm({invoiceData, handleFormSubmit, handleCancel,}) {
   const confirmationModal = useModalStore((s) => s.confirmationModal);
 
+
+  const defaultValues = {
+    id: invoiceData.id,
+    senderStreet: invoiceData.senderStreet,
+    senderCity: invoiceData.senderCity,
+    senderPostCode: invoiceData.senderPostCode,
+    senderCountry: invoiceData.senderCountry,
+    clientName: invoiceData.clientName,
+    clientEmail: invoiceData.clientEmail,
+    clientStreet: invoiceData.clientStreet,
+    clientCity: invoiceData.clientCity,
+    clientPostCode: invoiceData.clientPostCode,
+    clientCountry: invoiceData.clientCountry,
+    description: invoiceData.description,
+    companyName: invoiceData.companyName,
+    paymentTerms: invoiceData.paymentTerms,
+    createdAt: invoiceData.createdAt,
+    paymentDue: invoiceData.paymentDue,
+    status:invoiceData.status,
+    items: invoiceData.items,
+  };
+
+
+  
   const { register, handleSubmit } = useForm({
-    defaultValues: {
-      id: invoiceData.id,
-      senderStreet: invoiceData.senderStreet,
-      senderCity: invoiceData.senderCity,
-      senderPostCode: invoiceData.senderPostCode,
-      senderCountry: invoiceData.senderCountry,
-      clientName: invoiceData.clientName,
-      clientEmail: invoiceData.clientEmail,
-      clientStreet: invoiceData.clientStreet,
-      clientCity: invoiceData.clientCity,
-      clientPostCode: invoiceData.clientPostCode,
-      clientCountry: invoiceData.clientCountry,
-      description: invoiceData.description,
-      companyName: invoiceData.companyName,
-      paymentTerms: invoiceData.paymentTerms,
-    },
+    defaultValues,
   });
+
+ 
 
   return (
     <div className="secondary-bg relative z-50  row-span-1 row-start-1 flex h-max flex-col gap-8 p-4 sm:p-8">
@@ -176,7 +187,7 @@ export function InvoiceForm({ invoiceData, handleFormSubmit, handleCancel }) {
         <SelectPaymentTerms />
 
         {/* Form Items section */}
-        <FormItems />
+        <FormItems invoiceData={invoiceData}/>
 
         <div className=" mt-6 flex justify-between gap-4 ">
           <button

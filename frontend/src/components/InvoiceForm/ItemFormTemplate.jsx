@@ -1,69 +1,32 @@
-import { useEffect, useReducer } from 'react';
 import { toast } from 'react-toastify';
 
-import { v4 as uuidv4 } from 'uuid';
-
 import { FormItemInput } from '@/components/FormItemInput';
+import useNewInvoiceStore from '@/context/useNewInvoiceStore';
 
-import itemReducer from '../EditFormItem/itemReducer';
+function ItemFormTemplate({ setNewForm, newForm, item }) {
+  const updateItem = useNewInvoiceStore((s) => s.updateItem);
 
-function ItemFormTemplate({
-  item,
-  newForm,
-  onItemSave,
-  handleDelete,
-  addItem,
-  setShowNewItemInput,
-}) {
-  const newId = uuidv4();
-
-  const newFormInitialValue = {
-    formItem: {
-      itemId: newId,
-      name: '',
-      quantity: 1,
-      price: 0.01,
-      total: 0.0,
-    },
-  };
-
-  const initialValue = {
-    formItem: {
-      itemId: item?.id,
-      name: item?.name,
-      quantity: item?.quantity,
-      price: item?.price,
-      total: item?.total,
-    },
-  };
-
-  const [state, dispatch] = useReducer(
-    itemReducer,
-    newForm ? newFormInitialValue : initialValue
-  );
+  // const initialValue = {
+  //   formItem: {
+  //     itemId: newForm ? newId : item?.id,
+  //     name: newForm ? '' : item?.name,
+  //     quantity: newForm ? 1 : item?.quantity,
+  //     price: newForm ? 0.01 : item?.price,
+  //     total: newForm ? 0.01 : item?.total,
+  //   },
+  // };
 
   const handleSaveItem = (formItemValue) => {
     // toast.success('Item updated', { className: 'mx-4 md:mx-0 top-5 md:top-0' });
-
     setTimeout(() => {
-      onItemSave(formItemValue);
+      updateItem(formItemValue);
     }, 1000);
   };
 
   const handleDeleteItem = (itemId) => {
     toast.warning('Item Deleted', { className: 'mx-4 md:mx-0 top-5 md:top-0' });
     setTimeout(() => {
-      handleDelete(itemId);
-    }, 1000);
-  };
-
-  const handleAddItem = (itemValue) => {
-    toast.success('Item added', { className: 'mx-4 md:mx-0 top-5 md:top-0' });
-
-    setTimeout(() => {
-      addItem(itemValue);
-
-      setShowNewItemInput(false);
+      console.log('delete item, ', itemId);
     }, 1000);
   };
 
@@ -73,46 +36,14 @@ function ItemFormTemplate({
     });
 
     setTimeout(() => {
-      setShowNewItemInput(false);
+      setNewForm(false);
     }, 1000);
   };
 
-  const handleQuantityOnBlur = (val, e) => {
-    dispatch({
-      type: 'validateQuantity',
-      payload: { value: +e.target.value },
-    });
-
-    if (newForm) {
-      handleAddItem(val);
-    } else {
-      handleSaveItem(val);
-    }
-  };
-  const handleNameOnBlur = (val) => {
-    if (newForm) {
-      handleAddItem(val);
-    } else {
-      handleSaveItem(val);
-    }
-  };
-  const handlePriceOnBlur = (val, e) => {
-    dispatch({
-      type: 'validatePrice',
-      payload: { value: e.target.value },
-    });
-
-    if (newForm) {
-      handleAddItem(val);
-    } else {
-      handleSaveItem(val);
-    }
-  };
-
-  useEffect(() => {
-    if (!item) return;
-    dispatch({ type: 'itemId', payload: { itemId: item.itemId } });
-  }, [item?.itemId, item]);
+  // useEffect(() => {
+  //   if (!item) return;
+  //   dispatch({ type: 'itemId', payload: { itemId: item.itemId } });
+  // }, [item?.itemId, item]);
 
   return (
     <div className="relative ">
@@ -123,14 +54,8 @@ function ItemFormTemplate({
           <input
             type="text"
             name="name"
-            value={state?.formItem?.name}
-            onChange={(e) =>
-              dispatch({
-                type: 'itemName',
-                payload: { value: e.target.value },
-              })
-            }
-            onBlur={() => handleNameOnBlur(state.formItem)}
+            value={item?.name}
+            onChange={(e) => console.log(e.target.value)}
           />
         </FormItemInput>
 
@@ -142,16 +67,11 @@ function ItemFormTemplate({
           <input
             type="number"
             name="quantity"
-            value={+state.formItem.quantity}
-            onChange={(e) =>
-              dispatch({
-                type: 'itemQuantity',
-                payload: { value: e.target.value },
-              })
-            }
+            value={item.quantity}
+            onChange={(e) => console.log(e.target.value)}
             min={1}
             step={1}
-            onBlur={(e) => handleQuantityOnBlur(state.formItem, e)}
+            // onBlur={(e) => handleQuantityOnBlur(state.formItem, e)}
             className="text-center"
           />
         </FormItemInput>
@@ -164,14 +84,9 @@ function ItemFormTemplate({
           <input
             type="number"
             name="price"
-            value={state.formItem.price}
-            onChange={(e) =>
-              dispatch({
-                type: 'itemPrice',
-                payload: { value: e.target.value },
-              })
-            }
-            onBlur={(e) => handlePriceOnBlur(state.formItem, e)}
+            value={item.price}
+            onChange={(e) => console.log(e.target.value)}
+            // onBlur={(e) => handlePriceOnBlur(state.formItem, e)}
             className="text-center"
           />
         </FormItemInput>
@@ -184,7 +99,7 @@ function ItemFormTemplate({
           <input
             type="number"
             name="total"
-            value={state.formItem.total.toFixed(2)}
+            value={item.total.toFixed(2)}
             disabled
             className="text-center"
           />
@@ -203,7 +118,7 @@ function ItemFormTemplate({
             <button
               type="button"
               className="btn | flex items-center  justify-center gap-2  bg-red-800 text-white hover:bg-red-900"
-              onClick={() => handleDeleteItem(state?.formItem?.itemId)}
+              onClick={handleDeleteItem}
             >
               Delete Item
             </button>
@@ -212,7 +127,7 @@ function ItemFormTemplate({
           {newForm && (
             <button
               type="button"
-              onClick={() => handleAddItem(state.formItem)}
+              onClick={handleSaveItem}
               className=" btn |  flex items-center justify-center  gap-2 bg-green-800  text-white hover:bg-green-900 "
             >
               Save new Item

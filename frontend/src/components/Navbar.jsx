@@ -7,7 +7,7 @@ import {
   FaSun,
   FaUserEdit,
 } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { DarkModeContext } from '@/App';
 import { AuthContext } from '@/context/AuthContext';
@@ -22,7 +22,6 @@ export function Navbar() {
   const { theme, toggleDarkMode } = useContext(DarkModeContext);
 
   const toggleMobileMenu = useModalStore((s) => s.toggleMobileMenu);
-  const toggleNewInvoiceForm = useModalStore((s) => s.toggleNewInvoiceForm);
 
   const { user } = useContext(AuthContext);
 
@@ -31,6 +30,9 @@ export function Navbar() {
   const handleLogout = () => {
     logout();
   };
+
+
+  const navigate = useNavigate();
 
   const handleToggleMobileMenu = (e) => {
     e.stopPropagation();
@@ -61,7 +63,7 @@ export function Navbar() {
           <button
             type="button"
             className="flex w-full items-center justify-center gap-2 rounded-md bg-green-900 px-4 py-2 text-sm text-gray-50 sm:w-auto lg:text-base"
-            onClick={toggleNewInvoiceForm}
+            onClick={()=> navigate("/newinvoice")}
           >
             Add Invoice
           </button>

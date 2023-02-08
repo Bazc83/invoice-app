@@ -8,9 +8,11 @@ import useLocalStorage from 'use-local-storage';
 import { AuthContext } from './context/AuthContext';
 import { InvoiceContextProvider } from './context/InvoiceContext';
 import { InvoicesContextProvider } from './context/InvoicesContext';
+import { EditInvoice } from './pages/EditInvoice';
 import { Invoice } from './pages/Invoice';
 import { Invoices } from './pages/Invoices';
 import { Login } from './pages/Login';
+import { NewInvoice } from './pages/NewInvoice';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { PageLayout } from './pages/PageLayout';
 import { Signup } from './pages/Signup.jsx';
@@ -42,7 +44,7 @@ function App() {
           <InvoiceContextProvider>
             <BrowserRouter>
               <Routes>
-                <Route element={<PageLayout  theme={theme}/>}>
+                <Route element={<PageLayout theme={theme} />}>
                   <Route
                     index
                     element={user ? <Invoices /> : <Navigate to="/login" />}
@@ -56,6 +58,14 @@ function App() {
                   <Route
                     path="/invoices"
                     element={user ? <Invoices /> : <Navigate to="/login" />}
+                  />
+                  <Route
+                    path="/newinvoice"
+                    element={user ? <NewInvoice /> : <Navigate to="/login" />}
+                  />
+                  <Route
+                    path="/editinvoice/:invoiceId"
+                    element={user ? <EditInvoice /> : <Navigate to="/login" />}
                   />
 
                   <Route

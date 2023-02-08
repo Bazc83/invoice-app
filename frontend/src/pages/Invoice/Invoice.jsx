@@ -3,7 +3,6 @@ import { HiOutlineMenu, HiOutlineX } from 'react-icons/hi';
 import { useParams } from 'react-router-dom';
 
 import { ConfirmDeleteModal } from '@/components/ConfirmDeleteModal';
-import { EditInvoiceForm } from '@/components/EditInvoiceForm';
 import { GoBackLink } from '@/components/GoBackLink';
 import { InvoiceContext } from '@/context/InvoiceContext';
 import useModalStore from '@/context/useModalStore';
@@ -16,7 +15,7 @@ import ItemsSection from './ItemsSection';
 export function Invoice() {
   const editInvoiceForm = useModalStore((s) => s.editInvoiceForm);
   const deleteModal = useModalStore((s) => s.deleteModal);
-
+  const hideAllModals = useModalStore((s) => s.hideAllModals);
   const { getDate } = useFormatDate();
 
   const { dispatch } = useContext(InvoiceContext);
@@ -32,7 +31,11 @@ export function Invoice() {
     error,
   } = useFilterInvoiceById(invoiceId);
 
-  useEffect(() => () => dispatch({ type: 'resetInvoice' }), [dispatch]);
+  useEffect(() => {
+    hideAllModals();
+
+    dispatch({ type: 'resetInvoice' });
+  }, [dispatch, hideAllModals]);
 
   if (isLoading) return 'Loading...';
 
@@ -47,7 +50,7 @@ export function Invoice() {
     >
       {deleteModal && <ConfirmDeleteModal />}
 
-      {editInvoiceForm && <EditInvoiceForm invoiceId={invoiceId} />}
+      {/* {editInvoiceForm && <EditInvoiceForm invoiceId={invoiceId} />} */}
 
       {/* invoice wrapper */}
       <div className=" secondary-bg relative flex flex-col rounded-md  p-6  md:flex-row md:items-center md:justify-between">
@@ -68,7 +71,10 @@ export function Invoice() {
           </button>
         </div>
 
-        <InvoiceButtons showInvoiceControls={showInvoiceControls} />
+        <InvoiceButtons
+          showInvoiceControls={showInvoiceControls}
+          invoiceId={invoiceId}
+        />
       </div>
 
       {/* Invoice main content */}

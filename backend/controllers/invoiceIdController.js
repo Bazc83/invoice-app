@@ -23,6 +23,7 @@ const updateInvoiceId = asyncHandler(async (req, res) => {
   );
   if (updateId) {
     res.status(200).json(updateId);
+    
   } else {
     res.status(400);
     throw new Error('Error changing invoiceId');
