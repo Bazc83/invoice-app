@@ -2,6 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  [type='text'],
+  [type='email'],
+  [type='url'],
+  [type='password'],
+  [type='number'],
+  [type='date'],
+  [type='datetime-local'],
+  [type='month'],
+  [type='search'],
+  [type='tel'],
+  [type='time'],
+  [type='week'],
+  [multiple],
+  textarea,
+  select {
+    @apply w-full rounded-md border-gray-300 shadow-md active:ring-indigo-600 dark:text-black;
+  }
+
+ 
+}
+
 @layer components {
   .primary-bg {
     @apply bg-gray-100 font-semibold text-gray-900 dark:bg-gray-700 dark:text-white;
@@ -22,17 +44,9 @@
     @apply cursor-pointer rounded-md py-2 px-4 outline-none transition-colors;
   }
 
-  /* form {
-    @apply text-sm md:text-base ;
-  }
-  form input {
-    @apply primary-bg rounded-md px-3 py-2;
-  }
-  form input[disabled]{
-    @apply dark:bg-gray-900 dark:text-gray-500 bg-gray-600 text-gray-200  rounded-md px-3 py-2 font-semibold;
-  }
 
-  form label {
-    @apply secondary-text ;
-  } */
+ 
+
+ 
+  
 }

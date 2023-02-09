@@ -1,7 +1,7 @@
 import InvoiceItem from './InvoiceItem';
 
 function ItemsSection({ invoiceData }) {
-  console.log(invoiceData)
+ 
   return (
     <div className="grid grid-cols-12 gap-5 text-sm lg:text-base ">
       <p className="secondary-text col-span-full col-start-2 ">

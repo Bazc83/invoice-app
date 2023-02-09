@@ -13,35 +13,40 @@ export function InvoiceForm({ invoiceData, handleFormSubmit, handleCancel }) {
     defaultValues: { ...invoiceData },
   });
 
-  console.log(invoiceData);
   const { fields, append, remove } = useFieldArray({ control, name: 'items' });
 
+  // const amountDueTotal = useWatch({ control, name: 'items', defaultValue: {} });
+  // useEffect(() => {
+  //   if (amountDueTotal.length > 0) {
+
+  //    console.log(amountDueTotal)
+  //   }
+  // }, [amountDueTotal]);
+
   return (
-    <div className="secondary-bg relative z-50  row-span-1 row-start-1 flex h-max flex-col gap-8 p-4 sm:p-8">
+    <div className="secondary-bg relative z-50  row-span-1 row-start-1 flex h-max flex-col gap-8 p-4 pt-8 sm:p-8">
       {/* confirm cancel modal */}
       {confirmationModal && <CancelEditFormModal />}
 
-      <h2 className="text-xl">Edit #{invoiceData.id}</h2>
-
       <form
         onSubmit={handleSubmit(handleFormSubmit)}
-        className="flex flex-col gap-4"
+        className="primary-bg  mx-auto flex w-full max-w-3xl flex-col gap-6 rounded-md py-6 px-8"
       >
-        <div>
-          <input
-            id="id"
-            name="id"
-            type="text"
-            {...register('id')}
-            defaultValue={invoiceData.id}
-            hidden
-          />
-        </div>
-        <h2 className=" text-lg">Sender Details:</h2>
-        <div>
-          <label className="secondary-text" htmlFor="companyName">
-            Company Name{' '}
-          </label>
+        <h1 className="secondary-text text-2xl">Edit #{invoiceData.id}</h1>
+
+        <input
+          id="id"
+          name="id"
+          type="text"
+          {...register('id')}
+          defaultValue={invoiceData.id}
+          hidden
+        />
+
+        <h2 className="pt-6 text-xl">Sender Details:</h2>
+
+        <div className="flex flex-col gap-2">
+          <label htmlFor="companyName">Company Name </label>
           <input
             id="companyName"
             name="companyName"
@@ -49,10 +54,8 @@ export function InvoiceForm({ invoiceData, handleFormSubmit, handleCancel }) {
             {...register('companyName')}
           />
         </div>
-        <div>
-          <label className="secondary-text" htmlFor="senderStreet">
-            Sender Street{' '}
-          </label>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="senderStreet">Sender Street </label>
           <input
             id="senderStreet"
             name="senderStreet"
@@ -61,22 +64,16 @@ export function InvoiceForm({ invoiceData, handleFormSubmit, handleCancel }) {
           />
         </div>
 
-        <div>
-          <label className="secondary-text" htmlFor="senderCity">
-            Sender City
-          </label>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="senderCity">Sender City</label>
           <input name="senderCity" type="text" {...register('senderCity')} />
         </div>
-        <div>
-          <label className="secondary-text" htmlFor="senderPostCode">
-            Sender Postcode
-          </label>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="senderPostCode">Sender Postcode</label>
           <input type="text" {...register('senderPostCode')} />
         </div>
-        <div>
-          <label className="secondary-text" htmlFor="senderCountry">
-            Sender Country
-          </label>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="senderCountry">Sender Country</label>
           <input
             type="text"
             name="senderCountry"
@@ -84,70 +81,66 @@ export function InvoiceForm({ invoiceData, handleFormSubmit, handleCancel }) {
           />
         </div>
 
-        <h2 className="pt-6 text-lg">Client Details:</h2>
-        <div>
-          <label className="secondary-text" htmlFor="clientName">
-            Client Name
-          </label>
+        <h2 className="pt-6 text-xl ">Client Details:</h2>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="clientName">Client Name</label>
           <input type="text" {...register('clientName')} />
         </div>
-        <div>
-          <label className="secondary-text" htmlFor="clientEmail">
-            Client Email
-          </label>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="clientEmail">Client Email</label>
           <input type="email" {...register('clientEmail')} />
         </div>
-        <div>
-          <label className="secondary-text" htmlFor="clientStreet">
-            Client Street
-          </label>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="clientStreet">Client Street</label>
           <input type="text" {...register('clientStreet')} />
         </div>
-        <div>
-          <label className="secondary-text" htmlFor="clientCity">
-            Client City
-          </label>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="clientCity">Client City</label>
           <input type="text" {...register('clientCity')} />
         </div>
-        <div>
-          <label className="secondary-text" htmlFor="clientPostCode">
-            Client Postcode
-          </label>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="clientPostCode">Client Postcode</label>
           <input type="text" {...register('clientPostCode')} />
         </div>
-        <div>
-          <label className="secondary-text" htmlFor="clientCountry">
-            Client Country
-          </label>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="clientCountry">Client Country</label>
           <input type="text" {...register('clientCountry')} />
         </div>
 
-        <h2 className="pt-6 text-lg">Invoice Information:</h2>
-        <div>
-          <label className="secondary-text" htmlFor="description">
-            Description
-          </label>
+        <h2 className="pt-6 text-xl ">Invoice Information:</h2>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="description">Description</label>
           <input type="text" {...register('description')} />
         </div>
 
-        <div>
+        <div className="flex flex-col gap-2">
           <label htmlFor="statusSelect">Payment Status</label>
           {/* Payment status */}
-          <select {...register('status')} id="statusSelect" name="status">
+          <select
+            {...register('status')}
+            id="statusSelect"
+            name="status"
+            className="formSelectInput"
+          >
             <option value="draft">Draft</option>
             <option value="pending">Pending</option>
             <option value="paid">Paid</option>
           </select>
         </div>
 
-        <div>
+        <div className="flex flex-col gap-2">
           <label htmlFor="createdAt">Created At</label>
           <input type="date" {...register('createdAt')} />
         </div>
-        <div>
+
+        <div className="flex flex-col gap-2">
           <label htmlFor="selectPaymentTerms">Payment Terms</label>
           {/* Payment Terms */}
-          <select {...register('paymentTerms')} id="selectPaymentTerms">
+          <select
+            {...register('paymentTerms')}
+            id="selectPaymentTerms"
+            className="formSelectInput"
+          >
             <option value="Cash">Cash</option>
             <option value="15 days from invoice date">
               15 days from invoice date
@@ -157,14 +150,13 @@ export function InvoiceForm({ invoiceData, handleFormSubmit, handleCancel }) {
             </option>
           </select>
         </div>
-        {/* Form Items section */}
-        {/* <FormItems invoiceData={invoiceData}/> */}
 
-        <div>
-          <h2>Items:</h2>
-          {fields.map(({ id, name, quantity, price }, index) => (
-            <div key={id}>
-              <div>
+        {/* Form Items */}
+        <div className="flex flex-col gap-6">
+          <h2 className=" text-lg">Items:</h2>
+          {fields.map(({ id, name, quantity, price, total }, index) => (
+            <div key={id} className="flex flex-col gap-4">
+              <div className="flex flex-col gap-2">
                 <label htmlFor={`items[${index}].name`}>Item Name</label>
                 <input
                   {...register(`items[${index}].name`)}
@@ -173,25 +165,27 @@ export function InvoiceForm({ invoiceData, handleFormSubmit, handleCancel }) {
                   defaultValue={name}
                 />
               </div>
-              <div>
+              <div className="flex flex-col gap-2">
                 <label htmlFor={`items[${index}].quantity`}>Quantity</label>
                 <input
                   {...register(`items[${index}].quantity`)}
                   type="number"
-                  id="itemName"
+                  id="quantity"
                   defaultValue={quantity}
                 />
               </div>
-              <div>
+              <div className="flex flex-col gap-2">
                 <label htmlFor={`items[${index}].price`}>Price</label>
                 <input
                   {...register(`items[${index}].price`)}
                   type="number"
-                  id="itemName"
+
+                  id="price"
                   defaultValue={price}
                 />
               </div>
-              <ItemTotal control={control} index={index} register={register} />
+
+              <ItemTotal control={control} index={index} register={register} total={total} />
 
               <button type="button" onClick={() => remove(index)}>
                 <FaTrashAlt />

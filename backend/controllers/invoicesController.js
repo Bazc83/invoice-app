@@ -4,6 +4,7 @@ const Invoice = require('../models/invoiceModel');
 
 // Calculate amount due total
 const getAmountDueTotal = (itemsArr) => {
+  console.log(itemsArr)
   if (itemsArr.length === 0) return 0;
   return itemsArr.reduce((acc, curr) => acc + curr.total, 0);
 };
@@ -53,6 +54,7 @@ const addInvoice = asyncHandler(async (req, res) => {
     items,
     companyName
   } = req.body;
+
 
 
   if (!clientEmail || !clientName || !id) {

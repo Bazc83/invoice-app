@@ -33,9 +33,9 @@ export function EditInvoice() {
     //   paymentDue: state.formData.paymentDue,
     // };
     // dispatch({ type: 'setFormData', payload: payloadData });
-
+    console.log("edit data, ", data)
     updateInvoiceMutation.mutate({
-      invoiceId,
+      invoiceId: data.id,
       invoiceData: data,
     });
 

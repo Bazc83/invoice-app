@@ -8,13 +8,16 @@ function ItemTotal({ control, index, register }) {
   });
 
   return (
-    <div>
-      <label htmlFor={`items[${index}].total`}>Total</label>
+    <div className='flex flex-col gap-3'>
+      <label htmlFor={`items[${index}].total`} >Total</label>
       <input
         type="number"
-        value={(value.price || 0) * (value.quantity || 0)}
+        value={(+value.price || 0) * (+value.quantity || 0)}
         {...register(`items[${index}].total`)}
+        
       />
+
+      
     </div>
   );
 }
