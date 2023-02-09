@@ -54,6 +54,7 @@ const addInvoice = asyncHandler(async (req, res) => {
     companyName
   } = req.body;
 
+
   if (!clientEmail || !clientName || !id) {
    
     res.status(400);

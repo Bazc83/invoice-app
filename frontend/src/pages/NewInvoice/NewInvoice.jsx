@@ -43,6 +43,8 @@ export function NewInvoice() {
   const { updateIdMutation } = useUpdateInvoiceId();
 
   const handleFormSubmit = (data) => {
+
+    console.log("data, ", data)
     newInvoiceMutation.mutate({
       invoiceData: data,
     });

@@ -1,6 +1,7 @@
 import InvoiceItem from './InvoiceItem';
 
 function ItemsSection({ invoiceData }) {
+  console.log(invoiceData)
   return (
     <div className="grid grid-cols-12 gap-5 text-sm lg:text-base ">
       <p className="secondary-text col-span-full col-start-2 ">
@@ -30,7 +31,8 @@ function ItemsSection({ invoiceData }) {
 
         {/* Invoice items content */}
         {invoiceData?.items?.map((item) => (
-          <InvoiceItem item={item} key={item.itemId} />
+          // eslint-disable-next-line no-underscore-dangle
+          <InvoiceItem item={item} key={item._id} />
         ))}
         {/* Total amount due */}
         <div className="primary-bg col-span-full gap-2 flex flex-wrap items-center justify-end py-2 text-sm md:gap-1 pr-5">

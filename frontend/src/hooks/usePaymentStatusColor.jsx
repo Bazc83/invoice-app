@@ -20,10 +20,15 @@ const usePaymentStatusColor = (status) => {
         return {
           ...state,
           paymentStatusColor:
-            'dark:text-gray-50 dark:border-gray-50 border-gray-900 text-gray-900  ',
+            'dark:text-gray-50 dark:border-gray-50 border-gray-900 text-gray-900 ',
         };
       default:
-        throw new Error('paymentStatusColorReducer case error');
+        return {
+          ...state,
+          paymentStatusColor:
+            'dark:text-gray-50 dark:border-gray-50 border-gray-900 text-gray-900 ',
+        };
+      // throw new Error('paymentStatusColorReducer case error');
     }
   };
 

@@ -31,7 +31,6 @@ export function Navbar() {
     logout();
   };
 
-
   const navigate = useNavigate();
 
   const handleToggleMobileMenu = (e) => {
@@ -47,7 +46,7 @@ export function Navbar() {
         <MobileNavMenu user={user} handleLogout={handleLogout} />
       </div>
 
-      <nav className="z-50 col-span-full row-span-full flex h-20 items-center justify-between bg-gray-900 py-4 px-10 text-gray-50 lg:fixed lg:h-screen lg:w-[200px] lg:flex-col">
+      <nav className="z-50 col-span-full row-span-full flex h-20 items-center justify-between bg-gray-900 py-4 px-10 text-gray-50 lg:fixed lg:h-screen lg:w-[200px] lg:flex-col ">
         <div className="flex  w-full items-center justify-between gap-4  lg:w-auto  lg:flex-col lg:gap-12 ">
           <div className="flex items-center gap-2 ">
             {/* Random logo */}
@@ -56,17 +55,19 @@ export function Navbar() {
             <h1 className="text-xl font-bold ">InvoiceApp</h1>
           </div>
 
-          {/* FilterModal invoices compontent */}
-          <FilterModal />
+          <div className='md:flex lg:flex-col gap-4 hidden'>
+            {/* FilterModal invoices compontent */}
+            <FilterModal />
 
-          {/* Button shows new invoice form */}
-          <button
-            type="button"
-            className="flex w-full items-center justify-center gap-2 rounded-md bg-green-900 px-4 py-2 text-sm text-gray-50 sm:w-auto lg:text-base"
-            onClick={()=> navigate("/newinvoice")}
-          >
-            Add Invoice
-          </button>
+            {/* Button shows new invoice form */}
+            <button
+              type="button"
+              className="flex w-full items-center justify-center gap-2 rounded-md bg-green-900 px-4 py-2 text-sm text-gray-50 sm:w-auto lg:text-base"
+              onClick={() => navigate('/newinvoice')}
+            >
+              Add Invoice
+            </button>
+          </div>
         </div>
         <div className="flex items-center justify-center gap-4 lg:flex-col ">
           {/* Dark mode toggle */}

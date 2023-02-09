@@ -1,7 +1,5 @@
-import { useContext, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router';
 
-import { InvoiceContext } from '@/context/InvoiceContext';
 import useModalStore from '@/context/useModalStore';
 import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
 import { useUpdateInvoice } from '@/hooks/reactQueryHooks/useUpdateInvoice';
@@ -11,8 +9,7 @@ import { InvoiceForm } from '../../components/InvoiceForm';
 export function EditInvoice() {
   const { invoiceId } = useParams();
 
- 
-  const { state, dispatch } = useContext(InvoiceContext);
+  // const { state, dispatch } = useContext(InvoiceContext);
 
   const showConfirmationModal = useModalStore((s) => s.showConfirmationModal);
 
@@ -29,17 +26,17 @@ export function EditInvoice() {
   const navigate = useNavigate();
 
   const handleFormSubmit = (data) => {
-    const payloadData = {
-      ...data,
-      items: state.itemsArray,
-      paymentTerms: state.formData.paymentTerms,
-      paymentDue: state.formData.paymentDue,
-    };
-    dispatch({ type: 'setFormData', payload: payloadData });
+    // const payloadData = {
+    //   ...data,
+    //   items: state.itemsArray,
+    //   paymentTerms: state.formData.paymentTerms,
+    //   paymentDue: state.formData.paymentDue,
+    // };
+    // dispatch({ type: 'setFormData', payload: payloadData });
 
     updateInvoiceMutation.mutate({
       invoiceId,
-      invoiceData: payloadData,
+      invoiceData: data,
     });
 
     navigate('/');
@@ -49,15 +46,15 @@ export function EditInvoice() {
     showConfirmationModal();
   };
 
-  useEffect(() => {
-    if (invoiceData !== undefined) {
-      dispatch({ type: 'setFormData', payload: invoiceData });
+  // useEffect(() => {
+  //   if (invoiceData !== undefined) {
+  //     dispatch({ type: 'setFormData', payload: invoiceData });
 
-      if (invoiceData.items.length > 0) {
-        dispatch({ type: 'addItems', payload: invoiceData.items });
-      }
-    }
-  }, [invoiceData, dispatch]);
+  //     if (invoiceData.items.length > 0) {
+  //       dispatch({ type: 'addItems', payload: invoiceData.items });
+  //     }
+  //   }
+  // }, [invoiceData, dispatch]);
 
   if (isLoading) return 'Loading...';
 
