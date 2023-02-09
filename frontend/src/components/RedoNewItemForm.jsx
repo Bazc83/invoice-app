@@ -15,7 +15,7 @@ function NewItemForm({ setNewForm }) {
     total: 0.0,
   });
 
-  const addItem = useNewInvoiceStore(s => s.addItem);
+  const addItem = useNewInvoiceStore((s) => s.addItem);
 
   const handleSaveItem = (itemVal) => {
     toast.success('New Item Added', {

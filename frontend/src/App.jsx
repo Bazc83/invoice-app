@@ -8,6 +8,7 @@ import useLocalStorage from 'use-local-storage';
 import { AuthContext } from './context/AuthContext';
 import { InvoiceContextProvider } from './context/InvoiceContext';
 import { InvoicesContextProvider } from './context/InvoicesContext';
+import DynamicFormTest from './pages/DynamicFormTest';
 import { EditInvoice } from './pages/EditInvoice';
 import { Invoice } from './pages/Invoice';
 import { Invoices } from './pages/Invoices';
@@ -67,6 +68,8 @@ function App() {
                     path="/editinvoice/:invoiceId"
                     element={user ? <EditInvoice /> : <Navigate to="/login" />}
                   />
+
+                  <Route path="/formtest" element={<DynamicFormTest />} />
 
                   <Route
                     path="/login"
