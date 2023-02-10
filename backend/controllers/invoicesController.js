@@ -10,6 +10,7 @@ const getAmountDueTotal = (itemsArr) => {
 
 // Get total value per item
 const getItemsTotals = (items) => {
+  if (items.length === 0) return items;
   return items.map((val) => ({
     ...val,
     total: (+val.price || 0) * (+val.quantity || 0),
@@ -40,54 +41,25 @@ const getInvoice = asyncHandler(async (req, res) => {
 const addInvoice = asyncHandler(async (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
 
-  const {
-    senderCity,
-    senderStreet,
-    senderCountry,
-    senderPostCode,
-    clientEmail,
-    clientName,
-    clientCity,
-    clientStreet,
-    clientPostCode,
-    clientCountry,
-    description,
-    id,
-    createdAt,
-    paymentDue,
-    paymentTerms,
-    status,
-    amountDueTotal,
-    items,
-    companyName,
-  } = req.body;
-
   if (!clientEmail || !clientName || !id) {
     res.status(400);
     throw new Error('Please add required fields');
   }
 
-  const invoice = await Invoice.create({
-    companyName,
-    senderStreet,
-    senderCity,
-    senderPostCode,
-    senderCountry,
-    clientEmail,
-    clientName,
-    clientCity,
-    clientStreet,
-    clientPostCode,
-    clientCountry,
-    description,
-    id,
-    paymentDue,
-    paymentTerms,
-    status,
-    amountDueTotal: getAmountDueTotal(items),
-    items,
-    createdAt,
-  });
+  // Generates items with correct totals per item
+  const items = getItemsTotals(req.body.items);
+
+  // Generates total value of all products
+  const amountDueTotal = getAmountDueTotal(items);
+
+  // get all from req.body and
+  const payloadData = {
+    ...req.body,
+    items: items,
+    amountDueTotal: amountDueTotal,
+  };
+
+  const invoice = await Invoice.create(payloadData);
 
   if (invoice) {
     res.status(200).json(invoice);
@@ -101,11 +73,16 @@ const addInvoice = asyncHandler(async (req, res) => {
 const updateInvoice = asyncHandler(async (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
 
+  if (!req.body.clientName | !req.body.id) {
+    res.status(400);
+    throw new Error('Please add required fields');
+  }
+
   // Generates items with correct totals per item
-  const items = await getItemsTotals(req.body.items);
+  const items = getItemsTotals(req.body.items);
 
   // Generates total value of all products
-  const amountDueTotal = await getAmountDueTotal(items);
+  const amountDueTotal = getAmountDueTotal(items);
 
   // get all from req.body and
   const payloadData = {
@@ -113,11 +90,6 @@ const updateInvoice = asyncHandler(async (req, res) => {
     items: items,
     amountDueTotal: amountDueTotal,
   };
-
-  if (!req.body.clientName | !req.body.id) {
-    res.status(400);
-    throw new Error('Please add required fields');
-  }
 
   const invoice = await Invoice.findOneAndUpdate(
     { id: req.params.id },

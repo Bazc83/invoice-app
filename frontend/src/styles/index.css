@@ -18,10 +18,8 @@
   [multiple],
   textarea,
   select {
-    @apply w-full rounded-md border-gray-300 shadow-md active:ring-indigo-600 dark:text-black;
+    @apply  bg-white text-gray-900 dark:bg-gray-700 dark:text-white w-full rounded-md border-gray-300 shadow-md active:ring-indigo-600 dark:border-gray-600 dark:[color-scheme:_dark] ;
   }
-
- 
 }
 
 @layer components {
@@ -29,7 +27,7 @@
     @apply bg-gray-100 font-semibold text-gray-900 dark:bg-gray-700 dark:text-white;
   }
   .secondary-bg {
-    @apply bg-white text-gray-900  dark:bg-gray-800 dark:text-gray-50;
+    @apply bg-white text-gray-900  dark:bg-gray-800 dark:text-white;
   }
 
   .default-text {
@@ -43,10 +41,4 @@
   .btn {
     @apply cursor-pointer rounded-md py-2 px-4 outline-none transition-colors;
   }
-
-
- 
-
- 
-  
 }

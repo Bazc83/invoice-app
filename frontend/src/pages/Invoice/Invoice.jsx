@@ -1,10 +1,9 @@
-import { useContext, useEffect, useState } from 'react';
+import {  useEffect, useState } from 'react';
 import { HiOutlineMenu, HiOutlineX } from 'react-icons/hi';
 import { useParams } from 'react-router-dom';
 
 import { ConfirmDeleteModal } from '@/components/ConfirmDeleteModal';
 import { GoBackLink } from '@/components/GoBackLink';
-import { InvoiceContext } from '@/context/InvoiceContext';
 import useModalStore from '@/context/useModalStore';
 import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
 import useFormatDate from '@/hooks/useFormatDate';
@@ -17,8 +16,6 @@ export function Invoice() {
   const deleteModal = useModalStore((s) => s.deleteModal);
   const hideAllModals = useModalStore((s) => s.hideAllModals);
   const { getDate } = useFormatDate();
-
-  const { dispatch } = useContext(InvoiceContext);
 
   const [showInvoiceControls, setShowInvoiceControls] = useState(false);
 
@@ -33,9 +30,7 @@ export function Invoice() {
 
   useEffect(() => {
     hideAllModals();
-
-    dispatch({ type: 'resetInvoice' });
-  }, [dispatch, hideAllModals]);
+  }, [hideAllModals]);
 
   if (isLoading) return 'Loading...';
 

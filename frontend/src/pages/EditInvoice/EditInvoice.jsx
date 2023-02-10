@@ -38,16 +38,7 @@ export function EditInvoice() {
     showConfirmationModal();
   };
 
-  // useEffect(() => {
-  //   if (invoiceData !== undefined) {
-  //     dispatch({ type: 'setFormData', payload: invoiceData });
-
-  //     if (invoiceData.items.length > 0) {
-  //       dispatch({ type: 'addItems', payload: invoiceData.items });
-  //     }
-  //   }
-  // }, [invoiceData, dispatch]);
-
+  
   if (isLoading) return 'Loading...';
 
   if (isError) return `An error has occurred: ${error.message}`;
