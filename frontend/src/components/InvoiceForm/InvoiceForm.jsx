@@ -1,10 +1,10 @@
-import { useFieldArray, useForm } from 'react-hook-form';
-import { FaTrashAlt } from 'react-icons/fa';
+/* eslint-disable no-underscore-dangle */
+import { useFieldArray, useForm} from 'react-hook-form';
 
-import ItemTotal from '@/components/ItemTotal';
 import useModalStore from '@/context/useModalStore';
 
 import CancelEditFormModal from '../CancelEditFormModal';
+import InvoiceFormItem from './InvoiceFormItem';
 
 export function InvoiceForm({ invoiceData, handleFormSubmit, handleCancel }) {
   const confirmationModal = useModalStore((s) => s.confirmationModal);
@@ -15,13 +15,6 @@ export function InvoiceForm({ invoiceData, handleFormSubmit, handleCancel }) {
 
   const { fields, append, remove } = useFieldArray({ control, name: 'items' });
 
-  // const amountDueTotal = useWatch({ control, name: 'items', defaultValue: {} });
-  // useEffect(() => {
-  //   if (amountDueTotal.length > 0) {
-
-  //    console.log(amountDueTotal)
-  //   }
-  // }, [amountDueTotal]);
 
   return (
     <div className="secondary-bg relative z-50  row-span-1 row-start-1 flex h-max flex-col gap-8 p-4 pt-8 sm:p-8">
@@ -154,43 +147,15 @@ export function InvoiceForm({ invoiceData, handleFormSubmit, handleCancel }) {
         {/* Form Items */}
         <div className="flex flex-col gap-6">
           <h2 className=" text-lg">Items:</h2>
-          {fields.map(({ id, name, quantity, price, total }, index) => (
-            <div key={id} className="flex flex-col gap-4">
-              <div className="flex flex-col gap-2">
-                <label htmlFor={`items[${index}].name`}>Item Name</label>
-                <input
-                  {...register(`items[${index}].name`)}
-                  type="text"
-                  id="itemName"
-                  defaultValue={name}
-                />
-              </div>
-              <div className="flex flex-col gap-2">
-                <label htmlFor={`items[${index}].quantity`}>Quantity</label>
-                <input
-                  {...register(`items[${index}].quantity`)}
-                  type="number"
-                  id="quantity"
-                  defaultValue={quantity}
-                />
-              </div>
-              <div className="flex flex-col gap-2">
-                <label htmlFor={`items[${index}].price`}>Price</label>
-                <input
-                  {...register(`items[${index}].price`)}
-                  type="number"
-
-                  id="price"
-                  defaultValue={price}
-                />
-              </div>
-
-              <ItemTotal control={control} index={index} register={register} total={total} />
-
-              <button type="button" onClick={() => remove(index)}>
-                <FaTrashAlt />
-              </button>
-            </div>
+          {fields.map((item, index) => (
+            <InvoiceFormItem
+              item={item}
+              key={item._id}
+              index={index}
+              register={register}
+              remove={remove}
+              control={control}
+            />
           ))}
 
           <button className="btn" type="button" onClick={() => append({})}>

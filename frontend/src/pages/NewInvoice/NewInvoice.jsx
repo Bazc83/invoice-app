@@ -44,7 +44,6 @@ export function NewInvoice() {
 
   const handleFormSubmit = (data) => {
 
-    console.log("data, ", data)
     newInvoiceMutation.mutate({
       invoiceData: data,
     });

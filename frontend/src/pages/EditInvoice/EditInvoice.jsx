@@ -26,14 +26,6 @@ export function EditInvoice() {
   const navigate = useNavigate();
 
   const handleFormSubmit = (data) => {
-    // const payloadData = {
-    //   ...data,
-    //   items: state.itemsArray,
-    //   paymentTerms: state.formData.paymentTerms,
-    //   paymentDue: state.formData.paymentDue,
-    // };
-    // dispatch({ type: 'setFormData', payload: payloadData });
-    console.log("edit data, ", data)
     updateInvoiceMutation.mutate({
       invoiceId: data.id,
       invoiceData: data,

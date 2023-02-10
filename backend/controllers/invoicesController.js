@@ -4,9 +4,16 @@ const Invoice = require('../models/invoiceModel');
 
 // Calculate amount due total
 const getAmountDueTotal = (itemsArr) => {
-  console.log(itemsArr)
   if (itemsArr.length === 0) return 0;
   return itemsArr.reduce((acc, curr) => acc + curr.total, 0);
+};
+
+// Get total value per item
+const getItemsTotals = (items) => {
+  return items.map((val) => ({
+    ...val,
+    total: (+val.price || 0) * (+val.quantity || 0),
+  }));
 };
 
 // get all invoices
@@ -52,13 +59,10 @@ const addInvoice = asyncHandler(async (req, res) => {
     status,
     amountDueTotal,
     items,
-    companyName
+    companyName,
   } = req.body;
 
-
-
   if (!clientEmail || !clientName || !id) {
-   
     res.status(400);
     throw new Error('Please add required fields');
   }
@@ -97,58 +101,28 @@ const addInvoice = asyncHandler(async (req, res) => {
 const updateInvoice = asyncHandler(async (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
 
-  const {
-    companyName,
-    senderCity,
-    senderStreet,
-    senderCountry,
-    senderPostCode,
-    clientEmail,
-    clientName,
-    clientCity,
-    clientStreet,
-    clientPostCode,
-    clientCountry,
-    description,
-    id,
-    createdAt,
-    paymentDue,
-    paymentTerms,
-    status,
-    amountDueTotal,
-    items,
-  } = req.body;
+  // Generates items with correct totals per item
+  const items = await getItemsTotals(req.body.items);
 
+  // Generates total value of all products
+  const amountDueTotal = await getAmountDueTotal(items);
 
-  if (!clientName | !id ) {
-    
+  // get all from req.body and
+  const payloadData = {
+    ...req.body,
+    items: items,
+    amountDueTotal: amountDueTotal,
+  };
+
+  if (!req.body.clientName | !req.body.id) {
     res.status(400);
     throw new Error('Please add required fields');
   }
 
   const invoice = await Invoice.findOneAndUpdate(
     { id: req.params.id },
-    {
-      companyName,
-      senderCity,
-      senderStreet,
-      senderCountry,
-      senderPostCode,
-      clientEmail,
-      clientName,
-      clientCity,
-      clientStreet,
-      clientPostCode,
-      clientCountry,
-      description,
-      id,
-      createdAt,
-      paymentDue,
-      paymentTerms,
-      status,
-      amountDueTotal: getAmountDueTotal(items),
-      items,
-    }
+    // payLoadData === req.body, items & amountDueTotal
+    payloadData
   );
 
   if (invoice) {
