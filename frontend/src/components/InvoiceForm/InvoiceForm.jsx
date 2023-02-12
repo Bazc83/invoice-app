@@ -94,26 +94,44 @@ export function InvoiceForm({ invoiceData, handleFormSubmit, handleCancel }) {
           <div className="flex flex-col gap-3 ">
             <label htmlFor="clientName">Client Name</label>
             <input
-              className={`${
-                errors.clientName?.type === 'required' &&
-                'border-3 border-red-600'
-              }`}
+              className="inputError"
+              aria-invalid={
+                errors.clientName && errors.clientName.type === 'required'
+                  ? 'true'
+                  : 'false'
+              }
               type="text"
               {...register('clientName', { required: true })}
             />
 
-            {errors.clientName?.type === 'required' && (
-              <p className="text-sm text-red-500 " role="alert">
-                First name is required
-              </p>
+            {errors.clientName && errors.clientName.type === 'required' && (
+              <span className="errorMessage" role="alert">
+                A valid name is required
+              </span>
             )}
           </div>
+
           <div className="flex flex-col gap-3">
-            <label htmlFor="clientEmail">Client Email</label>
+            <label htmlFor="clientEmail" className="inputError">
+              Client Email
+            </label>
             <input
+              className="inputError"
+              aria-invalid={
+                errors.clientEmail && errors.clientEmail.type === 'required'
+                  ? 'true'
+                  : 'false'
+              }
+              aria-errormessage="Valid email is required"
               type="email"
               {...register('clientEmail', { required: true })}
             />
+
+            {errors.clientEmail && errors.clientEmail.type === 'required' && (
+              <span className="errorMessage" role="alert">
+                A valid email is required
+              </span>
+            )}
           </div>
           <div className="flex flex-col gap-3">
             <label htmlFor="clientStreet">Street</label>
