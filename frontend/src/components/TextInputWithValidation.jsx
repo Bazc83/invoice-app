@@ -11,7 +11,7 @@ function TextInputWithValidation({ errors, register, labelName, inputName }) {
         {...register(inputName, {
           required: { value: true, message: `${labelName} is required` },
           pattern: {
-            value: /^[a-zA-Z0-9 -']+$/,
+            value: /^[a-zA-Z0-9 \-']+$/,
             message: `${labelName} is invalid`,
           },
         })}

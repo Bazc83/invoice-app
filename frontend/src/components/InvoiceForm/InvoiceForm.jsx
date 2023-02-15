@@ -46,52 +46,51 @@ export function InvoiceForm({ invoiceData, handleFormSubmit, handleCancel }) {
         <div className="flex flex-col gap-6">
           <h2 className=" text-xl">Sender Details:</h2>
 
-          <div className="flex flex-col gap-3">
-            <label htmlFor="companyName">Company Name </label>
-            <input
-              id="companyName"
-              name="companyName"
-              type="text"
-              {...register('companyName')}
-            />
-          </div>
-          <div className="flex flex-col gap-3">
-            <label htmlFor="senderStreet">Street </label>
-            <input
-              id="senderStreet"
-              name="senderStreet"
-              type="text"
-              {...register('senderStreet')}
-            />
-          </div>
+          {/* Company name */}
+          <TextInputWithValidation
+            errors={errors}
+            register={register}
+            labelName="Company Name"
+            inputName="companyName"
+          />
+
+          {/* Sender street */}
+          <TextInputWithValidation
+            errors={errors}
+            register={register}
+            labelName="Street"
+            inputName="senderStreet"
+          />
 
           <div className="grid grid-cols-2 gap-4">
-            <div className="flex flex-col gap-3">
-              <label htmlFor="senderCity">City</label>
-              <input
-                name="senderCity"
-                type="text"
-                {...register('senderCity')}
-              />
-            </div>
-            <div className="flex flex-col gap-3">
-              <label htmlFor="senderPostCode">Postcode</label>
-              <input type="text" {...register('senderPostCode')} />
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-3">
-            <label htmlFor="senderCountry">Country</label>
-            <input
-              type="text"
-              name="senderCountry"
-              {...register('senderCountry')}
+            {/* Sender city */}
+            <TextInputWithValidation
+              errors={errors}
+              register={register}
+              labelName="City"
+              inputName="senderCity"
+            />
+            {/* Sender postcode */}
+            <TextInputWithValidation
+              errors={errors}
+              register={register}
+              labelName="Postcode"
+              inputName="senderPostCode"
             />
           </div>
+
+          {/* Sender Country */}
+          <TextInputWithValidation
+            errors={errors}
+            register={register}
+            labelName="Country"
+            inputName="senderCountry"
+          />
         </div>
 
         <div className="flex flex-col gap-6">
           <h2 className=" text-xl ">Client Details:</h2>
+
           <TextInputWithValidation
             errors={errors}
             register={register}
@@ -121,34 +120,51 @@ export function InvoiceForm({ invoiceData, handleFormSubmit, handleCancel }) {
               </span>
             )}
           </div>
-          <div className="flex flex-col gap-3">
-            <label htmlFor="clientStreet">Street</label>
-            <input type="text" {...register('clientStreet')} />
-          </div>
+
+          {/* Client Street */}
+          <TextInputWithValidation
+            errors={errors}
+            register={register}
+            labelName="Client Street"
+            inputName="clientStreet"
+          />
 
           <div className="grid grid-cols-2 gap-4">
-            <div className="flex flex-col gap-3">
-              <label htmlFor="clientCity">City</label>
-              <input type="text" {...register('clientCity')} />
-            </div>
-            <div className="flex flex-col gap-3">
-              <label htmlFor="clientPostCode">Postcode</label>
-              <input type="text" {...register('clientPostCode')} />
-            </div>
+            {/* Client City */}
+            <TextInputWithValidation
+              errors={errors}
+              register={register}
+              labelName="Client City"
+              inputName="clientCity"
+            />
+            {/* Client Postcode */}
+            <TextInputWithValidation
+              errors={errors}
+              register={register}
+              labelName="Client PostCode"
+              inputName="clientPostCode"
+            />
           </div>
 
-          <div className="flex flex-col gap-3">
-            <label htmlFor="clientCountry">Country</label>
-            <input type="text" {...register('clientCountry')} />
-          </div>
+          {/* Client Country */}
+          <TextInputWithValidation
+            errors={errors}
+            register={register}
+            labelName="Client Country"
+            inputName="clientCountry"
+          />
         </div>
 
         <div className="flex flex-col gap-6">
           <h2 className=" text-xl ">Invoice Information:</h2>
-          <div className="flex flex-col gap-3">
-            <label htmlFor="description">Description</label>
-            <input type="text" {...register('description')} />
-          </div>
+
+          {/* Description */}
+          <TextInputWithValidation
+            errors={errors}
+            register={register}
+            labelName="Description"
+            inputName="description"
+          />
 
           <div className="flex flex-col gap-3">
             <label htmlFor="selectPaymentTerms">Payment Terms</label>
