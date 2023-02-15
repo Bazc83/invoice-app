@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const invoiceSchema = new mongoose.Schema({
-  companyName:{
-    type: String
+  companyName: {
+    type: String,
   },
   senderCity: {
     type: String,
@@ -36,8 +36,8 @@ const invoiceSchema = new mongoose.Schema({
         type: String,
       },
       price: {
-        type: Number,
-        default: 0,
+        type: String,
+        default: '0.00',
       },
       quantity: {
         type: Number,

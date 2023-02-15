@@ -41,7 +41,7 @@ const getInvoice = asyncHandler(async (req, res) => {
 const addInvoice = asyncHandler(async (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
 
-  if (!clientEmail || !clientName || !id) {
+  if (!req.body.clientEmail || !req.body.clientName || !req.body.id) {
     res.status(400);
     throw new Error('Please add required fields');
   }

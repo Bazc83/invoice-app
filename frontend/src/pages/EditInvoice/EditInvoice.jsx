@@ -9,8 +9,6 @@ import { InvoiceForm } from '../../components/InvoiceForm';
 export function EditInvoice() {
   const { invoiceId } = useParams();
 
-  // const { state, dispatch } = useContext(InvoiceContext);
-
   const showConfirmationModal = useModalStore((s) => s.showConfirmationModal);
 
   const {
@@ -38,7 +36,6 @@ export function EditInvoice() {
     showConfirmationModal();
   };
 
-  
   if (isLoading) return 'Loading...';
 
   if (isError) return `An error has occurred: ${error.message}`;

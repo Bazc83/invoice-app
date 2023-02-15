@@ -4,6 +4,7 @@ import { useFieldArray, useForm } from 'react-hook-form';
 import useModalStore from '@/context/useModalStore';
 
 import CancelEditFormModal from '../CancelEditFormModal';
+import TextInputWithValidation from '../TextInputWithValidation';
 import InvoiceFormItem from './InvoiceFormItem';
 
 export function InvoiceForm({ invoiceData, handleFormSubmit, handleCancel }) {
@@ -91,25 +92,12 @@ export function InvoiceForm({ invoiceData, handleFormSubmit, handleCancel }) {
 
         <div className="flex flex-col gap-6">
           <h2 className=" text-xl ">Client Details:</h2>
-          <div className="flex flex-col gap-3 ">
-            <label htmlFor="clientName">Client Name</label>
-            <input
-              className="inputError"
-              aria-invalid={
-                errors.clientName && errors.clientName.type === 'required'
-                  ? 'true'
-                  : 'false'
-              }
-              type="text"
-              {...register('clientName', { required: true })}
-            />
-
-            {errors.clientName && errors.clientName.type === 'required' && (
-              <span className="errorMessage" role="alert">
-                A valid name is required
-              </span>
-            )}
-          </div>
+          <TextInputWithValidation
+            errors={errors}
+            register={register}
+            labelName="Client Name"
+            inputName="clientName"
+          />
 
           <div className="flex flex-col gap-3">
             <label htmlFor="clientEmail" className="inputError">
@@ -118,18 +106,18 @@ export function InvoiceForm({ invoiceData, handleFormSubmit, handleCancel }) {
             <input
               className="inputError"
               aria-invalid={
-                errors.clientEmail && errors.clientEmail.type === 'required'
-                  ? 'true'
-                  : 'false'
+                errors.clientEmail && errors.clientEmail ? 'true' : 'false'
               }
               aria-errormessage="Valid email is required"
               type="email"
-              {...register('clientEmail', { required: true })}
+              {...register('clientEmail', {
+                required: { value: true, message: 'A valid email is required' },
+              })}
             />
 
-            {errors.clientEmail && errors.clientEmail.type === 'required' && (
+            {errors.clientEmail && errors.clientEmail?.type && (
               <span className="errorMessage" role="alert">
-                A valid email is required
+                {errors.clientEmail.message}
               </span>
             )}
           </div>
@@ -166,7 +154,7 @@ export function InvoiceForm({ invoiceData, handleFormSubmit, handleCancel }) {
             <label htmlFor="selectPaymentTerms">Payment Terms</label>
             {/* Payment Terms */}
             <select
-              {...register('paymentTerms', { required: true })}
+              {...register('paymentTerms')}
               id="selectPaymentTerms"
               className="formSelectInput"
             >
@@ -198,26 +186,24 @@ export function InvoiceForm({ invoiceData, handleFormSubmit, handleCancel }) {
 
             <div className="flex flex-col gap-3">
               <label htmlFor="createdAt">Created At</label>
-              <input
-                type="date"
-                {...register('createdAt', { required: true })}
-              />
+              <input type="date" {...register('createdAt')} />
             </div>
           </div>
         </div>
 
+        {/* Form Items */}
         <div className="flex flex-col gap-6">
-          {/* Form Items */}
           <h2 className="  text-xl">Items:</h2>
 
-          {fields.map((item, index) => (
+          {fields.map((field, index) => (
             <InvoiceFormItem
-              item={item}
-              key={item._id}
+              item={field}
+              key={field.id}
               index={index}
               register={register}
               remove={remove}
               control={control}
+              errors={errors}
             />
           ))}
 
@@ -225,7 +211,7 @@ export function InvoiceForm({ invoiceData, handleFormSubmit, handleCancel }) {
           <button
             className="btn w-full border-2  border-gray-500 text-gray-800 hover:bg-gray-800 hover:text-white dark:border-gray-400 dark:text-gray-400 hover:dark:border-gray-900 hover:dark:bg-gray-900 hover:dark:text-white"
             type="button"
-            onClick={() => append({})}
+            onClick={() => append({ name: '', price: '0.00', quantity: 1 })}
           >
             Add Item
           </button>

@@ -1,3 +1,7 @@
+Check for date if no date just use todays date might be this way already
+
+
+
 ## Required features
 
 ### pagination
