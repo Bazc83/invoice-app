@@ -30,7 +30,7 @@ export function PageLayout({ theme }) {
       <div
         className={`lg:col-start-2 ${
           (filterModal || mobileMenu) &&
-          'before:absolute before:z-10 before:h-[calc(100%-100px)] before:w-full before:bg-black before:opacity-70'
+          'before:absolute before:z-10 before:h-[calc(100%-100px)] before:lg:h-full before:w-full before:lg:w-[calc(100%-100px)] before:bg-black before:opacity-70'
         } `}
       >
         <ToastContainer
