@@ -4,8 +4,8 @@ import { useFieldArray, useForm } from 'react-hook-form';
 import useModalStore from '@/context/useModalStore';
 
 import CancelEditFormModal from '../CancelEditFormModal';
-import TextInputWithValidation from '../TextInputWithValidation';
 import InvoiceFormItem from './InvoiceFormItem';
+import TextInputWithValidation from './TextInputWithValidation';
 
 export function InvoiceForm({ invoiceData, handleFormSubmit, handleCancel }) {
   const confirmationModal = useModalStore((s) => s.confirmationModal);
@@ -22,7 +22,7 @@ export function InvoiceForm({ invoiceData, handleFormSubmit, handleCancel }) {
   const { fields, append, remove } = useFieldArray({ control, name: 'items' });
 
   return (
-    <div className="primary-bg relative flex h-max flex-col pb-10  sm:px-6 md:pt-8  ">
+    <div className="primary-bg relative flex h-max flex-col pb-10 pt-6 sm:px-6 md:pt-8  ">
       {/* confirm cancel modal */}
       {confirmationModal && <CancelEditFormModal />}
 

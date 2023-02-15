@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useWatch } from 'react-hook-form';
 import { FaTrashAlt } from 'react-icons/fa';
 
-import TextInputWithValidation from '../TextInputWithValidation';
+import TextInputWithValidation from './TextInputWithValidation';
 
 function InvoiceFormItem({ item, index, register, remove, control, errors }) {
   const { quantity, price } = item;

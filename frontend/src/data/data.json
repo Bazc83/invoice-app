@@ -22,11 +22,11 @@
         "itemId": "aslkfjsdkl",
         "name": "Brand Guidelines",
         "quantity": 1,
-        "price": 1800.9,
-        "total": 1800.9
+        "price": "25.99",
+        "total": 25.99
       }
     ],
-    "amountDueTotal": 1800.9
+    "amountDueTotal": 25.99
   },
   {
     "id": "XM9141",
@@ -51,18 +51,18 @@
         "itemId": "asasfdsf",
         "name": "Banner Design",
         "quantity": 1,
-        "price": 156.0,
-        "total": 156.0
+        "price": "25.99",
+        "total": 25.99
       },
       {
         "itemId": "fdsafdsfdsfdsf",
         "name": "Email Design",
         "quantity": 2,
-        "price": 200.0,
-        "total": 400.0
+        "price": "25.99",
+        "total": 51.98
       }
     ],
-    "amountDueTotal": 556.0
+    "amountDueTotal": 77.97
   },
   {
     "id": "RG0314",
@@ -87,11 +87,11 @@
         "itemId": "fdsafdsaslkfjsdkl",
         "name": "Website Redesign",
         "quantity": 1,
-        "price": 14002.33,
-        "total": 14002.33
+        "price": "25.99",
+        "total": 25.99
       }
     ],
-    "amountDueTotal": 14002.33
+    "amountDueTotal": 25.99
   },
   {
     "id": "RT2080",
@@ -116,11 +116,11 @@
         "itemId": "77ghafdsfslkfjsdkl",
         "name": "Logo Sketches",
         "quantity": 1,
-        "price": 102.04,
-        "total": 102.04
+        "price": "25.99",
+        "total": 25.99
       }
     ],
-    "amountDueTotal": 102.04
+    "amountDueTotal": 25.99
   },
   {
     "id": "AA1449",
@@ -145,18 +145,18 @@
         "itemId": "afds5544aslkfjsdkl",
         "name": "New Logo",
         "quantity": 1,
-        "price": 1532.33,
-        "total": 1532.33
+        "price": "25.99",
+        "total": 25.99
       },
       {
         "itemId": "333adafdsafdslkfjsdkl",
         "name": "Brand Guidelines",
         "quantity": 1,
-        "price": 2500.0,
-        "total": 2500.0
+        "price": "25.99",
+        "total": 25.99
       }
     ],
-    "amountDueTotal": 4032.33
+    "amountDueTotal": 51.98
   },
   {
     "id": "TY9141",
@@ -181,11 +181,11 @@
         "itemId": "34343aslkfjsdkl",
         "name": "Web Design",
         "quantity": 1,
-        "price": 6155.91,
-        "total": 6155.91
+        "price": "25.99",
+        "total": 25.99
       }
     ],
-    "amountDueTotal": 6155.91
+    "amountDueTotal": 25.99
   },
   {
     "id": "FV2353",
@@ -210,10 +210,10 @@
         "itemId": "asl243243kfjsdkl",
         "name": "Logo Re-design",
         "quantity": 1,
-        "price": 3102.04,
-        "total": 3102.04
+        "price": "25.99",
+        "total": 25.99
       }
     ],
-    "amountDueTotal": 3102.04
+    "amountDueTotal": 25.99
   }
 ]

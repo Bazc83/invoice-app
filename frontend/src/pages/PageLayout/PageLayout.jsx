@@ -1,4 +1,3 @@
-import { createContext, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
@@ -7,13 +6,7 @@ import useModalStore from '@/context/useModalStore';
 
 import 'react-toastify/dist/ReactToastify.css';
 
-export const PageLayoutContext = createContext();
-
 export function PageLayout({ theme }) {
-  const [showFilterModal, setShowFilterModal] = useState(false);
-
-  const [showNewInvoiceForm, setShowNewInvoiceForm] = useState(false);
-
   const filterModal = useModalStore((state) => state.filterModal);
   const mobileMenu = useModalStore((state) => state.mobileMenu);
 
@@ -26,44 +19,34 @@ export function PageLayout({ theme }) {
   };
 
   return (
-    <PageLayoutContext.Provider
-      // eslint-disable-next-line react/jsx-no-constructed-context-values
-      value={{
-        showFilterModal,
-        setShowFilterModal,
-        showNewInvoiceForm,
-        setShowNewInvoiceForm,
-      }}
+    <div
+      className="primary-bg relative flex h-max min-h-screen flex-col lg:grid lg:grid-cols-[100px_10fr] "
+      onClick={handleCloseModal}
+      aria-hidden="true"
     >
-      <div
-        className="primary-bg relative flex h-max min-h-screen flex-col lg:grid lg:grid-cols-[200px_10fr] "
-        onClick={handleCloseModal}
-        aria-hidden="true"
-      >
-        <Navbar />
+      <Navbar />
 
-        {/* Show overlay when showFilterModal is true */}
-        <div
-          className={`lg:col-start-2 ${
-            (filterModal || mobileMenu) &&
-            'before:absolute before:z-10 before:h-full before:w-full before:bg-black before:opacity-70'
-          } `}
-        >
-          <ToastContainer
-            position="top-right"
-            autoClose={1000}
-            hideProgressBar
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            pauseOnHover
-            theme={theme}
-          />
-          <Outlet />
-        </div>
+      {/* Show overlay when showFilterModal is true */}
+      <div
+        className={`lg:col-start-2 ${
+          (filterModal || mobileMenu) &&
+          'before:absolute before:z-10 before:h-[calc(100%-100px)] before:w-full before:bg-black before:opacity-70'
+        } `}
+      >
+        <ToastContainer
+          position="top-right"
+          autoClose={1000}
+          hideProgressBar
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          pauseOnHover
+          theme={theme}
+        />
+        <Outlet />
       </div>
-    </PageLayoutContext.Provider>
+    </div>
   );
 }
 

@@ -4,7 +4,6 @@ import { FaMinus } from 'react-icons/fa';
 import { InvoicesContext } from '@/context/InvoicesContext';
 
 export function ShowFiltersAndClear() {
- 
   const { state, dispatch } = useContext(InvoicesContext);
 
   // Clear all Filters
@@ -18,9 +17,9 @@ export function ShowFiltersAndClear() {
   };
 
   return (
-    <div className="secondary-bg   flex flex-col items-center justify-between gap-2 rounded-md px-8 py-2 md:flex-row ">
+    <div className="secondary-bg   flex flex-col items-center justify-between gap-2 rounded-md   lg:flex-row ">
       <p className="secondary-text text-sm">Active filters:</p>
-      <div className="flex flex-wrap items-center justify-center gap-2 md:gap-4 ">
+      <div className="flex  flex-wrap items-center justify-center gap-2 md:flex-row md:gap-4 ">
         {state.checkedFilters?.map((val) => (
           <button
             type="button"

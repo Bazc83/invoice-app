@@ -7,14 +7,13 @@ import {
   FaSun,
   FaUserEdit,
 } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { DarkModeContext } from '@/App';
 import { AuthContext } from '@/context/AuthContext';
 import useModalStore from '@/context/useModalStore';
 import { useLogout } from '@/hooks/useLogout';
 
-import { FilterModal } from './FilterModal';
 import MobileNavMenu from './MobileNavMenu';
 import { RandomLogo } from './RandomLogo';
 
@@ -31,8 +30,6 @@ export function Navbar() {
     logout();
   };
 
-  const navigate = useNavigate();
-
   const handleToggleMobileMenu = (e) => {
     e.stopPropagation();
     toggleMobileMenu();
@@ -46,30 +43,24 @@ export function Navbar() {
         <MobileNavMenu user={user} handleLogout={handleLogout} />
       </div>
 
-      <nav className="z-50 col-span-full row-span-full flex h-20 items-center justify-between bg-gray-900 py-4 px-10 text-gray-50 lg:fixed lg:h-screen lg:w-[200px] lg:flex-col ">
+      <nav className="z-50 col-span-full row-span-full flex h-20 items-center justify-between bg-gray-900 py-4 px-10 text-gray-50 lg:fixed lg:h-screen lg:w-[100px] lg:flex-col lg:px-0 ">
         <div className="flex  w-full items-center justify-between gap-4  lg:w-auto  lg:flex-col lg:gap-12 ">
           <div className="flex items-center gap-2 ">
             {/* Random logo */}
             <RandomLogo />
-
-            <h1 className="text-xl font-bold ">InvoiceApp</h1>
           </div>
 
-          <div className='md:flex lg:flex-col gap-4 hidden'>
-            {/* FilterModal invoices compontent */}
-            <FilterModal />
-
-            {/* Button shows new invoice form */}
-            <button
-              type="button"
-              className="flex w-full items-center justify-center gap-2 rounded-md bg-green-900 px-4 py-2 text-sm text-gray-50 sm:w-auto lg:text-base"
-              onClick={() => navigate('/newinvoice')}
-            >
-              Add Invoice
-            </button>
-          </div>
+          {/* Nav list */}
+          <ul
+            className={` hidden flex-col gap-2 lg:static lg:flex lg:w-auto lg:items-center  lg:justify-center lg:bg-transparent`}
+          >
+            <li>
+              <Link to="/invoices"> Invoices</Link>
+            </li>
+          </ul>
         </div>
-        <div className="flex items-center justify-center gap-4 lg:flex-col ">
+
+        <div className="flex lg:flex-col items-center justify-center gap-4">
           {/* Dark mode toggle */}
           <button onClick={toggleDarkMode} type="button">
             {theme === 'dark' ? (
@@ -79,48 +70,42 @@ export function Navbar() {
             )}
           </button>
 
-          {/* Nav list */}
-          <ul
-            className={` hidden flex-col gap-2 lg:static lg:flex lg:w-auto lg:items-center  lg:justify-center lg:bg-transparent`}
-          >
-            <li>
-              <Link to="/invoices"> Invoices</Link>
-            </li>
+          <ul>
+            <div className=" flex flex-col gap-3">
+              {/* Logout */}
+              {user && (
+                <li>
+                  <button
+                    className="hidden items-center gap-2 lg:flex"
+                    type="button"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                    <FaSignOutAlt className="text-xl transition-colors hover:text-gray-400" />
+                  </button>
+                </li>
+              )}
 
-            {/* Logout */}
-            {user && (
-              <li>
-                <button
-                  className="flex items-center gap-2 "
-                  type="button"
-                  onClick={handleLogout}
-                >
-                  Sign out
-                  <FaSignOutAlt className="text-xl transition-colors hover:text-gray-400" />
-                </button>
-              </li>
-            )}
-
-            {/* Login */}
-            {!user && (
-              <li>
-                <Link to="/login" className="flex items-center gap-2">
-                  Login
-                  <FaSignInAlt className="text-xl transition-colors hover:text-gray-400" />
-                </Link>
-              </li>
-            )}
-            {/* Register / signup */}
-            {!user && (
-              <li>
-                <Link to="/signup" className="flex items-center gap-2">
-                  Sign up
-                  <FaUserEdit className="text-xl transition-colors hover:text-gray-400" />
-                </Link>
-              </li>
-            )}
+              {/* Login */}
+              {!user && (
+                <li>
+                  <Link to="/login" className="flex items-center gap-2">
+                    Login
+                    <FaSignInAlt className="text-xl transition-colors hover:text-gray-400" />
+                  </Link>
+                </li>
+              )}
+              {/* Register / signup */}
+              {!user && (
+                <li>
+                  <Link to="/signup" className="flex items-center gap-2">
+                    Sign up
+                    <FaUserEdit className="text-xl transition-colors hover:text-gray-400" />
+                  </Link>
+                </li>
+              )}
+            </div>
           </ul>
-
           <button type="button" onClick={handleToggleMobileMenu}>
             <FaBars className="text-3xl lg:hidden" />
           </button>
