@@ -24,7 +24,7 @@ const getInvoices = asyncHandler(async (req, res) => {
   res.status(200).json(invoices);
 });
 
-// Get  invoice by id
+// Get invoice by id
 const getInvoice = asyncHandler(async (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
 

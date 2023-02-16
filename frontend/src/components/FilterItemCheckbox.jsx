@@ -3,7 +3,7 @@ import { FaCheck } from 'react-icons/fa';
 
 import { InvoicesContext } from '@/context/InvoicesContext';
 
-export function FilterModalItem({ filter }) {
+function FilterItemCheckbox({ filter }) {
   const { dispatch } = useContext(InvoicesContext);
 
   const handleChecked = () => {
@@ -33,4 +33,4 @@ export function FilterModalItem({ filter }) {
   );
 }
 
-export default FilterModalItem;
+export default FilterItemCheckbox;

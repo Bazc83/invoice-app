@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { FilterModalItem } from '@/components/FilterModal/FilterModalItem';
+import { FilterModalItem } from '@/components/FilterItemCheckbox';
 import { InvoicesContext } from '@/context/InvoicesContext';
 import useModalStore from '@/context/useModalStore';
 

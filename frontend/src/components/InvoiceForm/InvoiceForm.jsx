@@ -1,4 +1,5 @@
 /* eslint-disable no-underscore-dangle */
+import { useEffect } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
 
 import useModalStore from '@/context/useModalStore';
@@ -20,6 +21,10 @@ export function InvoiceForm({ invoiceData, handleFormSubmit, handleCancel }) {
   });
 
   const { fields, append, remove } = useFieldArray({ control, name: 'items' });
+
+  useEffect(() => {
+    console.log('invoiceData, ', invoiceData);
+  }, [invoiceData]);
 
   return (
     <div className="primary-bg relative flex h-max flex-col pb-10 pt-6 sm:px-6 md:pt-8  ">
@@ -170,9 +175,15 @@ export function InvoiceForm({ invoiceData, handleFormSubmit, handleCancel }) {
             <label htmlFor="selectPaymentTerms">Payment Terms</label>
             {/* Payment Terms */}
             <select
-              {...register('paymentTerms')}
+              {...register('paymentTerms', {
+                required: {
+                  value: true,
+                  message: 'Payment Terms are required',
+                },
+              })}
               id="selectPaymentTerms"
               className="formSelectInput"
+              defaultValue="Cash"
             >
               <option value="Cash">Cash</option>
               <option value="15 days from invoice date">
