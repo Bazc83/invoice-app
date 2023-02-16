@@ -14,13 +14,13 @@ import { AuthContext } from '@/context/AuthContext';
 import useModalStore from '@/context/useModalStore';
 import { useLogout } from '@/hooks/useLogout';
 
-import MobileNavMenu from './MobileNavMenu';
 import { RandomLogo } from './RandomLogo';
 
 export function Navbar() {
   const { theme, toggleDarkMode } = useContext(DarkModeContext);
 
   const toggleMobileMenu = useModalStore((s) => s.toggleMobileMenu);
+  const mobileMenu = useModalStore((s) => s.mobileMenu);
 
   const { user } = useContext(AuthContext);
 
@@ -34,83 +34,74 @@ export function Navbar() {
     e.stopPropagation();
     toggleMobileMenu();
   };
+
   return (
-    <div className="grid grid-cols-1 grid-rows-1">
-      {/*  */}
-      {/* Mobile Menu */}
-      {/*  */}
-      <div className="relative col-span-full row-span-full">
-        <MobileNavMenu user={user} handleLogout={handleLogout} />
-      </div>
+    <div className="z-50 col-span-full row-span-full flex h-20 items-center justify-between bg-gray-900 py-4 px-10 text-gray-50 ">
+      {/* Random logo */}
+      <RandomLogo />
 
-      <nav className="z-50 col-span-full row-span-full flex h-20 items-center justify-between bg-gray-900 py-4 px-10 text-gray-50 lg:fixed lg:h-screen lg:w-[100px] lg:flex-col lg:px-0 ">
-        <div className="flex  w-full items-center justify-between gap-4  lg:w-auto  lg:flex-col lg:gap-12 ">
-          <div className="flex items-center gap-2 ">
-            {/* Random logo */}
-            <RandomLogo />
-          </div>
+      <div className="flex  items-center justify-center gap-4">
+        {/* Dark mode toggle */}
+        <button onClick={toggleDarkMode} type="button">
+          {theme === 'dark' ? (
+            <FaSun className="text-xl transition-colors hover:text-gray-400" />
+          ) : (
+            <FaMoon className="text-xl transition-colors hover:text-gray-400" />
+          )}
+        </button>
 
-          {/* Nav list */}
-          <ul
-            className={` hidden flex-col gap-2 lg:static lg:flex lg:w-auto lg:items-center  lg:justify-center lg:bg-transparent`}
-          >
-            <li>
+        {/* Hamburger menu button */}
+        <button type="button" onClick={handleToggleMobileMenu}>
+          <FaBars className="text-3xl" />
+        </button>
+
+        {/* Navlist */}
+        <nav
+          className={`secondary-bg absolute top-0 right-5  z-40 overflow-hidden rounded-md shadow-md transition-transform ease-in ${
+            mobileMenu ? ' translate-y-20' : '-translate-y-[200px] '
+          }`}
+        >
+          <ul className="flex w-max max-w-full flex-col flex-wrap gap-3   divide-y-2 divide-gray-900 divide-opacity-10 last:pb-4  dark:divide-gray-50 dark:divide-opacity-10">
+            <li className="px-6 pt-6 pb-4 text-gray-900 hover:text-gray-600 dark:text-white hover:dark:text-gray-400 ">
               <Link to="/invoices"> Invoices</Link>
             </li>
-          </ul>
-        </div>
 
-        <div className="flex lg:flex-col items-center justify-center gap-4">
-          {/* Dark mode toggle */}
-          <button onClick={toggleDarkMode} type="button">
-            {theme === 'dark' ? (
-              <FaSun className="text-xl transition-colors hover:text-gray-400" />
-            ) : (
-              <FaMoon className="text-xl transition-colors hover:text-gray-400" />
+            {/* Logout */}
+            {user && (
+              <li className="px-6 py-4 text-gray-900 hover:text-gray-600 dark:text-white hover:dark:text-gray-400">
+                <button
+                  className="flex items-center gap-2  "
+                  type="button"
+                  onClick={handleLogout}
+                >
+                  Sign out
+                  <FaSignOutAlt className="text-xl " />
+                </button>
+              </li>
             )}
-          </button>
 
-          <ul>
-            <div className=" flex flex-col gap-3">
-              {/* Logout */}
-              {user && (
-                <li>
-                  <button
-                    className="hidden items-center gap-2 lg:flex"
-                    type="button"
-                    onClick={handleLogout}
-                  >
-                    Logout
-                    <FaSignOutAlt className="text-xl transition-colors hover:text-gray-400" />
-                  </button>
-                </li>
-              )}
+            {/* Login */}
+            {!user && (
+              <li className="px-6 py-4 text-gray-900 hover:text-gray-600 dark:text-white hover:dark:text-gray-400">
+                <Link to="/login" className="flex items-center gap-2 ">
+                  Login
+                  <FaSignInAlt className="text-xl " />
+                </Link>
+              </li>
+            )}
 
-              {/* Login */}
-              {!user && (
-                <li>
-                  <Link to="/login" className="flex items-center gap-2">
-                    Login
-                    <FaSignInAlt className="text-xl transition-colors hover:text-gray-400" />
-                  </Link>
-                </li>
-              )}
-              {/* Register / signup */}
-              {!user && (
-                <li>
-                  <Link to="/signup" className="flex items-center gap-2">
-                    Sign up
-                    <FaUserEdit className="text-xl transition-colors hover:text-gray-400" />
-                  </Link>
-                </li>
-              )}
-            </div>
+            {/* Register / signup */}
+            {!user && (
+              <li className="px-6 py-4 text-gray-900 hover:text-gray-600 dark:text-white hover:dark:text-gray-400">
+                <Link to="/signup" className="flex items-center gap-2 ">
+                  Sign up
+                  <FaUserEdit className="text-xl transition-colors hover:text-gray-400" />
+                </Link>
+              </li>
+            )}
           </ul>
-          <button type="button" onClick={handleToggleMobileMenu}>
-            <FaBars className="text-3xl lg:hidden" />
-          </button>
-        </div>
-      </nav>
+        </nav>
+      </div>
     </div>
   );
 }

@@ -12,7 +12,7 @@ export function FilterModalItem({ filter }) {
 
   return (
     <div
-      className={` relative z-40 flex cursor-pointer gap-3 rounded-sm pl-8 after:absolute after:top-0 after:left-0 after:h-5 after:w-5 after:rounded-sm after:bg-gray-400 dark:after:bg-gray-600 `}
+      className={` relative z-20 flex cursor-pointer gap-3 rounded-sm pl-8 after:absolute after:top-0 after:left-0 after:h-5 after:w-5 after:rounded-sm after:bg-gray-400 dark:after:bg-gray-600 `}
       onClick={handleChecked}
       aria-hidden="true"
     >

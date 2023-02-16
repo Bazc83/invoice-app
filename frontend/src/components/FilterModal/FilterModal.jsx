@@ -27,7 +27,7 @@ export function FilterModal() {
 
       {filterModal && (
         <div className="secondary-bg absolute top-11 -left-3 rounded-md p-6 ">
-          <form className="flex flex-col gap-4">
+          <form className="flex flex-row gap-4">
             {/* Filter modal options */}
             {state.filters.map((filter) => (
               <FilterModalItem filter={filter} key={filter.filterValue} />

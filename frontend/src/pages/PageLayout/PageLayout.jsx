@@ -20,7 +20,7 @@ export function PageLayout({ theme }) {
 
   return (
     <div
-      className="primary-bg relative flex h-max min-h-screen flex-col lg:grid lg:grid-cols-[100px_10fr] "
+      className="primary-bg relative flex h-max min-h-screen flex-col  "
       onClick={handleCloseModal}
       aria-hidden="true"
     >
@@ -30,7 +30,7 @@ export function PageLayout({ theme }) {
       <div
         className={`lg:col-start-2 ${
           (filterModal || mobileMenu) &&
-          'before:absolute before:z-10 before:h-[calc(100%-100px)] before:lg:h-full before:w-full before:lg:w-[calc(100%-100px)] before:bg-black before:opacity-70'
+          'before:absolute before:z-30 before:h-[calc(100%-100px)]  before:w-full before:bg-black before:opacity-50'
         } `}
       >
         <ToastContainer
@@ -44,6 +44,7 @@ export function PageLayout({ theme }) {
           pauseOnHover
           theme={theme}
         />
+
         <Outlet />
       </div>
     </div>
