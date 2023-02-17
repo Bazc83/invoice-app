@@ -24,18 +24,18 @@
 
 @layer components {
   .primary-bg {
-    @apply bg-gray-100 font-semibold text-gray-900 dark:bg-gray-700 dark:text-white;
+    @apply bg-gray-100 font-semibold text-gray-900 dark:bg-gray-700 dark:text-white print:text-black dark:print:text-black;
   }
   .secondary-bg {
-    @apply bg-white text-gray-900  dark:bg-gray-800 dark:text-white;
+    @apply bg-white text-gray-900  dark:bg-gray-800 dark:text-white print:text-black dark:print:text-black;
   }
 
   .default-text {
-    @apply text-gray-900 dark:text-gray-50;
+    @apply text-gray-900 dark:text-gray-50 print:text-black dark:print:text-black;
   }
 
   .secondary-text {
-    @apply text-gray-600 dark:text-gray-400;
+    @apply text-gray-600 dark:text-gray-400 print:text-gray-700 dark:print:text-gray-700;
   }
 
   .btn {
@@ -47,6 +47,22 @@
   }
 
   .errorMessage {
-    @apply aria-[invalid=true]:visible aria-[invalid=false]:invisible text-sm text-red-600 relative -top-1;
+    @apply relative -top-1 text-sm text-red-600 aria-[invalid=true]:visible aria-[invalid=false]:invisible;
   }
+}
+
+@media print {
+  .noPrint {
+    display: none;
+  }
+
+  .print {
+    box-shadow: none;
+    transform: scale(1.05);
+  }
+}
+
+@page {
+  margin-top: 5%;
+  size: auto;
 }

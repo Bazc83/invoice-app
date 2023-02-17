@@ -20,7 +20,7 @@ export function PageLayout({ theme }) {
 
   return (
     <div
-      className="primary-bg relative flex h-max min-h-screen flex-col  "
+      className="primary-bg relative flex h-max min-h-screen flex-col print "
       onClick={handleCloseModal}
       aria-hidden="true"
     >

@@ -8,6 +8,7 @@ module.exports = {
         sm: '400px',
         md: '640px',
         lg: '1024px',
+        print: { raw: 'print' },
       },
     },
   },

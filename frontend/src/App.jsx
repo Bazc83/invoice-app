@@ -38,7 +38,7 @@ function App() {
   const { user } = useContext(AuthContext);
 
   return (
-    <div className={`App ${theme}`} data-theme={theme}>
+    <div className={`App ${theme} `} data-theme={theme}>
       <DarkModeContext.Provider value={{ theme, toggleDarkMode }}>
         <InvoicesContextProvider>
           <BrowserRouter>

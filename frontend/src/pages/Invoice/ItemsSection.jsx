@@ -1,7 +1,6 @@
 import InvoiceItem from './InvoiceItem';
 
 function ItemsSection({ invoiceData }) {
- 
   return (
     <div className="grid grid-cols-12 gap-5 text-sm lg:text-base ">
       <p className="secondary-text col-span-full col-start-2 ">
@@ -9,11 +8,11 @@ function ItemsSection({ invoiceData }) {
       </p>
 
       {/* Invoice items */}
-      <div className="primary-bg col-span-10  col-start-2 flex flex-col  justify-center  rounded-sm  border-2 border-gray-300  text-sm dark:border-gray-600 ">
+      <div className="primary-bg col-span-10  col-start-2 flex flex-col  justify-center  rounded-sm  border-2 border-gray-300  text-sm dark:border-gray-600 print:border-black">
         {/* invoice items headers for screens md and above else hidden */}
         <div
-          className=" grid grid-cols-[0.5rem_repeat(10,_1fr)_0.5rem] gap-2 rounded-t-md border-b-2 border-gray-300 py-2
-         dark:border-gray-600  md:gap-4 "
+          className=" grid grid-cols-[0.5rem_repeat(10,_1fr)_0.5rem] gap-2 rounded-t-md border-b-2 border-gray-300 py-2 dark:border-gray-600 md:gap-4
+         print:border-black  print:dark:border-black "
         >
           <h3 className="col-start-2 col-end-6 text-start md:col-end-6 ">
             Item
@@ -35,8 +34,8 @@ function ItemsSection({ invoiceData }) {
           <InvoiceItem item={item} key={item._id} />
         ))}
         {/* Total amount due */}
-        <div className="primary-bg col-span-full gap-2 flex flex-wrap items-center justify-end py-2 text-sm md:gap-1 pr-5">
-          <p >Amount Due</p>
+        <div className="primary-bg col-span-full flex flex-wrap items-center justify-end gap-2 py-2 pr-5 text-sm md:gap-1">
+          <p>Amount Due</p>
           <h3>
             {new Intl.NumberFormat('en', {
               style: 'currency',
