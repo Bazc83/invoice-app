@@ -25,8 +25,7 @@ export function Invoices() {
       {/* No invoice component */}
       {state.filteredInvoices?.length === 0 && <NoInvoices />}
 
-      <div className="flex flex-col gap-4 md:bg-gray-50 md:dark:bg-gray-900 md:px-6 md:py-4 rounded-md">
-
+      <div className="flex flex-col gap-4 rounded-md md:bg-gray-50 md:px-6 md:py-4 md:dark:bg-gray-900">
         {/* Invoice preview headers md screen and greater */}
         {state.filteredInvoices?.length > 0 && (
           <div className="hidden  gap-2  py-2  md:grid  md:grid-cols-[1rem_repeat(10,_1fr)_1rem] md:items-baseline  lg:gap-2  ">

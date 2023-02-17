@@ -1,4 +1,4 @@
-import {  useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { HiOutlineMenu, HiOutlineX } from 'react-icons/hi';
 import { useParams } from 'react-router-dom';
 
@@ -38,12 +38,11 @@ export function Invoice() {
   return (
     <div
       className={`primary-bg relative mx-auto grid max-w-6xl grid-cols-1 grid-rows-1 gap-6  p-6   ${
-        (deleteModal ) &&
+        deleteModal &&
         'before:fixed before:inset-0 before:z-10 before:h-full  before:w-full before:bg-black before:bg-opacity-60 '
       }`}
     >
       {deleteModal && <ConfirmDeleteModal />}
-
 
       {/* invoice wrapper */}
       <div className=" secondary-bg relative flex flex-col rounded-md  p-6  md:flex-row md:items-center md:justify-between">

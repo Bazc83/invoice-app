@@ -18,7 +18,7 @@ function EditInvoiceForm({ handleFormSubmit, handleCancel, invoiceData }) {
   return (
     <form
       onSubmit={handleSubmit(handleFormSubmit)}
-      className=" secondary-bg mx-auto flex w-full max-w-2xl flex-col gap-10 rounded-md py-6 px-8 shadow-md "
+      className=" secondary-bg mx-auto flex w-full max-w-6xl flex-col gap-10 rounded-md py-6 px-8 shadow-md "
     >
       <div className="flex flex-col gap-4">
         <h1 className="secondary-text text-2xl">Edit #{invoiceData.id}</h1>
