@@ -1,12 +1,13 @@
 import { useContext } from 'react';
+import { useNavigate } from 'react-router';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { AuthContext } from '@/context/AuthContext';
 
-export const useAddNewInvoice = () => {
+export const useAddNewInvoice = (invoiceId) => {
   const queryClient = useQueryClient();
-
+  const navigate = useNavigate();
   const { user } = useContext(AuthContext);
 
   const addInvoice = async (invoiceData) => {
@@ -33,6 +34,9 @@ export const useAddNewInvoice = () => {
 
     onSuccess: () => {
       queryClient.invalidateQueries('invoices');
+
+      // Navigate to created invoice
+      navigate(`/invoices/${invoiceId}`);
     },
   });
 

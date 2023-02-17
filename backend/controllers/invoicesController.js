@@ -13,9 +13,9 @@ const getAmountDueTotal = (itemsArr) => {
 // Get total value per item
 const getItemsTotals = (items) => {
   if (items.length === 0) return items;
-  return items.map((val) => ({
-    ...val,
-    total: (+val.price || 0) * (+val.quantity || 0),
+  return items.map((item) => ({
+    ...item,
+    total: (+item.price || 0) * (+item.quantity || 0),
   }));
 };
 

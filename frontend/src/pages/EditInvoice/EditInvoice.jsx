@@ -1,10 +1,11 @@
-import { useNavigate, useParams } from 'react-router';
+/* eslint-disable no-underscore-dangle */
+import { useParams } from 'react-router';
 
+import CancelEditFormModal from '@/components/CancelEditFormModal';
 import useModalStore from '@/context/useModalStore';
 import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
 import { useUpdateInvoice } from '@/hooks/reactQueryHooks/useUpdateInvoice';
-
-import { InvoiceForm } from '../../components/InvoiceForm';
+import EditInvoiceForm from '@/pages/EditInvoice/EditInvoiceForm';
 
 export function EditInvoice() {
   const { invoiceId } = useParams();
@@ -19,33 +20,36 @@ export function EditInvoice() {
   } = useFilterInvoiceById(invoiceId);
 
   // Update Invoice
-  const { updateInvoiceMutation } = useUpdateInvoice();
-
-  const navigate = useNavigate();
+  const { updateInvoiceMutation } = useUpdateInvoice(invoiceId);
 
   const handleFormSubmit = (data) => {
     updateInvoiceMutation.mutate({
       invoiceId: data.id,
       invoiceData: data,
     });
-
-    navigate('/');
   };
 
   const handleCancel = () => {
     showConfirmationModal();
   };
 
+  const confirmationModal = useModalStore((s) => s.confirmationModal);
+
   if (isLoading) return 'Loading...';
 
   if (isError) return `An error has occurred: ${error.message}`;
 
   return (
-    <InvoiceForm
-      invoiceData={invoiceData}
-      handleFormSubmit={handleFormSubmit}
-      handleCancel={handleCancel}
-    />
+    <div className="primary-bg relative flex h-max flex-col pb-10 pt-6 sm:px-6 md:pt-8  ">
+      {/* confirm cancel modal */}
+      {confirmationModal && <CancelEditFormModal />}
+
+      <EditInvoiceForm
+        handleFormSubmit={handleFormSubmit}
+        handleCancel={handleCancel}
+        invoiceData={invoiceData}
+      />
+    </div>
   );
 }
 

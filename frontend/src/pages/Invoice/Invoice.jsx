@@ -37,7 +37,7 @@ export function Invoice() {
 
   return (
     <div
-      className={`primary-bg relative mx-auto grid max-w-2xl grid-cols-1 grid-rows-1 gap-6  p-6   ${
+      className={`primary-bg relative mx-auto grid max-w-6xl grid-cols-1 grid-rows-1 gap-6  p-6   ${
         (deleteModal ) &&
         'before:fixed before:inset-0 before:z-10 before:h-full  before:w-full before:bg-black before:bg-opacity-60 '
       }`}

@@ -19,18 +19,18 @@ export function InvoicePreview({ invoice }) {
   return (
     <div
       onClick={() => showFullInvoice(invoice.id)}
-      className="secondary-bg  flex cursor-pointer flex-col gap-2 rounded-md py-4 px-8 shadow-md md:grid md:grid-cols-[1rem_repeat(10,_1fr)_1rem] md:items-baseline md:justify-center md:gap-1 md:px-0 lg:gap-2"
+      className="secondary-bg  flex cursor-pointer flex-col gap-2 rounded-md py-4 px-8 shadow-md md:grid md:grid-cols-[1rem_repeat(10,_1fr)_1rem] md:items-baseline md:justify-center md:gap-2 md:px-0 sm:gap-1"
       aria-hidden="true"
     >
       {/* Invoice id and paymentDue date */}
-      <div className="flex  items-baseline justify-between    gap-1  md:col-start-2     md:col-end-5">
-        <p className="secondary-text md:default-text ">#{id}</p>
+      <div className="grid grid-cols-[1fr_2fr]     gap-1  md:col-start-2    md:col-end-6  ">
+        <p className="secondary-text md:default-text  md:text-start text-sm md:text-base">#{id}</p>
 
         {/* Only show payment due date if not paid */}
         {status === 'paid' ? (
-          <p>Invoice Paid</p>
+          <p  className=' text-end md:text-center text-sm md:text-base'>Invoice Paid</p>
         ) : (
-          <p>
+          <p className=' text-end md:text-center text-sm md:text-base'>
             <span className="md:hidden">Due</span> {getDate(paymentDue)}
           </p>
         )}
@@ -40,7 +40,7 @@ export function InvoicePreview({ invoice }) {
         <p>{clientName} </p>
       </div>
       <div className="flex items-center justify-between  gap-2 md:col-start-9 md:col-end-12 md:w-full md:gap-6">
-        <p className="   w-full md:text-end lg:text-center">
+        <p className="   w-full  lg:text-center">
           {new Intl.NumberFormat('en', {
             style: 'currency',
             currency: 'GBP',
