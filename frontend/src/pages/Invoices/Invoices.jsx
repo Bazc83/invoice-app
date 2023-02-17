@@ -18,7 +18,7 @@ export function Invoices() {
   if (isLoading) return 'Loading...';
   if (isError) return `An error has occurred: ${error.message}`;
   return (
-    <div className="primary-bg relative mx-auto flex h-full max-w-6xl flex-col gap-4 px-6 py-8  lg:grid lg:grid-cols-[200px_1fr]">
+    <div className="primary-bg relative mx-auto flex h-full max-w-7xl flex-col gap-4 px-6 py-8  lg:grid lg:grid-cols-[200px_1fr]">
       {/* filter checkboxes and add new invoice button */}
       <InvoicesControlPanel state={state} />
 

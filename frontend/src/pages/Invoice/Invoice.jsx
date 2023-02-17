@@ -1,24 +1,27 @@
-import { useEffect, useState } from 'react';
-import { HiOutlineMenu, HiOutlineX } from 'react-icons/hi';
-import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { ConfirmDeleteModal } from '@/components/ConfirmDeleteModal';
 import { GoBackLink } from '@/components/GoBackLink';
 import useModalStore from '@/context/useModalStore';
 import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
 import useFormatDate from '@/hooks/useFormatDate';
-import { InvoiceButtons } from '@/pages/Invoice/InvoiceButtons';
 
 import ItemsSection from './ItemsSection';
 
 export function Invoice() {
+  const showDeleteModal = useModalStore((s) => s.showDeleteModal);
   const deleteModal = useModalStore((s) => s.deleteModal);
   const hideAllModals = useModalStore((s) => s.hideAllModals);
+
   const { getDate } = useFormatDate();
 
-  const [showInvoiceControls, setShowInvoiceControls] = useState(false);
-
   const { invoiceId } = useParams();
+
+  const navigate = useNavigate();
+
+  const handleEditInvoice = (invoiceIdVal) =>
+    navigate(`/editinvoice/${invoiceIdVal}`);
 
   const {
     data: invoiceData,
@@ -36,37 +39,33 @@ export function Invoice() {
   if (isError) return `An error has occurred: ${error.message}`;
 
   return (
-    <div
-      className={`primary-bg relative mx-auto grid max-w-6xl grid-cols-1 grid-rows-1 gap-6  p-6   ${
-        deleteModal &&
-        'before:fixed before:inset-0 before:z-10 before:h-full  before:w-full before:bg-black before:bg-opacity-60 '
-      }`}
-    >
+    <div className="primary-bg relative mx-auto grid max-w-3xl grid-cols-1 grid-rows-1 gap-6  p-6 ">
+      {/* Show delete confirmation modal */}
       {deleteModal && <ConfirmDeleteModal />}
 
-      {/* invoice wrapper */}
-      <div className=" secondary-bg relative flex flex-col rounded-md  p-6  md:flex-row md:items-center md:justify-between">
-        <div className="flex items-center justify-between ">
-          {/* Go back to invoices page link */}
-          <GoBackLink linkPath="/invoices" />
+      {/* invoice conrols */}
+      <div className=" secondary-bg relative flex  flex-col items-center justify-between  gap-4 rounded-md  py-6 px-8 text-sm sm:flex-row">
+        {/* Go back to invoices page link */}
+        <GoBackLink linkPath="/invoices" />
 
+        <div className="flex gap-4">
           <button
             type="button"
-            onClick={() => setShowInvoiceControls((prev) => !prev)}
-            className={` relative cursor-pointer rounded-md  py-1 px-1 font-semibold text-gray-800 outline-none transition-colors  dark:text-gray-50  md:hidden `}
+            onClick={showDeleteModal}
+            className="btn border border-red-600 text-red-600  hover:bg-red-600 hover:text-white  "
           >
-            {showInvoiceControls ? (
-              <HiOutlineX className="text-2xl" />
-            ) : (
-              <HiOutlineMenu className="text-2xl" />
-            )}
+            Delete
+          </button>
+
+          {/* Edit Button */}
+          <button
+            type="button"
+            onClick={() => handleEditInvoice(invoiceId)}
+            className="btn   border border-gray-900 text-gray-900    hover:bg-gray-900 hover:text-gray-50 dark:border-gray-50  dark:text-gray-50  hover:dark:text-gray-900 "
+          >
+            Edit
           </button>
         </div>
-
-        <InvoiceButtons
-          showInvoiceControls={showInvoiceControls}
-          invoiceId={invoiceId}
-        />
       </div>
 
       {/* Invoice main content */}
