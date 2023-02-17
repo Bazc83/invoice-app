@@ -3,8 +3,6 @@ import { useEffect, useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 
-import { formatISO } from 'date-fns';
-
 import CancelEditFormModal from '@/components/CancelEditFormModal';
 import InvoiceFormItem from '@/components/InvoiceForm/InvoiceFormItem';
 import TextInputWithValidation from '@/components/InvoiceForm/TextInputWithValidation';
@@ -21,27 +19,12 @@ export function NewInvoice() {
 
   const [newInvoiceId, setNewInvoiceId] = useState('');
 
-  const todaysDate = formatISO(new Date(), { representation: 'date' });
-  // const [paymentDue, setPaymentDue] = useState(todaysDate);
+
   const showConfirmationModal = useModalStore((s) => s.showConfirmationModal);
 
-  const [createdAtDate, setCreatedAtDate] = useState();
-  const [paymentTerms, setPaymentTerms] = useState();
 
-  // todo left of here
-  // todo
-  // todo
 
-  // todo Getting data onchange from form and then gonna use it generate payment due dates
-
-  useEffect(() => {
-    console.log(createdAtDate);
-  }, [createdAtDate]);
-  useEffect(() => {
-    console.log(paymentTerms);
-  }, [paymentTerms]);
-
-  const [invoiceData, setInvoiceData] = useState({
+  const [invoiceData] = useState({
     id: '',
     companyName: '',
     senderCity: '',
@@ -84,10 +67,7 @@ export function NewInvoice() {
     const payloadData = {
       ...data,
       id: invoiceId,
-      createdAt: todaysDate,
     };
-
-    console.log(payloadData);
 
     newInvoiceMutation.mutate({
       invoiceData: payloadData,
@@ -270,7 +250,6 @@ export function NewInvoice() {
             {/* Payment Terms */}
             <select
               {...register('paymentTerms', {
-                onChange: (e) => setPaymentTerms(e.target.value),
                 required: {
                   value: true,
                   message: 'Payment Terms are required',
@@ -310,9 +289,7 @@ export function NewInvoice() {
               <label htmlFor="createdAt">Created At</label>
               <input
                 type="date"
-                {...register('createdAt', {
-                  onChange: (e) => setCreatedAtDate(e.target.value),
-                })}
+                {...register('createdAt')}
               />
             </div>
           </div>

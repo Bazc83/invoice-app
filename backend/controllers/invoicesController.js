@@ -1,5 +1,7 @@
 const asyncHandler = require('express-async-handler');
-
+const addDays = require('date-fns/addDays');
+const formatISO = require('date-fns/formatISO');
+const parseISO = require('date-fns/parseISO');
 const Invoice = require('../models/invoiceModel');
 
 // Calculate amount due total
@@ -15,6 +17,42 @@ const getItemsTotals = (items) => {
     ...val,
     total: (+val.price || 0) * (+val.quantity || 0),
   }));
+};
+
+// CreatedAt date
+const setCreatedAtDate = (createdAtDate) => {
+  if (createdAtDate !== '') return createdAtDate;
+
+  return formatISO(new Date(), {
+    representation: 'date',
+  });
+};
+
+// setInvoiceDates
+const setInvoiceDates = ({ paymentTermsValue, createdAtDate }) => {
+  const newDate = new Date();
+
+  const createdAt = createdAtDate ? parseISO(createdAtDate) : '';
+  const addFifteenDays = addDays(createdAtDate ? createdAt : newDate, 15);
+  const addTwentyOneDays = addDays(createdAtDate ? createdAt : newDate, 21);
+
+  const todaysDate = formatISO(createdAtDate ? createdAt : newDate, {
+    representation: 'date',
+  });
+
+  const fifteenDays = formatISO(addFifteenDays, { representation: 'date' });
+  const twentyOneDays = formatISO(addTwentyOneDays, { representation: 'date' });
+
+  switch (paymentTermsValue) {
+    case 'Cash':
+      return todaysDate;
+    case '15 days from invoice date':
+      return fifteenDays;
+    case '21 days from invoice date':
+      return twentyOneDays;
+    default:
+      return 'paymentTermsValue';
+  }
 };
 
 // get all invoices
@@ -52,11 +90,22 @@ const addInvoice = asyncHandler(async (req, res) => {
   // Generates total value of all products
   const amountDueTotal = getAmountDueTotal(items);
 
+  // set createdAtDate
+  const createdAtDate = setCreatedAtDate(req.body.createdAt);
+
+  // get invoice due date
+  const paymentDueDate = setInvoiceDates({
+    paymentTermsValue: req.body.paymentTerms,
+    createdAtDate: createdAtDate,
+  });
+
   // get all from req.body and
   const payloadData = {
     ...req.body,
     items: items,
     amountDueTotal: amountDueTotal,
+    createdAt: createdAtDate,
+    paymentDue: paymentDueDate,
   };
 
   const invoice = await Invoice.create(payloadData);
@@ -84,11 +133,22 @@ const updateInvoice = asyncHandler(async (req, res) => {
   // Generates total value of all products
   const amountDueTotal = getAmountDueTotal(items);
 
-  // get all from req.body and
+  // set createdAtDate
+  const createdAtDate = setCreatedAtDate(req.body.createdAt);
+
+  // get invoice due date
+  const paymentDueDate = setInvoiceDates({
+    paymentTermsValue: req.body.paymentTerms,
+    createdAtDate: createdAtDate,
+  });
+
+  // get all from req.body
   const payloadData = {
     ...req.body,
     items: items,
     amountDueTotal: amountDueTotal,
+    createdAt: createdAtDate,
+    paymentDue: paymentDueDate,
   };
 
   const invoice = await Invoice.findOneAndUpdate(
