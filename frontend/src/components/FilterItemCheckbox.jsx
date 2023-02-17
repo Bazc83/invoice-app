@@ -24,9 +24,9 @@ function FilterItemCheckbox({ filter }) {
       />
 
       {filter.checked && (
-        <FaCheck className="absolute top-[2px] left-[2px] z-50" />
+        <FaCheck className="absolute top-[2px] left-[2px] z-30 " />
       )}
-      <label htmlFor={filter.filterValue} className="cursor-pointer capitalize">
+      <label htmlFor={filter.filterValue} className="cursor-pointer capitalize ">
         {filter.filterValue}
       </label>
     </div>
