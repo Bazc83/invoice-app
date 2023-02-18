@@ -29,7 +29,7 @@ export function Signup() {
         onChange={(e) => setPassword(e.target.value)}
       />
 
-      <button type="button" disabled={isLoading}>
+      <button type="submit" disabled={isLoading}>
         Sign Up
       </button>
 
