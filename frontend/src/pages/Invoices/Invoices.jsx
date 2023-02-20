@@ -18,16 +18,19 @@ export function Invoices() {
   if (isLoading) return 'Loading...';
   if (isError) return `An error has occurred: ${error.message}`;
   return (
-    <div className="mx-auto h-full  max-w-6xl rounded-md px-6 ">
-      <div className="secondary-bg relative  mt-4 flex  h-full flex-col gap-4 rounded-md px-6  py-8 lg:grid lg:grid-cols-[200px_1fr]">
+    <div className=" mx-auto secondary-bg  md:px-6 h-full max-w-6xl rounded-md xl:mt-6  shadow-md">
+
+      <h1 className='text-center text-3xl py-6'>Invoices</h1>
+      <div className=" relative flex h-full flex-col gap-4 rounded-md  lg:grid lg:grid-cols-[200px_1fr] ">
         {/* filter checkboxes and add new invoice button */}
         <InvoicesControlPanel state={state} />
 
         {/* No invoice component */}
         {state.filteredInvoices?.length === 0 && <NoInvoices />}
 
-        <div className="flex flex-col gap-2 rounded-md px-6 pt-4 pb-10 sm:bg-gray-50 sm:dark:bg-gray-900 ">
-          <h1 className="secondary-text my-3 text-center text-2xl">Invoices</h1>
+        <div className="flex flex-col gap-2 rounded-md px-6 pt-4 pb-10 primary-bg shadow-md">
+
+    
           {/* Invoice preview headers md screen and greater */}
           {state.filteredInvoices?.length > 0 && (
             <div className="hidden  gap-2  py-1  md:grid  md:grid-cols-[1rem_repeat(10,_1fr)_1rem] md:items-baseline  lg:gap-2  ">
@@ -50,7 +53,7 @@ export function Invoices() {
           )}
 
           {/* Invoice previews  */}
-          <div className="flex flex-col gap-4 overflow-auto lg:max-h-[500px] ">
+          <div className="flex flex-col gap-4 ">
             {/* invoice previews */}
             {invoices?.length > 0 &&
               state.filteredInvoices?.map((invoice) => (

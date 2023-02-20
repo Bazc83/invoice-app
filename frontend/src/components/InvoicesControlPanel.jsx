@@ -5,12 +5,11 @@ import Filters from './Filters';
 function InvoicesControlPanel({ state }) {
   const navigate = useNavigate();
   return (
-    <div className="sm:bg-gray-50 sm:dark:bg-gray-900 flex flex-col items-center  justify-between gap-6 rounded-md   px-2 sm:px-6 py-6 text-sm md:flex-row lg:flex-col lg:justify-start lg:pt-8 h-max lg:pb-10">
-      
+    <div className="  primary-bg flex h-max  flex-col items-center justify-between   gap-6 rounded-md px-6 py-6  text-sm shadow-md md:flex-row lg:flex-col lg:justify-start lg:pt-8 lg:pb-10">
       {/* Button shows new invoice form */}
       <button
         type="button"
-        className="flex w-full items-center justify-center gap-2 rounded-md bg-green-900 px-4 py-2  text-gray-50 md:w-auto  hover:bg-opacity-90 text-sm"
+        className="flex w-full items-center justify-center gap-2 rounded-md bg-green-900 px-4 py-2  text-sm text-gray-50  hover:bg-opacity-90 md:w-auto"
         onClick={() => navigate('/newinvoice')}
       >
         Add Invoice

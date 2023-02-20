@@ -19,18 +19,22 @@ export function InvoicePreview({ invoice }) {
   return (
     <div
       onClick={() => showFullInvoice(invoice.id)}
-      className="secondary-bg  flex cursor-pointer flex-col gap-2 rounded-md py-4 px-8 shadow-md md:grid md:grid-cols-[1rem_repeat(10,_1fr)_1rem] md:items-baseline md:justify-center md:gap-2 md:px-0 sm:gap-1"
+      className="secondary-bg flex cursor-pointer flex-col gap-2 rounded-md border border-gray-200 px-6 py-6 shadow-md dark:border-gray-900 sm:gap-1 md:grid md:grid-cols-[1rem_repeat(10,_1fr)_1rem] md:items-baseline md:justify-center md:gap-2 md:px-2 md:py-6  "
       aria-hidden="true"
     >
       {/* Invoice id and paymentDue date */}
       <div className="grid grid-cols-[1fr_2fr]     gap-1  md:col-start-2    md:col-end-6  ">
-        <p className="secondary-text md:default-text  md:text-start text-sm md:text-base">#{id}</p>
+        <p className="secondary-text md:default-text  text-sm md:text-start md:text-base">
+          #{id}
+        </p>
 
         {/* Only show payment due date if not paid */}
         {status === 'paid' ? (
-          <p  className=' text-end md:text-center text-sm md:text-base'>Invoice Paid</p>
+          <p className=" text-end text-sm md:text-center md:text-base">
+            Invoice Paid
+          </p>
         ) : (
-          <p className=' text-end md:text-center text-sm md:text-base'>
+          <p className=" text-end text-sm md:text-center md:text-base">
             <span className="md:hidden">Due</span> {getDate(paymentDue)}
           </p>
         )}
@@ -48,7 +52,7 @@ export function InvoicePreview({ invoice }) {
         </p>
 
         <p
-          className={`shrink-1 w-[170px] text-center   ${paymentStatusColor} rounded-md border py-2 px-1 text-sm capitalize`}
+          className={`shrink-1 w-[170px] text-center  md:pl-4 ${paymentStatusColor} rounded-md border py-2 px-1 text-sm capitalize md:rounded-none md:border-none md:py-0 md:px-0 md:text-base`}
         >
           {status}
         </p>

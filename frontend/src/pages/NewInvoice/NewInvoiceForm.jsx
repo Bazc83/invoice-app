@@ -58,7 +58,7 @@ function NewInvoiceForm({ handleFormSubmit, handleCancel, newInvoiceId }) {
       className=" secondary-bg mx-auto flex w-full max-w-2xl flex-col gap-10 rounded-md py-6 px-8 shadow-md "
     >
       <div className="flex flex-col gap-4">
-        <h1 className="secondary-text text-2xl">New Invoice #{newInvoiceId}</h1>
+        <h1 className="text-2xl">New Invoice #{newInvoiceId}</h1>
 
         <input
           id="id"

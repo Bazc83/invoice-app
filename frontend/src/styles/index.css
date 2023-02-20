@@ -18,16 +18,16 @@
   [multiple],
   textarea,
   select {
-    @apply w-full rounded-md  border-gray-300 bg-white text-gray-900 shadow-md active:ring-indigo-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:[color-scheme:_dark];
+    @apply w-full rounded-md  border-gray-300 bg-gray-50 text-gray-900 shadow-md active:ring-indigo-600 dark:border-gray-800 dark:bg-gray-850 dark:text-gray-50 dark:[color-scheme:_dark];
   }
 }
 
 @layer components {
   .primary-bg {
-    @apply bg-gray-100 font-semibold text-gray-900 dark:bg-gray-700 dark:text-white print:text-black dark:print:text-black;
+    @apply bg-gray-50 font-semibold text-black dark:bg-gray-850 dark:text-gray-100 print:text-black dark:print:text-black ;
   }
   .secondary-bg {
-    @apply bg-white text-gray-900  dark:bg-gray-800 dark:text-white print:text-black dark:print:text-black;
+    @apply bg-gray-25 text-black dark:bg-gray-800 dark:text-gray-50 print:text-black dark:print:text-black;
   }
 
   .default-text {
@@ -35,7 +35,7 @@
   }
 
   .secondary-text {
-    @apply text-gray-600 dark:text-gray-400 print:text-gray-700 dark:print:text-gray-700;
+    @apply text-gray-600 dark:text-gray-800 print:text-gray-700 dark:print:text-gray-700;
   }
 
   .btn {
