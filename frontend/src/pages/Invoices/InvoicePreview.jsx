@@ -24,9 +24,7 @@ export function InvoicePreview({ invoice }) {
     >
       {/* Invoice id and paymentDue date */}
       <div className="grid grid-cols-[1fr_2fr]     gap-1  md:col-start-2    md:col-end-6  ">
-        <p className="secondary-text md:default-text  text-sm md:text-start md:text-base">
-          #{id}
-        </p>
+        <p className=" text-sm md:text-start md:text-base">#{id}</p>
 
         {/* Only show payment due date if not paid */}
         {status === 'paid' ? (

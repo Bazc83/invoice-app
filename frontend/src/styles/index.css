@@ -3,8 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-
-
   [type='text'],
   [type='email'],
   [type='url'],
@@ -37,7 +35,7 @@
   }
 
   .secondary-text {
-    @apply text-gray-600 dark:text-gray-800 print:text-gray-700 dark:print:text-gray-700;
+    @apply text-gray-600 dark:text-gray-50 print:text-gray-700 dark:print:text-gray-700;
   }
 
   .btn {
@@ -51,8 +49,6 @@
   .errorMessage {
     @apply relative -top-1 text-sm text-red-600 aria-[invalid=true]:visible aria-[invalid=false]:invisible;
   }
-
-
 }
 
 @media print {
