@@ -33,15 +33,44 @@ function ItemsSection({ invoiceData }) {
           // eslint-disable-next-line no-underscore-dangle
           <InvoiceItem item={item} key={item._id} />
         ))}
-        {/* Total amount due */}
-        <div className="primary-bg col-span-full flex flex-wrap items-center justify-end gap-2 py-2 pr-5 text-sm md:gap-1">
-          <p>Amount Due</p>
-          <h3>
-            {new Intl.NumberFormat('en', {
-              style: 'currency',
-              currency: 'GBP',
-            }).format(invoiceData?.amountDueTotal)}
-          </h3>
+
+        <div className="flex flex-col gap-1 py-2">
+          <div className="primary-bg col-span-full flex flex-wrap items-center justify-end gap-2 pr-5 text-xs  md:gap-2">
+            <small>Ex Tax</small>
+            <small>
+              {' '}
+              {new Intl.NumberFormat('en', {
+                style: 'currency',
+                currency: 'GBP',
+              }).format(invoiceData?.exVatTotal)}
+            </small>
+          </div>
+          <div className="primary-bg col-span-full flex flex-wrap items-center justify-end gap-2 pr-5 text-xs md:gap-2">
+            <small>Tax Rate</small>
+            <small>{invoiceData?.taxRate}</small>
+          </div>
+
+          <div className="primary-bg col-span-full flex flex-wrap items-center justify-end gap-2 pr-5 text-xs md:gap-2 ">
+            <small>Tax</small>
+            <small>
+              {' '}
+              {new Intl.NumberFormat('en', {
+                style: 'currency',
+                currency: 'GBP',
+              }).format(invoiceData?.vatAmount)}
+            </small>
+          </div>
+
+          {/* Total amount due */}
+          <div className="primary-bg col-span-full flex flex-wrap items-center justify-end gap-2 pr-5  ">
+            <p>Amount Due</p>
+            <p>
+              {new Intl.NumberFormat('en', {
+                style: 'currency',
+                currency: 'GBP',
+              }).format(invoiceData?.amountDueTotal)}
+            </p>
+          </div>
         </div>
       </div>
     </div>

@@ -3,28 +3,36 @@ const mongoose = require('mongoose');
 const invoiceSchema = new mongoose.Schema({
   companyName: {
     type: String,
+    default: '',
   },
   senderCity: {
     type: String,
+    default: '',
   },
   senderStreet: {
     type: String,
+    default: '',
   },
   senderPostCode: {
     type: String,
+    default: '',
   },
   senderCountry: {
     type: String,
+    default: '',
   },
 
   clientEmail: {
     type: String,
+    default: '',
   },
   clientName: {
     type: String,
+    default: '',
   },
   description: {
     type: String,
+    default: '',
   },
   id: {
     type: String,
@@ -34,6 +42,7 @@ const invoiceSchema = new mongoose.Schema({
     {
       name: {
         type: String,
+        default: '',
       },
       price: {
         type: String,
@@ -57,29 +66,49 @@ const invoiceSchema = new mongoose.Schema({
   },
   paymentDue: {
     type: String,
+    default: '',
   },
   paymentTerms: {
     type: String,
+    default: '',
   },
 
   clientCity: {
     type: String,
+    default: '',
   },
   clientStreet: {
     type: String,
+    default: '',
   },
   clientPostCode: {
     type: String,
+    default: '',
   },
   clientCountry: {
     type: String,
+    default: '',
   },
 
   status: {
     type: String,
+    default: '',
+  },
+  exVatTotal: {
+    type: Number,
+    default: 0,
+  },
+  taxRate: {
+    type: String,
+    default: '20%',
+  },
+  vatAmount: {
+    type: Number,
+    default: 0,
   },
   amountDueTotal: {
     type: Number,
+    default: 0,
   },
 });
 

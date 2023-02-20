@@ -4,12 +4,6 @@ const formatISO = require('date-fns/formatISO');
 const parseISO = require('date-fns/parseISO');
 const Invoice = require('../models/invoiceModel');
 
-// Calculate amount due total
-const getAmountDueTotal = (itemsArr) => {
-  if (itemsArr.length === 0) return 0;
-  return itemsArr.reduce((acc, curr) => acc + curr.total, 0);
-};
-
 // Get total value per item
 const getItemsTotals = (items) => {
   if (items.length === 0) return items;
@@ -17,6 +11,35 @@ const getItemsTotals = (items) => {
     ...item,
     total: (+item.price || 0) * (+item.quantity || 0),
   }));
+};
+
+// Vat rate 20%
+const vatRate = 20;
+
+// Calculate amount due total
+const calculateExVatTotal = (itemsArr) => {
+  if (itemsArr.length === 0) return 0;
+  return itemsArr.reduce((acc, curr) => acc + curr.total, 0);
+};
+
+// Calculate vat
+const calculateVat = (exVatTotal) => {
+  return (exVatTotal / 100) * vatRate;
+};
+
+// Total Amount due
+const getAmountDueTotal = (vat, exVatTotal) => {
+  return exVatTotal + vat;
+};
+
+const calculateValues = (items) => {
+  const exVatTotal = calculateExVatTotal(items);
+
+  const vatAmount = calculateVat(exVatTotal);
+
+  const amountDueTotal = getAmountDueTotal(exVatTotal, vatAmount);
+
+  return { exVatTotal, vatAmount, amountDueTotal };
 };
 
 // CreatedAt date
@@ -87,8 +110,7 @@ const addInvoice = asyncHandler(async (req, res) => {
   // Generates items with correct totals per item
   const items = getItemsTotals(req.body.items);
 
-  // Generates total value of all products
-  const amountDueTotal = getAmountDueTotal(items);
+  const { exVatTotal, vatAmount, amountDueTotal } = calculateValues(items);
 
   // set createdAtDate
   const createdAtDate = setCreatedAtDate(req.body.createdAt);
@@ -103,6 +125,9 @@ const addInvoice = asyncHandler(async (req, res) => {
   const payloadData = {
     ...req.body,
     items: items,
+    exVatTotal: exVatTotal,
+    taxRate: `${vatRate}%`,
+    vatAmount: vatAmount,
     amountDueTotal: amountDueTotal,
     createdAt: createdAtDate,
     paymentDue: paymentDueDate,
@@ -130,8 +155,8 @@ const updateInvoice = asyncHandler(async (req, res) => {
   // Generates items with correct totals per item
   const items = getItemsTotals(req.body.items);
 
-  // Generates total value of all products
-  const amountDueTotal = getAmountDueTotal(items);
+  // get subtotal, totalVat, total amount due
+  const { exVatTotal, vatAmount, amountDueTotal } = calculateValues(items);
 
   // set createdAtDate
   const createdAtDate = setCreatedAtDate(req.body.createdAt);
@@ -146,6 +171,9 @@ const updateInvoice = asyncHandler(async (req, res) => {
   const payloadData = {
     ...req.body,
     items: items,
+    exVatTotal: exVatTotal,
+    taxRate: `${vatRate}%`,
+    vatAmount: vatAmount,
     amountDueTotal: amountDueTotal,
     createdAt: createdAtDate,
     paymentDue: paymentDueDate,

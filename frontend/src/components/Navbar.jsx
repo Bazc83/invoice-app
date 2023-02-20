@@ -60,16 +60,16 @@ export function Navbar() {
           {/* Navlist */}
           {mobileMenu && (
             <nav
-              className={`secondary-bg absolute top-14 right-0 z-30 overflow-hidden rounded-md shadow-md transition-transform ease-in `}
+              className={`secondary-bg absolute top-14 right-0 z-30 overflow-hidden shadow-md transition-transform ease-in `}
             >
-              <ul className="flex w-max max-w-full flex-col flex-wrap gap-3   divide-y-2 divide-gray-900 divide-opacity-10 last:pb-4  dark:divide-gray-50 dark:divide-opacity-10">
-                <li className="px-6 pt-6 pb-4 text-base text-gray-900 hover:text-gray-600 dark:text-white hover:dark:text-gray-400">
+              <ul className="flex  w-[250px]  flex-col  ">
+                <li className=" block  w-full  cursor-pointer border-b border-b-gray-700  px-4 py-4 last:border-none hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">
                   <Link to="/invoices"> Invoices</Link>
                 </li>
 
                 {/* Logout */}
                 {user && (
-                  <li className="px-6 py-4 text-gray-900 hover:text-gray-600 dark:text-white hover:dark:text-gray-400">
+                  <li className=" block  w-full  cursor-pointer border-b border-b-gray-700  px-4 py-4 last:border-none hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">
                     <button
                       className="flex items-center gap-2 text-base "
                       type="button"
@@ -83,7 +83,7 @@ export function Navbar() {
 
                 {/* Login */}
                 {!user && (
-                  <li className="px-6 py-4 text-gray-900 hover:text-gray-600 dark:text-white hover:dark:text-gray-400">
+                  <li className=" block  w-full  cursor-pointer border-b border-b-gray-700  px-4 py-4 last:border-none hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">
                     <Link to="/login" className="flex items-center gap-2 ">
                       Login
                       <FaSignInAlt className="text-xl " />
@@ -93,7 +93,7 @@ export function Navbar() {
 
                 {/* Register / signup */}
                 {!user && (
-                  <li className="px-6 py-4 text-gray-900 hover:text-gray-600 dark:text-white hover:dark:text-gray-400">
+                  <li className=" block  w-full  cursor-pointer border-b border-b-gray-700  px-4 py-4 last:border-none hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">
                     <Link to="/signup" className="flex items-center gap-2 ">
                       Sign up
                       <FaUserEdit className="text-xl transition-colors hover:text-gray-400" />

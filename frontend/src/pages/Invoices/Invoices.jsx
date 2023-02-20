@@ -18,9 +18,8 @@ export function Invoices() {
   if (isLoading) return 'Loading...';
   if (isError) return `An error has occurred: ${error.message}`;
   return (
-    <div  className="mx-auto secondary-bg  md:px-6 h-full max-w-6xl rounded-md md:mt-4  shadow-md pb-10 ">
-
-      <h1 className='text-center text-3xl py-6'>Invoices</h1>
+    <div className="secondary-bg mx-auto  h-full max-w-6xl rounded-md pb-10 shadow-md  md:mt-4 md:px-6 ">
+      <h1 className="py-6 text-center text-3xl">Invoices</h1>
       <div className=" relative flex h-full flex-col gap-4 rounded-md  lg:grid lg:grid-cols-[200px_1fr] ">
         {/* filter checkboxes and add new invoice button */}
         <InvoicesControlPanel state={state} />
@@ -28,9 +27,7 @@ export function Invoices() {
         {/* No invoice component */}
         {state.filteredInvoices?.length === 0 && <NoInvoices />}
 
-        <div className="flex flex-col gap-2 rounded-md px-6 pt-4 pb-10 primary-bg shadow-md ">
-
-    
+        <div className="primary-bg flex flex-col gap-2 rounded-md px-6 pt-4 pb-10 shadow-md ">
           {/* Invoice preview headers md screen and greater */}
           {state.filteredInvoices?.length > 0 && (
             <div className="hidden  gap-2  py-1  md:grid  md:grid-cols-[1rem_repeat(10,_1fr)_1rem] md:items-baseline  lg:gap-2  ">
