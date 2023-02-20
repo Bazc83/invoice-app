@@ -6,11 +6,10 @@ module.exports = {
   darkMode: 'class',
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
-  
     extend: {
-      colors:{
-        "gray-25": "#FEFEFF",
-        "gray-850": "#2A3340"
+      colors: {
+        'gray-25': '#FEFEFF',
+        'gray-850': '#2A3340',
       },
       screens: {
         sm: '400px',
@@ -20,5 +19,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require('@tailwindcss/forms')],
+  plugins: [require('@tailwindcss/forms'), require('tailwind-scrollbar')],
 };

@@ -18,7 +18,7 @@ export function Invoices() {
   if (isLoading) return 'Loading...';
   if (isError) return `An error has occurred: ${error.message}`;
   return (
-    <div className=" mx-auto secondary-bg  md:px-6 h-full max-w-6xl rounded-md xl:mt-6  shadow-md">
+    <div  className="mx-auto secondary-bg  md:px-6 h-full max-w-6xl rounded-md md:mt-4  shadow-md pb-10 ">
 
       <h1 className='text-center text-3xl py-6'>Invoices</h1>
       <div className=" relative flex h-full flex-col gap-4 rounded-md  lg:grid lg:grid-cols-[200px_1fr] ">
@@ -28,7 +28,7 @@ export function Invoices() {
         {/* No invoice component */}
         {state.filteredInvoices?.length === 0 && <NoInvoices />}
 
-        <div className="flex flex-col gap-2 rounded-md px-6 pt-4 pb-10 primary-bg shadow-md">
+        <div className="flex flex-col gap-2 rounded-md px-6 pt-4 pb-10 primary-bg shadow-md ">
 
     
           {/* Invoice preview headers md screen and greater */}

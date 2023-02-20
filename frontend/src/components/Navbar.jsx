@@ -36,7 +36,7 @@ export function Navbar() {
   };
 
   return (
-    <div className="noPrint | z-50 h-20 bg-gradient-to-t from-gray-700 via-gray-800 to-gray-900 ">
+    <div className="noPrint | z-50 h-20 bg-gray-800">
       {/* Navbar Container */}
       <div className=" relative mx-auto flex h-20 max-w-6xl items-center justify-between py-4 px-6 text-gray-50">
         {/* Random logo */}

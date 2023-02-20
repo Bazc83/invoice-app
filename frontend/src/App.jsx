@@ -38,7 +38,12 @@ function App() {
   const { user } = useContext(AuthContext);
 
   return (
-    <div className={`App ${theme} `} data-theme={theme}>
+    <div
+      className={`App ${theme} h-screen overflow-auto ${
+        theme === 'dark' && '[color-scheme:dark]'
+      }`}
+      data-theme={theme}
+    >
       <DarkModeContext.Provider value={{ theme, toggleDarkMode }}>
         <InvoicesContextProvider>
           <BrowserRouter>
@@ -82,7 +87,9 @@ function App() {
               </Route>
             </Routes>
           </BrowserRouter>
-          <ReactQueryDevtools initialIsOpen={false} />
+          <div className="noPrint">
+            <ReactQueryDevtools initialIsOpen={false} />
+          </div>
         </InvoicesContextProvider>
       </DarkModeContext.Provider>
     </div>
