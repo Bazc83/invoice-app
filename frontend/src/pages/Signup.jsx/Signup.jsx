@@ -22,7 +22,7 @@ export function Signup() {
         <form
           onSubmit={handleSubmit(handleFormSubmit)}
           className="secondary-bg mx-auto flex max-w-lg flex-col gap-6 rounded-md p-6 shadow-md md:p-8 "
-        >s
+        >
           <h3 className="text-center text-2xl ">Sign up</h3>
 
           {/* Email */}
