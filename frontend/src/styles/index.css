@@ -69,6 +69,8 @@
     @apply cursor-pointer rounded-md py-2 px-4 outline-none transition-colors;
   }
 
+  
+
   .inputError {
     @apply aria-[invalid=true]:ring-2 aria-[invalid=true]:ring-red-600;
   }

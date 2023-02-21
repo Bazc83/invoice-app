@@ -6,7 +6,7 @@ import useModalStore from '@/context/useModalStore';
 
 import 'react-toastify/dist/ReactToastify.css';
 
-export function PageLayout({ theme }) {
+export function PageLayout() {
   const filterModal = useModalStore((state) => state.filterModal);
   const mobileMenu = useModalStore((state) => state.mobileMenu);
 
@@ -42,8 +42,7 @@ export function PageLayout({ theme }) {
           rtl={false}
           pauseOnFocusLoss
           pauseOnHover
-          // theme={theme}
-          theme='colored'
+          theme="colored"
           className="mt-24"
         />
 

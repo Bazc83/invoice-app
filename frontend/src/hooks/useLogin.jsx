@@ -22,15 +22,19 @@ export const useLogin = () => {
     if (!response.ok) {
       setIsLoading(false);
       setError(json.error);
+
+      // Removes error from UI
+      setTimeout(() => {
+        setError(null);
+      }, 2000);
     }
 
     if (response.ok) {
       // save to local storage
       localStorage.setItem('user', JSON.stringify(json));
-
       // update AuthContext
       dispatch({ type: 'LOGIN', payload: json });
-
+      setError(null);
       setIsLoading(false);
     }
   };

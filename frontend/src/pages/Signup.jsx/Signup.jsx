@@ -1,6 +1,4 @@
-import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
 
 import { useSignup } from '@/hooks/useSignup';
 
@@ -15,17 +13,8 @@ export function Signup() {
     register,
     handleSubmit,
     formState: { errors },
-    getValues,
     watch,
   } = useForm();
-
-  const notifyError = (errorVal) => toast.error(`${errorVal}`);
-
-  useEffect(() => {
-    if (error) {
-      notifyError(error);
-    }
-  }, [error]);
 
   return (
     <div className="h-full min-h-[calc(100vh-5rem)]  w-full bg-black/10 dark:bg-black/60 ">
@@ -33,7 +22,7 @@ export function Signup() {
         <form
           onSubmit={handleSubmit(handleFormSubmit)}
           className="secondary-bg mx-auto flex max-w-lg flex-col gap-6 rounded-md p-6 shadow-md md:p-8 "
-        >
+        >s
           <h3 className="text-center text-2xl ">Sign up</h3>
 
           {/* Email */}
@@ -47,7 +36,7 @@ export function Signup() {
               {...register('email', {
                 required: { value: true, message: 'A valid email is required' },
                 pattern: {
-                  value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                  value: /^\w+([.-]?\w+)*@\w+([.]?)+(\.\w{2,3})+$/,
                   message: 'Please enter a valid email',
                 },
               })}
@@ -118,6 +107,12 @@ export function Signup() {
               </span>
             )}
           </div>
+
+          {error && (
+            <div className="rounded-md bg-red-800 py-2 text-center text-white">
+              {error}
+            </div>
+          )}
 
           <div className=" flex justify-end py-2">
             <button

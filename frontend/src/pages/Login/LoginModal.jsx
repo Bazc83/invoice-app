@@ -8,6 +8,7 @@ export function LoginModal() {
   const { login, error, isLoading } = useLogin();
 
   const handleFormSubmit = async (data) => {
+    console.log(data)
     await login(data.email, data.password);
   };
 
@@ -45,7 +46,7 @@ export function LoginModal() {
               {...register('email', {
                 required: { value: true, message: 'A valid email is required' },
                 pattern: {
-                  value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                  value: /^\w+([.-]?\w+)*@\w+([.]?)+(\.\w{2,3})+$/,
                   message: 'Please enter a valid email',
                 },
               })}

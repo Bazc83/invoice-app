@@ -22,6 +22,11 @@ export const useSignup = () => {
     if (!response.ok) {
       setIsLoading(false);
       setError(json.error);
+
+      // Removes error from UI
+      setTimeout(() => {
+        setError(null);
+      }, 2000);
     }
 
     if (response.ok) {
@@ -30,7 +35,7 @@ export const useSignup = () => {
 
       // update AuthContext
       dispatch({ type: 'LOGIN', payload: json });
-
+      setError(null);
       setIsLoading(false);
     }
   };
