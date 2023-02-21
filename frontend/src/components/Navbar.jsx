@@ -38,7 +38,7 @@ export function Navbar() {
   return (
     <div className="noPrint | z-50 h-20 bg-gray-800">
       {/* Navbar Container */}
-      <div className=" relative mx-auto flex h-20 max-w-6xl items-center justify-between py-4 px-6 text-gray-50">
+      <div className=" relative mx-auto flex h-20 max-w-6xl items-center justify-between py-4 px-4 text-gray-50 md:px-6 xl:px-0">
         {/* Random logo */}
         <RandomLogo />
 
@@ -63,15 +63,18 @@ export function Navbar() {
               className={`secondary-bg absolute top-14 right-0 z-30 overflow-hidden shadow-md transition-transform ease-in `}
             >
               <ul className="flex  w-[250px]  flex-col  ">
-                <li className=" block  w-full  cursor-pointer border-b border-b-gray-700  px-4 py-4 last:border-none hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">
-                  <Link to="/invoices"> Invoices</Link>
-                </li>
+                {/* Invoices link */}
+                {user && (
+                  <li className=" block  w-full  cursor-pointer border-b border-b-gray-700  px-4 py-4 last:border-none hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">
+                    <Link to="/invoices"> Invoices</Link>
+                  </li>
+                )}
 
                 {/* Logout */}
                 {user && (
                   <li className=" block  w-full  cursor-pointer border-b border-b-gray-700  px-4 py-4 last:border-none hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">
                     <button
-                      className="flex items-center gap-2 text-base "
+                      className="flex w-full items-center gap-2 text-base  "
                       type="button"
                       onClick={handleLogout}
                     >

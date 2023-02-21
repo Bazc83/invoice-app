@@ -20,7 +20,7 @@ export function PageLayout({ theme }) {
 
   return (
     <div
-      className="primary-bg print relative flex h-max min-h-screen flex-col "
+      className="primary-bg print relative flex h-max min-h-screen flex-col  "
       onClick={handleCloseModal}
       aria-hidden="true"
     >
@@ -28,9 +28,9 @@ export function PageLayout({ theme }) {
 
       {/* Show overlay when showFilterModal is true */}
       <div
-        className={`lg:col-start-2  ${
+        className={` lg:col-start-2  ${
           (filterModal || mobileMenu) &&
-          ' blur-[0.5px] before:absolute before:z-30 before:h-[calc(100%-100px)]  before:w-full before:bg-black/30 before:dark:bg-black/50 '
+          ' blur-[0.5px] before:absolute before:z-30 before:h-full before:min-h-[calc(100vh-5rem)]  before:w-full before:bg-black/30 before:dark:bg-black/50 '
         } `}
       >
         <ToastContainer
