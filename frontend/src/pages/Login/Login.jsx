@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 
 import { useLogin } from '@/hooks/useLogin';
 
@@ -74,7 +75,14 @@ export function Login() {
               {error}
             </div>
           )}
-          <div className=" flex justify-end py-2">
+
+          <div className=" flex flex-wrap-reverse  items-center justify-between py-2">
+            <Link
+              to="/signup"
+              className="text-gray-600 underline underline-offset-2 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-100"
+            >
+              Click here to Register
+            </Link>
             <button
               type="submit"
               disabled={isLoading}
