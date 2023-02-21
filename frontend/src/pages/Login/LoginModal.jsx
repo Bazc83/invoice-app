@@ -4,11 +4,10 @@ import { toast } from 'react-toastify';
 
 import { useLogin } from '@/hooks/useLogin';
 
-export function Login() {
+export function LoginModal() {
   const { login, error, isLoading } = useLogin();
 
   const handleFormSubmit = async (data) => {
-    console.log(data);
     await login(data.email, data.password);
   };
 
@@ -27,11 +26,11 @@ export function Login() {
   }, [error]);
 
   return (
-    <div className="min-h-[calc(100vh-5rem)] h-full  w-full bg-black/10 dark:bg-black/60 ">
-      <div className="px-8 py-8">
+    <div className="fixed inset-0 z-20 h-full  w-full bg-black bg-opacity-70 ">
+      <div className="secondary-bg absolute top-[20%] left-[50%] z-50 flex w-[calc(100%_-_2rem)] max-w-xl -translate-x-[50%] -translate-y-[20%] flex-col items-start justify-center gap-6 rounded-md p-6  ">
         <form
           onSubmit={handleSubmit(handleFormSubmit)}
-          className="secondary-bg mx-auto flex max-w-lg flex-col gap-6 rounded-md p-6 shadow-md md:p-8 "
+          className="secondary-bg mx-auto flex w-full flex-col gap-6 rounded-md p-6 shadow-md md:p-8 "
         >
           <h3 className="text-center text-2xl ">Login</h3>
 
@@ -45,7 +44,10 @@ export function Login() {
               type="email"
               {...register('email', {
                 required: { value: true, message: 'A valid email is required' },
-            
+                pattern: {
+                  value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                  message: 'Please enter a valid email',
+                },
               })}
             />
 
@@ -86,7 +88,7 @@ export function Login() {
             <button
               type="submit"
               disabled={isLoading}
-              className="btn | bg-green-700 text-white hover:bg-green-900/90"
+              className="btn | bg-green-600 text-white hover:bg-green-800"
             >
               Login
             </button>
@@ -97,4 +99,4 @@ export function Login() {
   );
 }
 
-export default Login;
+export default LoginModal;

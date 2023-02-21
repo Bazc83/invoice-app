@@ -12,13 +12,13 @@ Check for date if no date just use todays date might be this way already
 
 #### add toast messages for different actions
 
-#### Validate Inputs
+<!-- #### Validate Inputs -->
 
 <!-- ### dates -->
 
 <!-- #### date logic creation date + paymentTerms -->
 
-#### check date formats too
+<!-- #### check date formats too -->
 
 <!-- ### filter -->
 
@@ -26,23 +26,19 @@ Check for date if no date just use todays date might be this way already
 
 #### maybe search invoices
 
-### buttonWrapper
-
-#### Needs to be used once (not top and bottom)
-
-### css
+<!-- ### css
 
 #### fonts need some set sizes
 
 #### colors in light mode
 
-#### Items table vs grid pick one (grid?)
+#### Items table vs grid pick one (grid?) -->
 
 ## Optional features
 
 ### add avatar
 
-### user authentication
+<!-- ### user authentication -->
 
 ### db of products to select items from
 
@@ -56,12 +52,3 @@ Check for date if no date just use todays date might be this way already
 
 #### ability to add new invoice to their a/c
 
-### invoiceIds and invoiceNewItem ids
-
-#### set these id's to the mongodb \_id
-
-#### saves having to create my own'
-
-#### so can remove all that functionality
-
-#### invoiceIdRoutes, controller etc

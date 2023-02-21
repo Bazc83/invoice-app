@@ -34,15 +34,17 @@ export function PageLayout({ theme }) {
         } `}
       >
         <ToastContainer
-          position="top-right"
-          autoClose={1000}
+          position="top-center"
+          autoClose={3000}
           hideProgressBar
           newestOnTop={false}
           closeOnClick
           rtl={false}
           pauseOnFocusLoss
           pauseOnHover
-          theme={theme}
+          // theme={theme}
+          theme='colored'
+          className="mt-24"
         />
 
         <Outlet />
