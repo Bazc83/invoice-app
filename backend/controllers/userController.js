@@ -6,11 +6,12 @@ const createToken = (_id, res) => {
 
   // jwt.sign({payload}, secret, {options})
   // 3d === 3 days
-  return jwt.sign({ _id: _id }, process.env.TOKEN_SECRET, { expiresIn: '90d' });
+  return jwt.sign({ _id: _id }, process.env.TOKEN_SECRET, { expiresIn: "90d"});
 };
 
 // Login user
 const loginUser = async (req, res) => {
+ 
   const { email, password } = req.body;
   try {
     const user = await User.login(email, password);
@@ -53,7 +54,5 @@ const checkToken = async (req, res) => {
     return res.status(200).json({ jwtValid: true });
   }
 };
-
-const getUserId = async (req, res) => {};
 
 module.exports = { loginUser, signupUser, checkToken };

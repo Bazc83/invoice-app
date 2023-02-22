@@ -20,16 +20,19 @@ export function Invoices() {
   if (isError) return `An error has occurred: ${error.message}`;
   return (
     <Container>
-      {/* No invoice component */}
-      {state.filteredInvoices?.length === 0 && <NoInvoices />}
-
-      <div className={`secondary-bg mx-auto  h-full max-w-6xl rounded-md px-4 pb-10 shadow-md md:px-6 ${state.filteredInvoices?.length === 0 && "hidden"} `}>
+      <div
+        className={`secondary-bg mx-auto  h-full max-w-6xl rounded-md px-4 pb-10 shadow-md md:px-6 `}
+      >
         <h1 className="py-6 text-center text-3xl">Invoices</h1>
         <div className=" relative flex h-full flex-col gap-4 rounded-md  lg:grid lg:grid-cols-[200px_1fr] ">
+
           {/* filter checkboxes and add new invoice button */}
           <InvoicesControlPanel state={state} />
 
-          <div className="primary-bg flex flex-col gap-2 rounded-md px-6 pt-4 pb-10 shadow-md ">
+          {/* No invoice component */}
+          {state.filteredInvoices?.length === 0 && <NoInvoices />}
+
+          <div className={`primary-bg  flex-col gap-2 rounded-md px-6 pt-4 pb-10 shadow-md ${state.filteredInvoices?.length === 0 ? "hidden" : "flex"}`}>
             {/* Invoice preview headers md screen and greater */}
             {state.filteredInvoices?.length > 0 && (
               <div className="hidden  gap-2  py-1  md:grid  md:grid-cols-[1rem_repeat(10,_1fr)_1rem] md:items-baseline  lg:gap-2  ">

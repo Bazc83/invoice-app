@@ -79,11 +79,12 @@ const getInvoices = asyncHandler(async (req, res) => {
   const invoices = await Invoice.where('createdByUser')
     .equals(req.user._id)
     .sort({ createdAt: -1, clientName: 1 });
-  res.status(200).json(invoices);
+
+  res.send(invoices);
 });
 
 // Get invoice by id
-const getInvoice = asyncHandler(async (req, res, next) => {
+const getInvoice = asyncHandler(async (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
 
   const invoice = await Invoice.findOne({
@@ -91,12 +92,7 @@ const getInvoice = asyncHandler(async (req, res, next) => {
     createdByUser: req.user._id.toHexString(),
   });
 
-  if (!invoice) {
-    res.status(400);
-    throw new Error(invoice);
-  } else {
-    res.status(200).json(invoice);
-  }
+  res.send(invoice);
 });
 
 // Add Invoice
@@ -137,12 +133,7 @@ const addInvoice = asyncHandler(async (req, res) => {
 
   const invoice = await Invoice.create(payloadData);
 
-  if (invoice) {
-    res.status(200).json(invoice);
-  } else {
-    res.status(400);
-    throw new Error('Error adding new invoice!');
-  }
+  res.send(invoice);
 });
 
 // updateInvoice
@@ -186,13 +177,7 @@ const updateInvoice = asyncHandler(async (req, res) => {
     // payLoadData === req.body, items & amountDueTotal
     payloadData
   );
-
-  if (invoice) {
-    res.status(200).json(invoice);
-  } else {
-    res.status(400);
-    throw new Error('Error adding new invoice!');
-  }
+  res.send(invoice);
 });
 
 // delete invoice

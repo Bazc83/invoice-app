@@ -11,9 +11,7 @@ const getInvoiceById = async (userToken, invoiceId) => {
     headers: { Authorization: `Bearer ${userToken}` },
   });
 
-
   const json = await response.json();
-
 
   if (response.ok) {
     return json;

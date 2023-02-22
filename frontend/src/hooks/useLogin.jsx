@@ -30,6 +30,7 @@ export const useLogin = () => {
     }
 
     if (response.ok) {
+      
       // save to local storage
       localStorage.setItem('user', JSON.stringify(json));
       // update AuthContext

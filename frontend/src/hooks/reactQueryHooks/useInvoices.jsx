@@ -12,8 +12,11 @@ const getInvoices = async (userToken) => {
       Authorization: `Bearer ${userToken}`,
     },
   });
+
+
   const json = await response.json();
 
+  // console.log(json.status(200))
   if (response.ok) {
     return json;
   }

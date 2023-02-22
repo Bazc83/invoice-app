@@ -1,6 +1,10 @@
 const express = require('express');
 
-const { loginUser, signupUser, checkToken} = require('../controllers/userController');
+const {
+  loginUser,
+  signupUser,
+  checkToken,
+} = require('../controllers/userController');
 const router = express.Router();
 
 // Login route
@@ -10,6 +14,6 @@ router.post('/login', loginUser);
 router.post('/signup', signupUser);
 
 // check JWT
-router.post("/checktoken", checkToken);
+router.post('/checktoken', checkToken);
 
 module.exports = router;
