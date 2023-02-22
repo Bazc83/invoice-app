@@ -10,8 +10,6 @@ import useUpdateInvoiceId from '@/hooks/reactQueryHooks/useUpdateInvoiceId';
 import NewInvoiceForm from './NewInvoiceForm';
 
 export function NewInvoice() {
-  const { email: currentUserEmail } = JSON.parse(localStorage.getItem('user'));
-
   // const navigate = useNavigate();
   const confirmationModal = useModalStore((s) => s.confirmationModal);
 
@@ -29,7 +27,6 @@ export function NewInvoice() {
     const payloadData = {
       ...data,
       id: invoiceId,
-      createdByUser: currentUserEmail,
     };
 
     newInvoiceMutation.mutate({

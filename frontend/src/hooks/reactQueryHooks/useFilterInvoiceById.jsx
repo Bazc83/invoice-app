@@ -11,12 +11,14 @@ const getInvoiceById = async (userToken, invoiceId) => {
     headers: { Authorization: `Bearer ${userToken}` },
   });
 
+
   const json = await response.json();
+
+
   if (response.ok) {
     return json;
   }
-
-  return json.error;
+  return json;
 };
 
 export const useFilterInvoiceById = (invoiceId) => {
@@ -25,7 +27,7 @@ export const useFilterInvoiceById = (invoiceId) => {
   const { authData } = useAuth();
 
   const queryResponse = useQuery({
-    queryKey: ["invoice", invoiceId],
+    queryKey: ['invoice', invoiceId],
     queryFn: () => getInvoiceById(user.token, invoiceId),
     enabled: authData?.jwtValid === true,
   });

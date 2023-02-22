@@ -51,13 +51,13 @@ const setCreatedAtDate = () => {
 
 // setInvoiceDates
 const setInvoiceDates = ({ paymentTermsValue, createdAtDate }) => {
-  const createdAt =  parseISO(createdAtDate);
-  const addFifteenDays = addDays(createdAt  ,15);
-  const addTwentyOneDays = addDays( createdAt , 21);
-  const todaysDate = formatISO(createdAt , {
+  const createdAt = parseISO(createdAtDate);
+  const addFifteenDays = addDays(createdAt, 15);
+  const addTwentyOneDays = addDays(createdAt, 21);
+  const todaysDate = formatISO(createdAt, {
     representation: 'date',
   });
-  
+
   const fifteenDays = formatISO(addFifteenDays, { representation: 'date' });
   const twentyOneDays = formatISO(addTwentyOneDays, { representation: 'date' });
 
@@ -73,21 +73,27 @@ const setInvoiceDates = ({ paymentTermsValue, createdAtDate }) => {
   }
 };
 
-// get all invoices (sorted by createdAt date descending & clientName ascending)
+// Get all invoices for user (sorted by createdAt date desc and name: asc)
 const getInvoices = asyncHandler(async (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
-  const invoices = await Invoice.find().sort({ createdAt: -1, clientName: 1 });
+  const invoices = await Invoice.where('createdByUser')
+    .equals(req.user._id)
+    .sort({ createdAt: -1, clientName: 1 });
   res.status(200).json(invoices);
 });
 
-
 // Get invoice by id
-const getInvoice = asyncHandler(async (req, res) => {
+const getInvoice = asyncHandler(async (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
-  const invoice = await Invoice.findOne({ id: req.params.id });
+
+  const invoice = await Invoice.findOne({
+    id: req.params.id,
+    createdByUser: req.user._id.toHexString(),
+  });
+
   if (!invoice) {
     res.status(400);
-    throw new Error('Invoice not found');
+    throw new Error(invoice);
   } else {
     res.status(200).json(invoice);
   }
@@ -126,6 +132,7 @@ const addInvoice = asyncHandler(async (req, res) => {
     amountDueTotal: amountDueTotal,
     createdAt: createdAtDate,
     paymentDue: paymentDueDate,
+    createdByUser: req.user._id.toHexString(),
   };
 
   const invoice = await Invoice.create(payloadData);
