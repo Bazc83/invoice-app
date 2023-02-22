@@ -1,17 +1,17 @@
 const User = require('../models/userModel');
 const jwt = require('jsonwebtoken');
+const asyncHandler = require('express-async-handler');
 
 const createToken = (_id, res) => {
   // Nothing senstive in the {} payload of sign()
 
   // jwt.sign({payload}, secret, {options})
   // 3d === 3 days
-  return jwt.sign({ _id: _id }, process.env.TOKEN_SECRET, { expiresIn: "90d"});
+  return jwt.sign({ _id: _id }, process.env.TOKEN_SECRET, { expiresIn: '90d' });
 };
 
 // Login user
 const loginUser = async (req, res) => {
- 
   const { email, password } = req.body;
   try {
     const user = await User.login(email, password);
@@ -21,6 +21,7 @@ const loginUser = async (req, res) => {
 
     res.status(200).json({ email, token });
   } catch (error) {
+    console.log(error);
     res.status(400).json({ error: error.message });
   }
 };

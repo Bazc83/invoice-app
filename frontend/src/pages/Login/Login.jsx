@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useLogin } from '@/hooks/useLogin';
 
 export function Login() {
-  const { login, error, isLoading } = useLogin();
+  const { login, error } = useLogin();
 
   const handleFormSubmit = async (data) => {
     await login(data.email, data.password);
@@ -85,7 +85,7 @@ export function Login() {
             </Link>
             <button
               type="submit"
-              disabled={isLoading}
+              disabled={error}
               className="btn | bg-green-700 text-white hover:bg-green-900/90 disabled:bg-gray-700 disabled:text-gray-600"
             >
               Login
