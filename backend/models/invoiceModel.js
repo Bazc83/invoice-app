@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const invoiceSchema = new mongoose.Schema({
+  createdByUser: {
+    type: String,
+    required: true,
+  },
   companyName: {
     type: String,
     default: '',
@@ -63,6 +67,7 @@ const invoiceSchema = new mongoose.Schema({
   ],
   createdAt: {
     type: String,
+    default: '',
   },
   paymentDue: {
     type: String,

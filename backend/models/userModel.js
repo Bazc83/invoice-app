@@ -2,18 +2,20 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const validator = require('validator');
 
-const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
+
+const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
     unique: true,
+    lowercase: true,
   },
   password: {
     type: String,
     required: true,
   },
+
 });
 
 // Static signup method
@@ -45,6 +47,7 @@ userSchema.statics.signup = async function (email, password) {
 
   const user = await this.create({ email, password: hash });
 
+  
   return user;
 };
 

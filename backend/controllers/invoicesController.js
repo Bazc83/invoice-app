@@ -43,9 +43,7 @@ const calculateValues = (items) => {
 };
 
 // CreatedAt date
-const setCreatedAtDate = (createdAtDate) => {
-  if (createdAtDate !== '') return createdAtDate;
-
+const setCreatedAtDate = () => {
   return formatISO(new Date(), {
     representation: 'date',
   });
@@ -53,16 +51,13 @@ const setCreatedAtDate = (createdAtDate) => {
 
 // setInvoiceDates
 const setInvoiceDates = ({ paymentTermsValue, createdAtDate }) => {
-  const newDate = new Date();
-
-  const createdAt = createdAtDate ? parseISO(createdAtDate) : '';
-  const addFifteenDays = addDays(createdAtDate ? createdAt : newDate, 15);
-  const addTwentyOneDays = addDays(createdAtDate ? createdAt : newDate, 21);
-
-  const todaysDate = formatISO(createdAtDate ? createdAt : newDate, {
+  const createdAt =  parseISO(createdAtDate);
+  const addFifteenDays = addDays(createdAt  ,15);
+  const addTwentyOneDays = addDays( createdAt , 21);
+  const todaysDate = formatISO(createdAt , {
     representation: 'date',
   });
-
+  
   const fifteenDays = formatISO(addFifteenDays, { representation: 'date' });
   const twentyOneDays = formatISO(addTwentyOneDays, { representation: 'date' });
 
@@ -78,17 +73,17 @@ const setInvoiceDates = ({ paymentTermsValue, createdAtDate }) => {
   }
 };
 
-// get all invoices
+// get all invoices (sorted by createdAt date descending & clientName ascending)
 const getInvoices = asyncHandler(async (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
-  const invoices = await Invoice.find();
+  const invoices = await Invoice.find().sort({ createdAt: -1, clientName: 1 });
   res.status(200).json(invoices);
 });
+
 
 // Get invoice by id
 const getInvoice = asyncHandler(async (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
-
   const invoice = await Invoice.findOne({ id: req.params.id });
   if (!invoice) {
     res.status(400);
@@ -113,7 +108,7 @@ const addInvoice = asyncHandler(async (req, res) => {
   const { exVatTotal, vatAmount, amountDueTotal } = calculateValues(items);
 
   // set createdAtDate
-  const createdAtDate = setCreatedAtDate(req.body.createdAt);
+  const createdAtDate = setCreatedAtDate();
 
   // get invoice due date
   const paymentDueDate = setInvoiceDates({
@@ -159,7 +154,7 @@ const updateInvoice = asyncHandler(async (req, res) => {
   const { exVatTotal, vatAmount, amountDueTotal } = calculateValues(items);
 
   // set createdAtDate
-  const createdAtDate = setCreatedAtDate(req.body.createdAt);
+  const createdAtDate = setCreatedAtDate();
 
   // get invoice due date
   const paymentDueDate = setInvoiceDates({

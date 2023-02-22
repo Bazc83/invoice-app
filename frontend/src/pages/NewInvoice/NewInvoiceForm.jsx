@@ -217,26 +217,19 @@ function NewInvoiceForm({ handleFormSubmit, handleCancel, newInvoiceId }) {
           </select>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
-          <div className="flex flex-col gap-3">
-            <label htmlFor="statusSelect">Payment Status</label>
-            {/* Payment status */}
-            <select
-              {...register('status')}
-              id="statusSelect"
-              name="status"
-              className="formSelectInput"
-            >
-              <option value="draft">Draft</option>
-              <option value="pending">Pending</option>
-              <option value="paid">Paid</option>
-            </select>
-          </div>
-
-          <div className="flex flex-col gap-3">
-            <label htmlFor="createdAt">Created At</label>
-            <input type="date" {...register('createdAt')} />
-          </div>
+        <div className="flex flex-col gap-3 ">
+          <label htmlFor="statusSelect">Payment Status</label>
+          {/* Payment status */}
+          <select
+            {...register('status')}
+            id="statusSelect"
+            name="status"
+            className="formSelectInput"
+          >
+            <option value="draft">Draft</option>
+            <option value="pending">Pending</option>
+            <option value="paid">Paid</option>
+          </select>
         </div>
       </div>
 

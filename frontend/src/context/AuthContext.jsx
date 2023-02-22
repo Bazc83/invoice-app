@@ -36,7 +36,7 @@ export function AuthContextProvider({ children }) {
 
   return (
     // eslint-disable-next-line react/jsx-no-constructed-context-values
-    <AuthContext.Provider value={{ ...state, dispatch }}>
+    <AuthContext.Provider value={{ ...state, dispatch, authData }}>
       {children}
     </AuthContext.Provider>
   );
