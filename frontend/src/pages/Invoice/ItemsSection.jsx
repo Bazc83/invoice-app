@@ -35,7 +35,7 @@ function ItemsSection({ invoiceData }) {
         ))}
 
         <div className="flex flex-col gap-1 py-2">
-          <div className="primary-bg col-span-full flex flex-wrap items-center justify-end gap-2 pr-5 text-xs  md:gap-2">
+          <div className="primary-bg col-span-full flex flex-wrap items-center justify-end gap-2 pr-5   md:gap-2">
             <small>Ex Tax</small>
             <small>
               {' '}
@@ -45,12 +45,12 @@ function ItemsSection({ invoiceData }) {
               }).format(invoiceData?.exVatTotal)}
             </small>
           </div>
-          <div className="primary-bg col-span-full flex flex-wrap items-center justify-end gap-2 pr-5 text-xs md:gap-2">
+          <div className="primary-bg col-span-full flex flex-wrap items-center justify-end gap-2 pr-5  md:gap-2">
             <small>Tax Rate</small>
             <small>{invoiceData?.taxRate}</small>
           </div>
 
-          <div className="primary-bg col-span-full flex flex-wrap items-center justify-end gap-2 pr-5 text-xs md:gap-2 ">
+          <div className="primary-bg col-span-full flex flex-wrap items-center justify-end gap-2 pr-5  md:gap-2 ">
             <small>Tax</small>
             <small>
               {' '}
