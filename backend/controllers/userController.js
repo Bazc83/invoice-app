@@ -64,6 +64,7 @@ const getUserDetails = asyncHandler(async (req, res) => {
     {
       // excludes password field
       password: 0,
+    
     }
   );
 
