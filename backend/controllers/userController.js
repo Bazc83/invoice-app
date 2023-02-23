@@ -56,4 +56,18 @@ const checkToken = async (req, res) => {
   }
 };
 
-module.exports = { loginUser, signupUser, checkToken };
+const getUserDetails = asyncHandler(async (req, res) => {
+  res.header('Access-Control-Allow-Origin', '*');
+
+  const userDetails = await User.findOne(
+    { _id: req.user._id.toHexString() },
+    {
+      // excludes password field
+      password: 0,
+    }
+  );
+
+  res.send(userDetails);
+});
+
+module.exports = { loginUser, signupUser, checkToken, getUserDetails };

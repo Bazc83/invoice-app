@@ -13,6 +13,34 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  firstName: {
+    type: String,
+    default: "",
+  },
+  surname: {
+    type: String,
+    default: "",
+  },
+  companyName: {
+    type: String,
+    default: "",
+  },
+  senderCity: {
+    type: String,
+    default: '',
+  },
+  senderStreet: {
+    type: String,
+    default: '',
+  },
+  senderPostCode: {
+    type: String,
+    default: '',
+  },
+  senderCountry: {
+    type: String,
+    default: '',
+  },
 });
 
 // Static signup method
@@ -70,5 +98,8 @@ userSchema.statics.login = async function (email, password) {
 
   return user;
 };
+
+
+
 
 module.exports = mongoose.model('User', userSchema);

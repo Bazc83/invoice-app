@@ -4,6 +4,7 @@ const {
   loginUser,
   signupUser,
   checkToken,
+  getUserDetails,
 } = require('../controllers/userController');
 const router = express.Router();
 
@@ -15,5 +16,10 @@ router.post('/signup', signupUser);
 
 // check JWT
 router.post('/checktoken', checkToken);
+
+const requireAuth = require('../middleware/requireAuth');
+router.use(requireAuth);
+
+router.get('/:user', getUserDetails);
 
 module.exports = router;

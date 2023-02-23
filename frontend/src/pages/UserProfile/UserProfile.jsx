@@ -1,21 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import CancelEditFormModal from '@/components/CancelEditFormModal';
 import Container from '@/components/Container';
 import TextInputWithValidation from '@/components/TextInputWithValidation';
 import useModalStore from '@/context/useModalStore';
+import useGetUserDetails from '@/hooks/reactQueryHooks/useGetUserDetails';
 
 export function UserProfile() {
+  const { data: userData, isLoading, isError, error } = useGetUserDetails();
+
   const [selectedButton, setSelectedButton] = useState();
+
+  const confirmationModal = useModalStore((s) => s.confirmationModal);
 
   const handleFormSubmit = (data) => {
     const payload = { ...data, selectedButton };
     return payload;
   };
-
-  const confirmationModal = useModalStore((s) => s.confirmationModal);
-
   const {
     register,
     handleSubmit,
@@ -24,6 +26,13 @@ export function UserProfile() {
 
   const [currentForm, setCurrentForm] = useState('personal');
 
+  useEffect(() => {
+    console.log(userData);
+  }, [userData]);
+
+  if (isLoading) return <div>Loading ...</div>;
+
+  if (isError) return <div>Error {error}</div>;
   return (
     <Container>
       {/* confirm cancel modal */}
