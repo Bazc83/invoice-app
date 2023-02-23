@@ -56,6 +56,7 @@ const checkToken = async (req, res) => {
   }
 };
 
+// get user data
 const getUserDetails = asyncHandler(async (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
 
@@ -70,7 +71,7 @@ const getUserDetails = asyncHandler(async (req, res) => {
   res.send(userDetails);
 });
 
-// updateUser
+// update user data
 const updateUser = asyncHandler(async (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
 
@@ -84,6 +85,8 @@ const updateUser = asyncHandler(async (req, res) => {
     // payLoadData === req.body, items & amountDueTotal
     payloadData
   ).catch((err) => console.log(err));
+
+  console.log('invoice, ', invoice);
   res.send(invoice);
 });
 

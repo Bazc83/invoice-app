@@ -13,40 +13,33 @@ function UserProfileForm({ handleFormSubmit, userData }) {
   } = useForm({ defaultValues: { ...userData } });
 
   return (
-    <div className=" relative flex h-full flex-col gap-4 rounded-md  lg:grid lg:grid-cols-[200px_1fr] ">
-      <div className="secondary-bg flex w-full items-center justify-center gap-4  rounded-md p-4 lg:flex-col lg:items-start lg:justify-start lg:px-8 lg:pt-10">
+    <div className=" mx-auto  max-w-lg rounded-b-md ">
+      <div className="primary-bg flex justify-between ">
         <button
           type="button"
-          className="cursor-pointer hover:opacity-80"
+          aria-expanded={currentForm === 'personal'}
+          className="aria-expanded:secondary-bg primary-bg block w-full cursor-pointer py-4 hover:opacity-80 aria-expanded:rounded-t-md"
           onClick={() => setCurrentForm('personal')}
         >
-          Personal Details
+          Personal <span className="hidden md:inline">Details</span>
         </button>
         <button
           type="button"
-          className="cursor-pointer hover:opacity-80"
+          aria-expanded={currentForm === 'company'}
+          className="aria-expanded:secondary-bg  block w-full cursor-pointer hover:opacity-80 aria-expanded:rounded-t-md"
           onClick={() => setCurrentForm('company')}
         >
-          Company Details
-        </button>
-        <button
-          type="button"
-          className="cursor-pointer hover:opacity-80"
-          onClick={() => setCurrentForm('preferences')}
-        >
-          Preferences
+          Company <span className="hidden md:inline">Details</span>
         </button>
       </div>
 
-      <div>
+      <div className=" secondary-bg   rounded-b-md px-8 py-10 shadow-md md:pb-16">
         {currentForm === 'personal' && (
           <form
             onSubmit={handleSubmit(handleFormSubmit)}
-            className=" secondary-bg mx-auto flex w-full max-w-2xl flex-col gap-10 rounded-md py-6 px-8 shadow-md "
+            className="flex  flex-col gap-4 rounded-md shadow-md  md:gap-8"
           >
             <div className="flex flex-col gap-6">
-              <h2 className=" text-xl">Personal Details</h2>
-
               {/* First Name */}
               <TextInputWithValidation
                 errors={errors}
@@ -64,7 +57,7 @@ function UserProfileForm({ handleFormSubmit, userData }) {
             </div>
             <button
               type="submit"
-              className="btn | bg-green-900 py-2 hover:opacity-80"
+              className="btn | mt-4 bg-green-900 py-2 hover:opacity-80"
             >
               Save
             </button>
@@ -74,10 +67,9 @@ function UserProfileForm({ handleFormSubmit, userData }) {
         {currentForm === 'company' && (
           <form
             onSubmit={handleSubmit(handleFormSubmit)}
-            className=" secondary-bg mx-auto flex w-full max-w-2xl flex-col gap-10 rounded-md py-6 px-8 shadow-md "
+            className="flex  flex-col gap-4 rounded-md shadow-md  md:gap-8"
           >
             <div className="flex flex-col gap-6 ">
-              <h2 className=" text-xl">Company Details</h2>
               {/* Company name */}
               <TextInputWithValidation
                 errors={errors}
@@ -94,22 +86,20 @@ function UserProfileForm({ handleFormSubmit, userData }) {
                 inputName="senderStreet"
               />
 
-              <div className="grid grid-cols-2 gap-4">
-                {/* Sender city */}
-                <TextInputWithValidation
-                  errors={errors}
-                  register={register}
-                  labelName="City"
-                  inputName="senderCity"
-                />
-                {/* Sender postcode */}
-                <TextInputWithValidation
-                  errors={errors}
-                  register={register}
-                  labelName="Postcode"
-                  inputName="senderPostCode"
-                />
-              </div>
+              {/* Sender city */}
+              <TextInputWithValidation
+                errors={errors}
+                register={register}
+                labelName="City"
+                inputName="senderCity"
+              />
+              {/* Sender postcode */}
+              <TextInputWithValidation
+                errors={errors}
+                register={register}
+                labelName="Postcode"
+                inputName="senderPostCode"
+              />
 
               {/* Sender Country */}
               <TextInputWithValidation
@@ -122,32 +112,7 @@ function UserProfileForm({ handleFormSubmit, userData }) {
 
             <button
               type="submit"
-              className="btn | bg-green-900 py-2 hover:opacity-80"
-            >
-              Save
-            </button>
-          </form>
-        )}
-        {currentForm === 'preferences' && (
-          <form
-            onSubmit={handleSubmit(handleFormSubmit)}
-            className=" secondary-bg mx-auto flex w-full max-w-2xl flex-col gap-10 rounded-md py-6 px-8 shadow-md "
-          >
-            <div className="flex flex-col gap-6 ">
-              <h2 className=" text-xl">Preferences</h2>
-
-              {/* Sender Country */}
-              <TextInputWithValidation
-                errors={errors}
-                register={register}
-                labelName="test"
-                inputName="test"
-              />
-            </div>
-
-            <button
-              type="submit"
-              className="btn | bg-green-900 py-2 hover:opacity-80"
+              className="btn | mt-4 bg-green-900 py-2 hover:opacity-80"
             >
               Save
             </button>
