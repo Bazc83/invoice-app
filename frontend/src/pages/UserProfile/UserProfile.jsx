@@ -30,7 +30,7 @@ export function UserProfile() {
       {confirmationModal && <CancelEditFormModal />}
 
       <div className=" relative flex h-full flex-col gap-4 rounded-md  lg:grid lg:grid-cols-[200px_1fr] ">
-        <div className="secondary-bg flex items-center justify-center gap-4 p-4 lg:mx-auto lg:flex-col lg:items-start lg:justify-start lg:px-8 lg:pt-10">
+        <div className="secondary-bg flex w-full items-center justify-center gap-4  rounded-md p-4 lg:flex-col lg:items-start lg:justify-start lg:px-8 lg:pt-10">
           <button
             type="button"
             className="cursor-pointer hover:opacity-80"
@@ -78,40 +78,44 @@ export function UserProfile() {
                   inputName="surname"
                 />
 
-                {/* Surname */}
-                <div className="flex gap-4">
-                  <button
-                    className={`${
-                      selectedButton === 'jonny' &&
-                      'rounded-full ring-4  ring-red-500'
-                    }`}
-                    type="button"
-                    value="profile1"
-                    {...register('profile')}
-                    onClick={() => setSelectedButton('jonny')}
-                  >
-                    <img
-                      src="https://eu.ui-avatars.com/api/?name=John+Doe&size=250"
-                      className="h-10 w-10 rounded-full"
-                      alt=""
-                    />
-                  </button>
-                  <button
-                    className={`${
-                      selectedButton === 'jane' &&
-                      'rounded-full ring-4  ring-red-500'
-                    }`}
-                    type="button"
-                    value="profile1"
-                    {...register('profile')}
-                    onClick={() => setSelectedButton('jane')}
-                  >
-                    <img
-                      src="https://eu.ui-avatars.com/api/?name=Jane&size=250"
-                      className="h-10 w-10 rounded-full"
-                      alt=""
-                    />
-                  </button>
+                {/* avatar selection */}
+
+                <div className="flex flex-col gap-4 ">
+                  <h2>Select avatar:</h2>
+                  <div className="flex gap-4">
+                    <button
+                      className={`${
+                        selectedButton === 'jonny' &&
+                        'rounded-full ring-4  ring-red-500'
+                      }`}
+                      type="button"
+                      value="profile1"
+                      {...register('profile')}
+                      onClick={() => setSelectedButton('jonny')}
+                    >
+                      <img
+                        src="https://eu.ui-avatars.com/api/?name=John+Doe&size=250"
+                        className="h-10 w-10 rounded-full"
+                        alt=""
+                      />
+                    </button>
+                    <button
+                      className={`${
+                        selectedButton === 'jane' &&
+                        'rounded-full ring-4  ring-red-500'
+                      }`}
+                      type="button"
+                      value="profile1"
+                      {...register('profile')}
+                      onClick={() => setSelectedButton('jane')}
+                    >
+                      <img
+                        src="https://eu.ui-avatars.com/api/?name=Jane&size=250"
+                        className="h-10 w-10 rounded-full"
+                        alt=""
+                      />
+                    </button>
+                  </div>
                 </div>
               </div>
               <button
