@@ -19,7 +19,7 @@ export const useLogin = () => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),
-    }).catch((err) => errHandler(err));
+    });
 
     const json = await response.json().catch((err) => errHandler(err));
 

@@ -7,7 +7,6 @@ import useLocalStorage from 'use-local-storage';
 
 import { AuthContext } from './context/AuthContext';
 import { InvoicesContextProvider } from './context/InvoicesContext';
-import DynamicFormTest from './pages/DynamicFormTest';
 import { EditInvoice } from './pages/EditInvoice';
 import { Invoice } from './pages/Invoice';
 import { Invoices } from './pages/Invoices';
@@ -16,6 +15,7 @@ import { NewInvoice } from './pages/NewInvoice';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { PageLayout } from './pages/PageLayout';
 import { Signup } from './pages/Signup.jsx';
+import { UserProfile } from './pages/UserProfile';
 
 export const DarkModeContext = createContext();
 
@@ -72,7 +72,10 @@ function App() {
                   element={user ? <EditInvoice /> : <Navigate to="/login" />}
                 />
 
-                <Route path="/formtest" element={<DynamicFormTest />} />
+                <Route
+                  path="/profile"
+                  element={user ? <UserProfile /> : <Navigate to="/login" />}
+                />
 
                 <Route
                   path="/login"

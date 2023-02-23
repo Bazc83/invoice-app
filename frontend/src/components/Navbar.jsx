@@ -14,6 +14,7 @@ import { AuthContext } from '@/context/AuthContext';
 import useModalStore from '@/context/useModalStore';
 import { useLogout } from '@/hooks/useLogout';
 
+import NavLinkItem from './NavLinkItem';
 import { RandomLogo } from './RandomLogo';
 
 export function Navbar() {
@@ -63,45 +64,59 @@ export function Navbar() {
               className={`secondary-bg absolute top-14 right-0 z-30 overflow-hidden shadow-md transition-transform ease-in `}
             >
               <ul className="flex  w-[250px]  flex-col  ">
+                {/* User Profile */}
+
+                {user && (
+                  <NavLinkItem>
+                    <Link to="profile" className="block py-2">
+                      Profile
+                    </Link>
+                  </NavLinkItem>
+                )}
+
                 {/* Invoices link */}
                 {user && (
-                  <li className=" block  w-full  cursor-pointer border-b border-b-gray-700  px-4 py-4 last:border-none hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">
-                    <Link to="/invoices"> Invoices</Link>
-                  </li>
+                  <NavLinkItem>
+                    <Link to="/invoices" className="block py-2">
+                      {' '}
+                      Invoices
+                    </Link>
+                  </NavLinkItem>
                 )}
 
                 {/* Logout */}
+
                 {user && (
-                  <li className=" block  w-full  cursor-pointer border-b border-b-gray-700  px-4 py-4 last:border-none hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">
+                  <NavLinkItem>
                     <button
-                      className="flex w-full items-center gap-2 text-base  "
+                      className="flex w-full items-center gap-2 py-2 text-base  "
                       type="button"
                       onClick={handleLogout}
                     >
                       Sign out
                       <FaSignOutAlt className="text-xl " />
                     </button>
-                  </li>
+                  </NavLinkItem>
                 )}
 
                 {/* Login */}
                 {!user && (
-                  <li className=" block  w-full  cursor-pointer border-b border-b-gray-700  px-4 py-4 last:border-none hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">
-                    <Link to="/login" className="flex items-center gap-2 ">
+                  <NavLinkItem>
+                    <Link to="/login" className="flex items-center gap-2 py-2">
                       Login
                       <FaSignInAlt className="text-xl " />
                     </Link>
-                  </li>
+                  </NavLinkItem>
                 )}
 
                 {/* Register / signup */}
                 {!user && (
-                  <li className=" block  w-full  cursor-pointer border-b border-b-gray-700  px-4 py-4 last:border-none hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">
-                    <Link to="/signup" className="flex items-center gap-2 ">
+                  <NavLinkItem>
+                    <Link to="/signup" className="flex items-center gap-2 py-2 ">
                       Sign up
                       <FaUserEdit className="text-xl transition-colors hover:text-gray-400" />
                     </Link>
-                  </li>
+                  </NavLinkItem>
                 )}
               </ul>
             </nav>
