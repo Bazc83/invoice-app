@@ -35,7 +35,7 @@ export function PageLayout() {
       >
         <ToastContainer
           position="top-center"
-          autoClose={3000}
+          autoClose={2000}
           hideProgressBar
           newestOnTop={false}
           closeOnClick
@@ -43,7 +43,7 @@ export function PageLayout() {
           pauseOnFocusLoss
           pauseOnHover
           theme="colored"
-          className="mt-24"
+          className="mt-`15"
         />
 
         <Outlet />

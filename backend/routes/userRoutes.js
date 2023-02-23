@@ -5,6 +5,7 @@ const {
   signupUser,
   checkToken,
   getUserDetails,
+  updateUser,
 } = require('../controllers/userController');
 const router = express.Router();
 
@@ -21,5 +22,6 @@ const requireAuth = require('../middleware/requireAuth');
 router.use(requireAuth);
 
 router.get('/:user', getUserDetails);
+router.put('/:user', updateUser);
 
 module.exports = router;

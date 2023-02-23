@@ -29,7 +29,7 @@ export const useGetUserDetails = () => {
     // eslint-disable-next-line no-underscore-dangle
     queryKey: ['user', user._id],
     // eslint-disable-next-line no-underscore-dangle
-    queryFn: () => getDetails(user.token, user._id),
+    queryFn: () => getDetails(user.token),
     enabled: authData?.jwtValid === true,
   });
 

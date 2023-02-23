@@ -11,8 +11,6 @@ export const useUpdateInvoice = (invoiceIdValue) => {
 
   const { user } = useContext(AuthContext);
 
-
-
   const updateInvoice = async (invoiceId, invoiceData) => {
 
     const response = await fetch(`/api/invoices/${invoiceId}`, {

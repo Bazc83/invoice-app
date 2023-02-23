@@ -64,11 +64,33 @@ const getUserDetails = asyncHandler(async (req, res) => {
     {
       // excludes password field
       password: 0,
-    
     }
   );
 
   res.send(userDetails);
 });
 
-module.exports = { loginUser, signupUser, checkToken, getUserDetails };
+// updateUser
+const updateUser = asyncHandler(async (req, res) => {
+  res.header('Access-Control-Allow-Origin', '*');
+
+  // get all from req.body
+  const payloadData = {
+    ...req.body,
+  };
+
+  const invoice = await User.findOneAndUpdate(
+    { _id: req.user._id.toHexString() },
+    // payLoadData === req.body, items & amountDueTotal
+    payloadData
+  ).catch((err) => console.log(err));
+  res.send(invoice);
+});
+
+module.exports = {
+  loginUser,
+  updateUser,
+  signupUser,
+  checkToken,
+  getUserDetails,
+};

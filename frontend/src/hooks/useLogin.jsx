@@ -7,10 +7,6 @@ export const useLogin = () => {
   const [isLoading, setIsLoading] = useState(null);
   const { dispatch } = useContext(AuthContext);
 
-  const errHandler = (err) => {
-    console.log('error, ', err);
-  };
-
   const login = async (email, password) => {
     setIsLoading(true);
     setError(null);
@@ -21,7 +17,7 @@ export const useLogin = () => {
       body: JSON.stringify({ email, password }),
     });
 
-    const json = await response.json().catch((err) => errHandler(err));
+    const json = await response.json();
 
     if (json.error) {
       setIsLoading(false);
@@ -30,9 +26,7 @@ export const useLogin = () => {
       setTimeout(() => {
         setError(null);
       }, 2000);
-    }
-
-    if (response.ok) {
+    } else {
       // save to local storage
       localStorage.setItem('user', JSON.stringify(json));
       // update AuthContext

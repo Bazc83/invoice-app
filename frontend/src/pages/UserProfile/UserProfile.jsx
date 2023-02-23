@@ -1,9 +1,11 @@
-import { useEffect } from 'react';
+import { useContext } from 'react';
 
 import CancelEditFormModal from '@/components/CancelEditFormModal';
 import Container from '@/components/Container';
+import { AuthContext } from '@/context/AuthContext';
 import useModalStore from '@/context/useModalStore';
 import useGetUserDetails from '@/hooks/reactQueryHooks/useGetUserDetails';
+import useUpdateUser from '@/hooks/reactQueryHooks/useUpdateUser';
 
 import UserProfileForm from './UserProfileForm';
 
@@ -12,14 +14,14 @@ export function UserProfile() {
 
   const confirmationModal = useModalStore((s) => s.confirmationModal);
 
+  const { updateUserMutation } = useUpdateUser();
+
+  const { user } = useContext(AuthContext);
+
   const handleFormSubmit = (data) => {
-    console.log(data);
+    updateUserMutation.mutate({ user, userData: data });
     return data;
   };
-
-  useEffect(() => {
-    console.log(userData);
-  }, [userData]);
 
   if (isLoading) return <div>Loading ...</div>;
 
