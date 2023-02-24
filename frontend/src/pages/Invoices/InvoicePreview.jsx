@@ -1,11 +1,13 @@
 import { useNavigate } from 'react-router';
 
+import useModalStore from '@/context/useModalStore';
 import { useFormatDate } from '@/hooks/useFormatDate';
 import usePaymentStatusColor from '@/hooks/usePaymentStatusColor';
 
 export function InvoicePreview({ invoice }) {
   const { status, id, clientName, amountDueTotal, paymentDue } = invoice;
 
+  const showDeleteModal = useModalStore((s) => s.showDeleteModal);
   const { getDate } = useFormatDate();
 
   const navigate = useNavigate();
@@ -14,14 +16,42 @@ export function InvoicePreview({ invoice }) {
     navigate(`/invoices/${invoiceId}`);
   };
 
+  const editInvoice = (invoiceId) => {
+    navigate(`/editinvoice/${invoiceId}`);
+  };
+
   const { paymentStatusColor } = usePaymentStatusColor(status);
 
   return (
     <div
-      onClick={() => showFullInvoice(invoice.id)}
-      className="secondary-bg flex cursor-pointer flex-col gap-2 rounded-md border border-gray-200 px-6 py-6 shadow-md dark:border-gray-900 sm:gap-1 md:grid md:grid-cols-[1rem_repeat(10,_1fr)_1rem] md:items-baseline md:justify-center md:gap-2 md:px-2 md:py-6  "
+      // onClick={() => showFullInvoice(invoice.id)}
+      className="secondary-bg relative flex cursor-pointer flex-col gap-2 rounded-md border border-gray-200 px-6 py-6  shadow-md dark:border-gray-900 sm:gap-1 md:grid md:grid-cols-[1rem_repeat(10,_1fr)_1rem] md:items-baseline md:justify-center  md:gap-2 md:px-2 md:py-6 "
       aria-hidden="true"
     >
+      <div className="group absolute inset-0 flex h-full w-full items-center justify-end gap-4 rounded-md bg-gray-800/90 px-6 opacity-0 transition-all duration-200 ease-in-out hover:opacity-100">
+        <button
+          type="button"
+          className="btn | hidden bg-red-600 group-hover:block"
+          onClick={() => showDeleteModal(invoice.id)}
+        >
+          Delete
+        </button>
+        <button
+          type="button"
+          className="btn | hidden bg-blue-600 group-hover:block"
+          onClick={() => editInvoice(invoice.id)}
+        >
+          Edit
+        </button>
+        <button
+          type="button"
+          className="btn | hidden bg-green-600 group-hover:block"
+          onClick={() => showFullInvoice(invoice.id)}
+        >
+          Show
+        </button>
+      </div>
+
       {/* Invoice id and paymentDue date */}
       <div className="grid grid-cols-[1fr_2fr]     gap-1  md:col-start-2    md:col-end-6  ">
         <p className=" text-sm md:text-start md:text-base">#{id}</p>

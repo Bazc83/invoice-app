@@ -1,9 +1,11 @@
 import { useContext, useEffect } from 'react';
 
+import ConfirmDeleteModal from '@/components/ConfirmDeleteModal';
 import Container from '@/components/Container';
 import InvoicesControlPanel from '@/components/InvoicesControlPanel';
 import { NoInvoices } from '@/components/NoInvoices';
 import { InvoicesContext } from '@/context/InvoicesContext';
+import useModalStore from '@/context/useModalStore';
 import { useInvoices } from '@/hooks/reactQueryHooks/useInvoices';
 import { InvoicePreview } from '@/pages/Invoices/InvoicePreview';
 
@@ -11,6 +13,9 @@ export function Invoices() {
   const { state, dispatch } = useContext(InvoicesContext);
 
   const { isLoading, isError, error, data: invoices } = useInvoices();
+
+  
+  const deleteModal = useModalStore((s) => s.deleteModal);
 
   useEffect(() => {
     dispatch({ type: 'filterInvoices', payload: invoices });
@@ -25,14 +30,19 @@ export function Invoices() {
       >
         <h1 className="py-6 text-center text-3xl">Invoices</h1>
         <div className=" relative flex h-full flex-col gap-4 rounded-md  lg:grid lg:grid-cols-[200px_1fr] ">
-
           {/* filter checkboxes and add new invoice button */}
           <InvoicesControlPanel state={state} />
 
           {/* No invoice component */}
           {state.filteredInvoices?.length === 0 && <NoInvoices />}
 
-          <div className={`primary-bg  flex-col gap-2 rounded-md px-6 pt-4 pb-10 shadow-md ${state.filteredInvoices?.length === 0 ? "hidden" : "flex"}`}>
+          {/* Show delete confirmation modal */}
+          {deleteModal && <ConfirmDeleteModal />}
+          <div
+            className={`primary-bg  flex-col gap-2 rounded-md px-6 pt-4 pb-10 shadow-md ${
+              state.filteredInvoices?.length === 0 ? 'hidden' : 'flex'
+            }`}
+          >
             {/* Invoice preview headers md screen and greater */}
             {state.filteredInvoices?.length > 0 && (
               <div className="hidden  gap-2  py-1  md:grid  md:grid-cols-[1rem_repeat(10,_1fr)_1rem] md:items-baseline  lg:gap-2  ">

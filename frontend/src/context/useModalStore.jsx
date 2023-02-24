@@ -5,6 +5,8 @@ const initialState = {
   mobileMenu: false,
   confirmationModal: false,
   deleteModal: false,
+  invoiceId: '',
+  enableQuery: true,
 };
 const useModalStore = create((set) => ({
   ...initialState,
@@ -14,7 +16,7 @@ const useModalStore = create((set) => ({
     set((state) => ({ filterModal: !state.filterModal })),
   toggleDeleteModal: () =>
     set((state) => ({ deleteModal: !state.deleteModal })),
-  
+
   toggleMobileMenu: () => set((state) => ({ mobileMenu: !state.mobileMenu })),
   toggleConfirmationModal: () =>
     set((state) => ({ confirmationModal: !state.confirmationModal })),
@@ -23,13 +25,15 @@ const useModalStore = create((set) => ({
   showConfirmationModal: () => set(() => ({ confirmationModal: true })),
   showMobileMenu: () => set(() => ({ mobileMenu: true })),
 
-  showDeleteModal: () => set(() => ({ deleteModal: true })),
+  showDeleteModal: (invoiceId) =>
+    set(() => ({ deleteModal: true, invoiceId, enableQuery: false })),
 
   // Hide modals
   hideConfirmationModal: () => set(() => ({ confirmationModal: false })),
 
   hideMobileMenu: () => set(() => ({ mobileMenu: false })),
-  hideDeleteModal: () => set(() => ({ deleteModal: false })),
+  hideDeleteModal: () =>
+    set(() => ({ deleteModal: false, invoiceId: '' })),
   hideAllModals: () => set(() => ({ ...initialState })),
 }));
 export default useModalStore;

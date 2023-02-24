@@ -86,11 +86,15 @@ const getInvoices = asyncHandler(async (req, res) => {
 // Get invoice by id
 const getInvoice = asyncHandler(async (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
-
   const invoice = await Invoice.findOne({
     id: req.params.id,
     createdByUser: req.user._id.toHexString(),
   });
+
+  if (!invoice) {
+    res.status(400);
+    throw new Error('Invoice not found');
+  }
 
   res.send(invoice);
 });
@@ -187,7 +191,7 @@ const deleteInvoice = asyncHandler(async (req, res) => {
   const invoice = await Invoice.findOne({ id: req.params.id });
   if (!invoice) {
     res.status(400);
-    throw new Error('Invoice not found');
+    throw new Error({ error: 'Invoice not Found' });
   } else {
     await invoice.remove();
     res.status(200).json({ id: req.params.id });

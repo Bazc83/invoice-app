@@ -13,6 +13,7 @@ function ConfirmActionModalTemplate({
   modalContent,
   cancelActionFunction,
   confirmActionFunction,
+  invoiceId
 }) {
   return (
     <div className="fixed inset-0 z-20 h-full   w-full bg-black bg-opacity-70 ">
@@ -31,7 +32,7 @@ function ConfirmActionModalTemplate({
           <button
             type="button"
             className="btn | flex items-center  justify-center gap-2   bg-red-700 text-white hover:bg-red-900"
-            onClick={confirmActionFunction}
+            onClick={()=>confirmActionFunction(invoiceId)}
           >
             {modalContent?.confirmBtn}
           </button>

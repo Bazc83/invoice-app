@@ -29,15 +29,27 @@ export function Invoice() {
     isLoading,
     isError,
     error,
+    remove,
   } = useFilterInvoiceById(invoiceId);
+
+  const handleDelete = (invoiceIdValue) => {
+    showDeleteModal(invoiceIdValue);
+  };
+
+  // Clears from useQuery cache on unmount
+  useEffect(
+    () => () => remove(),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
 
   useEffect(() => {
     hideAllModals();
   }, [hideAllModals]);
 
-  if (isLoading) return 'Loading...';
+  if (isLoading) return <div>Loading...</div>;
 
-  if (isError) return `An error has occurred: ${error.message}`;
+  if (isError) return <div>{`An error has occurred: ${error.message}`}</div>;
 
   return (
     <div className="primary-bg  relative mx-auto grid  max-w-3xl grid-cols-1 grid-rows-1 gap-6  p-6  ">
@@ -52,7 +64,7 @@ export function Invoice() {
         <div className="flex gap-4">
           <button
             type="button"
-            onClick={showDeleteModal}
+            onClick={() => handleDelete(invoiceId)}
             className="btn border border-red-600 text-red-600  hover:bg-red-600 hover:text-white  "
           >
             Delete

@@ -3,23 +3,29 @@ import { useContext } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 import { AuthContext } from '@/context/AuthContext';
+import useModalStore from '@/context/useModalStore';
 
 import { useAuth } from './useAuth';
 
-const getInvoiceById = async (userToken, invoiceId) => {
-  const response = await fetch(`/api/invoices/${invoiceId}`, {
+const getInvoiceById = async (userToken, invoiceIdValue) => {
+  const response = await fetch(`/api/invoices/${invoiceIdValue}`, {
+    method: 'GET',
     headers: { Authorization: `Bearer ${userToken}` },
   });
 
+  if (!response.ok) {
+    return response;
+  }
+
   const json = await response.json();
 
-  if (response.ok) {
-    return json;
-  }
   return json;
 };
 
 export const useFilterInvoiceById = (invoiceId) => {
+  // If delete modal is shown stops query
+  const enableQuery = useModalStore((s) => s.enableQuery);
+
   const { user } = useContext(AuthContext);
 
   const { authData } = useAuth();
@@ -27,7 +33,7 @@ export const useFilterInvoiceById = (invoiceId) => {
   const queryResponse = useQuery({
     queryKey: ['invoice', invoiceId],
     queryFn: () => getInvoiceById(user.token, invoiceId),
-    enabled: authData?.jwtValid === true,
+    enabled: authData?.jwtValid === true && enableQuery === true,
   });
 
   return { ...queryResponse };
