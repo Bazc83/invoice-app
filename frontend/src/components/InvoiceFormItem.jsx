@@ -80,7 +80,6 @@ function InvoiceFormItem({ item, index, register, remove, control, errors }) {
                   value: /^[0-9]+\.[0-9]{2}$/,
                   message: 'Invalid price',
                 },
-                value: 'test',
               })}
               inputMode="numeric"
               type="text"
