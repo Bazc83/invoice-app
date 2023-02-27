@@ -29,25 +29,29 @@
 
 @layer base {
   :root {
-    --color-text-base: #000000;
-    --color-text-muted: #222222;
-    --color-text-inverted: #ffffff;
-    --color-primary: #ffffff;
-    --color-secondary: #f8f8f8;
-    --color-fill: #f8f8f8;
-    --color-danger: red;
-    --color-warning: orange;
-    --color-success: green;
-    --ring-base: #9404f4;
+    --color-text-base: 0 0 0;
+    --color-text-muted: 34 34 34;
+    --color-text-inverted: 255 255 255;
+    --color-primary: 250 250 250;
+    --color-secondary: 255 255 255;
+    --color-fill: 200 200 200;
+    --color-edit: 0 0 255;
+    --color-danger: 255 0 0;
+    --color-warning: 255 165 0;
+    --color-success: 0 100 0;
+    --color-ring-base: 148 4 244;
+    --color-button-default: 150 150 150;
+    --color-navbar: 30 30 30;
   }
 
   .dark-theme {
-    --color-text-base: #ffffff;
-    --color-text-muted: #f1f1f1;
-    --color-text-inverted: #000000;
-    --color-primary: #121212;
-    --color-secondary: #151515;
-    --color-fill: #000000;
+    --color-text-base: 255 255 255;
+    --color-text-muted: 241 241 241;
+    --color-text-inverted: 0 0 0;
+    --color-primary: 18 18 18;
+    --color-secondary: 30 30 30;
+    --color-fill: 75 75 75;
+    --color-button-default: 74 74 74;
   }
 
   [type='text'],
@@ -65,37 +69,22 @@
   [multiple],
   textarea,
   select {
-    @apply w-full rounded-md  border-gray-400 bg-white text-gray-900 shadow-md   focus:border-transparent focus:outline-none focus:ring-2 focus:ring-skin-base  active:ring-2 active:ring-skin-base 
-    dark:border-gray-400  dark:bg-gray-400
-    dark:text-gray-900 dark:focus:ring-4;
+    @apply w-full rounded-md  border-skin-fill bg-skin-fill text-skin-base shadow-md   focus:border-transparent focus:outline-none focus:ring-2 focus:ring-skin-base  active:ring-2 active:ring-skin-base 
+    dark:focus:ring-4;
   }
 }
 
 @layer components {
-  /* .primary-bg {
-    @apply bg-gray-100 font-semibold text-gray-900 dark:bg-gray-900 dark:text-gray-50 print:text-black dark:print:text-black;
-  } */
-  .primary-bg {
-    @apply bg-skin-primary text-skin-base;
-  }
-  /* .secondary-bg {
-    @apply bg-gray-50 text-black dark:bg-gray-800 dark:text-gray-50 print:text-black dark:print:text-black;
-  } */
-
-  .secondary-bg {
-    @apply bg-skin-secondary text-skin-base;
-  }
-
   .default-text {
     @apply text-gray-900 dark:text-gray-50 print:text-black dark:print:text-black;
   }
 
-  .secondary-text {
-    @apply text-gray-600 dark:text-gray-50 print:text-gray-700 dark:print:text-gray-700;
-  }
-
   .btn {
     @apply cursor-pointer rounded-md py-2 px-4 outline-none transition-colors;
+  }
+
+  .btn-neutral {
+    @apply btn bg-skin-btn-default text-skin-inverted;
   }
 
   .inputError {

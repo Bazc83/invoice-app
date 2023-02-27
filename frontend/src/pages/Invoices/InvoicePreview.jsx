@@ -24,27 +24,27 @@ export function InvoicePreview({ invoice }) {
 
   return (
     <div
-      className="secondary-bg relative flex cursor-pointer flex-col gap-2 rounded-md border border-gray-200 px-6 py-6  shadow-md dark:border-gray-900 sm:gap-1 md:grid md:grid-cols-[1rem_repeat(10,_1fr)_1rem] md:items-baseline md:justify-center  md:gap-2 md:px-2 md:py-6 "
+      className="relative flex cursor-pointer flex-col gap-2 rounded-md border border-gray-200 bg-skin-primary px-6 py-6 text-skin-base  shadow-md dark:border-gray-900 sm:gap-1 md:grid md:grid-cols-[1rem_repeat(10,_1fr)_1rem] md:items-baseline md:justify-center  md:gap-2 md:px-0 md:py-6 "
       aria-hidden="true"
     >
-      <div className="group absolute inset-0 flex h-full w-full items-center justify-end gap-4 rounded-md bg-gray-800/90 px-6 opacity-0 transition-all duration-200 ease-in-out hover:opacity-100">
+      <div className="group absolute inset-0 flex h-full w-full items-center justify-end gap-4 rounded-md bg-skin-secondary/90 px-6 opacity-0 transition-all duration-200 ease-in-out hover:opacity-100">
         <button
           type="button"
-          className="btn | hidden bg-red-600 group-hover:block"
+          className="btn | hidden bg-skin-danger  text-white group-hover:block"
           onClick={() => showDeleteModal(invoice.id)}
         >
           Delete
         </button>
         <button
           type="button"
-          className="btn | hidden bg-blue-600 group-hover:block"
+          className="btn | hidden bg-skin-edit text-white  group-hover:block"
           onClick={() => editInvoice(invoice.id)}
         >
           Edit
         </button>
         <button
           type="button"
-          className="btn | hidden bg-green-600 group-hover:block"
+          className="btn | hidden bg-skin-success  text-white group-hover:block"
           onClick={() => showFullInvoice(invoice.id)}
         >
           Show

@@ -18,7 +18,7 @@ function EditInvoiceForm({ handleFormSubmit, handleCancel, invoiceData }) {
   return (
     <form
       onSubmit={handleSubmit(handleFormSubmit)}
-      className=" secondary-bg mx-auto flex w-full max-w-2xl flex-col gap-10 rounded-md py-6 px-8 shadow-md "
+      className=" mx-auto flex w-full max-w-2xl flex-col gap-10 rounded-md bg-skin-secondary py-6 px-8 text-skin-base shadow-md "
     >
       <div className="flex flex-col gap-4">
         <h1 className="text-2xl">Edit #{invoiceData.id}</h1>
@@ -214,7 +214,7 @@ function EditInvoiceForm({ handleFormSubmit, handleCancel, invoiceData }) {
 
         {/* Add a new item */}
         <button
-          className="btn w-full border-2  border-gray-500 text-gray-800 hover:bg-gray-800 hover:text-white dark:border-gray-400 dark:text-gray-400 hover:dark:border-gray-900 hover:dark:bg-gray-900 hover:dark:text-white"
+          className="btn w-full border-2  border-skin-btn-default text-skin-base hover:bg-skin-btn-default hover:text-skin-inverted "
           type="button"
           onClick={() => append({ name: '', price: '0.00', quantity: 1 })}
         >
@@ -226,14 +226,14 @@ function EditInvoiceForm({ handleFormSubmit, handleCancel, invoiceData }) {
       <div className=" mt-6 flex justify-between gap-4 ">
         <button
           type="button"
-          className="btn | flex items-center  justify-center gap-3  bg-red-800 text-white hover:bg-red-900"
+          className="btn | flex items-center  justify-center gap-3  bg-skin-danger text-white hover:opacity-90"
           onClick={handleCancel}
         >
           Cancel
         </button>
         <button
           type="submit"
-          className="btn | flex items-center  justify-center gap-3 bg-green-800 text-white  hover:bg-green-900"
+          className="btn | flex items-center  justify-center gap-3 bg-skin-success text-white  hover:opacity-90"
         >
           Submit Changes
         </button>

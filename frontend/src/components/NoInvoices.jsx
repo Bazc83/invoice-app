@@ -4,8 +4,8 @@ export function NoInvoices() {
   const navigate = useNavigate();
 
   return (
-    <div className="primary-bg flex flex-col gap-2 rounded-md px-6  shadow-md  py-10 ">
-      <div className='max-h-52 flex items-center justify-center'>
+    <div className="flex flex-col gap-2 rounded-md bg-skin-primary px-6 py-10  text-skin-base  shadow-md ">
+      <div className="flex max-h-52 items-center justify-center">
         <img src="/images/illustration-empty.svg" alt="no invoices svg" />
       </div>
       <div className="flex flex-col items-center justify-center gap-6">
@@ -15,7 +15,7 @@ export function NoInvoices() {
 
         <button
           onClick={() => navigate('/newinvoice')}
-          className="btn bg-green-700"
+          className="btn bg-skin-success text-white"
           type="button"
         >
           Add Invoice

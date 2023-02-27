@@ -52,12 +52,12 @@ export function Invoice() {
   if (isError) return <div>{`An error has occurred: ${error.message}`}</div>;
 
   return (
-    <div className="primary-bg  relative mx-auto grid  max-w-3xl grid-cols-1 grid-rows-1 gap-6  p-6  ">
+    <div className="relative mx-auto  grid max-w-3xl grid-cols-1  grid-rows-1 gap-6 bg-skin-primary p-6  text-skin-base  ">
       {/* Show delete confirmation modal */}
       {deleteModal && <ConfirmDeleteModal />}
 
       {/* invoice conrols */}
-      <div className="noPrint | secondary-bg relative flex  flex-col items-center justify-between  gap-4 rounded-md  py-6 px-8 text-sm sm:flex-row">
+      <div className="noPrint | relative flex flex-col items-center  justify-between gap-4 rounded-md  bg-skin-secondary py-6  px-8 text-sm text-skin-base sm:flex-row">
         {/* Go back to invoices page link */}
         <GoBackLink linkPath="/invoices" />
 
@@ -65,7 +65,7 @@ export function Invoice() {
           <button
             type="button"
             onClick={() => handleDelete(invoiceId)}
-            className="btn border border-red-600 text-red-600  hover:bg-red-600 hover:text-white  "
+            className="btn border border-skin-danger text-skin-danger  hover:bg-skin-danger hover:text-white "
           >
             Delete
           </button>
@@ -74,7 +74,7 @@ export function Invoice() {
           <button
             type="button"
             onClick={() => handleEditInvoice(invoiceId)}
-            className="btn   border border-gray-900 text-gray-900    hover:bg-gray-900 hover:text-gray-50 dark:border-gray-50  dark:text-gray-50  hover:dark:bg-gray-50 hover:dark:text-gray-900"
+            className="btn   border border-skin-btn-default text-skin-btn-default    hover:bg-skin-btn-default hover:text-white "
           >
             Edit
           </button>
@@ -82,7 +82,7 @@ export function Invoice() {
       </div>
 
       {/* Invoice main content */}
-      <main className="secondary-bg print | relative flex h-full  flex-col gap-y-4 pt-8 pb-12  text-sm shadow-md">
+      <main className="print | relative flex h-full flex-col gap-y-4  bg-skin-secondary pt-8 pb-12 text-sm  text-skin-base shadow-md">
         {/* Print Button */}
         <button
           type="button"
@@ -100,12 +100,12 @@ export function Invoice() {
           {/* Header and invoice id */}
           <div className="col-span-5 col-start-2 flex flex-col gap-2">
             <h1 className="text-lg md:text-xl lg:text-2xl ">Invoice</h1>
-            <p className="secondary-text  text-sm lg:text-base  ">
+            <p className="text-sm  text-skin-muted lg:text-base  ">
               #{invoiceData?.id}
             </p>
           </div>
 
-          <p className="secondary-text col-span-5 col-start-8 self-center text-lg capitalize md:text-xl lg:text-2xl ">
+          <p className="col-span-5 col-start-8 self-center text-lg capitalize text-skin-muted md:text-xl lg:text-2xl ">
             {invoiceData?.status}
           </p>
         </div>
@@ -114,14 +114,14 @@ export function Invoice() {
         <div className="grid grid-cols-12 text-sm lg:text-base">
           {/* Created at date */}
           <div className="col-span-5 col-start-2 flex flex-col flex-wrap gap-2 md:flex-row">
-            <p className="secondary-text ">Invoice Date: </p>
+            <p className="text-skin-muted ">Invoice Date: </p>
             <p className="">{getDate(invoiceData?.createdAt)}</p>
           </div>
 
           {/* Invoice payment due date */}
           {invoiceData?.status !== 'paid' && (
             <div className="col-span-5 col-start-8 flex flex-col flex-wrap gap-2 md:flex-row">
-              <p className="secondary-text ">Payment Due: </p>
+              <p className="text-skin-muted ">Payment Due: </p>
               <p className="">{getDate(invoiceData?.paymentDue)}</p>
             </div>
           )}
@@ -130,7 +130,7 @@ export function Invoice() {
         {/* Client and sender details */}
         <div className="grid grid-cols-12 text-sm lg:text-base">
           <div className="col-span-5 col-start-2">
-            <p className="secondary-text  ">Bill To:</p>
+            <p className="text-skin-muted  ">Bill To:</p>
             <div className="md:pl-2">
               <p>{invoiceData?.clientName}</p>
               <p>{invoiceData?.clientStreet}</p>
@@ -140,7 +140,7 @@ export function Invoice() {
             </div>
           </div>
           <div className="col-span-5 col-start-8 ">
-            <p className="secondary-text">Bill From:</p>
+            <p className="text-skin-muted">Bill From:</p>
             <div className="md:pl-2">
               <p>{invoiceData?.companyName}</p>
               <p>{invoiceData?.senderStreet}</p>
@@ -154,12 +154,12 @@ export function Invoice() {
         {/* Invoice description & client's email */}
         <div className="grid grid-cols-12   gap-2  text-sm md:gap-0 lg:text-base">
           <div className=" col-span-full col-start-2  md:col-span-5 md:col-start-2 ">
-            <p className="secondary-text">Invoice Ref:</p>
+            <p className="text-skin-muted">Invoice Ref:</p>
             <p className="md:pl-2">{invoiceData?.description}</p>
           </div>
 
           <div className="col-span-full col-start-2  md:col-span-5 md:col-start-8 ">
-            <p className="secondary-text">Email Address:</p>
+            <p className="text-skin-muted">Email Address:</p>
             <p className="md:pl-2">{invoiceData?.clientEmail}</p>
           </div>
         </div>

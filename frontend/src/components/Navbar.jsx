@@ -37,7 +37,7 @@ export function Navbar() {
   };
 
   return (
-    <div className="noPrint | z-50 h-20 bg-gray-800">
+    <div className="noPrint | z-50 h-20 bg-skin-navbar">
       {/* Navbar Container */}
       <div className=" relative mx-auto flex h-20 max-w-6xl items-center justify-between py-4 px-4 text-gray-50 md:px-6 xl:px-0">
         {/* Random logo */}
@@ -47,9 +47,9 @@ export function Navbar() {
           {/* Dark mode toggle */}
           <button onClick={toggleDarkMode} type="button">
             {theme === 'dark' ? (
-              <FaSun className="text-xl transition-colors hover:text-gray-400" />
+              <FaSun className="text-xl transition-colors hover:opacity-90" />
             ) : (
-              <FaMoon className="text-xl transition-colors hover:text-gray-400" />
+              <FaMoon className="text-xl transition-colors hover:opacity-90" />
             )}
           </button>
 
@@ -61,7 +61,7 @@ export function Navbar() {
           {/* Navlist */}
           {mobileMenu && (
             <nav
-              className={`secondary-bg absolute top-14 right-0 z-30 overflow-hidden shadow-md transition-transform ease-in `}
+              className={`absolute top-14 right-0 z-30 overflow-hidden bg-skin-secondary text-skin-base shadow-md transition-transform ease-in `}
             >
               <ul className="flex  w-[250px]  flex-col  ">
                 {/* User Profile */}
@@ -89,7 +89,7 @@ export function Navbar() {
                 {user && (
                   <NavLinkItem>
                     <button
-                      className="flex w-full items-center gap-2 py-2 text-base  "
+                      className="flex w-full items-center gap-2 py-2 text-skin-base  "
                       type="button"
                       onClick={handleLogout}
                     >
@@ -112,7 +112,10 @@ export function Navbar() {
                 {/* Register / signup */}
                 {!user && (
                   <NavLinkItem>
-                    <Link to="/signup" className="flex items-center gap-2 py-2 ">
+                    <Link
+                      to="/signup"
+                      className="flex items-center gap-2 py-2 "
+                    >
                       Sign up
                       <FaUserEdit className="text-xl transition-colors hover:text-gray-400" />
                     </Link>

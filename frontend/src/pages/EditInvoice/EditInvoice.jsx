@@ -40,7 +40,7 @@ export function EditInvoice() {
   if (isError) return `An error has occurred: ${error.message}`;
 
   return (
-    <div className="primary-bg relative flex h-max flex-col pb-10 pt-6 sm:px-6 md:pt-8  ">
+    <div className="relative flex h-max flex-col bg-skin-primary pb-10 pt-6 text-skin-base sm:px-6 md:pt-8  ">
       {/* confirm cancel modal */}
       {confirmationModal && <CancelEditFormModal />}
 

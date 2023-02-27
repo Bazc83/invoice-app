@@ -108,7 +108,7 @@ function InvoiceFormItem({ item, index, register, remove, control, errors }) {
             onClick={() => remove(index)}
             className="flex w-full items-end justify-center pb-3"
           >
-            <FaTrashAlt className="text-xl hover:text-red-600" />
+            <FaTrashAlt className="text-xl hover:text-skin-danger " />
           </button>
         </div>
       </div>

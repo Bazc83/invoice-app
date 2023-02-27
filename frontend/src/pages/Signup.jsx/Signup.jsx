@@ -40,10 +40,10 @@ export function Signup() {
       {/* todo remove Hidden  */}
       {/* todo remove Hidden  */}
       <div className=" mx-auto  hidden max-w-lg rounded-b-md">
-        {/* primary-bg removed  */}
-        {/* primary-bg removed  */}
-        {/* primary-bg removed  */}
-        {/* primary-bg removed  */}
+        {/* bg-skin-primary text-skin-base removed  */}
+        {/* bg-skin-primary text-skin-base removed  */}
+        {/* bg-skin-primary text-skin-base removed  */}
+        {/* bg-skin-primary text-skin-base removed  */}
         <div className=" mb-10 flex  justify-between">
           <FormSectionButton
             currentForm={currentForm}
@@ -70,11 +70,11 @@ export function Signup() {
           </FormSectionButton>
         </div>
 
-        <div className=" secondary-bg   rounded-b-md px-8 py-10 shadow-md md:pb-16">
+        <div className=" rounded-b-md bg-skin-secondary   px-8 py-10 text-skin-base shadow-md md:pb-16">
           {currentForm === 'signup' && (
             <form
               onSubmit={handleSubmit(handleFormSubmit)}
-              className="secondary-bg mx-auto flex max-w-lg flex-col gap-6 rounded-md p-6 shadow-md md:p-8 "
+              className="mx-auto flex max-w-lg flex-col gap-6 rounded-md bg-skin-secondary p-6 text-skin-base shadow-md md:p-8 "
             >
               <h3 className="text-center text-2xl ">Sign up</h3>
 
@@ -190,7 +190,7 @@ export function Signup() {
                 <button
                   type="button"
                   disabled={isLoading}
-                  className="btn | flex items-center justify-center  gap-2 bg-green-700 text-white hover:bg-green-900/90"
+                  className="btn | flex items-center justify-center  gap-2 bg-skin-success text-skin-inverted hover:opacity-90"
                 >
                   Personal details <FaChevronRight />
                 </button>
@@ -220,7 +220,7 @@ export function Signup() {
               </div>
               <button
                 type="submit"
-                className="btn | mt-4 bg-green-900 py-2 hover:opacity-80"
+                className="btn | mt-4 bg-skin-success py-2 hover:opacity-80"
               >
                 Save
               </button>
@@ -275,7 +275,7 @@ export function Signup() {
 
               <button
                 type="submit"
-                className="btn | mt-4 bg-green-900 py-2 hover:opacity-80"
+                className="btn | mt-4 bg-skin-success py-2 hover:opacity-80"
               >
                 Save
               </button>
@@ -331,7 +331,7 @@ export function Signup() {
 
           <button
             type="submit"
-            className="btn | mt-4 bg-green-900 py-2 hover:opacity-80"
+            className="btn | mt-4 bg-skin-success py-2 hover:opacity-90"
           >
             Save
           </button>

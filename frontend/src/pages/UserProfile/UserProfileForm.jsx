@@ -14,11 +14,11 @@ function UserProfileForm({ handleFormSubmit, userData }) {
 
   return (
     <div className=" mx-auto  max-w-lg rounded-b-md ">
-      <div className="primary-bg flex justify-between ">
+      <div className="flex justify-between bg-skin-primary text-skin-base ">
         <button
           type="button"
           aria-expanded={currentForm === 'personal'}
-          className="aria-expanded:secondary-bg primary-bg block w-full cursor-pointer py-4 hover:opacity-80 aria-expanded:rounded-t-md"
+          className="block w-full cursor-pointer bg-skin-primary py-4 hover:opacity-90 aria-expanded:rounded-t-md aria-expanded:bg-skin-secondary"
           onClick={() => setCurrentForm('personal')}
         >
           Personal <span className="hidden md:inline">Details</span>
@@ -26,14 +26,14 @@ function UserProfileForm({ handleFormSubmit, userData }) {
         <button
           type="button"
           aria-expanded={currentForm === 'company'}
-          className="aria-expanded:secondary-bg  block w-full cursor-pointer hover:opacity-80 aria-expanded:rounded-t-md"
+          className="block w-full  cursor-pointer text-skin-base hover:opacity-90 aria-expanded:rounded-t-md aria-expanded:bg-skin-secondary"
           onClick={() => setCurrentForm('company')}
         >
           Company <span className="hidden md:inline">Details</span>
         </button>
       </div>
 
-      <div className=" secondary-bg   rounded-b-md px-8 py-10 shadow-md md:pb-16">
+      <div className=" rounded-b-md bg-skin-secondary   px-8 py-10 text-skin-base shadow-md md:pb-16">
         {currentForm === 'personal' && (
           <form
             onSubmit={handleSubmit(handleFormSubmit)}
@@ -57,7 +57,7 @@ function UserProfileForm({ handleFormSubmit, userData }) {
             </div>
             <button
               type="submit"
-              className="btn | mt-4 bg-green-900 py-2 hover:opacity-80"
+              className="btn | mt-4 bg-skin-success py-2 text-white hover:opacity-90"
             >
               Save
             </button>
@@ -112,7 +112,7 @@ function UserProfileForm({ handleFormSubmit, userData }) {
 
             <button
               type="submit"
-              className="btn | mt-4 bg-green-900 py-2 hover:opacity-80"
+              className="btn | mt-4 bg-skin-success py-2 text-white hover:opacity-90"
             >
               Save
             </button>

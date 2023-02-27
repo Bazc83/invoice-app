@@ -3,12 +3,12 @@ import InvoiceItem from './InvoiceItem';
 function ItemsSection({ invoiceData }) {
   return (
     <div className="grid grid-cols-12 gap-5 text-sm lg:text-base ">
-      <p className="secondary-text col-span-full col-start-2 ">
+      <p className="col-span-full col-start-2 text-skin-muted ">
         Invoice Items:
       </p>
 
       {/* Invoice items */}
-      <div className="primary-bg col-span-10  col-start-2 flex flex-col  justify-center  rounded-sm  border-2 border-gray-300  text-sm dark:border-gray-600 print:border-black">
+      <div className="col-span-10 col-start-2 flex  flex-col justify-center rounded-sm  border-2  border-gray-300  bg-skin-primary text-sm  text-skin-base dark:border-gray-600 print:border-black">
         {/* invoice items headers for screens md and above else hidden */}
         <div
           className=" grid grid-cols-[0.5rem_repeat(10,_1fr)_0.5rem] gap-2 rounded-t-md border-b-2 border-gray-300 py-2 dark:border-gray-600 md:gap-4
@@ -35,7 +35,7 @@ function ItemsSection({ invoiceData }) {
         ))}
 
         <div className="flex flex-col gap-1 py-2">
-          <div className="primary-bg col-span-full flex flex-wrap items-center justify-end gap-2 pr-5   md:gap-2">
+          <div className="col-span-full flex flex-wrap items-center justify-end gap-2 bg-skin-primary pr-5 text-skin-base   md:gap-2">
             <small>Ex Tax</small>
             <small>
               {' '}
@@ -45,12 +45,12 @@ function ItemsSection({ invoiceData }) {
               }).format(invoiceData?.exVatTotal)}
             </small>
           </div>
-          <div className="primary-bg col-span-full flex flex-wrap items-center justify-end gap-2 pr-5  md:gap-2">
+          <div className="col-span-full flex flex-wrap items-center justify-end gap-2 bg-skin-primary pr-5 text-skin-base  md:gap-2">
             <small>Tax Rate</small>
             <small>{invoiceData?.taxRate}</small>
           </div>
 
-          <div className="primary-bg col-span-full flex flex-wrap items-center justify-end gap-2 pr-5  md:gap-2 ">
+          <div className="col-span-full flex flex-wrap items-center justify-end gap-2 bg-skin-primary pr-5 text-skin-base  md:gap-2 ">
             <small>Tax</small>
             <small>
               {' '}
@@ -62,7 +62,7 @@ function ItemsSection({ invoiceData }) {
           </div>
 
           {/* Total amount due */}
-          <div className="primary-bg col-span-full flex flex-wrap items-center justify-end gap-2 pr-5  ">
+          <div className="col-span-full flex flex-wrap items-center justify-end gap-2 bg-skin-primary pr-5 text-skin-base  ">
             <p>Amount Due</p>
             <p>
               {new Intl.NumberFormat('en', {

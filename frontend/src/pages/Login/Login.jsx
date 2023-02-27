@@ -21,7 +21,7 @@ export function Login() {
       <div className="px-8 py-8">
         <form
           onSubmit={handleSubmit(handleFormSubmit)}
-          className="secondary-bg mx-auto flex max-w-lg flex-col gap-6 rounded-md p-6 shadow-md md:p-8 "
+          className="mx-auto flex max-w-lg flex-col gap-6 rounded-md bg-skin-secondary p-6 text-skin-base shadow-md md:p-8 "
         >
           <h3 className="text-center text-2xl ">Login</h3>
 
@@ -86,7 +86,7 @@ export function Login() {
             <button
               type="submit"
               disabled={error}
-              className="btn | bg-green-700 text-white hover:bg-green-900/90 disabled:bg-gray-700 disabled:text-gray-600"
+              className="btn | bg-skin-success text-white hover:opacity-90 disabled:bg-gray-700 disabled:text-gray-600"
             >
               Login
             </button>

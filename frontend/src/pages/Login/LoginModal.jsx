@@ -8,7 +8,7 @@ export function LoginModal() {
   const { login, error, isLoading } = useLogin();
 
   const handleFormSubmit = async (data) => {
-    console.log(data)
+    console.log(data);
     await login(data.email, data.password);
   };
 
@@ -28,10 +28,10 @@ export function LoginModal() {
 
   return (
     <div className="fixed inset-0 z-20 h-full  w-full bg-black bg-opacity-70 ">
-      <div className="secondary-bg absolute top-[20%] left-[50%] z-50 flex w-[calc(100%_-_2rem)] max-w-xl -translate-x-[50%] -translate-y-[20%] flex-col items-start justify-center gap-6 rounded-md p-6  ">
+      <div className="absolute top-[20%] left-[50%] z-50 flex w-[calc(100%_-_2rem)] max-w-xl -translate-x-[50%] -translate-y-[20%] flex-col items-start justify-center gap-6 rounded-md bg-skin-secondary p-6 text-skin-base  ">
         <form
           onSubmit={handleSubmit(handleFormSubmit)}
-          className="secondary-bg mx-auto flex w-full flex-col gap-6 rounded-md p-6 shadow-md md:p-8 "
+          className="mx-auto flex w-full flex-col gap-6 rounded-md bg-skin-secondary p-6 text-skin-base shadow-md md:p-8 "
         >
           <h3 className="text-center text-2xl ">Login</h3>
 
@@ -89,7 +89,7 @@ export function LoginModal() {
             <button
               type="submit"
               disabled={isLoading}
-              className="btn | bg-green-600 text-white hover:bg-green-800"
+              className="btn | bg-skin-success text-white hover:opacity-90 disabled:bg-gray-700 disabled:text-gray-600"
             >
               Login
             </button>
