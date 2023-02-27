@@ -28,6 +28,28 @@
 }
 
 @layer base {
+  :root {
+    --color-text-base: #000000;
+    --color-text-muted: #222222;
+    --color-text-inverted: #ffffff;
+    --color-primary: #ffffff;
+    --color-secondary: #f8f8f8;
+    --color-fill: #f8f8f8;
+    --color-danger: red;
+    --color-warning: orange;
+    --color-success: green;
+    --ring-base: #9404f4;
+  }
+
+  .dark-theme {
+    --color-text-base: #ffffff;
+    --color-text-muted: #f1f1f1;
+    --color-text-inverted: #000000;
+    --color-primary: #121212;
+    --color-secondary: #151515;
+    --color-fill: #000000;
+  }
+
   [type='text'],
   [type='email'],
   [type='url'],
@@ -43,18 +65,25 @@
   [multiple],
   textarea,
   select {
-    @apply w-full rounded-md  border-gray-400 bg-white text-gray-900 shadow-md   focus:border-transparent focus:outline-none focus:ring-2 focus:ring-indigo-600  active:ring-2 active:ring-indigo-600 
+    @apply w-full rounded-md  border-gray-400 bg-white text-gray-900 shadow-md   focus:border-transparent focus:outline-none focus:ring-2 focus:ring-skin-base  active:ring-2 active:ring-skin-base 
     dark:border-gray-400  dark:bg-gray-400
     dark:text-gray-900 dark:focus:ring-4;
   }
 }
 
 @layer components {
+  /* .primary-bg {
+    @apply bg-gray-100 font-semibold text-gray-900 dark:bg-gray-900 dark:text-gray-50 print:text-black dark:print:text-black;
+  } */
   .primary-bg {
-    @apply bg-gray-50 font-semibold text-black dark:bg-gray-850 dark:text-gray-100 print:text-black dark:print:text-black;
+    @apply bg-skin-primary text-skin-base;
   }
+  /* .secondary-bg {
+    @apply bg-gray-50 text-black dark:bg-gray-800 dark:text-gray-50 print:text-black dark:print:text-black;
+  } */
+
   .secondary-bg {
-    @apply bg-gray-25 text-black dark:bg-gray-800 dark:text-gray-50 print:text-black dark:print:text-black;
+    @apply bg-skin-secondary text-skin-base;
   }
 
   .default-text {
@@ -69,14 +98,12 @@
     @apply cursor-pointer rounded-md py-2 px-4 outline-none transition-colors;
   }
 
-  
-
   .inputError {
-    @apply aria-[invalid=true]:ring-2 aria-[invalid=true]:ring-red-600;
+    @apply aria-[invalid=true]:ring-2 aria-[invalid=true]:ring-skin-danger;
   }
 
   .errorMessage {
-    @apply relative -top-1 text-sm text-red-600 aria-[invalid=true]:visible aria-[invalid=false]:invisible;
+    @apply relative -top-1 text-sm text-skin-danger aria-[invalid=true]:visible aria-[invalid=false]:invisible;
   }
 }
 

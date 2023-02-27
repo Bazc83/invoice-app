@@ -40,7 +40,7 @@ function App() {
   return (
     <div
       className={`App ${theme} h-screen overflow-auto ${
-        theme === 'dark' && '[color-scheme:dark]'
+        theme === 'dark' && 'dark-theme  [color-scheme:dark]'
       }`}
       data-theme={theme}
     >

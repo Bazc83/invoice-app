@@ -24,7 +24,6 @@ export function InvoicePreview({ invoice }) {
 
   return (
     <div
-      // onClick={() => showFullInvoice(invoice.id)}
       className="secondary-bg relative flex cursor-pointer flex-col gap-2 rounded-md border border-gray-200 px-6 py-6  shadow-md dark:border-gray-900 sm:gap-1 md:grid md:grid-cols-[1rem_repeat(10,_1fr)_1rem] md:items-baseline md:justify-center  md:gap-2 md:px-2 md:py-6 "
       aria-hidden="true"
     >
@@ -53,7 +52,7 @@ export function InvoicePreview({ invoice }) {
       </div>
 
       {/* Invoice id and paymentDue date */}
-      <div className="grid grid-cols-[1fr_2fr]     gap-1  md:col-start-2    md:col-end-6  ">
+      <div className="grid grid-cols-[1fr_2fr]     gap-1  md:col-start-2    md:col-end-6">
         <p className=" text-sm md:text-start md:text-base">#{id}</p>
 
         {/* Only show payment due date if not paid */}

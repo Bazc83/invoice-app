@@ -1,7 +1,5 @@
 Check for date if no date just use todays date might be this way already
 
-
-
 ## Required features
 
 ### pagination
@@ -42,7 +40,12 @@ Check for date if no date just use todays date might be this way already
 
 ### db of products to select items from
 
+### create/add product section
+
+### if payment due date > createdAt date mark OVERDUE
+
 ### price change by discount input only
+
 
 ### customer a/c's
 
@@ -50,5 +53,6 @@ Check for date if no date just use todays date might be this way already
 
 #### payment history
 
-#### ability to add new invoice to their a/c
+#### current balance 
 
+#### credit limit
