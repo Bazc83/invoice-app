@@ -10,7 +10,7 @@ function Filters() {
   useEffect(() => dispatch({ type: 'clearFilters' }), [dispatch]);
 
   return (
-    <div className="flex  gap-3  text-sm md:gap-4 ">
+    <div className="flex  gap-3  text-sm md:gap-4 font-semibold">
       <h1>Filters:</h1>
 
       <form className="flex flex-wrap gap-3 ">

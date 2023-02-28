@@ -30,7 +30,7 @@ export function Invoices() {
       <div
         className={`mx-auto h-full  max-w-5xl rounded-md pb-10  md:px-6 `}
       >
-        <h1 className="py-6 text-center text-3xl">Invoices</h1>
+        <h1 className="py-6 text-center text-3xl font-semibold">Invoices</h1>
         <div className=" relative flex h-full flex-col gap-6 px-6 md:px-0 ">
 
           {/* filter checkboxes and add new invoice button */}
@@ -50,13 +50,13 @@ export function Invoices() {
           >
             {/* Invoice preview headers md screen and greater */}
             {state.filteredInvoices?.length > 0 && (
-              <InvoicesTable addClass="text-center  md:text-start py-4 border-b  hidden md:grid">
+              <InvoicesTable addClass="text-center  md:text-start py-4 px-6  border-b  hidden md:grid font-semibold">
                 <p className="">Ref</p>
                 <p className="">Payment Due</p>
 
                 <p className="">Client Name</p>
 
-                <p className="">Total</p>
+                <p className="text-center ">Total</p>
 
                 <p className="">Status</p>
 
@@ -68,7 +68,7 @@ export function Invoices() {
             )}
 
             {/* Invoice previews  */}
-            <div className="flex flex-col gap-4  overflow-auto lg:h-[500px] pb-8 ">
+            <div className="flex flex-col gap-6  overflow-auto lg:h-[500px]  px-3 pt-4 pb-10 rounded-md">
               {/* invoice previews */}
               {invoices?.length > 0 &&
                 state.filteredInvoices?.map((invoice) => (

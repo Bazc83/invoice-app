@@ -96,7 +96,7 @@ function InvoiceFormItem({ item, index, register, remove, control, errors }) {
             </label>
             <div
               id={`items[${index}].total`}
-              className="rounded-md   border border-gray-200 bg-gray-200 py-2 text-center text-gray-500 dark:border-gray-400 dark:bg-gray-800"
+              className="rounded-md  border border-skin-fill bg-skin-fill py-2 text-center text-skin-muted relative after:absolute after:bg-black/40 after:rounded-md after:inset-0 after:w-full after:h-full"
             >
               {itemTotal || '0.00'}
             </div>

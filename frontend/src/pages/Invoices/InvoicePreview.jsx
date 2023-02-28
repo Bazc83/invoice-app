@@ -26,7 +26,7 @@ export function InvoicePreview({ invoice }) {
   const { paymentStatusColor } = usePaymentStatusColor(status);
 
   return (
-    <InvoicesTable addClass="md:text-start md:py-4 border shadow-md ">
+    <InvoicesTable addClass="md:text-start md:py-4 shadow-md px-6 py-6 md:px-3 bg-skin-primary rounded-md ">
       <button
         type="button"
         className="absolute z-10 h-full w-full "
@@ -35,14 +35,15 @@ export function InvoicePreview({ invoice }) {
       />
 
       {/* Id */}
-      <p className="col-start-1 row-start-1 text-skin-muted">
-        #{id}
+      <p className="col-start-1 row-start-1   ">
+        <span className="text-skin-muted">#</span>
+        {id}
       </p>
 
       {/* payment due date */}
       {/* Only show payment due date if not paid */}
       {status === 'paid' ? (
-        <p className="col-start-2 row-start-1 text-end md:row-start-auto md:col-start-auto md:text-center">
+        <p className="col-start-2 row-start-1 text-end md:col-start-auto md:row-start-auto md:text-center">
           Paid
         </p>
       ) : (
@@ -55,7 +56,7 @@ export function InvoicePreview({ invoice }) {
         {clientName}
       </p>
 
-      <p className="col-start-1 row-start-3 md:col-start-auto md:row-start-auto">
+      <p className="col-start-1 row-start-3 md:col-start-auto md:row-start-auto md:text-center">
         {new Intl.NumberFormat('en', {
           style: 'currency',
           currency: 'GBP',

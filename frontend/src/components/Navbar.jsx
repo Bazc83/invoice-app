@@ -37,15 +37,21 @@ export function Navbar() {
   };
 
   return (
-    <div className="noPrint | z-50 h-20 bg-skin-navbar">
+    <div className="noPrint | z-30 bg-skin-navbar text-white">
       {/* Navbar Container */}
-      <div className=" relative mx-auto flex h-20 max-w-6xl items-center justify-between py-4 px-4 text-gray-50 md:px-6 xl:px-0">
-        {/* Random logo */}
-        <RandomLogo />
+      <div className=" relative mx-auto flex  max-w-6xl items-center justify-between py-4 px-4  md:px-6 xl:px-0">
+        <Link to="/">
+          {/* Random logo */}
+          <RandomLogo />
+        </Link>
 
         <div className=" relative  flex items-center justify-center gap-4">
           {/* Dark mode toggle */}
-          <button onClick={toggleDarkMode} type="button">
+          <button
+            onClick={toggleDarkMode}
+            type="button"
+            className="transition-all duration-300 hover:scale-95 hover:text-gray-200"
+          >
             {theme === 'dark' ? (
               <FaSun className="text-xl transition-colors hover:opacity-90" />
             ) : (
@@ -54,14 +60,18 @@ export function Navbar() {
           </button>
 
           {/* Hamburger menu button */}
-          <button type="button" onClick={handleToggleMobileMenu}>
-            <FaBars className="text-3xl" />
+          <button
+            type="button"
+            onClick={handleToggleMobileMenu}
+            className="transition-all duration-300 hover:scale-95 hover:text-gray-200"
+          >
+            <FaBars className="text-3xl " />
           </button>
 
           {/* Navlist */}
           {mobileMenu && (
             <nav
-              className={`absolute top-14 right-0 z-30 overflow-hidden bg-skin-secondary text-skin-base shadow-md transition-transform ease-in `}
+              className={`absolute top-14 right-0 z-30 overflow-hidden rounded-b-md bg-skin-secondary text-skin-base shadow-md transition-transform ease-in `}
             >
               <ul className="flex  w-[250px]  flex-col  ">
                 {/* User Profile */}
