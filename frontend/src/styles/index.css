@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,500&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -32,7 +33,7 @@
     --color-text-base: 0 0 0;
     --color-text-muted: 34 34 34;
     --color-text-inverted: 255 255 255;
-    --color-primary: 250 250 250;
+    --color-primary: 255 255 255;
     --color-secondary: 255 255 255;
     --color-fill: 200 200 200;
     --color-edit: 0 0 255;
@@ -42,6 +43,9 @@
     --color-ring-base: 148 4 244;
     --color-button-default: 150 150 150;
     --color-navbar: 30 30 30;
+
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
   }
 
   .dark-theme {
