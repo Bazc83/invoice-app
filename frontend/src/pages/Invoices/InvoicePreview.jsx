@@ -26,11 +26,7 @@ export function InvoicePreview({ invoice }) {
   const { paymentStatusColor } = usePaymentStatusColor(status);
 
   return (
-    <InvoicesTable addClass="md:text-start md:py-2    ">
-      {/* Invoice id and paymentDue date */}
-
-      <p className="col-start-1 row-start-1 md:col-start-auto md:row-start-auto text-skin-muted">#{id}</p>
-
+    <InvoicesTable addClass="md:text-start md:py-4 border shadow-md ">
       <button
         type="button"
         className="absolute z-10 h-full w-full "
@@ -38,9 +34,15 @@ export function InvoicePreview({ invoice }) {
         aria-label="Show invoice"
       />
 
+      {/* Id */}
+      <p className="col-start-1 row-start-1 text-skin-muted">
+        #{id}
+      </p>
+
+      {/* payment due date */}
       {/* Only show payment due date if not paid */}
       {status === 'paid' ? (
-        <p className="col-start-2 row-start-1 text-end md:col-start-auto md:text-center">
+        <p className="col-start-2 row-start-1 text-end md:row-start-auto md:col-start-auto md:text-center">
           Paid
         </p>
       ) : (

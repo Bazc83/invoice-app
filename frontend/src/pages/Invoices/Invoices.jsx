@@ -28,13 +28,15 @@ export function Invoices() {
   return (
     <Container>
       <div
-        className={`mx-auto h-full  max-w-5xl rounded-md px-4 pb-10  md:px-6 `}
+        className={`mx-auto h-full  max-w-5xl rounded-md pb-10  md:px-6 `}
       >
         <h1 className="py-6 text-center text-3xl">Invoices</h1>
-        <div className=" relative flex h-full flex-col gap-8   ">
-          {/* filter checkboxes and add new invoice button */}
-          <InvoicesControlPanel state={state} />
+        <div className=" relative flex h-full flex-col gap-6 px-6 md:px-0 ">
 
+          {/* filter checkboxes and add new invoice button */}
+         
+          <InvoicesControlPanel state={state} />
+    
           {/* No invoice component */}
           {state.filteredInvoices?.length === 0 && <NoInvoices />}
 
@@ -42,13 +44,13 @@ export function Invoices() {
           {deleteModal && <ConfirmDeleteModal />}
 
           <div
-            className={`flex-col gap-4 rounded-md  border bg-skin-secondary ${
+            className={`flex-col gap-4 rounded-md   bg-skin-secondary ${
               state.filteredInvoices?.length === 0 ? 'hidden' : 'flex'
             }`}
           >
             {/* Invoice preview headers md screen and greater */}
             {state.filteredInvoices?.length > 0 && (
-              <InvoicesTable addClass="text-center  md:text-start py-2 hidden md:grid">
+              <InvoicesTable addClass="text-center  md:text-start py-4 border-b  hidden md:grid">
                 <p className="">Ref</p>
                 <p className="">Payment Due</p>
 
@@ -66,7 +68,7 @@ export function Invoices() {
             )}
 
             {/* Invoice previews  */}
-            <div className="flex flex-col gap-4 overflow-auto lg:h-[500px]">
+            <div className="flex flex-col gap-4  overflow-auto lg:h-[500px] pb-8 ">
               {/* invoice previews */}
               {invoices?.length > 0 &&
                 state.filteredInvoices?.map((invoice) => (

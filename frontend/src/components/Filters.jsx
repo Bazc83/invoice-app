@@ -10,10 +10,10 @@ function Filters() {
   useEffect(() => dispatch({ type: 'clearFilters' }), [dispatch]);
 
   return (
-    <div className="flex  gap-3 px-2  text-sm md:gap-6 lg:flex-col">
+    <div className="flex  gap-3  text-sm md:gap-4 ">
       <h1>Filters:</h1>
 
-      <form className="flex flex-wrap gap-3 lg:flex-col">
+      <form className="flex flex-wrap gap-3 ">
         {/* Filter modal options */}
         {state.filters.map((filter) => (
           <FilterItemCheckbox filter={filter} key={filter.filterValue} />
