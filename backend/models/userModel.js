@@ -15,15 +15,15 @@ const userSchema = new mongoose.Schema({
   },
   firstName: {
     type: String,
-    default: "",
+    default: '',
   },
   surname: {
     type: String,
-    default: "",
+    default: '',
   },
   companyName: {
     type: String,
-    default: "",
+    default: '',
   },
   senderCity: {
     type: String,
@@ -45,9 +45,10 @@ const userSchema = new mongoose.Schema({
 
 // Static signup method
 // can't be an arrow function as using "this"
-userSchema.statics.signup = async function (email, password) {
-  // Validate email and password values
+userSchema.statics.signup = async function (data) {
+  const { email, password } = data;
 
+  // Validate email and password values
   if (!email || !password) {
     throw Error('All fields must be completed');
   }
@@ -70,7 +71,7 @@ userSchema.statics.signup = async function (email, password) {
 
   const hash = await bcrypt.hash(password, salt);
 
-  const user = await this.create({ email, password: hash });
+  const user = await this.create({ ...data, email: email, password: hash });
 
   return user;
 };
@@ -98,8 +99,5 @@ userSchema.statics.login = async function (email, password) {
 
   return user;
 };
-
-
-
 
 module.exports = mongoose.model('User', userSchema);

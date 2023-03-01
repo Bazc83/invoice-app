@@ -28,15 +28,16 @@ const loginUser = async (req, res) => {
 
 // Signup user
 const signupUser = async (req, res) => {
-  const { email, password } = req.body;
   try {
-    const user = await User.signup(email, password);
+    const user = await User.signup(req.body);
 
     // Create jwt token
     const token = createToken(user._id);
+    console.log(token);
 
-    res.status(200).json({ email, token });
+    res.status(200).json({ email: user.email, token });
   } catch (error) {
+    console.log(error);
     res.status(400).json({ error: error.message });
   }
 };
@@ -80,14 +81,14 @@ const updateUser = asyncHandler(async (req, res) => {
     ...req.body,
   };
 
-  const invoice = await User.findOneAndUpdate(
+  const user = await User.findOneAndUpdate(
     { _id: req.user._id.toHexString() },
     // payLoadData === req.body, items & amountDueTotal
     payloadData
   ).catch((err) => console.log(err));
 
-  console.log('invoice, ', invoice);
-  res.send(invoice);
+  console.log('user, ', user);
+  res.send(user);
 });
 
 const checkForUser = asyncHandler(async (req, res) => {

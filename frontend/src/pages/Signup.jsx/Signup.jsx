@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
@@ -15,28 +15,14 @@ export function Signup() {
 
   const [currentForm, setCurrentForm] = useState('signup');
 
-
-  const [alreadyTaken, setAlreadyTaken ] = useState(false);
+  const [alreadyTaken, setAlreadyTaken] = useState(false);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    formState,
     watch,
   } = useForm({});
-
-  const [dataPayload, setDataPayload] = useState({
-    firstName: '',
-    surname: '',
-    password: '',
-    email: '',
-    companyName: '',
-    senderCity: '',
-    senderStreet: '',
-    senderPostCode: '',
-    senderCountry: '',
-  });
 
   const [loginDetailsError, setLoginDetailsError] = useState(true);
   const [personalDetailsError, setPersonalDetailsError] = useState(true);
@@ -44,30 +30,22 @@ export function Signup() {
   const handleLoginDetails = async (data) => {
     const taken = await checkIfTaken(data.email);
 
-
-    if(taken){
-      return setAlreadyTaken(true)
-    } 
-
-
-    setAlreadyTaken(false)
-    setDataPayload((prev) => ({ ...prev, ...data }));
-
-
-
-
-    if (!errors.email && !errors.password && !errors.confirmPassword) {
-      setCurrentForm('personal');
-
-      setLoginDetailsError(false);
+    if (taken) {
+      setAlreadyTaken(true);
     } else {
-      setLoginDetailsError(true);
+      setAlreadyTaken(false);
+
+      if (!errors.email && !errors.password && !errors.confirmPassword) {
+        setCurrentForm('personal');
+
+        setLoginDetailsError(false);
+      } else {
+        setLoginDetailsError(true);
+      }
     }
   };
 
-  const handlePersonalDetails = (data) => {
-    setDataPayload((prev) => ({ ...prev, ...data }));
-
+  const handlePersonalDetails = () => {
     if (!errors.firstName && !errors.surname) {
       setCurrentForm('company');
 
@@ -78,7 +56,7 @@ export function Signup() {
   };
 
   const handleFormSubmit = async (data) => {
-    await signup(data.email, data.password);
+    await signup(data);
   };
 
   return (
@@ -334,6 +312,7 @@ export function Signup() {
                 </button>
                 <button
                   type="submit"
+                  disabled={isLoading}
                   className="btn | flex items-center justify-center  gap-2 bg-skin-success text-skin-inverted hover:opacity-90"
                 >
                   Submit
