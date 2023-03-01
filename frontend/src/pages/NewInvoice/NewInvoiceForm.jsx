@@ -4,14 +4,19 @@ import { useFieldArray, useForm } from 'react-hook-form';
 import InvoiceFormItem from '@/components/InvoiceFormItem';
 import TextInputWithValidation from '@/components/TextInputWithValidation';
 
-function NewInvoiceForm({ handleFormSubmit, handleCancel, newInvoiceId }) {
+function NewInvoiceForm({
+  handleFormSubmit,
+  handleCancel,
+  newInvoiceId,
+  userData,
+}) {
   const [invoiceData] = useState({
     id: '',
-    companyName: '',
-    senderCity: '',
-    senderStreet: '',
-    senderPostCode: '',
-    senderCountry: '',
+    companyName: userData ? userData.companyName : '',
+    senderCity: userData ? userData.senderCity : '',
+    senderStreet: userData ? userData.senderStreet : '',
+    senderPostCode: userData ? userData.senderPostCode : '',
+    senderCountry: userData ? userData.senderCountry : '',
     clientEmail: '',
     clientName: '',
     clientCity: '',
@@ -67,51 +72,6 @@ function NewInvoiceForm({ handleFormSubmit, handleCancel, newInvoiceId }) {
           {...register('id')}
           defaultValue={newInvoiceId}
           hidden
-        />
-      </div>
-
-      <div className="flex flex-col gap-6">
-        <h2 className=" text-xl">Sender Details:</h2>
-
-        {/* Company name */}
-        <TextInputWithValidation
-          errors={errors}
-          register={register}
-          labelName="Company Name"
-          inputName="companyName"
-        />
-
-        {/* Sender street */}
-        <TextInputWithValidation
-          errors={errors}
-          register={register}
-          labelName="Street"
-          inputName="senderStreet"
-        />
-
-        <div className="grid grid-cols-2 gap-4">
-          {/* Sender city */}
-          <TextInputWithValidation
-            errors={errors}
-            register={register}
-            labelName="City"
-            inputName="senderCity"
-          />
-          {/* Sender postcode */}
-          <TextInputWithValidation
-            errors={errors}
-            register={register}
-            labelName="Postcode"
-            inputName="senderPostCode"
-          />
-        </div>
-
-        {/* Sender Country */}
-        <TextInputWithValidation
-          errors={errors}
-          register={register}
-          labelName="Country"
-          inputName="senderCountry"
         />
       </div>
 

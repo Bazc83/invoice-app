@@ -16,7 +16,7 @@ function ConfirmActionModalTemplate({
   invoiceId,
 }) {
   return (
-    <div className="fixed inset-0 z-20 h-full   w-full bg-black bg-opacity-70 ">
+    <div className="fixed inset-0 z-30 h-full   w-full bg-black bg-opacity-70 ">
       <div className="absolute top-[20%] left-[50%] z-50 flex w-[calc(100%_-_2rem)] max-w-xl -translate-x-[50%] -translate-y-[20%] flex-col items-start justify-center gap-6 rounded-md bg-skin-secondary p-6 text-skin-base  ">
         <h1 className="text-xl font-semibold">{modalContent?.header}</h1>
         <p className="text-lg text-skin-muted">{modalContent?.text}</p>

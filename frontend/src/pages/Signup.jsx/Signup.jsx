@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { FaChevronRight } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 import FormSectionButton from '@/components/FormSectionButton';
@@ -240,21 +240,12 @@ export function Signup() {
                 inputName="surname"
               />
 
-              <div className="flex flex-wrap justify-between gap-1 ">
-                <button
-                  type="button"
-                  className="btn | flex items-center justify-center  gap-2 bg-skin-success text-skin-inverted hover:opacity-90"
-                  onClick={() => setCurrentForm('signup')}
-                >
-                  <FaChevronLeft /> Login
-                </button>
-                <button
-                  type="submit"
-                  className="btn | flex items-center justify-center  gap-2 bg-skin-success text-skin-inverted hover:opacity-90"
-                >
-                  Company <FaChevronRight />
-                </button>
-              </div>
+              <button
+                type="submit"
+                className="btn | flex items-center justify-center  gap-2 bg-skin-success text-skin-inverted hover:opacity-90"
+              >
+                Company <FaChevronRight />
+              </button>
             </form>
           )}
 
@@ -302,22 +293,13 @@ export function Signup() {
                 inputName="senderCountry"
               />
 
-              <div className="flex flex-wrap justify-between gap-1 ">
-                <button
-                  type="button"
-                  className="btn | flex items-center justify-center  gap-2 bg-skin-success text-skin-inverted hover:opacity-90"
-                  onClick={() => setCurrentForm('personal')}
-                >
-                  <FaChevronLeft /> Personal
-                </button>
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="btn | flex items-center justify-center  gap-2 bg-skin-success text-skin-inverted hover:opacity-90"
-                >
-                  Submit
-                </button>
-              </div>
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="btn | flex items-center justify-center  gap-2 bg-skin-success text-skin-inverted hover:opacity-90"
+              >
+                Submit
+              </button>
             </form>
           )}
         </div>
