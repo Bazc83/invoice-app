@@ -4,6 +4,7 @@ import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import ConfirmDeleteModal from '@/components/ConfirmDeleteModal';
 import Container from '@/components/Container';
 import InvoicesControlPanel from '@/components/InvoicesControlPanel';
+import LoadingAnimation from '@/components/LoadingAnimation';
 import { NoInvoices } from '@/components/NoInvoices';
 import { InvoicesContext } from '@/context/InvoicesContext';
 import useModalStore from '@/context/useModalStore';
@@ -23,7 +24,7 @@ export function Invoices() {
     dispatch({ type: 'filterInvoices', payload: invoices });
   }, [invoices, dispatch, state.filters]);
 
-  if (isLoading) return 'Loading...';
+  if (isLoading) return <LoadingAnimation />;
   if (isError) return `An error has occurred: ${error.message}`;
   return (
     <Container>

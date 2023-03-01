@@ -2,6 +2,7 @@
 import { useParams } from 'react-router';
 
 import CancelEditFormModal from '@/components/CancelEditFormModal';
+import LoadingAnimation from '@/components/LoadingAnimation';
 import useModalStore from '@/context/useModalStore';
 import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
 import { useUpdateInvoice } from '@/hooks/reactQueryHooks/useUpdateInvoice';
@@ -35,7 +36,7 @@ export function EditInvoice() {
 
   const confirmationModal = useModalStore((s) => s.confirmationModal);
 
-  if (isLoading) return 'Loading...';
+  if (isLoading) return <LoadingAnimation />;
 
   if (isError) return `An error has occurred: ${error.message}`;
 

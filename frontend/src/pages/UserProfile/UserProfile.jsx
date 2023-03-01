@@ -2,6 +2,7 @@ import { useContext } from 'react';
 
 import CancelEditFormModal from '@/components/CancelEditFormModal';
 import Container from '@/components/Container';
+import LoadingAnimation from '@/components/LoadingAnimation';
 import { AuthContext } from '@/context/AuthContext';
 import useModalStore from '@/context/useModalStore';
 import useGetUserDetails from '@/hooks/reactQueryHooks/useGetUserDetails';
@@ -23,7 +24,7 @@ export function UserProfile() {
     return data;
   };
 
-  if (isLoading) return <div>Loading ...</div>;
+  if (isLoading) return <LoadingAnimation />;
 
   if (isError) return <div>Error {error}</div>;
 

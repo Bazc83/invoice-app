@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 
 import CancelEditFormModal from '@/components/CancelEditFormModal';
+import LoadingAnimation from '@/components/LoadingAnimation';
 import useModalStore from '@/context/useModalStore';
 import useAddNewInvoice from '@/hooks/reactQueryHooks/useAddNewInvoice';
 import useGetUserDetails from '@/hooks/reactQueryHooks/useGetUserDetails';
@@ -52,11 +53,10 @@ export function NewInvoice() {
     }
   }, [invoiceId]);
 
-  if (isLoading) return <div>Loading ...</div>;
+  if (isLoading) return <LoadingAnimation />;
   if (isError) return <div>Error</div>;
-  if (!newInvoiceId) return <div>Loading...</div>;
-  if (userDataIsLoading) return <div>Loading...</div>;
-
+  if (!newInvoiceId) return <LoadingAnimation />;
+  if (userDataIsLoading) return <LoadingAnimation />;
 
   return (
     <div className="relative flex h-max flex-col bg-skin-primary pb-10 pt-6 text-skin-base sm:px-6 md:pt-8  ">

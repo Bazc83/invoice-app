@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { ConfirmDeleteModal } from '@/components/ConfirmDeleteModal';
 import { GoBackLink } from '@/components/GoBackLink';
+import LoadingAnimation from '@/components/LoadingAnimation';
 import useModalStore from '@/context/useModalStore';
 import { useFilterInvoiceById } from '@/hooks/reactQueryHooks/useFilterInvoiceById';
 import useFormatDate from '@/hooks/useFormatDate';
@@ -47,7 +48,7 @@ export function Invoice() {
     hideAllModals();
   }, [hideAllModals]);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <LoadingAnimation />;
 
   if (isError) return <div>{`An error has occurred: ${error.message}`}</div>;
 
