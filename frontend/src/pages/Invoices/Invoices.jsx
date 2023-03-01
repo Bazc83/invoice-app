@@ -33,7 +33,6 @@ export function Invoices() {
 
         <div className=" relative flex h-full flex-col gap-6 px-2 md:px-0 ">
           {/* filter checkboxes and add new invoice button */}
-
           <InvoicesControlPanel state={state} />
 
           {/* No invoice component */}
