@@ -23,7 +23,7 @@ function ConfirmActionModalTemplate({
         <div className="flex w-full justify-end gap-4 ">
           <button
             type="button"
-            className="btn | flex items-center  justify-center gap-2 border border-skin-btn-default text-skin-base hover:bg-skin-btn-default hover:text-skin-inverted"
+            className="btn | flex items-center  justify-center gap-2 border sborder-skin-btn-default text-skin-base hover:bg-skin-btn-default hover:text-skin-inverted"
             onClick={cancelActionFunction}
           >
             {modalContent?.cancelBtn}
