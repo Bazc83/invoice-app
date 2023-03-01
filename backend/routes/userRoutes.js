@@ -6,6 +6,7 @@ const {
   checkToken,
   getUserDetails,
   updateUser,
+  checkForUser,
 } = require('../controllers/userController');
 const router = express.Router();
 
@@ -18,7 +19,10 @@ router.post('/signup', signupUser);
 // check JWT
 router.post('/checktoken', checkToken);
 
+router.get('/checkforuser/:email', checkForUser);
+
 const requireAuth = require('../middleware/requireAuth');
+
 router.use(requireAuth);
 
 router.get('/:user', getUserDetails);

@@ -26,7 +26,7 @@ export function InvoicePreview({ invoice }) {
   const { paymentStatusColor } = usePaymentStatusColor(status);
 
   return (
-    <InvoicesTable addClass="md:text-start md:py-4 shadow-md px-6 py-6 md:px-3 bg-skin-primary rounded-md ">
+    <InvoicesTable addClass="md:text-start md:py-4 shadow-md px-6 py-6 md:px-2 bg-skin-primary rounded-md ">
       <button
         type="button"
         className="absolute z-10 h-full w-full "
@@ -35,7 +35,7 @@ export function InvoicePreview({ invoice }) {
       />
 
       {/* Id */}
-      <p className="col-start-1 row-start-1   ">
+      <p className="col-start-1 row-start-1    md:text-center">
         <span className="text-skin-muted">#</span>
         {id}
       </p>
@@ -43,20 +43,20 @@ export function InvoicePreview({ invoice }) {
       {/* payment due date */}
       {/* Only show payment due date if not paid */}
       {status === 'paid' ? (
-        <p className="col-start-2 row-start-1 text-end md:col-start-auto md:row-start-auto md:text-center">
+        <p className="col-start-2 row-start-1 text-end md:col-start-auto md:row-start-auto md:text-center ">
           Paid
         </p>
       ) : (
-        <p className="col-start-2 row-start-1 text-end md:col-start-auto md:text-start">
+        <p className="col-start-2 row-start-1 text-end md:col-start-auto md:text-center ">
           <span className="md:hidden">Due</span> {getDate(paymentDue)}
         </p>
       )}
 
-      <p className="text col-start-1 row-start-2 capitalize md:col-start-auto md:row-start-auto">
+      <p className="col-start-1 row-start-2 capitalize md:col-start-auto md:row-start-auto md:text-center ">
         {clientName}
       </p>
 
-      <p className="col-start-1 row-start-3 md:col-start-auto md:row-start-auto md:text-center">
+      <p className="col-start-1 row-start-3 md:col-start-auto md:row-start-auto md:text-center ">
         {new Intl.NumberFormat('en', {
           style: 'currency',
           currency: 'GBP',
@@ -64,12 +64,12 @@ export function InvoicePreview({ invoice }) {
       </p>
 
       <p
-        className={` ${paymentStatusColor} col-start-2 row-start-2 text-end capitalize md:col-start-auto md:row-start-auto md:text-start`}
+        className={` ${paymentStatusColor} col-start-2 row-start-2 text-end capitalize md:col-start-auto md:row-start-auto md:text-center `}
       >
         {status}
       </p>
 
-      <div className="z-20 col-start-2 row-start-3 flex justify-end gap-4 md:col-start-auto md:row-start-auto">
+      <div className="z-20 col-start-2 row-start-3 flex justify-end gap-4 md:col-start-auto md:row-start-auto ">
         <button
           type="button"
           onClick={() => editInvoice(invoice.id)}

@@ -90,10 +90,21 @@ const updateUser = asyncHandler(async (req, res) => {
   res.send(invoice);
 });
 
+const checkForUser = asyncHandler(async (req, res) => {
+  const userEmail = await User.findOne({ email: req.params.email });
+
+  if (userEmail) {
+    res.send(true);
+  } else {
+    res.send(false);
+  }
+});
+
 module.exports = {
   loginUser,
   updateUser,
   signupUser,
   checkToken,
   getUserDetails,
+  checkForUser,
 };

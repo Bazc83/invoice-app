@@ -1,54 +1,98 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { FaChevronRight } from 'react-icons/fa';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 import FormSectionButton from '@/components/FormSectionButton';
 import TextInputWithValidation from '@/components/TextInputWithValidation';
+import useCheckForUser from '@/hooks/useCheckForUser';
 import { useSignup } from '@/hooks/useSignup';
 
 export function Signup() {
   const { signup, isLoading, error } = useSignup();
 
-  const handleFormSubmit = async (data) => {
-    await signup(data.email, data.password);
-  };
+  const { checkIfTaken } = useCheckForUser();
 
-  const [currentForm, setCurrentForm] = useState('personal');
+  const [currentForm, setCurrentForm] = useState('signup');
+
+
+  const [alreadyTaken, setAlreadyTaken ] = useState(false);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    formState,
     watch,
   } = useForm({});
 
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   formState: { errors },
-  //   watch,
-  // } = useForm();
+  const [dataPayload, setDataPayload] = useState({
+    firstName: '',
+    surname: '',
+    password: '',
+    email: '',
+    companyName: '',
+    senderCity: '',
+    senderStreet: '',
+    senderPostCode: '',
+    senderCountry: '',
+  });
+
+  const [loginDetailsError, setLoginDetailsError] = useState(true);
+  const [personalDetailsError, setPersonalDetailsError] = useState(true);
+
+  const handleLoginDetails = async (data) => {
+    const taken = await checkIfTaken(data.email);
+
+
+    if(taken){
+      return setAlreadyTaken(true)
+    } 
+
+
+    setAlreadyTaken(false)
+    setDataPayload((prev) => ({ ...prev, ...data }));
+
+
+
+
+    if (!errors.email && !errors.password && !errors.confirmPassword) {
+      setCurrentForm('personal');
+
+      setLoginDetailsError(false);
+    } else {
+      setLoginDetailsError(true);
+    }
+  };
+
+  const handlePersonalDetails = (data) => {
+    setDataPayload((prev) => ({ ...prev, ...data }));
+
+    if (!errors.firstName && !errors.surname) {
+      setCurrentForm('company');
+
+      setPersonalDetailsError(false);
+    } else {
+      setPersonalDetailsError(true);
+    }
+  };
+
+  const handleFormSubmit = async (data) => {
+    await signup(data.email, data.password);
+  };
 
   return (
     <div className="px-8 py-8">
-      {/* todo remove Hidden  */}
-      {/* todo remove Hidden  */}
-      {/* todo remove Hidden  */}
-      {/* todo remove Hidden  */}
-      {/* todo remove Hidden  */}
-      {/* todo remove Hidden  */}
-      {/* todo remove Hidden  */}
-      <div className=" mx-auto  hidden max-w-lg rounded-b-md">
-        {/* bg-skin-primary text-skin-base removed  */}
-        {/* bg-skin-primary text-skin-base removed  */}
-        {/* bg-skin-primary text-skin-base removed  */}
-        {/* bg-skin-primary text-skin-base removed  */}
-        <div className=" mb-10 flex  justify-between">
+      <div className=" mx-auto  max-w-lg rounded-b-md">
+        <div className="flex  justify-between">
           <FormSectionButton
             currentForm={currentForm}
             setCurrentForm={setCurrentForm}
             formSectionTitle="signup"
+            addClass={`${
+              (errors.email || errors.password || errors.confirmPassword) &&
+              'text-skin-danger border-b-2 border-b-skin-danger'
+            } `}
           >
             Login <span className="hidden md:inline">Details</span>
           </FormSectionButton>
@@ -57,6 +101,7 @@ export function Signup() {
             currentForm={currentForm}
             setCurrentForm={setCurrentForm}
             formSectionTitle="personal"
+            disabled={loginDetailsError}
           >
             Personal <span className="hidden md:inline">Details</span>
           </FormSectionButton>
@@ -65,19 +110,19 @@ export function Signup() {
             currentForm={currentForm}
             setCurrentForm={setCurrentForm}
             formSectionTitle="company"
+            disabled={personalDetailsError}
           >
             Company <span className="hidden md:inline">Details</span>
           </FormSectionButton>
         </div>
 
         <div className=" rounded-b-md bg-skin-secondary   px-8 py-10 text-skin-base shadow-md md:pb-16">
+          {/* Sign up */}
           {currentForm === 'signup' && (
             <form
-              onSubmit={handleSubmit(handleFormSubmit)}
-              className="mx-auto flex max-w-lg flex-col gap-6 rounded-md bg-skin-secondary p-6 text-skin-base shadow-md md:p-8 "
+              className="flex flex-col gap-4 rounded-md  md:gap-8"
+              onSubmit={handleSubmit(handleLoginDetails)}
             >
-              <h3 className="text-center text-2xl ">Sign up</h3>
-
               {/* Email */}
               <div className="flex flex-col gap-3">
                 <label htmlFor="email">Email</label>
@@ -173,169 +218,130 @@ export function Signup() {
                 </div>
               )}
 
-              <div className=" flex flex-wrap-reverse items-center justify-between py-2">
+              {alreadyTaken && (
+                <div className="rounded-md bg-red-800 py-2 text-center text-white">
+                  Email already taken! Please login or use different email.
+                </div>
+              )}
+
+              <div className=" flex flex-wrap-reverse items-baseline justify-center gap-2 py-2 md:justify-between">
                 <Link
                   to="/login"
                   className="text-gray-600 underline underline-offset-2 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-100"
                 >
                   Click here to Login
                 </Link>
-                {/* <button
-              type="submit"
-              disabled={isLoading}
-              className="btn | bg-green-700 text-white hover:bg-green-900/90 "
-            >
-              Sign Up
-            </button> */}
+
                 <button
-                  type="button"
-                  disabled={isLoading}
-                  className="btn | flex items-center justify-center  gap-2 bg-skin-success text-skin-inverted hover:opacity-90"
+                  type="submit"
+                  className="btn | flex items-center justify-center  gap-2 bg-skin-success text-skin-inverted hover:opacity-90 disabled:opacity-10 "
                 >
                   Personal details <FaChevronRight />
                 </button>
               </div>
             </form>
           )}
+
           {currentForm === 'personal' && (
             <form
-              onSubmit={handleSubmit(handleFormSubmit)}
-              className="flex  flex-col gap-4 rounded-md shadow-md  md:gap-8"
+              onSubmit={handleSubmit(handlePersonalDetails)}
+              className="flex flex-col gap-4 rounded-md  md:gap-8"
             >
-              <div className="flex flex-col gap-6">
-                {/* First Name */}
-                <TextInputWithValidation
-                  errors={errors}
-                  register={register}
-                  labelName="First name"
-                  inputName="firstName"
-                />
-                {/* Surname */}
-                <TextInputWithValidation
-                  errors={errors}
-                  register={register}
-                  labelName="Surname"
-                  inputName="surname"
-                />
+              {/* First Name */}
+              <TextInputWithValidation
+                errors={errors}
+                register={register}
+                labelName="First name"
+                inputName="firstName"
+              />
+              {/* Surname */}
+              <TextInputWithValidation
+                errors={errors}
+                register={register}
+                labelName="Surname"
+                inputName="surname"
+              />
+
+              <div className="flex flex-wrap justify-between gap-1 ">
+                <button
+                  type="button"
+                  className="btn | flex items-center justify-center  gap-2 bg-skin-success text-skin-inverted hover:opacity-90"
+                  onClick={() => setCurrentForm('signup')}
+                >
+                  <FaChevronLeft /> Login
+                </button>
+                <button
+                  type="submit"
+                  className="btn | flex items-center justify-center  gap-2 bg-skin-success text-skin-inverted hover:opacity-90"
+                >
+                  Company <FaChevronRight />
+                </button>
               </div>
-              <button
-                type="submit"
-                className="btn | mt-4 bg-skin-success py-2 hover:opacity-80"
-              >
-                Save
-              </button>
             </form>
           )}
 
           {currentForm === 'company' && (
             <form
               onSubmit={handleSubmit(handleFormSubmit)}
-              className="flex  flex-col gap-4 rounded-md shadow-md  md:gap-8"
+              className="flex flex-col gap-4 rounded-md  md:gap-8"
             >
-              <div className="flex flex-col gap-6 ">
-                {/* Company name */}
-                <TextInputWithValidation
-                  errors={errors}
-                  register={register}
-                  labelName="Company Name"
-                  inputName="companyName"
-                />
+              {/* Company name */}
+              <TextInputWithValidation
+                errors={errors}
+                register={register}
+                labelName="Company Name"
+                inputName="companyName"
+              />
 
-                {/* Sender street */}
-                <TextInputWithValidation
-                  errors={errors}
-                  register={register}
-                  labelName="Street"
-                  inputName="senderStreet"
-                />
+              {/* Sender street */}
+              <TextInputWithValidation
+                errors={errors}
+                register={register}
+                labelName="Street"
+                inputName="senderStreet"
+              />
 
-                {/* Sender city */}
-                <TextInputWithValidation
-                  errors={errors}
-                  register={register}
-                  labelName="City"
-                  inputName="senderCity"
-                />
-                {/* Sender postcode */}
-                <TextInputWithValidation
-                  errors={errors}
-                  register={register}
-                  labelName="Postcode"
-                  inputName="senderPostCode"
-                />
+              {/* Sender city */}
+              <TextInputWithValidation
+                errors={errors}
+                register={register}
+                labelName="City"
+                inputName="senderCity"
+              />
+              {/* Sender postcode */}
+              <TextInputWithValidation
+                errors={errors}
+                register={register}
+                labelName="Postcode"
+                inputName="senderPostCode"
+              />
 
-                {/* Sender Country */}
-                <TextInputWithValidation
-                  errors={errors}
-                  register={register}
-                  labelName="Country"
-                  inputName="senderCountry"
-                />
+              {/* Sender Country */}
+              <TextInputWithValidation
+                errors={errors}
+                register={register}
+                labelName="Country"
+                inputName="senderCountry"
+              />
+
+              <div className="flex flex-wrap justify-between gap-1 ">
+                <button
+                  type="button"
+                  className="btn | flex items-center justify-center  gap-2 bg-skin-success text-skin-inverted hover:opacity-90"
+                  onClick={() => setCurrentForm('personal')}
+                >
+                  <FaChevronLeft /> Personal
+                </button>
+                <button
+                  type="submit"
+                  className="btn | flex items-center justify-center  gap-2 bg-skin-success text-skin-inverted hover:opacity-90"
+                >
+                  Submit
+                </button>
               </div>
-
-              <button
-                type="submit"
-                className="btn | mt-4 bg-skin-success py-2 hover:opacity-80"
-              >
-                Save
-              </button>
             </form>
           )}
         </div>
-      </div>
-      <div className="mx-auto  max-w-lg rounded-b-md bg-skin-secondary px-8 py-8">
-        <form
-          onSubmit={handleSubmit(handleFormSubmit)}
-          className="flex  flex-col gap-4 rounded-md  md:gap-8"
-        >
-          <div className="flex flex-col gap-6 ">
-            {/* Company name */}
-            <TextInputWithValidation
-              errors={errors}
-              register={register}
-              labelName="Company Name"
-              inputName="companyName"
-            />
-
-            {/* Sender street */}
-            <TextInputWithValidation
-              errors={errors}
-              register={register}
-              labelName="Street"
-              inputName="senderStreet"
-            />
-
-            {/* Sender city */}
-            <TextInputWithValidation
-              errors={errors}
-              register={register}
-              labelName="City"
-              inputName="senderCity"
-            />
-            {/* Sender postcode */}
-            <TextInputWithValidation
-              errors={errors}
-              register={register}
-              labelName="Postcode"
-              inputName="senderPostCode"
-            />
-
-            {/* Sender Country */}
-            <TextInputWithValidation
-              errors={errors}
-              register={register}
-              labelName="Country"
-              inputName="senderCountry"
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="btn | mt-4 bg-skin-success py-2 hover:opacity-90"
-          >
-            Save
-          </button>
-        </form>
       </div>
     </div>
   );

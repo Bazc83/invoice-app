@@ -27,16 +27,14 @@ export function Invoices() {
   if (isError) return `An error has occurred: ${error.message}`;
   return (
     <Container>
-      <div
-        className={`mx-auto h-full  max-w-5xl rounded-md pb-10  md:px-6 `}
-      >
+      <div className={`mx-auto h-full  max-w-5xl rounded-md pb-10  md:px-6 `}>
         <h1 className="py-6 text-center text-3xl font-semibold">Invoices</h1>
-        <div className=" relative flex h-full flex-col gap-6 px-6 md:px-0 ">
 
+        <div className=" relative flex h-full flex-col gap-6 px-2 md:px-0 ">
           {/* filter checkboxes and add new invoice button */}
-         
+
           <InvoicesControlPanel state={state} />
-    
+
           {/* No invoice component */}
           {state.filteredInvoices?.length === 0 && <NoInvoices />}
 
@@ -51,16 +49,16 @@ export function Invoices() {
             {/* Invoice preview headers md screen and greater */}
             {state.filteredInvoices?.length > 0 && (
               <InvoicesTable addClass="text-center  md:text-start py-4 px-6  border-b  hidden md:grid font-semibold">
-                <p className="">Ref</p>
-                <p className="">Payment Due</p>
+                <p className=" text-center">Ref</p>
+                <p className=" text-center">Payment Due</p>
 
-                <p className="">Client Name</p>
+                <p className=" text-center">Client Name</p>
 
-                <p className="text-center ">Total</p>
+                <p className=" text-center">Total</p>
 
-                <p className="">Status</p>
+                <p className=" text-center">Status</p>
 
-                <div className='flex gap-4 justify-end' >
+                <div className="flex justify-end gap-4">
                   <FaEdit className="" />
                   <FaTrashAlt className="" />
                 </div>
@@ -68,7 +66,7 @@ export function Invoices() {
             )}
 
             {/* Invoice previews  */}
-            <div className="flex flex-col gap-6  overflow-auto lg:h-[500px]  px-3 pt-4 pb-10 rounded-md">
+            <div className="flex flex-col gap-6  overflow-auto rounded-md  px-6  py-6 shadow-md md:py-0 md:pb-10 lg:h-[500px]">
               {/* invoice previews */}
               {invoices?.length > 0 &&
                 state.filteredInvoices?.map((invoice) => (

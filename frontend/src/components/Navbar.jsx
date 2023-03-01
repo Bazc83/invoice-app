@@ -39,7 +39,7 @@ export function Navbar() {
   return (
     <div className="noPrint | z-30 bg-skin-navbar text-white">
       {/* Navbar Container */}
-      <div className=" relative mx-auto flex  max-w-6xl items-center justify-between py-4 px-4  md:px-6 xl:px-0">
+      <div className=" relative mx-auto flex  max-w-5xl items-center justify-between py-4 px-4  md:px-6 ">
         <Link to="/">
           {/* Random logo */}
           <RandomLogo />
