@@ -52,7 +52,7 @@ export function InvoicePreview({ invoice }) {
         </p>
       )}
 
-      <p className="col-start-1 row-start-2 capitalize md:col-start-auto md:row-start-auto md:text-center ">
+      <p className="col-start-1 row-start-2 capitalize md:col-start-auto md:row-start-auto md:text-center truncate ">
         {clientName}
       </p>
 

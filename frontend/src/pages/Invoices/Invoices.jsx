@@ -49,7 +49,7 @@ export function Invoices() {
             {/* Invoice preview headers md screen and greater */}
             {state.filteredInvoices?.length > 0 && (
               <InvoicesTable addClass="text-center  md:text-start py-4 px-6  border-b  hidden md:grid font-semibold">
-                <p className=" text-center">Ref</p>
+                <p className=" text-center md:text-start">Ref</p>
                 <p className=" text-center">Payment Due</p>
 
                 <p className=" text-center">Client Name</p>
@@ -66,7 +66,7 @@ export function Invoices() {
             )}
 
             {/* Invoice previews  */}
-            <div className="flex flex-col gap-6  overflow-auto rounded-md  px-6  py-6 shadow-md md:py-0 md:pb-10 lg:h-[500px]">
+            <div className="flex flex-col gap-6  overflow-auto rounded-md  px-4  py-6 shadow-md md:py-0 md:pb-10 lg:h-[500px]">
               {/* invoice previews */}
               {invoices?.length > 0 &&
                 state.filteredInvoices?.map((invoice) => (
