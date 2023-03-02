@@ -21,7 +21,7 @@ export function Login() {
       <div className="px-8 py-8">
         <form
           onSubmit={handleSubmit(handleFormSubmit)}
-          className="mx-auto flex max-w-lg flex-col gap-6 rounded-md bg-skin-secondary p-6 text-skin-base shadow-md md:p-8 "
+          className="mx-auto flex max-w-lg flex-col gap-6 rounded-md bg-skin-secondary p-6 text-skin-base  md:p-8 "
         >
           <h3 className="text-center text-2xl ">Login</h3>
 

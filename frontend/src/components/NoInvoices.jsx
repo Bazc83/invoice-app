@@ -4,7 +4,7 @@ export function NoInvoices() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col gap-2 rounded-md bg-skin-primary px-6 py-10  text-skin-base  shadow-md ">
+    <div className="flex flex-col gap-2 rounded-md bg-skin-primary px-6 py-10  text-skin-base   ">
       <div className="flex max-h-52 items-center justify-center">
         <img src="/images/illustration-empty.svg" alt="no invoices svg" />
       </div>

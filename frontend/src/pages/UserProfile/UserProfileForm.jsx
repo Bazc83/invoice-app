@@ -33,11 +33,11 @@ function UserProfileForm({ handleFormSubmit, userData }) {
         </button>
       </div>
 
-      <div className=" rounded-b-md bg-skin-secondary   px-8 py-10 text-skin-base shadow-md md:pb-16">
+      <div className=" rounded-b-md bg-skin-secondary   px-8 py-10 text-skin-base  md:pb-16">
         {currentForm === 'personal' && (
           <form
             onSubmit={handleSubmit(handleFormSubmit)}
-            className="flex  flex-col gap-4 rounded-md shadow-md  md:gap-8"
+            className="flex  flex-col gap-4 rounded-md   md:gap-8"
           >
             <div className="flex flex-col gap-6">
               {/* First Name */}
@@ -67,7 +67,7 @@ function UserProfileForm({ handleFormSubmit, userData }) {
         {currentForm === 'company' && (
           <form
             onSubmit={handleSubmit(handleFormSubmit)}
-            className="flex  flex-col gap-4 rounded-md shadow-md  md:gap-8"
+            className="flex  flex-col gap-4 rounded-md   md:gap-8"
           >
             <div className="flex flex-col gap-6 ">
               {/* Company name */}

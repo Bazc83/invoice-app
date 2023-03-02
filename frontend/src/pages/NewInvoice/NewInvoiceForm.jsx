@@ -60,7 +60,7 @@ function NewInvoiceForm({
   return (
     <form
       onSubmit={handleSubmit(handleFormSubmit)}
-      className=" mx-auto flex w-full max-w-2xl flex-col gap-10 rounded-md bg-skin-secondary py-6 px-8 text-skin-base shadow-md "
+      className=" mx-auto flex w-full max-w-2xl flex-col gap-10 rounded-md bg-skin-secondary py-6 px-8 text-skin-base  "
     >
       <div className="flex flex-col gap-4">
         <h1 className="text-2xl">New Invoice #{newInvoiceId}</h1>

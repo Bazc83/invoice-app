@@ -66,7 +66,7 @@ export function Invoice() {
           <button
             type="button"
             onClick={() => handleDelete(invoiceId)}
-            className="btn border border-skin-danger text-skin-danger  hover:bg-skin-danger hover:text-white "
+            className="btn bg-skin-danger text-white "
           >
             Delete
           </button>
@@ -75,7 +75,7 @@ export function Invoice() {
           <button
             type="button"
             onClick={() => handleEditInvoice(invoiceId)}
-            className="btn   border border-skin-btn-default text-skin-btn-default    hover:bg-skin-btn-default hover:text-white "
+            className="btn  bg-skin-button text-white hover:bg-skin-button-lighter"
           >
             Edit
           </button>
@@ -83,7 +83,7 @@ export function Invoice() {
       </div>
 
       {/* Invoice main content */}
-      <main className="print | relative flex h-full flex-col gap-y-4  bg-skin-secondary pt-8 pb-12 text-sm  text-skin-base shadow-md">
+      <main className="print | relative flex h-full flex-col gap-y-4  bg-skin-secondary pt-8 pb-12 text-sm  text-skin-base ">
         {/* Print Button */}
         <button
           type="button"

@@ -7,35 +7,54 @@ module.exports = {
     extend: {
       textColor: {
         skin: {
-          base: 'var(--color-text-base)',
-          primary: "var(--color-primary)",
-          secondary: "var(--color-secondary)",
+          base: {
+            DEFAULT: 'var(--color-text-base)',
+          },
           muted: 'var(--color-text-muted)',
           inverted: 'var(--color-text-inverted)',
+          primary: {
+            DEFAULT: 'var(--color-primary)',
+          },
+          secondary: 'var(--color-secondary)',
+
           edit: 'var(--color-edit)',
           warning: 'var(--color-warning)',
           danger: 'var(--color-danger)',
           success: 'var(--color-success)',
-          'btn-default': 'var(--color-button-default)',
+          button: {
+            DEFAULT: 'var(--color-button)',
+            darker: 'var(--color-button-darker)',
+            lighter: 'var(--color-button-lighter)',
+          },
         },
       },
       backgroundColor: {
         skin: {
           fill: 'var(--color-fill)',
-          primary: 'var(--color-primary)',
+          primary: {
+            DEFAULT: 'var(--color-primary)',
+          },
           secondary: 'var(--color-secondary)',
           edit: 'var(--color-edit)',
           warning: 'var(--color-warning)',
           danger: 'var(--color-danger)',
           success: 'var(--color-success)',
-          'btn-default': 'var(--color-button-default)',
+
           navbar: 'var(--color-navbar)',
+          button: {
+            DEFAULT: 'var(--color-button)',
+            darker: 'var(--color-button-darker)',
+            lighter: 'var(--color-button-lighter)',
+          },
         },
       },
       borderColor: {
         skin: {
+          base: 'var(--color-text-base)',
           fill: 'var(--color-fill)',
-          primary: 'var(--color-primary)',
+          primary: {
+            DEFAULT: 'var(--color-primary)',
+          },
           secondary: 'var(--color-secondary)',
           edit: 'var(--color-edit)',
           warning: 'var(--color-warning)',
@@ -46,7 +65,9 @@ module.exports = {
       },
       ringColor: {
         skin: {
-          primary: 'var(--color-primary)',
+          primary: {
+            DEFAULT: 'var(--color-primary)',
+          },
           secondary: 'var(--color-secondary)',
           base: 'var(--color-ring-base)',
           danger: 'var(--color-danger)',

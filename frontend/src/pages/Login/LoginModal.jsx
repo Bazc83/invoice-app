@@ -31,7 +31,7 @@ export function LoginModal() {
       <div className="absolute top-[20%] left-[50%] z-50 flex w-[calc(100%_-_2rem)] max-w-xl -translate-x-[50%] -translate-y-[20%] flex-col items-start justify-center gap-6 rounded-md bg-skin-secondary p-6 text-skin-base  ">
         <form
           onSubmit={handleSubmit(handleFormSubmit)}
-          className="mx-auto flex w-full flex-col gap-6 rounded-md bg-skin-secondary p-6 text-skin-base shadow-md md:p-8 "
+          className="mx-auto flex w-full flex-col gap-6 rounded-md bg-skin-secondary p-6 text-skin-base  md:p-8 "
         >
           <h3 className="text-center text-2xl ">Login</h3>
 

@@ -37,7 +37,7 @@ export function Navbar() {
   };
 
   return (
-    <div className="noPrint | z-30 bg-skin-navbar text-white">
+    <div className="noPrint | z-30 bg-skin-secondary border-b-2 border-b-skin-fill">
       {/* Navbar Container */}
       <div className=" relative mx-auto flex  max-w-5xl items-center justify-between py-4 px-4  md:px-6 ">
         <Link to="/">
@@ -50,28 +50,24 @@ export function Navbar() {
           <button
             onClick={toggleDarkMode}
             type="button"
-            className="transition-all duration-300 hover:scale-95 hover:text-gray-200"
+            className="text-xl text-skin-muted  transition-all duration-300 hover:text-skin-base "
           >
-            {theme === 'dark' ? (
-              <FaSun className="text-xl transition-colors hover:opacity-90" />
-            ) : (
-              <FaMoon className="text-xl transition-colors hover:opacity-90" />
-            )}
+            {theme === 'dark' ? <FaSun /> : <FaMoon />}
           </button>
 
           {/* Hamburger menu button */}
           <button
             type="button"
             onClick={handleToggleMobileMenu}
-            className="transition-all duration-300 hover:scale-95 hover:text-gray-200"
+            className="text-3xl text-skin-muted transition-all duration-300 hover:text-skin-base "
           >
-            <FaBars className="text-3xl " />
+            <FaBars />
           </button>
 
           {/* Navlist */}
           {mobileMenu && (
             <nav
-              className={`absolute top-14 right-0 z-30 overflow-hidden rounded-b-md bg-skin-secondary text-skin-base shadow-md transition-transform ease-in `}
+              className={`absolute top-14 right-0 z-30 overflow-hidden rounded-b-md bg-skin-secondary text-skin-base  transition-transform ease-in `}
             >
               <ul className="flex  w-[250px]  flex-col  ">
                 {/* User Profile */}

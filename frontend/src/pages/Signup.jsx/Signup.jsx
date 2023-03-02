@@ -94,7 +94,7 @@ export function Signup() {
           </FormSectionButton>
         </div>
 
-        <div className=" rounded-b-md bg-skin-secondary   px-8 py-10 text-skin-base shadow-md md:pb-16">
+        <div className=" rounded-b-md bg-skin-secondary   px-8 py-10 text-skin-base  md:pb-16">
           {/* Sign up */}
           {currentForm === 'signup' && (
             <form

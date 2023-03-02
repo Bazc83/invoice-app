@@ -5,7 +5,6 @@ import useModalStore from '@/context/useModalStore';
 import { useFormatDate } from '@/hooks/useFormatDate';
 import usePaymentStatusColor from '@/hooks/usePaymentStatusColor';
 
-import InvoicesTable from './InvoicesTable';
 
 export function InvoicePreview({ invoice }) {
   const { status, id, clientName, amountDueTotal, paymentDue } = invoice;
@@ -26,7 +25,7 @@ export function InvoicePreview({ invoice }) {
   const { paymentStatusColor } = usePaymentStatusColor(status);
 
   return (
-    <InvoicesTable addClass="md:text-start md:py-4 shadow-md px-6 py-6 md:px-2 bg-skin-primary rounded-md ">
+    <div className=" relative grid grid-cols-2 gap-4 rounded-md bg-skin-secondary px-6  py-3 md:grid-cols-[1fr_2fr_2fr_1fr_80px_50px] md:items-center md:gap-4 md:px-6 md:text-start lg:gap-8 border-2 border-skin-fill ">
       <button
         type="button"
         className="absolute z-10 h-full w-full "
@@ -35,7 +34,7 @@ export function InvoicePreview({ invoice }) {
       />
 
       {/* Id */}
-      <p className="col-start-1 row-start-1    md:text-center">
+      <p className="col-start-1 row-start-1 md:text-start">
         <span className="text-skin-muted">#</span>
         {id}
       </p>
@@ -52,11 +51,11 @@ export function InvoicePreview({ invoice }) {
         </p>
       )}
 
-      <p className="col-start-1 row-start-2 capitalize md:col-start-auto md:row-start-auto md:text-center truncate ">
+      <p className="col-start-1 row-start-2 truncate capitalize md:col-start-auto md:row-start-auto md:text-start ">
         {clientName}
       </p>
 
-      <p className="col-start-1 row-start-3 md:col-start-auto md:row-start-auto md:text-center ">
+      <p className="col-start-1 row-start-3 md:col-start-auto md:row-start-auto md:text-end ">
         {new Intl.NumberFormat('en', {
           style: 'currency',
           currency: 'GBP',
@@ -64,7 +63,7 @@ export function InvoicePreview({ invoice }) {
       </p>
 
       <p
-        className={` ${paymentStatusColor} col-start-2 row-start-2 text-end capitalize md:col-start-auto md:row-start-auto md:text-center `}
+        className={` ${paymentStatusColor} col-start-2 row-start-2 text-end capitalize md:col-start-auto md:row-start-auto md:text-start `}
       >
         {status}
       </p>
@@ -86,7 +85,7 @@ export function InvoicePreview({ invoice }) {
           <FaTrashAlt />
         </button>
       </div>
-    </InvoicesTable>
+    </div>
   );
 }
 

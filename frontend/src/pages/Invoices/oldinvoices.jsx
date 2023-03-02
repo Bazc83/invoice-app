@@ -39,7 +39,7 @@ export function Invoices() {
           {deleteModal && <ConfirmDeleteModal />}
 
           <div
-            className={`flex-col gap-2  rounded-md bg-skin-secondary  pt-4 pb-10 text-skin-base shadow-md ${
+            className={`flex-col gap-2  rounded-md bg-skin-secondary  pt-4 pb-10 text-skin-base  ${
               state.filteredInvoices?.length === 0 ? 'hidden' : 'flex'
             }`}
           >
