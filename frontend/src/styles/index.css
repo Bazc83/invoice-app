@@ -34,13 +34,16 @@
     --color-text-base: #0d0d0d;
     --color-text-muted: #808080;
     --color-text-inverted: #f3f3f3;
+    --color-main-bg: hsl(240, 30%, 93%);
     --color-primary: hsl(0, 0%, 100%);
-    --color-secondary: hsl(0, 0%, 100%);
-    --color-fill: #e0dfdf;
+    --color-secondary: hsl(240, 30%, 99%);
+    --color-secondary-darker: hsl(240, 30%, 93%);
+    --color-fill: #a3a2a2;
     --color-edit: #0000ff;
     --color-danger: #ff0000;
     --color-warning: #993300;
-    --color-success: #3e3e3e;
+    --color-success: hsl(128, 74%, 23%);
+    --color-success-darker: hsl(128, 74%, 19%);
     --color-ring-base: #001099;
     --color-button: #363636;
     --color-button-darker: #222222;
@@ -55,13 +58,12 @@
     --color-text-base: #ffffff;
     --color-text-muted: #bcbcbc;
     --color-text-inverted: #0d0d0d;
+    --color-main-bg: hsl(206, 61%, 8%);
     --color-primary: #131313;
-    --color-secondary: hsl(0, 1%, 17%);
-    --color-fill: #606060;
-    --color-edit: #0000ff;
-    --color-danger: #ff0000;
-    --color-warning: #993300;
-    --color-success: #009900;
+    --color-secondary: hsl(206, 51%, 14%);
+    --color-secondary-darker: hsl(206, 51%, 20%);
+    --color-fill: #7696af;
+
     --color-ring-base: #001099;
     --color-button: #555555;
     --color-button-lighter: #444444;

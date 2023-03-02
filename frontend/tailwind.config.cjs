@@ -31,14 +31,21 @@ module.exports = {
       backgroundColor: {
         skin: {
           fill: 'var(--color-fill)',
+          'main-bg': 'var(--color-main-bg)',
           primary: {
             DEFAULT: 'var(--color-primary)',
           },
-          secondary: 'var(--color-secondary)',
+          secondary: {
+            DEFAULT: 'var(--color-secondary)',
+            darker: 'var(--color-secondary-darker)',
+          },
           edit: 'var(--color-edit)',
           warning: 'var(--color-warning)',
           danger: 'var(--color-danger)',
-          success: 'var(--color-success)',
+          success: {
+            DEFAULT: 'var(--color-success)',
+            darker: 'var(--color-success-darker)',
+          },
 
           navbar: 'var(--color-navbar)',
           button: {

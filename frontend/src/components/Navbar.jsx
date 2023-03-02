@@ -15,7 +15,6 @@ import useModalStore from '@/context/useModalStore';
 import { useLogout } from '@/hooks/useLogout';
 
 import NavLinkItem from './NavLinkItem';
-import { RandomLogo } from './RandomLogo';
 
 export function Navbar() {
   const { theme, toggleDarkMode } = useContext(DarkModeContext);
@@ -37,12 +36,11 @@ export function Navbar() {
   };
 
   return (
-    <div className="noPrint | z-30 bg-skin-secondary border-b-2 border-b-skin-fill">
+    <div className="noPrint | z-30 bg-skin-main-bg  ">
       {/* Navbar Container */}
       <div className=" relative mx-auto flex  max-w-5xl items-center justify-between py-4 px-4  md:px-6 ">
         <Link to="/">
-          {/* Random logo */}
-          <RandomLogo />
+          <h1 className="stroke-black text-2xl font-semibold">LOGO</h1>
         </Link>
 
         <div className=" relative  flex items-center justify-center gap-4">

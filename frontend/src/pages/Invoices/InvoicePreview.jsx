@@ -5,7 +5,6 @@ import useModalStore from '@/context/useModalStore';
 import { useFormatDate } from '@/hooks/useFormatDate';
 import usePaymentStatusColor from '@/hooks/usePaymentStatusColor';
 
-
 export function InvoicePreview({ invoice }) {
   const { status, id, clientName, amountDueTotal, paymentDue } = invoice;
 
@@ -25,7 +24,7 @@ export function InvoicePreview({ invoice }) {
   const { paymentStatusColor } = usePaymentStatusColor(status);
 
   return (
-    <div className=" relative grid grid-cols-2 gap-4 rounded-md bg-skin-secondary px-6  py-3 md:grid-cols-[1fr_2fr_2fr_1fr_80px_50px] md:items-center md:gap-4 md:px-6 md:text-start lg:gap-8 border-2 border-skin-fill ">
+    <div className=" relative grid grid-cols-2 gap-4 bg-skin-secondary   py-6 odd:bg-skin-secondary-darker md:grid-cols-[1fr_2fr_2fr_1fr_80px_50px] md:items-center  md:gap-4 md:text-start lg:gap-8 px-6 rounded-md md:rounded-none ">
       <button
         type="button"
         className="absolute z-10 h-full w-full "

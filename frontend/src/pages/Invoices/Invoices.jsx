@@ -1,5 +1,4 @@
 import { useContext, useEffect } from 'react';
-import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 
 import ConfirmDeleteModal from '@/components/ConfirmDeleteModal';
 import Container from '@/components/Container';
@@ -26,9 +25,8 @@ export function Invoices() {
   if (isError) return `An error has occurred: ${error.message}`;
   return (
     <Container>
-      <div className="mx-auto h-full  max-w-5xl rounded-md   px-4 pb-10  md:px-6">
-
-        <h1 className="py-6 text-center text-3xl font-semibold">Invoices</h1>
+      <div className="mx-auto h-full  max-w-5xl rounded-md  border  px-4 pb-10  md:px-6">
+        <h1 className="pb-6 text-center text-3xl font-semibold">Invoices</h1>
 
         <div className=" relative flex h-full flex-col gap-6 px-4 md:gap-8 md:px-0 lg:flex-row ">
           {/* filter checkboxes and add new invoice button */}
@@ -41,13 +39,13 @@ export function Invoices() {
           {deleteModal && <ConfirmDeleteModal />}
 
           <div
-            className={`flex-col gap-4 rounded-md   ${
+            className={`flex-col bg-skin-secondary rounded-md ${
               state.filteredInvoices?.length === 0 ? 'hidden' : 'flex'
             }`}
           >
             {/* Invoice preview headers md screen and greater */}
             {state.filteredInvoices?.length > 0 && (
-              <div className=" relative  hidden grid-cols-2 gap-2 rounded-md  border-2  border-skin-fill  bg-skin-secondary py-2 px-6 text-center  font-semibold  md:grid  md:grid-cols-[1fr_2fr_2fr_1fr_80px_50px] md:items-center md:gap-4 md:text-start lg:gap-8 ">
+              <div className=" relative hidden grid-cols-2 gap-4  rounded-t-md bg-skin-secondary px-6 pt-4 text-center text-sm md:grid md:grid-cols-[1fr_2fr_2fr_1fr_80px_50px] md:items-center md:gap-4 md:text-start lg:gap-8 pb-4">
                 <p className=" text-start">Ref</p>
                 <p className=" text-center">Payment Due</p>
 
@@ -56,16 +54,12 @@ export function Invoices() {
                 <p className=" text-center ">Total</p>
 
                 <p className=" text-start">Status</p>
-
-                <div className="flex justify-end gap-4">
-                  <FaEdit />
-                  <FaTrashAlt />
-                </div>
+                <p className=" text-start">Actions</p>
               </div>
             )}
 
             {/* Invoice previews  */}
-            <div className="flex flex-col gap-6 overflow-auto  rounded-md px-0  md:gap-4  md:pb-8">
+            <div className="flex flex-col gap-6  overflow-auto md:gap-0 md:pb-8 ">
               {/* invoice previews */}
               {invoices?.length > 0 &&
                 state.filteredInvoices?.map((invoice) => (
