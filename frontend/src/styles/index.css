@@ -38,7 +38,7 @@
     --color-primary: hsl(0, 0%, 100%);
     --color-secondary: hsl(240, 30%, 99%);
     --color-secondary-darker: hsl(240, 30%, 93%);
-    --color-fill: #a3a2a2;
+    --color-fill: #d5ddf2;
     --color-edit: #0000ff;
     --color-danger: #ff0000;
     --color-warning: #993300;
@@ -62,7 +62,7 @@
     --color-primary: #131313;
     --color-secondary: hsl(206, 51%, 14%);
     --color-secondary-darker: hsl(206, 51%, 20%);
-    --color-fill: #7696af;
+    --color-fill: #475e70;
 
     --color-ring-base: #001099;
     --color-button: #555555;
