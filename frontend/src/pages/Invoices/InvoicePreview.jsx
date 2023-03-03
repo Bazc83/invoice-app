@@ -24,7 +24,7 @@ export function InvoicePreview({ invoice }) {
   const { paymentStatusColor } = usePaymentStatusColor(status);
 
   return (
-    <div className=" relative grid grid-cols-2 gap-4 rounded-md border-2  border-skin-fill bg-skin-secondary  py-6 px-6 last:rounded-b-md md:grid-cols-[1fr_2fr_2fr_1fr_80px_50px] md:items-center md:gap-4 md:rounded-none md:border-none md:text-start lg:gap-8">
+    <div className=" relative grid grid-cols-2 gap-4 rounded-md   bg-skin-primary px-6 py-4 last:rounded-b-md even:bg-skin-secondary hover:scale-[0.99] transition-all duration-300 ease-in-out md:grid-cols-[1fr_2fr_2fr_1fr_80px_50px] md:items-center md:gap-4 md:rounded-none md:border-none md:text-start lg:gap-8">
       <button
         type="button"
         className="absolute z-10 h-full w-full "

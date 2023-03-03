@@ -8,6 +8,7 @@ import useLocalStorage from 'use-local-storage';
 import { AuthContext } from './context/AuthContext';
 import { InvoicesContextProvider } from './context/InvoicesContext';
 import { EditInvoice } from './pages/EditInvoice';
+import { Home } from './pages/Home';
 import { Invoice } from './pages/Invoice';
 import { Invoices } from './pages/Invoices';
 import { Login } from './pages/Login';
@@ -51,7 +52,7 @@ function App() {
               <Route element={<PageLayout />}>
                 <Route
                   index
-                  element={user ? <Invoices /> : <Navigate to="/login" />}
+                  element={user ? <Home /> : <Navigate to="/login" />}
                 />
 
                 <Route

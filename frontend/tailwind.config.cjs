@@ -26,6 +26,11 @@ module.exports = {
             darker: 'var(--color-button-darker)',
             lighter: 'var(--color-button-lighter)',
           },
+          brand: {
+            DEFAULT: 'var(--color-brand)',
+            darker: 'var(--color-brand-darker)',
+            lighter: 'var(--color-brand-lighter)',
+          },
         },
       },
       backgroundColor: {
@@ -46,7 +51,11 @@ module.exports = {
             DEFAULT: 'var(--color-success)',
             darker: 'var(--color-success-darker)',
           },
-
+          brand: {
+            DEFAULT: 'var(--color-brand)',
+            darker: 'var(--color-brand-darker)',
+            lighter: 'var(--color-brand-lighter)',
+          },
           navbar: 'var(--color-navbar)',
           button: {
             DEFAULT: 'var(--color-button)',
@@ -62,7 +71,15 @@ module.exports = {
           primary: {
             DEFAULT: 'var(--color-primary)',
           },
-          secondary: 'var(--color-secondary)',
+          secondary: {
+            DEFAULT: 'var(--color-secondary)',
+            darker: 'var(--color-secondary-darker)',
+          },
+          brand: {
+            DEFAULT: 'var(--color-brand)',
+            darker: 'var(--color-brand-darker)',
+            lighter: 'var(--color-brand-lighter)',
+          },
           edit: 'var(--color-edit)',
           warning: 'var(--color-warning)',
           danger: 'var(--color-danger)',
@@ -74,6 +91,11 @@ module.exports = {
         skin: {
           primary: {
             DEFAULT: 'var(--color-primary)',
+          },
+          brand: {
+            DEFAULT: 'var(--color-brand)',
+            darker: 'var(--color-brand-darker',
+            lighter: 'var(--color-brand-lighter)',
           },
           secondary: 'var(--color-secondary)',
           base: 'var(--color-ring-base)',
