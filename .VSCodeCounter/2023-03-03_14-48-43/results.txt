@@ -1,0 +1,168 @@
+Date : 2023-03-03 14:48:43
+Directory : c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app
+Total : 105 files,  15080 codes, 243 comments, 782 blanks, all 16105 lines
+
+Languages
++--------------------+------------+------------+------------+------------+------------+
+| language           | files      | code       | comment    | blank      | total      |
++--------------------+------------+------------+------------+------------+------------+
+| JSON               |          6 |     11,349 |          0 |          5 |     11,354 |
+| JavaScript JSX     |         57 |      2,823 |        170 |        575 |      3,568 |
+| JavaScript         |         27 |        749 |         55 |        154 |        958 |
+| CSS                |          1 |        112 |          0 |         18 |        130 |
+| Markdown           |          1 |         18 |         14 |         27 |         59 |
+| HTML               |          1 |         13 |          0 |          3 |         16 |
+| SVG                |         11 |         11 |          0 |          0 |         11 |
+| JSON with Comments |          1 |          5 |          4 |          0 |          9 |
++--------------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                  | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                     |        105 |     15,080 |        243 |        782 |     16,105 |
+| . (Files)                                                                                                             |          3 |      5,849 |         14 |         29 |      5,892 |
+| backend                                                                                                               |         12 |        547 |         53 |        137 |        737 |
+| backend (Files)                                                                                                       |          1 |         26 |          5 |         11 |         42 |
+| backend\config                                                                                                        |          1 |         12 |          0 |          3 |         15 |
+| backend\controllers                                                                                                   |          3 |        252 |         37 |         67 |        356 |
+| backend\middleware                                                                                                    |          1 |         17 |          1 |          5 |         23 |
+| backend\models                                                                                                        |          3 |        199 |          7 |         28 |        234 |
+| backend\routes                                                                                                        |          3 |         41 |          3 |         23 |         67 |
+| frontend                                                                                                              |         90 |      8,684 |        176 |        616 |      9,476 |
+| frontend (Files)                                                                                                      |         10 |      5,509 |          6 |         12 |      5,527 |
+| frontend\public                                                                                                       |         11 |         11 |          0 |          0 |         11 |
+| frontend\public\images                                                                                                |         11 |         11 |          0 |          0 |         11 |
+| frontend\src                                                                                                          |         69 |      3,164 |        170 |        604 |      3,938 |
+| frontend\src (Files)                                                                                                  |          2 |        102 |          3 |         21 |        126 |
+| frontend\src\components                                                                                               |         18 |        614 |         36 |        115 |        765 |
+| frontend\src\context                                                                                                  |          3 |        137 |          9 |         23 |        169 |
+| frontend\src\data                                                                                                     |          1 |        219 |          0 |          1 |        220 |
+| frontend\src\hooks                                                                                                    |         17 |        450 |         34 |        162 |        646 |
+| frontend\src\hooks (Files)                                                                                            |          7 |        168 |          9 |         46 |        223 |
+| frontend\src\hooks\reactQueryHooks                                                                                    |         10 |        282 |         25 |        116 |        423 |
+| frontend\src\pages                                                                                                    |         27 |      1,530 |         88 |        264 |      1,882 |
+| frontend\src\pages\EditInvoice                                                                                        |          3 |        246 |         18 |         41 |        305 |
+| frontend\src\pages\Home                                                                                               |          2 |         12 |          0 |          5 |         17 |
+| frontend\src\pages\Invoice                                                                                            |          4 |        230 |         21 |         40 |        291 |
+| frontend\src\pages\Invoices                                                                                           |          3 |        133 |          8 |         34 |        175 |
+| frontend\src\pages\Login                                                                                              |          3 |        176 |          4 |         27 |        207 |
+| frontend\src\pages\NewInvoice                                                                                         |          3 |        262 |         16 |         43 |        321 |
+| frontend\src\pages\NotFoundPage                                                                                       |          2 |         17 |          0 |          6 |         23 |
+| frontend\src\pages\PageLayout                                                                                         |          2 |         49 |          1 |          8 |         58 |
+| frontend\src\pages\Signup.jsx                                                                                         |          2 |        265 |         12 |         36 |        313 |
+| frontend\src\pages\UserProfile                                                                                        |          3 |        140 |          8 |         24 |        172 |
+| frontend\src\styles                                                                                                   |          1 |        112 |          0 |         18 |        130 |
++-----------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| filename                                                                                                              | language           | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\Todos.md                                                    | Markdown           |         18 |         14 |         27 |         59 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\backend\config\db.js                                        | JavaScript         |         12 |          0 |          3 |         15 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\backend\controllers\invoiceIdController.js                  | JavaScript         |         28 |          2 |          6 |         36 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\backend\controllers\invoicesController.js                   | JavaScript         |        147 |         22 |         39 |        208 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\backend\controllers\userController.js                       | JavaScript         |         77 |         13 |         22 |        112 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\backend\middleware\requireAuth.js                           | JavaScript         |         17 |          1 |          5 |         23 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\backend\models\invoiceIdModel.js                            | JavaScript         |          6 |          0 |          3 |          9 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\backend\models\invoiceModel.js                              | JavaScript         |        115 |          0 |          6 |        121 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\backend\models\userModel.js                                 | JavaScript         |         78 |          7 |         19 |        104 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\backend\routes\invoiceIdRoutes.js                           | JavaScript         |          8 |          0 |          5 |         13 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\backend\routes\invoiceRoutes.js                             | JavaScript         |         14 |          0 |          8 |         22 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\backend\routes\userRoutes.js                                | JavaScript         |         19 |          3 |         10 |         32 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\backend\server.js                                           | JavaScript         |         26 |          5 |         11 |         42 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\.eslintrc.cjs                                      | JavaScript         |         35 |          0 |          1 |         36 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\index.html                                         | HTML               |         13 |          0 |          3 |         16 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\jsconfig.json                                      | JSON with Comments |          5 |          4 |          0 |          9 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\package-lock.json                                  | JSON               |      5,199 |          0 |          1 |      5,200 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\package.json                                       | JSON               |         55 |          0 |          1 |         56 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\postcss.config.cjs                                 | JavaScript         |          6 |          0 |          1 |          7 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\prettier.config.cjs                                | JavaScript         |          8 |          0 |          0 |          8 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\public\images\icon-arrow-down.svg                  | SVG                |          1 |          0 |          0 |          1 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\public\images\icon-arrow-left.svg                  | SVG                |          1 |          0 |          0 |          1 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\public\images\icon-arrow-right.svg                 | SVG                |          1 |          0 |          0 |          1 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\public\images\icon-calendar.svg                    | SVG                |          1 |          0 |          0 |          1 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\public\images\icon-check.svg                       | SVG                |          1 |          0 |          0 |          1 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\public\images\icon-delete.svg                      | SVG                |          1 |          0 |          0 |          1 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\public\images\icon-moon.svg                        | SVG                |          1 |          0 |          0 |          1 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\public\images\icon-plus.svg                        | SVG                |          1 |          0 |          0 |          1 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\public\images\icon-sun.svg                         | SVG                |          1 |          0 |          0 |          1 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\public\images\illustration-empty.svg               | SVG                |          1 |          0 |          0 |          1 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\public\images\logo.svg                             | SVG                |          1 |          0 |          0 |          1 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\App.jsx                                        | JavaScript JSX     |         86 |          3 |         15 |        104 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\components\CancelEditFormModal.jsx             | JavaScript JSX     |         28 |          0 |         10 |         38 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\components\ConfirmActionModalTemplate.jsx      | JavaScript JSX     |         32 |          9 |          5 |         46 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\components\ConfirmDeleteModal.jsx              | JavaScript JSX     |         31 |          1 |         10 |         42 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\components\Container.jsx                       | JavaScript JSX     |          4 |          0 |          1 |          5 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\components\FilterItemCheckbox.jsx              | JavaScript JSX     |         33 |          0 |          7 |         40 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\components\Filters.jsx                         | JavaScript JSX     |         18 |          1 |          7 |         26 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\components\FormSectionButton.jsx               | JavaScript JSX     |         21 |          2 |          3 |         26 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\components\GoBackLink.jsx                      | JavaScript JSX     |         11 |          0 |          3 |         14 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\components\InvoiceFormItem.jsx                 | JavaScript JSX     |        115 |          6 |         12 |        133 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\components\InvoicesControlPanel.jsx            | JavaScript JSX     |         12 |          1 |          5 |         18 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\components\LoadingAnimation.jsx                | JavaScript JSX     |         15 |          0 |          1 |         16 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\components\MobileNav.jsx                       | JavaScript JSX     |         63 |          6 |         11 |         80 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\components\NavLinkItem.jsx                     | JavaScript JSX     |          4 |          0 |          1 |          5 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\components\Navbar.jsx                          | JavaScript JSX     |        121 |         10 |         23 |        154 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\components\NoInvoices.jsx                      | JavaScript JSX     |         26 |          0 |          6 |         32 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\components\Overview.jsx                        | JavaScript JSX     |         45 |          0 |          6 |         51 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\components\RandomLogo.jsx                      | JavaScript JSX     |          8 |          0 |          2 |         10 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\components\TextInputWithValidation.jsx         | JavaScript JSX     |         27 |          0 |          2 |         29 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\context\AuthContext.jsx                        | JavaScript JSX     |         33 |          2 |          9 |         44 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\context\InvoicesContext.jsx                    | JavaScript JSX     |         75 |          4 |          6 |         85 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\context\useModalStore.jsx                      | JavaScript JSX     |         29 |          3 |          8 |         40 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\data\data.json                                 | JSON               |        219 |          0 |          1 |        220 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\hooks\reactQueryHooks\useAddNewInvoice.jsx     | JavaScript JSX     |         33 |          2 |         13 |         48 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\hooks\reactQueryHooks\useAuth.jsx              | JavaScript JSX     |         30 |          0 |          7 |         37 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\hooks\reactQueryHooks\useDeleteInvoice.jsx     | JavaScript JSX     |         37 |         14 |         18 |         69 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\hooks\reactQueryHooks\useFilterInvoiceById.jsx | JavaScript JSX     |         28 |          1 |         14 |         43 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\hooks\reactQueryHooks\useGetUserDetails.jsx    | JavaScript JSX     |         25 |          3 |         12 |         40 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\hooks\reactQueryHooks\useInvoiceId.jsx         | JavaScript JSX     |         17 |          0 |          9 |         26 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\hooks\reactQueryHooks\useInvoices.jsx          | JavaScript JSX     |         27 |          1 |         13 |         41 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\hooks\reactQueryHooks\useUpdateInvoice.jsx     | JavaScript JSX     |         34 |          1 |         12 |         47 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\hooks\reactQueryHooks\useUpdateInvoiceId.jsx   | JavaScript JSX     |         17 |          0 |          7 |         24 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\hooks\reactQueryHooks\useUpdateUser.jsx        | JavaScript JSX     |         34 |          3 |         11 |         48 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\hooks\useCheckForUser.jsx                      | JavaScript JSX     |         11 |          0 |          5 |         16 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\hooks\useFormatDate.jsx                        | JavaScript JSX     |         27 |          0 |          4 |         31 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\hooks\useLogin.jsx                             | JavaScript JSX     |         31 |          3 |          9 |         43 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\hooks\useLogout.jsx                            | JavaScript JSX     |         11 |          2 |          4 |         17 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\hooks\usePaymentStatusColor.jsx                | JavaScript JSX     |         38 |          1 |          7 |         46 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\hooks\useSignup.jsx                            | JavaScript JSX     |         32 |          3 |         11 |         46 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\hooks\useWindowResize.jsx                      | JavaScript JSX     |         18 |          0 |          6 |         24 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\main.jsx                                       | JavaScript JSX     |         16 |          0 |          6 |         22 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\pages\EditInvoice\EditInvoice.jsx              | JavaScript JSX     |         41 |          3 |         14 |         58 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\pages\EditInvoice\EditInvoiceForm.jsx          | JavaScript JSX     |        204 |         15 |         26 |        245 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\pages\EditInvoice\index.js                     | JavaScript         |          1 |          0 |          1 |          2 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\pages\Home\Home.jsx                            | JavaScript JSX     |         11 |          0 |          4 |         15 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\pages\Home\index.js                            | JavaScript         |          1 |          0 |          1 |          2 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\pages\Invoice\Invoice.jsx                      | JavaScript JSX     |        132 |         16 |         28 |        176 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\pages\Invoice\InvoiceItem.jsx                  | JavaScript JSX     |         29 |          0 |          4 |         33 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\pages\Invoice\ItemsSection.jsx                 | JavaScript JSX     |         68 |          5 |          7 |         80 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\pages\Invoice\index.js                         | JavaScript         |          1 |          0 |          1 |          2 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\pages\Invoices\InvoicePreview.jsx              | JavaScript JSX     |         72 |          3 |         17 |         92 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\pages\Invoices\Invoices.jsx                    | JavaScript JSX     |         60 |          5 |         16 |         81 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\pages\Invoices\index.js                        | JavaScript         |          1 |          0 |          1 |          2 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\pages\Login\Login.jsx                          | JavaScript JSX     |         87 |          2 |         12 |        101 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\pages\Login\LoginModal.jsx                     | JavaScript JSX     |         88 |          2 |         14 |        104 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\pages\Login\index.js                           | JavaScript         |          1 |          0 |          1 |          2 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\pages\NewInvoice\NewInvoice.jsx                | JavaScript JSX     |         52 |          6 |         19 |         77 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\pages\NewInvoice\NewInvoiceForm.jsx            | JavaScript JSX     |        209 |         10 |         23 |        242 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\pages\NewInvoice\index.js                      | JavaScript         |          1 |          0 |          1 |          2 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\pages\NotFoundPage\NotFoundPage.jsx            | JavaScript JSX     |         16 |          0 |          5 |         21 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\pages\NotFoundPage\index.js                    | JavaScript         |          1 |          0 |          1 |          2 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\pages\PageLayout\PageLayout.jsx                | JavaScript JSX     |         48 |          1 |          7 |         56 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\pages\PageLayout\index.js                      | JavaScript         |          1 |          0 |          1 |          2 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\pages\Signup.jsx\Signup.jsx                    | JavaScript JSX     |        264 |         12 |         35 |        311 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\pages\Signup.jsx\index.js                      | JavaScript         |          1 |          0 |          1 |          2 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\pages\UserProfile\UserProfile.jsx              | JavaScript JSX     |         31 |          1 |         12 |         44 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\pages\UserProfile\UserProfileForm.jsx          | JavaScript JSX     |        108 |          7 |         11 |        126 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\pages\UserProfile\index.js                     | JavaScript         |          1 |          0 |          1 |          2 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src\styles\index.css                               | CSS                |        112 |          0 |         18 |        130 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\tailwind.config.cjs                                | JavaScript         |        120 |          2 |          3 |        125 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\tailwindconfig.json                                | JSON               |         45 |          0 |          0 |         45 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\vite.config.js                                     | JavaScript         |         23 |          0 |          2 |         25 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\package-lock.json                                           | JSON               |      5,793 |          0 |          1 |      5,794 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\package.json                                                | JSON               |         38 |          0 |          1 |         39 |
+| Total                                                                                                                 |                    |     15,080 |        243 |        782 |     16,105 |
++-----------------------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+

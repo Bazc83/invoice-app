@@ -8,7 +8,7 @@ import useModalStore from '@/context/useModalStore';
 import { useAuth } from './useAuth';
 
 const getInvoiceById = async (userToken, invoiceIdValue) => {
-  const response = await fetch(`/api/invoices/${invoiceIdValue}`, {
+  const response = await fetch(`/api/invoices/invoice/${invoiceIdValue}`, {
     method: 'GET',
     headers: { Authorization: `Bearer ${userToken}` },
   });

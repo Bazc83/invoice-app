@@ -13,7 +13,7 @@ export const useUpdateInvoice = (invoiceIdValue) => {
 
   const updateInvoice = async (invoiceId, invoiceData) => {
 
-    const response = await fetch(`/api/invoices/${invoiceId}`, {
+    const response = await fetch(`/api/invoices/invoice/${invoiceId}`, {
       method: 'PUT',
       body: JSON.stringify(invoiceData),
       headers: {

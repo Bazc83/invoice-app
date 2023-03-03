@@ -16,7 +16,7 @@ export const useDeleteInvoice = () => {
   const queryClient = useQueryClient();
 
   const deleteInvoice = async (invoiceId) => {
-    const response = await fetch(`/api/invoices/${invoiceId}`, {
+    const response = await fetch(`/api/invoices/invoice/${invoiceId}`, {
       method: 'DELETE',
       headers: {
         Authorization: `Bearer ${user.token}`,

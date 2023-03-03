@@ -83,6 +83,14 @@ const getInvoices = asyncHandler(async (req, res) => {
   res.send(invoices);
 });
 
+// Get all quotes for user
+const getQuotes = asyncHandler(async (req, res) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  const quotes = await Invoice.find({ status: 'quote', createdByUser: req.user._id});
+
+  res.send(quotes);
+});
+
 // Get invoice by id
 const getInvoice = asyncHandler(async (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -204,4 +212,5 @@ module.exports = {
   addInvoice,
   updateInvoice,
   deleteInvoice,
+  getQuotes,
 };

@@ -1,0 +1,49 @@
+Date : 2023-03-03 14:48:43
+Directory : c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app
+Total : 15 files,  6396 codes, 67 comments, 166 blanks, all 6629 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JSON       |          2 |      5,831 |          0 |          2 |      5,833 |
+| JavaScript |         12 |        547 |         53 |        137 |        737 |
+| Markdown   |          1 |         18 |         14 |         27 |         59 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                 | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                    |         15 |      6,396 |         67 |        166 |      6,629 |
+| . (Files)                                                                                            |          3 |      5,849 |         14 |         29 |      5,892 |
+| backend                                                                                              |         12 |        547 |         53 |        137 |        737 |
+| backend (Files)                                                                                      |          1 |         26 |          5 |         11 |         42 |
+| backend\config                                                                                       |          1 |         12 |          0 |          3 |         15 |
+| backend\controllers                                                                                  |          3 |        252 |         37 |         67 |        356 |
+| backend\middleware                                                                                   |          1 |         17 |          1 |          5 |         23 |
+| backend\models                                                                                       |          3 |        199 |          7 |         28 |        234 |
+| backend\routes                                                                                       |          3 |         41 |          3 |         23 |         67 |
++------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                             | language   | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\Todos.md                                   | Markdown   |         18 |         14 |         27 |         59 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\backend\config\db.js                       | JavaScript |         12 |          0 |          3 |         15 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\backend\controllers\invoiceIdController.js | JavaScript |         28 |          2 |          6 |         36 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\backend\controllers\invoicesController.js  | JavaScript |        147 |         22 |         39 |        208 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\backend\controllers\userController.js      | JavaScript |         77 |         13 |         22 |        112 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\backend\middleware\requireAuth.js          | JavaScript |         17 |          1 |          5 |         23 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\backend\models\invoiceIdModel.js           | JavaScript |          6 |          0 |          3 |          9 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\backend\models\invoiceModel.js             | JavaScript |        115 |          0 |          6 |        121 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\backend\models\userModel.js                | JavaScript |         78 |          7 |         19 |        104 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\backend\routes\invoiceIdRoutes.js          | JavaScript |          8 |          0 |          5 |         13 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\backend\routes\invoiceRoutes.js            | JavaScript |         14 |          0 |          8 |         22 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\backend\routes\userRoutes.js               | JavaScript |         19 |          3 |         10 |         32 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\backend\server.js                          | JavaScript |         26 |          5 |         11 |         42 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\package-lock.json                          | JSON       |      5,793 |          0 |          1 |      5,794 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\package.json                               | JSON       |         38 |          0 |          1 |         39 |
+| Total                                                                                                |            |      6,396 |         67 |        166 |      6,629 |
++------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

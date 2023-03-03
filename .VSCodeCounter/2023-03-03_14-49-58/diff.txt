@@ -1,0 +1,78 @@
+Date : 2023-03-03 14:49:58
+Directory : c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\src
+Total : 36 files,  -11916 codes, -73 comments, -178 blanks, all -12167 lines
+
+Languages
++--------------------+------------+------------+------------+------------+------------+
+| language           | files      | code       | comment    | blank      | total      |
++--------------------+------------+------------+------------+------------+------------+
+| JSON with Comments |          1 |         -5 |         -4 |          0 |         -9 |
+| SVG                |         11 |        -11 |          0 |          0 |        -11 |
+| HTML               |          1 |        -13 |          0 |         -3 |        -16 |
+| Markdown           |          1 |        -18 |        -14 |        -27 |        -59 |
+| JavaScript         |         17 |       -739 |        -55 |       -144 |       -938 |
+| JSON               |          5 |    -11,130 |          0 |         -4 |    -11,134 |
++--------------------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                    | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                       |         36 |    -11,916 |        -73 |       -178 |    -12,167 |
+| ..                                                                                                      |         36 |    -11,916 |        -73 |       -178 |    -12,167 |
+| .. (Files)                                                                                              |         10 |     -5,509 |         -6 |        -12 |     -5,527 |
+| ..\..                                                                                                   |         15 |     -6,396 |        -67 |       -166 |     -6,629 |
+| ..\.. (Files)                                                                                           |          3 |     -5,849 |        -14 |        -29 |     -5,892 |
+| ..\..\backend                                                                                           |         12 |       -547 |        -53 |       -137 |       -737 |
+| ..\..\backend (Files)                                                                                   |          1 |        -26 |         -5 |        -11 |        -42 |
+| ..\..\backend\config                                                                                    |          1 |        -12 |          0 |         -3 |        -15 |
+| ..\..\backend\controllers                                                                               |          3 |       -252 |        -37 |        -67 |       -356 |
+| ..\..\backend\middleware                                                                                |          1 |        -17 |         -1 |         -5 |        -23 |
+| ..\..\backend\models                                                                                    |          3 |       -199 |         -7 |        -28 |       -234 |
+| ..\..\backend\routes                                                                                    |          3 |        -41 |         -3 |        -23 |        -67 |
+| ..\public                                                                                               |         11 |        -11 |          0 |          0 |        -11 |
+| ..\public\images                                                                                        |         11 |        -11 |          0 |          0 |        -11 |
++---------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| filename                                                                                                | language           | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\Todos.md                                      | Markdown           |        -18 |        -14 |        -27 |        -59 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\backend\config\db.js                          | JavaScript         |        -12 |          0 |         -3 |        -15 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\backend\controllers\invoiceIdController.js    | JavaScript         |        -28 |         -2 |         -6 |        -36 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\backend\controllers\invoicesController.js     | JavaScript         |       -147 |        -22 |        -39 |       -208 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\backend\controllers\userController.js         | JavaScript         |        -77 |        -13 |        -22 |       -112 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\backend\middleware\requireAuth.js             | JavaScript         |        -17 |         -1 |         -5 |        -23 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\backend\models\invoiceIdModel.js              | JavaScript         |         -6 |          0 |         -3 |         -9 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\backend\models\invoiceModel.js                | JavaScript         |       -115 |          0 |         -6 |       -121 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\backend\models\userModel.js                   | JavaScript         |        -78 |         -7 |        -19 |       -104 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\backend\routes\invoiceIdRoutes.js             | JavaScript         |         -8 |          0 |         -5 |        -13 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\backend\routes\invoiceRoutes.js               | JavaScript         |        -14 |          0 |         -8 |        -22 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\backend\routes\userRoutes.js                  | JavaScript         |        -19 |         -3 |        -10 |        -32 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\backend\server.js                             | JavaScript         |        -26 |         -5 |        -11 |        -42 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\.eslintrc.cjs                        | JavaScript         |        -35 |          0 |         -1 |        -36 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\index.html                           | HTML               |        -13 |          0 |         -3 |        -16 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\jsconfig.json                        | JSON with Comments |         -5 |         -4 |          0 |         -9 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\package-lock.json                    | JSON               |     -5,199 |          0 |         -1 |     -5,200 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\package.json                         | JSON               |        -55 |          0 |         -1 |        -56 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\postcss.config.cjs                   | JavaScript         |         -6 |          0 |         -1 |         -7 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\prettier.config.cjs                  | JavaScript         |         -8 |          0 |          0 |         -8 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\public\images\icon-arrow-down.svg    | SVG                |         -1 |          0 |          0 |         -1 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\public\images\icon-arrow-left.svg    | SVG                |         -1 |          0 |          0 |         -1 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\public\images\icon-arrow-right.svg   | SVG                |         -1 |          0 |          0 |         -1 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\public\images\icon-calendar.svg      | SVG                |         -1 |          0 |          0 |         -1 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\public\images\icon-check.svg         | SVG                |         -1 |          0 |          0 |         -1 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\public\images\icon-delete.svg        | SVG                |         -1 |          0 |          0 |         -1 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\public\images\icon-moon.svg          | SVG                |         -1 |          0 |          0 |         -1 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\public\images\icon-plus.svg          | SVG                |         -1 |          0 |          0 |         -1 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\public\images\icon-sun.svg           | SVG                |         -1 |          0 |          0 |         -1 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\public\images\illustration-empty.svg | SVG                |         -1 |          0 |          0 |         -1 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\public\images\logo.svg               | SVG                |         -1 |          0 |          0 |         -1 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\tailwind.config.cjs                  | JavaScript         |       -120 |         -2 |         -3 |       -125 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\tailwindconfig.json                  | JSON               |        -45 |          0 |          0 |        -45 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\frontend\vite.config.js                       | JavaScript         |        -23 |          0 |         -2 |        -25 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\package-lock.json                             | JSON               |     -5,793 |          0 |         -1 |     -5,794 |
+| c:\Users\bazc\Desktop\coding\frontend-mentors\invoice-app\package.json                                  | JSON               |        -38 |          0 |         -1 |        -39 |
+| Total                                                                                                   |                    |    -11,916 |        -73 |       -178 |    -12,167 |
++---------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
