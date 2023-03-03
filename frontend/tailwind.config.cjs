@@ -35,6 +35,8 @@ module.exports = {
       },
       backgroundColor: {
         skin: {
+          base: 'var(--color-text-base)',
+          inverted: 'var(--color-text-inverted)',
           fill: 'var(--color-fill)',
           'main-bg': 'var(--color-main-bg)',
           primary: {
@@ -67,6 +69,7 @@ module.exports = {
       borderColor: {
         skin: {
           base: 'var(--color-text-base)',
+          inverted: 'var(--color-text-inverted)',
           fill: 'var(--color-fill)',
           primary: {
             DEFAULT: 'var(--color-primary)',
@@ -109,7 +112,7 @@ module.exports = {
         'gray-850': '#2A3340',
       },
       screens: {
-        sm: '400px',
+        sm: '425px',
         md: '640px',
         lg: '1024px',
         print: { raw: 'print' },

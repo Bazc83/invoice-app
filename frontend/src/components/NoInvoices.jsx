@@ -4,11 +4,11 @@ export function NoInvoices() {
   const navigate = useNavigate();
 
   return (
-    <div className="mx-auto flex flex-col gap-2 rounded-md bg-skin-main-bg px-6  py-10 text-skin-base">
+    <div className="mx-auto flex flex-col items-center gap-2 rounded-md bg-skin-main-bg  px-6 py-10 text-skin-base">
       <img
         src="/images/illustration-empty.svg"
         alt="no invoices svg"
-        className="w-full sm:w-80"
+        className="w-full max-w-[250px] md:max-w-[300px] "
       />
 
       <div className="flex flex-col items-center justify-center gap-6">

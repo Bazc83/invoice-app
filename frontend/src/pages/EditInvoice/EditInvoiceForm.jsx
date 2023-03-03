@@ -189,7 +189,7 @@ function EditInvoiceForm({ handleFormSubmit, handleCancel, invoiceData }) {
             name="status"
             className="formSelectInput"
           >
-            <option value="draft">Draft</option>
+            <option value="quote">Quote</option>
             <option value="pending">Pending</option>
             <option value="paid">Paid</option>
           </select>
@@ -214,7 +214,7 @@ function EditInvoiceForm({ handleFormSubmit, handleCancel, invoiceData }) {
 
         {/* Add a new item */}
         <button
-          className="btn w-full border-2  border-skin-btn-default text-skin-base hover:bg-skin-btn-default hover:text-skin-inverted "
+          className="btn hover:bg-skin-btn-default w-full  border-2 border-skin-btn-default text-skin-base hover:text-skin-inverted "
           type="button"
           onClick={() => append({ name: '', price: '0.00', quantity: 1 })}
         >

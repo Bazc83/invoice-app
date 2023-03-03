@@ -41,7 +41,7 @@
     --color-brand: hsl(216, 38%, 37%);
     --color-brand-darker: hsl(216, 38%, 26%);
     --color-brand-lighter: hsl(216, 30%, 80%);
-    --color-fill: #d5ddf2;
+    --color-fill: #dadbdb;
     --color-edit: #0000ff;
     --color-danger: #ff0000;
     --color-warning: #993300;
@@ -62,8 +62,8 @@
     --color-text-muted: #bcbcbc;
     --color-text-inverted: #0d0d0d;
     --color-main-bg: hsl(206, 61%, 8%);
-    --color-primary: #131313;
-    --color-secondary: hsl(206, 51%, 14%);
+    --color-primary: hsl(206, 51%, 14%);
+    --color-secondary: hsl(206, 51%, 10%);
     --color-secondary-darker: hsl(206, 51%, 20%);
     --color-fill: #475e70;
 
@@ -99,7 +99,7 @@
   }
 
   .btn {
-    @apply cursor-pointer rounded-md py-2 px-4 outline-none transition-all duration-300 ease-in-out h-max;
+    @apply h-max  cursor-pointer rounded-md py-1 px-3 outline-none transition-colors duration-300 ease-in-out;
   }
 
   .inputError {

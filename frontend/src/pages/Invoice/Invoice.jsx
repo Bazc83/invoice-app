@@ -60,7 +60,7 @@ export function Invoice() {
       {/* invoice conrols */}
       <div className="noPrint | relative flex flex-col items-center  justify-between gap-4 rounded-md  bg-skin-secondary py-6  px-8 text-sm text-skin-base sm:flex-row">
         {/* Go back to invoices page link */}
-        <GoBackLink linkPath="/invoices" />
+        <GoBackLink linkPath="/" />
 
         <div className="flex gap-4">
           <button

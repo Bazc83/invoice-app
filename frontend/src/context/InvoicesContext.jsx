@@ -55,7 +55,7 @@ export const invoicesContextReducer = (state, action) => {
         filters: [
           { id: 1, filterValue: 'paid', checked: false },
           { id: 2, filterValue: 'pending', checked: false },
-          { id: 3, filterValue: 'draft', checked: false },
+          { id: 3, filterValue: 'quote', checked: false },
         ].sort((a, b) => b.id - a.id),
       };
     default:
@@ -69,7 +69,7 @@ export function InvoicesContextProvider({ children }) {
     filters: [
       { id: 1, filterValue: 'paid', checked: false },
       { id: 2, filterValue: 'pending', checked: false },
-      { id: 3, filterValue: 'draft', checked: false },
+      { id: 3, filterValue: 'quote', checked: false },
     ].sort((a, b) => b.id - a.id),
     filteredInvoices: [],
     checkedFilters: [],

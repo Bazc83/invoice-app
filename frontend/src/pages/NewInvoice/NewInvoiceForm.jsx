@@ -27,7 +27,7 @@ function NewInvoiceForm({
     createdAt: '',
     paymentDue: '',
     paymentTerms: 'Cash',
-    status: 'draft',
+    status: 'quote',
     amountDueTotal: 0,
     items: [
       {
@@ -186,7 +186,7 @@ function NewInvoiceForm({
             name="status"
             className="formSelectInput"
           >
-            <option value="draft">Draft</option>
+            <option value="quote">Quote</option>
             <option value="pending">Pending</option>
             <option value="paid">Paid</option>
           </select>
@@ -211,7 +211,7 @@ function NewInvoiceForm({
 
         {/* Add a new item */}
         <button
-          className="btn w-full border-2  border-skin-btn-default text-skin-base hover:bg-skin-btn-default "
+          className="btn hover:bg-skin-btn-default w-full  border-2 border-skin-btn-default text-skin-base "
           type="button"
           onClick={() => append({ name: '', price: '0.00', quantity: 1 })}
         >

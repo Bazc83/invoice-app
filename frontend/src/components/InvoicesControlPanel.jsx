@@ -1,9 +1,8 @@
-import { useNavigate } from 'react-router';
 
 import Filters from './Filters';
 
 function InvoicesControlPanel({ state }) {
-  const navigate = useNavigate();
+
 
   return (
     <div
@@ -12,15 +11,6 @@ function InvoicesControlPanel({ state }) {
     >
       {/* <Filters /> */}
       <Filters state={state} />
-
-      {/* Button shows new invoice form */}
-      <button
-        type="button"
-        className="flex w-full items-center justify-center gap-2 rounded-md bg-skin-success  px-4 py-2 text-sm text-white   transition-colors duration-300 hover:bg-skin-success-darker md:w-auto"
-        onClick={() => navigate('/newinvoice')}
-      >
-        Add Invoice
-      </button>
     </div>
   );
 }

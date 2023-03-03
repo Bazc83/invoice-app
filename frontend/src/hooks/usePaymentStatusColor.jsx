@@ -16,7 +16,7 @@ const usePaymentStatusColor = (status) => {
           ...state,
           paymentStatusColor: 'text-orange-600 border-orange-600 ',
         };
-      case 'draft':
+      case 'quote':
         return {
           ...state,
           paymentStatusColor:
