@@ -19,8 +19,8 @@ function Overview() {
 
   return (
     <div className=" w-full  bg-skin-brand py-4">
-      <div className="mx-auto flex max-w-5xl flex-col justify-between gap-6 px-6 md:flex-row md:gap-4 md:px-6">
-        <div className="flex flex-wrap items-end justify-between gap-2   py-2 md:flex-col md:items-start md:gap-3">
+      <div className="mx-auto flex max-w-5xl flex-col justify-between gap-6 px-6 py-4 md:flex-row md:gap-4 md:px-6 md:py-2">
+        <div className="flex flex-wrap items-end justify-between gap-2   border-b-2 border-b-white/10 pt-0 pb-8 last:border-none last:pb-2 md:flex-col md:items-start md:gap-3 md:border-none md:py-2">
           <div className="flex flex-col gap-2 md:gap-2">
             <h3 className="text-skin-brand-lighter  ">Overdue</h3>
             <p className="text-2xl text-white md:text-3xl">£0.00</p>
@@ -34,7 +34,7 @@ function Overview() {
           </button>
         </div>
 
-        <div className="flex flex-wrap items-end justify-between gap-2   py-2 md:flex-col md:items-start md:gap-3">
+        <div className="flex flex-wrap items-end justify-between gap-2   border-b-2 border-b-white/10 pt-0 pb-8 last:border-none last:pb-2 md:flex-col md:items-start md:gap-3 md:border-none md:py-2">
           <div className="flex flex-col gap-2 ">
             <h3 className="text-skin-brand-lighter  ">Quotes</h3>
             <p className="text-2xl text-white md:text-3xl">£{quotesTotal}</p>
@@ -48,7 +48,7 @@ function Overview() {
           </button>
         </div>
 
-        <div className="flex flex-wrap items-end justify-between gap-2   py-2 md:flex-col md:items-start md:gap-3">
+        <div className="flex flex-wrap items-end justify-between gap-2   border-b-2 border-b-white/10 pt-0 pb-5 last:border-none last:pb-2 md:flex-col md:items-start md:gap-3 md:border-none md:py-2">
           <div className="flex flex-col gap-2 md:gap-2">
             <h3 className="text-skin-brand-lighter  ">Total</h3>
             <p className="text-2xl text-white md:text-3xl">£543434.00</p>

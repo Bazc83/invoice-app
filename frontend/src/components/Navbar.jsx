@@ -54,12 +54,28 @@ export function Navbar() {
           <h1 className=" text-2xl font-semibold ">LOGO</h1>
         </Link>
 
-        <div className=" justify-betweengap-4 flex ">
+        <div className=" flex justify-between gap-4 items-center">
+          {/* Dark mode toggle */}
+          <button
+            onClick={toggleDarkMode}
+            type="button"
+            className="    flex min-w-max  text-xl text-skin-muted  hover:text-skin-base md:hidden "
+          >
+            {theme === 'dark' ? <FaSun /> : <FaMoon />}
+          </button>
           <ul className="hidden  w-full  items-center justify-center  gap-4 font-semibold md:flex">
             {/* User Profile */}
             {user && (
               <NavLinkItem>
-                <Link to="profile" className="block py-2 ">
+                <Link to="/" className="block py-2 ">
+                  Dashboard
+                </Link>
+              </NavLinkItem>
+            )}
+            {/* User Profile */}
+            {user && (
+              <NavLinkItem>
+                <Link to="/profile" className="block py-2 ">
                   Profile
                 </Link>
               </NavLinkItem>
@@ -93,15 +109,15 @@ export function Navbar() {
             <button
               onClick={toggleDarkMode}
               type="button"
-              className="btn flex min-w-max  text-xl text-skin-muted  hover:text-skin-base "
+              className="    flex min-w-max  text-xl text-skin-muted  hover:text-skin-base "
             >
               {theme === 'dark' ? <FaSun /> : <FaMoon />}
             </button>
-            {/* Logout */}
 
+            {/* Logout */}
             {user && (
               <button
-                className="btn | hover flex  min-w-max items-center justify-center gap-2  rounded-full py-2  text-sm text-skin-muted hover:text-skin-base "
+                className="    hover flex  min-w-max items-center justify-center gap-2  rounded-full py-2  text-sm text-skin-muted hover:text-skin-base "
                 type="button"
                 onClick={handleLogout}
               >
@@ -113,7 +129,7 @@ export function Navbar() {
             {!user && (
               <button
                 type="button"
-                className="btn | hover flex  min-w-max items-center justify-center gap-2  rounded-full py-2  text-sm text-skin-muted hover:text-skin-base"
+                className="   hover flex  min-w-max items-center justify-center gap-2  rounded-full py-2  text-sm text-skin-muted hover:text-skin-base"
                 onClick={() => navigate('/login')}
               >
                 Login
@@ -125,7 +141,7 @@ export function Navbar() {
             {!user && (
               <button
                 type="button"
-                className="btn | hover flex  min-w-max items-center justify-center gap-2  rounded-full py-2  text-sm text-skin-muted hover:text-skin-base"
+                className="    hover flex  min-w-max items-center justify-center gap-2  rounded-full py-2  text-sm text-skin-muted hover:text-skin-base"
                 onClick={() => navigate('/login')}
               >
                 Sign up

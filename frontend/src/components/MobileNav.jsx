@@ -8,12 +8,19 @@ function MobileNav({ user, handleLogout }) {
 
   return (
     <div className="absolute top-16 right-5 z-30 overflow-hidden rounded-b-md bg-skin-main-bg px-6 py-6  text-skin-base transition-transform ease-in md:hidden">
-      <ul className="flex  w-max  flex-col  gap-4 items-start justify-start ">
-        {/* User Profile */}
-
+      <ul className="flex  w-max  flex-col  items-start justify-start gap-4 ">
+        {/* Dashboard ("/") */}
         {user && (
           <NavLinkItem>
-            <Link to="profile" className="block py-2 ">
+            <Link to="/" className="block py-2 ">
+              Dashboard
+            </Link>
+          </NavLinkItem>
+        )}
+        {/* User Profile */}
+        {user && (
+          <NavLinkItem>
+            <Link to="/profile" className="block py-2 ">
               Profile
             </Link>
           </NavLinkItem>
