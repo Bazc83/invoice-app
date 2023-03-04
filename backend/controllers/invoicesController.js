@@ -99,6 +99,7 @@ const getInvoice = asyncHandler(async (req, res) => {
     createdByUser: req.user._id.toHexString(),
   });
 
+  console.log(invoice)
   if (!invoice) {
     res.status(400);
     throw new Error('Invoice not found');
@@ -115,7 +116,6 @@ const addInvoice = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error('Please add required fields');
   }
-
   // Generates items with correct totals per item
   const items = getItemsTotals(req.body.items);
 
