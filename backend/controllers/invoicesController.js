@@ -86,7 +86,10 @@ const getInvoices = asyncHandler(async (req, res) => {
 // Get all quotes for user
 const getQuotes = asyncHandler(async (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
-  const quotes = await Invoice.find({ status: 'quote', createdByUser: req.user._id});
+  const quotes = await Invoice.find({
+    status: 'quote',
+    createdByUser: req.user._id,
+  });
 
   res.send(quotes);
 });
@@ -99,7 +102,6 @@ const getInvoice = asyncHandler(async (req, res) => {
     createdByUser: req.user._id.toHexString(),
   });
 
-  console.log(invoice)
   if (!invoice) {
     res.status(400);
     throw new Error('Invoice not found');

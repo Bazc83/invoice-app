@@ -10,7 +10,6 @@ export const useAddNewInvoice = (invoiceId) => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
 
-
   const addInvoice = async (invoiceData) => {
     const response = await fetch(`/api/invoices/`, {
       method: 'POST',

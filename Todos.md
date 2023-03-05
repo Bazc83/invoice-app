@@ -1,4 +1,4 @@
-Check for date if no date just use todays date might be this way already
+## when changed from quote to pending or paid change invoice date to todays date
 
 ## Required features
 

@@ -1,15 +1,22 @@
+import { useEffect } from 'react';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import { useNavigate } from 'react-router';
 
 import useModalStore from '@/context/useModalStore';
-import { useFormatDate } from '@/hooks/useFormatDate';
+import useCheckIfOverdue from '@/hooks/useCheckIfOverdue';
 import usePaymentStatusColor from '@/hooks/usePaymentStatusColor';
 
 export function InvoicePreview({ invoice }) {
   const { status, id, clientName, amountDueTotal, paymentDue } = invoice;
 
   const showDeleteModal = useModalStore((s) => s.showDeleteModal);
-  const { getDate } = useFormatDate();
+
+  const { checkIfOverdue, isOverdue, distanceFromToday } =
+    useCheckIfOverdue(paymentDue);
+
+  useEffect(() => {
+    checkIfOverdue(paymentDue);
+  }, [paymentDue, checkIfOverdue]);
 
   const navigate = useNavigate();
 
@@ -38,17 +45,37 @@ export function InvoicePreview({ invoice }) {
         {id}
       </p>
 
-      {/* payment due date */}
-      {/* Only show payment due date if not paid */}
-      {status === 'paid' ? (
+      {status === 'quote' && (
+        <p className="col-start-2 row-start-1 text-end md:col-start-auto md:row-start-auto md:text-center ">
+          N/A
+        </p>
+      )}
+
+      {status !== 'quote' && status === 'paid' && (
         <p className="col-start-2 row-start-1 text-end md:col-start-auto md:row-start-auto md:text-center ">
           Paid
         </p>
-      ) : (
-        <p className="col-start-2 row-start-1 text-end md:col-start-auto md:text-center ">
-          <span className="md:hidden">Due</span> {getDate(paymentDue)}
-        </p>
       )}
+
+      {status !== 'quote' &&
+        status !== 'paid' &&
+        distanceFromToday !== 'Today' && (
+          <p className="col-start-2 row-start-1 text-end md:col-start-auto md:text-center ">
+            <span className="md:hidden">
+              {isOverdue ? 'Overdue by ' : 'Due in '}
+            </span>
+            <span>{distanceFromToday}</span>
+          </p>
+        )}
+
+      {status !== 'quote' &&
+        status !== 'paid' &&
+        distanceFromToday === 'Today' && (
+          <p className="col-start-2 row-start-1 text-end md:col-start-auto md:text-center ">
+            <span className="md:hidden">Due </span>
+            <span>{distanceFromToday}</span>
+          </p>
+        )}
 
       <p className="col-start-1 row-start-2 truncate capitalize md:col-start-auto md:row-start-auto md:text-start ">
         {clientName}
