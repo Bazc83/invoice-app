@@ -16,12 +16,20 @@ const router = express.Router();
 
 router.use(requireAuth);
 
+// Get or add invoice
 router.route('/').get(getInvoices).post(addInvoice);
-router.route('/page/:page').get(getPaginatedInvoices);
+
+// get paginated invoices
+router.route('/page').get(getPaginatedInvoices);
+
+// get, update or delete a selected invoice by id
 router
   .route('/invoice/:id')
   .get(getInvoice)
   .put(updateInvoice)
   .delete(deleteInvoice);
+
+//  get all quotes
 router.route('/quotes').get(getQuotes);
+
 module.exports = router;

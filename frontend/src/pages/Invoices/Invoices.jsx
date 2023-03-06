@@ -17,22 +17,32 @@ export function Invoices() {
   // const { isLoading, isError, error, data: invoices } = useInvoices();
   const [pageNumber, setPageNumber] = useState(0);
 
-  const {
-    isLoading,
-    isError,
-    error,
-    data: invoices,
-  } = usePaginatedInvoices(pageNumber);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
+
+  const { isLoading, isError, error, data } = usePaginatedInvoices(
+    pageNumber,
+    itemsPerPage
+  );
+
+  const pages = new Array(data?.pages).fill(null).map((v, i) => i);
 
   const deleteModal = useModalStore((s) => s.deleteModal);
 
-  const handlePageChange = (e) => {
-    setPageNumber(e.target.value);
+  const goToPreviousPage = () => {
+    setPageNumber(Math.max(0, pageNumber - 1));
+  };
+
+  const goToNextPage = () => {
+    setPageNumber(pageNumber + 1 < data?.pages ? pageNumber + 1 : pageNumber);
   };
 
   useEffect(() => {
-    dispatch({ type: 'filterInvoices', payload: invoices });
-  }, [invoices, dispatch, state.filters]);
+    dispatch({ type: 'filterInvoices', payload: data?.invoices });
+  }, [data?.invoices, dispatch, state.filters]);
+
+  useEffect(() => {
+    setPageNumber(0);
+  }, [itemsPerPage]);
 
   if (isLoading) return <LoadingAnimation />;
   if (isError) return `An error has occurred: ${error.message}`;
@@ -42,14 +52,35 @@ export function Invoices() {
       <div
         className={`mx-auto h-full  max-w-5xl rounded-md  px-4 pb-10 md:px-6 `}
       >
-        <div className=" relative flex h-full flex-col items-center justify-center gap-6  px-4 md:gap-8 md:px-0 lg:flex-row">
+        <div className=" relative flex h-full flex-col items-center justify-center gap-6  px-4 md:gap-8 md:px-0 lg:flex-row ">
           {/* Show delete confirmation modal */}
           {deleteModal && <ConfirmDeleteModal />}
 
           <div className="flex min-w-full flex-col gap-4">
-            <div className="flex flex-wrap items-baseline justify-between gap-2">
-              <h2 className="text-2xl ">All Invoices</h2>
-              <Filters />
+            <div className="flex flex-col items-center justify-between gap-4  md:gap-4">
+              <h2 className="text-2xl">All Invoices</h2>
+
+              <div className="flex w-full flex-col items-center gap-6 px-5 md:flex-row md:items-center md:justify-between md:gap-4">
+                <Filters />
+
+                <form className=" self-end ">
+                  <div className="flex items-center gap-2 text-sm ">
+                    <label htmlFor="itemsPerPage">Show</label>
+                    <select
+                      id="itemsPerPage"
+                      name="itemsPerPage"
+                      className="py-1 text-sm"
+                      onChange={(e) => setItemsPerPage(e.target.value)}
+                    >
+                      <option value="5" selected>
+                        5
+                      </option>
+                      <option value="10">10</option>
+                      <option value="25">25</option>
+                    </select>
+                  </div>
+                </form>
+              </div>
             </div>
 
             <div
@@ -76,28 +107,39 @@ export function Invoices() {
               {state.filteredInvoices?.length > 0 && (
                 <div className="flex flex-col gap-4  overflow-auto md:gap-0  ">
                   {/* invoice previews */}
-                  {invoices?.length > 0 &&
+                  {data?.invoices?.length > 0 &&
                     state.filteredInvoices?.map((invoice) => (
                       <InvoicePreview invoice={invoice} key={invoice?.id} />
                     ))}
                 </div>
               )}
             </div>
+            {data?.pages > 1 && (
+              <div className="flex items-center justify-center gap-2">
+                <button type="button" onClick={goToPreviousPage}>
+                  Prev
+                </button>
 
-            <div className="flex gap-4 text-black">
-              <button type="button" value="0" onClick={handlePageChange}>
-                1
-              </button>
-              <button type="button" value="1" onClick={handlePageChange}>
-                2
-              </button>
-              <button type="button" value="2" onClick={handlePageChange}>
-                3
-              </button>
-              <button type="button" value="3" onClick={handlePageChange}>
-                4
-              </button>
-            </div>
+                {pages.map((pageIndex) => (
+                  <button
+                    key={pageIndex}
+                    type="button"
+                    value={pageIndex}
+                    className={`${
+                      pageIndex === +pageNumber &&
+                      'font-bold text-skin-edit underline underline-offset-4'
+                    } relative px-1 py-1 font-semibold `}
+                    onClick={(e) => setPageNumber(e.target.value)}
+                  >
+                    {pageIndex + 1}
+                  </button>
+                ))}
+
+                <button type="button" onClick={goToNextPage}>
+                  Next
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -1,3 +1,9 @@
+## create pagenation component
+
+### has state for page number
+
+### children props for everything else giving page number to children
+
 ## when changed from quote to pending or paid change invoice date to todays date
 
 ## Required features
@@ -46,13 +52,12 @@
 
 ### price change by discount input only
 
-
 ### customer a/c's
 
 #### to show invoice history
 
 #### payment history
 
-#### current balance 
+#### current balance
 
 #### credit limit

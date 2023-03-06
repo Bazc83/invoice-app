@@ -87,8 +87,9 @@
   [type='week'],
   [multiple],
   textarea,
-  select {
-    @apply w-full rounded-md  border-skin-fill bg-skin-fill text-skin-base  focus:border-transparent focus:outline-none focus:ring-2 focus:ring-skin-base  active:ring-2 active:ring-skin-base 
+  select
+  {
+    @apply  rounded-md  border-skin-fill bg-skin-fill text-skin-base  focus:border-transparent focus:outline-none focus:ring-2 focus:ring-skin-base  active:ring-2 active:ring-skin-base 
     dark:focus:ring-4;
   }
 }

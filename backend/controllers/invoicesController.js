@@ -86,22 +86,21 @@ const getInvoices = asyncHandler(async (req, res) => {
 // Get paginated invoices
 const getPaginatedInvoices = asyncHandler(async (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
+  const PAGE_SIZE = parseInt(req.query.size || '5');
+  const page_number = parseInt(req.query.page || '0');
+  const totalInvoices = await Invoice.where('createdByUser')
+    .equals(req.user._id)
+    .count();
 
-  console.log(req.params.page)
-  const PAGE_SIZE = 5;
-  const page_number = req.params.page;
-  const totalInvoices= await Invoice.where('createdByUser')
-  .equals(req.user._id)
 
   const invoices = await Invoice.where('createdByUser')
     .equals(req.user._id)
     .skip(PAGE_SIZE * page_number)
-    .limit(5);
-  
+    .limit(PAGE_SIZE);
 
-    const totalPages = totalInvoices.length / PAGE_SIZE;
+  const totalPages = Math.ceil(totalInvoices / PAGE_SIZE);
 
-  res.send({invoices: invoices, pages: totalPages });
+  res.send({ invoices: invoices, pages: totalPages });
 });
 
 // Get all quotes for user
@@ -235,5 +234,5 @@ module.exports = {
   updateInvoice,
   deleteInvoice,
   getQuotes,
-  getPaginatedInvoices
+  getPaginatedInvoices,
 };
