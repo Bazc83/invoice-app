@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import ConfirmDeleteModal from '@/components/ConfirmDeleteModal';
 import Container from '@/components/Container';
@@ -7,15 +7,28 @@ import LoadingAnimation from '@/components/LoadingAnimation';
 import { NoInvoices } from '@/components/NoInvoices';
 import { InvoicesContext } from '@/context/InvoicesContext';
 import useModalStore from '@/context/useModalStore';
-import { useInvoices } from '@/hooks/reactQueryHooks/useInvoices';
+// import { useInvoices } from '@/hooks/reactQueryHooks/useInvoices';
+import usePaginatedInvoices from '@/hooks/usePaginatedInvoices';
 import { InvoicePreview } from '@/pages/Invoices/InvoicePreview';
 
 export function Invoices() {
   const { state, dispatch } = useContext(InvoicesContext);
 
-  const { isLoading, isError, error, data: invoices } = useInvoices();
+  // const { isLoading, isError, error, data: invoices } = useInvoices();
+  const [pageNumber, setPageNumber] = useState(0);
+
+  const {
+    isLoading,
+    isError,
+    error,
+    data: invoices,
+  } = usePaginatedInvoices(pageNumber);
 
   const deleteModal = useModalStore((s) => s.deleteModal);
+
+  const handlePageChange = (e) => {
+    setPageNumber(e.target.value);
+  };
 
   useEffect(() => {
     dispatch({ type: 'filterInvoices', payload: invoices });
@@ -69,6 +82,21 @@ export function Invoices() {
                     ))}
                 </div>
               )}
+            </div>
+
+            <div className="flex gap-4 text-black">
+              <button type="button" value="0" onClick={handlePageChange}>
+                1
+              </button>
+              <button type="button" value="1" onClick={handlePageChange}>
+                2
+              </button>
+              <button type="button" value="2" onClick={handlePageChange}>
+                3
+              </button>
+              <button type="button" value="3" onClick={handlePageChange}>
+                4
+              </button>
             </div>
           </div>
         </div>

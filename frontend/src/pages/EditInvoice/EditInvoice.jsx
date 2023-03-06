@@ -50,7 +50,6 @@ export function EditInvoice() {
         handleCancel={handleCancel}
         invoiceData={invoiceData}
       />
-      
     </div>
   );
 }

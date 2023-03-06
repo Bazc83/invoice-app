@@ -7,6 +7,7 @@ const {
   updateInvoice,
   deleteInvoice,
   getQuotes,
+  getPaginatedInvoices,
 } = require('../controllers/invoicesController');
 
 const requireAuth = require('../middleware/requireAuth');
@@ -16,6 +17,7 @@ const router = express.Router();
 router.use(requireAuth);
 
 router.route('/').get(getInvoices).post(addInvoice);
+router.route('/page/:page').get(getPaginatedInvoices);
 router
   .route('/invoice/:id')
   .get(getInvoice)

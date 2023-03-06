@@ -54,7 +54,7 @@ export function Navbar() {
           <h1 className=" text-2xl font-semibold ">LOGO</h1>
         </Link>
 
-        <div className=" flex justify-between gap-4 items-center">
+        <div className=" flex items-center justify-between gap-4">
           {/* Dark mode toggle */}
           <button
             onClick={toggleDarkMode}
