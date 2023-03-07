@@ -57,8 +57,6 @@ export function Invoices() {
   //   }
   // }, [state?.filters]);
 
-
-  
   if (isLoading) return <LoadingAnimation />;
   if (isError) return `An error has occurred: ${error.message}`;
 

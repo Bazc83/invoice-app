@@ -88,14 +88,20 @@ const getPaginatedInvoices = asyncHandler(async (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
   const PAGE_SIZE = parseInt(req.query.size || '5');
   const page_number = parseInt(req.query.page || '0');
-  const totalInvoices = await Invoice.where('createdByUser')
-    .equals(req.user._id)
-    .count();
+  // const totalInvoices = await Invoice.where('createdByUser')
+  //   .equals(req.user._id)
+  //   .count();
+  const totalInvoices = await Invoice.find({
+    createdByUser: req.user._id,
+  }).count();
 
-  const invoices = await Invoice.where('createdByUser')
-    .equals(req.user._id)
+  const invoices = await Invoice.find({ createdByUser: req.user._id })
     .skip(PAGE_SIZE * page_number)
     .limit(PAGE_SIZE);
+  // const invoices = await Invoice.where('createdByUser')
+  //   .equals(req.user._id)
+  //   .skip(PAGE_SIZE * page_number)
+  //   .limit(PAGE_SIZE);
 
   const totalPages = Math.ceil(totalInvoices / PAGE_SIZE);
 
