@@ -92,7 +92,6 @@ const getPaginatedInvoices = asyncHandler(async (req, res) => {
     .equals(req.user._id)
     .count();
 
-
   const invoices = await Invoice.where('createdByUser')
     .equals(req.user._id)
     .skip(PAGE_SIZE * page_number)

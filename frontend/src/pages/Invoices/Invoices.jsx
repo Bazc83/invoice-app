@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 import ConfirmDeleteModal from '@/components/ConfirmDeleteModal';
 import Container from '@/components/Container';
@@ -14,7 +15,6 @@ import { InvoicePreview } from '@/pages/Invoices/InvoicePreview';
 export function Invoices() {
   const { state, dispatch } = useContext(InvoicesContext);
 
-  // const { isLoading, isError, error, data: invoices } = useInvoices();
   const [pageNumber, setPageNumber] = useState(0);
 
   const [itemsPerPage, setItemsPerPage] = useState(5);
@@ -44,6 +44,21 @@ export function Invoices() {
     setPageNumber(0);
   }, [itemsPerPage]);
 
+  // useEffect(() => {
+  //   if (state?.filters[0].checked) {
+  //     console.log('quote');
+  //   }
+
+  //   if (state?.filters[1].checked) {
+  //     console.log('pending');
+  //   }
+  //   if (state?.filters[2].checked) {
+  //     console.log('paid');
+  //   }
+  // }, [state?.filters]);
+
+
+  
   if (isLoading) return <LoadingAnimation />;
   if (isError) return `An error has occurred: ${error.message}`;
 
@@ -56,7 +71,7 @@ export function Invoices() {
           {/* Show delete confirmation modal */}
           {deleteModal && <ConfirmDeleteModal />}
 
-          <div className="flex min-w-full flex-col gap-4">
+          <div className="flex min-w-full flex-col gap-4 ">
             <div className="flex flex-col items-center justify-between gap-4  md:gap-4">
               <h2 className="text-2xl">All Invoices</h2>
 
@@ -72,7 +87,7 @@ export function Invoices() {
                       className="py-1 text-sm"
                       onChange={(e) => setItemsPerPage(e.target.value)}
                     >
-                      <option value="5" selected>
+                      <option value="5" defaultValue>
                         5
                       </option>
                       <option value="10">10</option>
@@ -114,29 +129,42 @@ export function Invoices() {
                 </div>
               )}
             </div>
+
             {data?.pages > 1 && (
-              <div className="flex items-center justify-center gap-2">
-                <button type="button" onClick={goToPreviousPage}>
-                  Prev
+              <div className="flex flex-wrap items-center justify-center gap-2 px-6 sm:justify-between md:px-4">
+                <button
+                  type="button"
+                  onClick={goToPreviousPage}
+                  className={`${
+                    pageNumber - 1 < 0 && 'opacity-0'
+                  } hidden items-center gap-1 sm:flex`}
+                >
+                  <FaChevronLeft /> Prev
                 </button>
-
-                {pages.map((pageIndex) => (
-                  <button
-                    key={pageIndex}
-                    type="button"
-                    value={pageIndex}
-                    className={`${
-                      pageIndex === +pageNumber &&
-                      'font-bold text-skin-edit underline underline-offset-4'
-                    } relative px-1 py-1 font-semibold `}
-                    onClick={(e) => setPageNumber(e.target.value)}
-                  >
-                    {pageIndex + 1}
-                  </button>
-                ))}
-
-                <button type="button" onClick={goToNextPage}>
-                  Next
+                <div className="flex gap-2 ">
+                  {pages.map((pageIndex) => (
+                    <button
+                      key={pageIndex}
+                      type="button"
+                      value={pageIndex}
+                      className={`${
+                        pageIndex === +pageNumber &&
+                        'font-bold text-skin-edit underline underline-offset-4'
+                      } relative px-2 py-1 font-semibold  `}
+                      onClick={(e) => setPageNumber(e.target.value)}
+                    >
+                      {pageIndex + 1}
+                    </button>
+                  ))}
+                </div>
+                <button
+                  type="button"
+                  onClick={goToNextPage}
+                  className={`${
+                    pageNumber + 1 === data?.pages && 'opacity-0'
+                  }  hidden items-center gap-1  sm:flex`}
+                >
+                  Next <FaChevronRight />
                 </button>
               </div>
             )}
