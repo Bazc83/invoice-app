@@ -17,6 +17,7 @@ export function Invoices() {
     quote: false,
     pending: false,
     paid: false,
+    sortBy: 'dateDescending',
   });
 
   const { isLoading, isError, error, data } = usePaginatedInvoices(payload);
@@ -43,11 +44,15 @@ export function Invoices() {
   };
 
   const handlePageChange = (e) => {
-    setPayload((prev) => ({ ...prev, pageNumber: e.target.value }));
+    setPayload((prev) => ({ ...prev, pageNumber: +e.target.value }));
   };
 
   const changeItemsPerPage = (e) => {
     setPayload((prev) => ({ ...prev, itemsPerPage: e.target.value }));
+  };
+
+  const changeSortBy = (e) => {
+    setPayload((prev) => ({ ...prev, sortBy: e.target.value }));
   };
 
   useEffect(() => {
@@ -82,7 +87,7 @@ export function Invoices() {
 
                 <form className=" self-end ">
                   <div className="flex items-center gap-2 text-sm ">
-                    <label htmlFor="itemsPerPage">Show</label>
+                    <label htmlFor="itemsPerPage">Results per page</label>
                     <select
                       id="itemsPerPage"
                       name="itemsPerPage"
@@ -94,6 +99,23 @@ export function Invoices() {
                       </option>
                       <option value="10">10</option>
                       <option value="25">25</option>
+                    </select>
+                  </div>
+                </form>
+
+                <form className=" self-end ">
+                  <div className="flex items-center gap-2 text-sm ">
+                    <label htmlFor="sortBy">Sort by</label>
+                    <select
+                      id="sortBy"
+                      name="sortBy"
+                      className="py-1 text-sm"
+                      onChange={changeSortBy}
+                    >
+                      <option value="dateDesc" defaultValue>
+                        Date desc
+                      </option>
+                      <option value="dateAsc">Date Asc</option>
                     </select>
                   </div>
                 </form>
@@ -134,6 +156,7 @@ export function Invoices() {
 
             {data?.pages > 1 && (
               <div className="flex flex-wrap items-center justify-center gap-2 px-6 sm:justify-between md:px-4">
+                {/* Previous page */}
                 <button
                   type="button"
                   onClick={goToPreviousPage}
@@ -143,6 +166,13 @@ export function Invoices() {
                 >
                   <FaChevronLeft /> Prev
                 </button>
+
+                {/* pages as "Page 1 of 4" */}
+                {/* <div>
+                  Page {payload.pageNumber + 1} of {pages.length}
+                </div> */}
+
+                {/* Page numbers */}
                 <div className="flex gap-2 ">
                   {pages.map((pageIndex) => (
                     <button
@@ -159,6 +189,8 @@ export function Invoices() {
                     </button>
                   ))}
                 </div>
+
+                {/* Next Page */}
                 <button
                   type="button"
                   onClick={goToNextPage}

@@ -7,10 +7,10 @@ import { AuthContext } from '@/context/AuthContext';
 import { useAuth } from './reactQueryHooks/useAuth';
 
 const getInvoicesByPage = async ({ userToken, payload }) => {
-  const { pageNumber, itemsPerPage, quote, paid, pending } = payload;
+  const { pageNumber, itemsPerPage, quote, paid, pending, sortBy } = payload;
 
   const response = await fetch(
-    `/api/invoices/page?pageNumber=${pageNumber}&itemsPerPage=${itemsPerPage}&quote=${quote}&pending=${pending}&paid=${paid}`,
+    `/api/invoices/page?pageNumber=${pageNumber}&itemsPerPage=${itemsPerPage}&quote=${quote}&pending=${pending}&paid=${paid}&sort=${sortBy}`,
     {
       headers: {
         Authorization: `Bearer ${userToken}`,
@@ -27,13 +27,13 @@ const getInvoicesByPage = async ({ userToken, payload }) => {
 };
 
 export const usePaginatedInvoices = (payload) => {
-  const { itemsPerPage, pageNumber, quote, pending, paid } = payload;
+  const { itemsPerPage, pageNumber, quote, pending, paid, sortBy } = payload;
   const { user } = useContext(AuthContext);
 
   const { authData } = useAuth();
 
   const { data, isLoading, isError, error } = useQuery({
-    queryKey: ['invoices', pageNumber, itemsPerPage, quote, pending, paid],
+    queryKey: ['invoices', pageNumber, itemsPerPage, quote, pending, paid, sortBy],
     queryFn: () => getInvoicesByPage({ userToken: user.token, payload }),
     keepPreviousData: true,
     enabled: authData?.jwtValid === true,

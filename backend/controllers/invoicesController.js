@@ -93,6 +93,15 @@ const getPaginatedInvoices = asyncHandler(async (req, res) => {
   const quote = req.query.quote !== 'false';
   const pending = req.query.pending !== 'false';
   const paid = req.query.paid !== 'false';
+  const sortBy = req.query.sort || 'dateDesc';
+
+  let sortValue = { createdAt: -1 };
+
+  if (sortBy === 'dateAsc') {
+    sortValue = { createdAt: 1 };
+  } else {
+    sortValue = { createdAt: -1 };
+  }
 
   const filterArray = [];
 
@@ -115,12 +124,12 @@ const getPaginatedInvoices = asyncHandler(async (req, res) => {
     status: { $in: filterArray },
   };
 
-  console.log(queryPayload);
   const totalInvoices = await Invoice.find(queryPayload).count();
 
   const invoices = await Invoice.find(queryPayload)
     .skip(PAGE_SIZE * page_number)
-    .limit(PAGE_SIZE);
+    .limit(PAGE_SIZE)
+    .sort(sortValue);
 
   const totalPages = Math.ceil(totalInvoices / PAGE_SIZE);
 
