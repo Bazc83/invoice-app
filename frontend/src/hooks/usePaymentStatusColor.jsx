@@ -2,33 +2,25 @@ import { useEffect, useReducer } from 'react';
 
 const usePaymentStatusColor = (status) => {
   const initialValue =
-    'dark:text-gray-50 dark:border-gray-50 border-gray-900 text-gray-900  ';
+    'bg-skin-quote text-skin-quote-darker';
 
   const paymentStatusColorReducer = (state, action) => {
     switch (action.type) {
       case 'paid':
         return {
           ...state,
-          paymentStatusColor: 'text-green-600 border-green-600',
+          paymentStatusColor: 'text-skin-paid-darker bg-skin-paid',
         };
       case 'pending':
         return {
           ...state,
-          paymentStatusColor: 'text-orange-600 border-orange-600 ',
-        };
-      case 'quote':
-        return {
-          ...state,
-          paymentStatusColor:
-            'dark:text-gray-50 dark:border-gray-50 border-gray-900 text-gray-900 ',
+          paymentStatusColor: 'text-skin-pending-darker bg-skin-pending ',
         };
       default:
         return {
           ...state,
-          paymentStatusColor:
-            'dark:text-gray-50 dark:border-gray-50 border-gray-900 text-gray-900 ',
+          paymentStatusColor: 'bg-skin-quote text-skin-quote-darker',
         };
-      // throw new Error('paymentStatusColorReducer case error');
     }
   };
 

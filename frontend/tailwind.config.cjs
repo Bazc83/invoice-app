@@ -31,6 +31,9 @@ module.exports = {
             darker: 'var(--color-brand-darker)',
             lighter: 'var(--color-brand-lighter)',
           },
+          pending: {DEFAULT: "var(--color-pending)", darker: "var(--color-pending-darker)"},
+          quote: {DEFAULT: "var(--color-quote)", darker: "var(--color-quote-darker)"},
+          paid: {DEFAULT: "var(--color-paid)", darker: "var(--color-paid-darker)"},
         },
       },
       backgroundColor: {
@@ -64,6 +67,9 @@ module.exports = {
             darker: 'var(--color-button-darker)',
             lighter: 'var(--color-button-lighter)',
           },
+          pending: {DEFAULT: "var(--color-pending)", darker: "var(--color-pending-darker)"},
+          quote: {DEFAULT: "var(--color-quote)", darker: "var(--color-quote-darker)"},
+          paid: {DEFAULT: "var(--color-paid)", darker: "var(--color-paid-darker)"},
         },
       },
       borderColor: {
@@ -88,7 +94,11 @@ module.exports = {
           danger: 'var(--color-danger)',
           success: 'var(--color-success)',
           'btn-default': 'var(--color-button-default)',
+          pending: {DEFAULT: "var(--color-pending)", darker: "var(--color-pending-darker)"},
+          quote: {DEFAULT: "var(--color-quote)", darker: "var(--color-quote-darker)"},
+          paid: {DEFAULT: "var(--color-paid)", darker: "var(--color-paid-darker)"},
         },
+
       },
       ringColor: {
         skin: {

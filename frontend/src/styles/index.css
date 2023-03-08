@@ -52,6 +52,12 @@
     --color-button-darker: #222222;
     --color-button-lighter: #616060;
     --color-navbar: #615f6b;
+    --color-pending: #f5c19f;
+    --color-pending-darker: #6b4616;
+    --color-quote: #d5d8ecb7;
+    --color-quote-darker: #222850;
+    --color-paid: #bbe9c8;
+    --color-paid-darker: #135c24;
 
     font-family: 'Open Sans', sans-serif;
     font-weight: 500;
@@ -71,6 +77,12 @@
     --color-button: #555555;
     --color-button-lighter: #444444;
     --color-button-darker: #666666;
+    --color-pending-darker: #f3cbb0;
+    --color-pending: #a5651b;
+    --color-quote-darker: #fbfcffb7;
+    --color-quote: #2a3677;
+    --color-paid-darker: #cae0d0;
+    --color-paid: #135c24;
   }
 
   [type='text'],
@@ -87,9 +99,8 @@
   [type='week'],
   [multiple],
   textarea,
-  select
-  {
-    @apply  rounded-md  border-skin-fill bg-skin-fill text-skin-base  focus:border-transparent focus:outline-none focus:ring-2 focus:ring-skin-base  active:ring-2 active:ring-skin-base 
+  select {
+    @apply rounded-md  border-skin-fill bg-skin-fill text-skin-base  focus:border-transparent focus:outline-none focus:ring-2 focus:ring-skin-base  active:ring-2 active:ring-skin-base 
     dark:focus:ring-4;
   }
 }

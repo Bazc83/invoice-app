@@ -31,7 +31,7 @@ export function InvoicePreview({ invoice }) {
   const { paymentStatusColor } = usePaymentStatusColor(status);
 
   return (
-    <div className=" relative grid grid-cols-2 gap-4 rounded-md   bg-skin-primary px-6 py-4 last:rounded-b-md even:bg-skin-secondary  md:grid-cols-[1fr_2fr_2fr_1fr_80px_50px] md:items-center md:gap-4 md:rounded-none md:border-none md:text-start lg:gap-8">
+    <div className=" relative grid grid-cols-2 gap-4 rounded-md   bg-skin-primary px-6 py-4 last:rounded-b-md even:bg-skin-secondary  md:grid-cols-[1fr_2fr_2fr_1fr_100px_50px] md:items-center md:gap-4 md:rounded-none md:border-none md:text-start lg:gap-8">
       <button
         type="button"
         className="absolute z-10 h-full w-full "
@@ -89,7 +89,7 @@ export function InvoicePreview({ invoice }) {
       </p>
 
       <p
-        className={` ${paymentStatusColor} col-start-2 row-start-2 text-end capitalize md:col-start-auto md:row-start-auto md:text-start `}
+        className={` ${paymentStatusColor} col-start-2 row-start-2 w-max md:w-auto px-4 capitalize md:col-start-auto md:row-start-auto text-center rounded-xl  py-1 text-sm justify-self-end md:justify-self-auto font-semibold`}
       >
         {status}
       </p>

@@ -104,7 +104,7 @@ export function Invoices() {
 
               {/* Invoice preview headers md screen and greater */}
               {state.filteredInvoices?.length > 0 && (
-                <div className=" relative hidden grid-cols-2  gap-4 rounded-t-md bg-skin-secondary-darker py-2  px-6   text-center text-sm md:grid md:grid-cols-[1fr_2fr_2fr_1fr_80px_50px] md:items-center md:gap-4 md:text-start lg:gap-8">
+                <div className=" relative hidden grid-cols-2  gap-4 rounded-t-md bg-skin-secondary-darker py-2  px-6   text-center text-sm md:grid md:grid-cols-[1fr_2fr_2fr_1fr_100px_50px] md:items-center md:gap-4 md:text-start lg:gap-8">
                   <p className=" text-start">Ref</p>
                   <p className=" text-center">Payment Due</p>
 
