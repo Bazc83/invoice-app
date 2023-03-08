@@ -1,23 +1,28 @@
-import { useContext, useEffect } from 'react';
-
-import { InvoicesContext } from '@/context/InvoicesContext';
-
 import FilterItemCheckbox from './FilterItemCheckbox';
 
-function Filters() {
-  const { state, dispatch } = useContext(InvoicesContext);
-
-  useEffect(() => dispatch({ type: 'clearFilters' }), [dispatch]);
-
+function Filters({ payload, handleChecked }) {
   return (
-    <div className="flex  justify-center  gap-2 sm:gap-2 flex-col  text-sm sm:w-auto   md:items-center md:flex-row md:gap-4">
+    <div className="flex  flex-col  justify-center gap-2 text-sm  sm:w-auto sm:gap-2   md:flex-row md:items-center md:gap-4">
       <h1>Filters:</h1>
 
-      <form className="flex   flex-wrap gap-2  md:gap-3 md:flex-row">
+      <form className="flex   flex-wrap gap-2  md:flex-row md:gap-3">
         {/* Filter modal options */}
-        {state.filters.map((filter) => (
-          <FilterItemCheckbox filter={filter} key={filter.filterValue} />
-        ))}
+
+        <FilterItemCheckbox
+          filter={payload.paid}
+          filterValue="paid"
+          handleChecked={handleChecked}
+        />
+        <FilterItemCheckbox
+          filter={payload.quote}
+          filterValue="quote"
+          handleChecked={handleChecked}
+        />
+        <FilterItemCheckbox
+          filterValue="pending"
+          filter={payload.pending}
+          handleChecked={handleChecked}
+        />
       </form>
     </div>
   );

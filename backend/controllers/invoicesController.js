@@ -87,8 +87,8 @@ const getInvoices = asyncHandler(async (req, res) => {
 const getPaginatedInvoices = asyncHandler(async (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
 
-  const PAGE_SIZE = parseInt(req.query.size || '5');
-  const page_number = parseInt(req.query.page || '0');
+  const PAGE_SIZE = parseInt(req.query.itemsPerPage || '5');
+  const page_number = parseInt(req.query.pageNumber || '0');
 
   const quote = req.query.quote !== 'false';
   const pending = req.query.pending !== 'false';

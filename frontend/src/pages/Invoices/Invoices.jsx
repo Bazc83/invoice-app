@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 import ConfirmDeleteModal from '@/components/ConfirmDeleteModal';
@@ -6,22 +6,14 @@ import Container from '@/components/Container';
 import Filters from '@/components/Filters';
 import LoadingAnimation from '@/components/LoadingAnimation';
 import { NoInvoices } from '@/components/NoInvoices';
-import { InvoicesContext } from '@/context/InvoicesContext';
 import useModalStore from '@/context/useModalStore';
-// import { useInvoices } from '@/hooks/reactQueryHooks/useInvoices';
 import usePaginatedInvoices from '@/hooks/usePaginatedInvoices';
 import { InvoicePreview } from '@/pages/Invoices/InvoicePreview';
 
 export function Invoices() {
-  const { state, dispatch } = useContext(InvoicesContext);
-
-  const [pageNumber, setPageNumber] = useState(0);
-
-  const [itemsPerPage, setItemsPerPage] = useState(5);
-
   const [payload, setPayload] = useState({
-    page: pageNumber,
-    size: itemsPerPage,
+    pageNumber: 0,
+    itemsPerPage: 5,
     quote: false,
     pending: false,
     paid: false,
@@ -34,43 +26,40 @@ export function Invoices() {
   const deleteModal = useModalStore((s) => s.deleteModal);
 
   const goToPreviousPage = () => {
-    setPageNumber(Math.max(0, pageNumber - 1));
-    setPayload((prev) => ({ ...prev, page: Math.max(0, pageNumber - 1) }));
+    setPayload((prev) => ({
+      ...prev,
+      pageNumber: Math.max(0, prev.pageNumber - 1),
+    }));
   };
 
   const goToNextPage = () => {
-    setPageNumber(pageNumber + 1 < data?.pages ? pageNumber + 1 : pageNumber);
     setPayload((prev) => ({
       ...prev,
-      page: pageNumber + 1 < data?.pages ? pageNumber + 1 : pageNumber,
+      pageNumber:
+        prev.pageNumber + 1 < data?.pages
+          ? prev.pageNumber + 1
+          : prev.pageNumber,
     }));
   };
 
   const handlePageChange = (e) => {
-    setPageNumber(e.target.value);
-    setPayload((prev) => ({ ...prev, page: e.target.value }));
+    setPayload((prev) => ({ ...prev, pageNumber: e.target.value }));
   };
 
   const changeItemsPerPage = (e) => {
-    setItemsPerPage(e.target.value);
-    setPayload((prev) => ({ ...prev, size: e.target.value }));
+    setPayload((prev) => ({ ...prev, itemsPerPage: e.target.value }));
   };
-  useEffect(() => {
-    dispatch({ type: 'filterInvoices', payload: data?.invoices });
-  }, [data?.invoices, dispatch, state.filters]);
 
   useEffect(() => {
-    setPageNumber(0);
-  }, [itemsPerPage]);
+    setPayload((prev) => ({ ...prev, pageNumber: 0 }));
+  }, [payload.itemsPerPage, payload.quote, payload.paid, payload.pending]);
 
-  useEffect(() => {
+  const handleChecked = (filterVal) => {
     setPayload((prev) => ({
       ...prev,
-      quote: state?.filters[0].checked,
-      pending: state?.filters[1].checked,
-      paid: state?.filters[2].checked,
+      [filterVal]: !prev[filterVal],
     }));
-  }, [state?.filters]);
+  };
 
   if (isLoading) return <LoadingAnimation />;
   if (isError) return `An error has occurred: ${error.message}`;
@@ -89,7 +78,7 @@ export function Invoices() {
               <h2 className="text-2xl">All Invoices</h2>
 
               <div className="flex w-full flex-col items-center gap-6 px-5 md:flex-row md:items-center md:justify-between md:gap-4">
-                <Filters />
+                <Filters payload={payload} handleChecked={handleChecked} />
 
                 <form className=" self-end ">
                   <div className="flex items-center gap-2 text-sm ">
@@ -149,7 +138,7 @@ export function Invoices() {
                   type="button"
                   onClick={goToPreviousPage}
                   className={`${
-                    pageNumber - 1 < 0 && 'opacity-0'
+                    payload.pageNumber - 1 < 0 && 'opacity-0'
                   } hidden items-center gap-1 sm:flex`}
                 >
                   <FaChevronLeft /> Prev
@@ -161,7 +150,7 @@ export function Invoices() {
                       type="button"
                       value={pageIndex}
                       className={`${
-                        pageIndex === +pageNumber &&
+                        pageIndex === +payload.pageNumber &&
                         'font-bold text-skin-edit underline underline-offset-4'
                       } relative px-2 py-1 font-semibold  `}
                       onClick={handlePageChange}
@@ -174,7 +163,7 @@ export function Invoices() {
                   type="button"
                   onClick={goToNextPage}
                   className={`${
-                    pageNumber + 1 === data?.pages && 'opacity-0'
+                    payload.pageNumber + 1 === data?.pages && 'opacity-0'
                   }  hidden items-center gap-1  sm:flex`}
                 >
                   Next <FaChevronRight />

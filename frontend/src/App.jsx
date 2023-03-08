@@ -6,7 +6,6 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import useLocalStorage from 'use-local-storage';
 
 import { AuthContext } from './context/AuthContext';
-import { InvoicesContextProvider } from './context/InvoicesContext';
 import { EditInvoice } from './pages/EditInvoice';
 import { Home } from './pages/Home';
 import { Invoice } from './pages/Invoice';
@@ -46,55 +45,53 @@ function App() {
       data-theme={theme}
     >
       <DarkModeContext.Provider value={{ theme, toggleDarkMode }}>
-        <InvoicesContextProvider>
-          <BrowserRouter>
-            <Routes>
-              <Route element={<PageLayout />}>
-                <Route
-                  index
-                  element={user ? <Home /> : <Navigate to="/login" />}
-                />
+        <BrowserRouter>
+          <Routes>
+            <Route element={<PageLayout />}>
+              <Route
+                index
+                element={user ? <Home /> : <Navigate to="/login" />}
+              />
 
-                <Route
-                  path="/invoices/:invoiceId"
-                  element={user ? <Invoice /> : <Navigate to="/login" />}
-                />
+              <Route
+                path="/invoices/:invoiceId"
+                element={user ? <Invoice /> : <Navigate to="/login" />}
+              />
 
-                <Route
-                  path="/invoices"
-                  element={user ? <Invoices /> : <Navigate to="/login" />}
-                />
-                <Route
-                  path="/newinvoice"
-                  element={user ? <NewInvoice /> : <Navigate to="/login" />}
-                />
-                <Route
-                  path="/editinvoice/:invoiceId"
-                  element={user ? <EditInvoice /> : <Navigate to="/login" />}
-                />
+              <Route
+                path="/invoices"
+                element={user ? <Invoices /> : <Navigate to="/login" />}
+              />
+              <Route
+                path="/newinvoice"
+                element={user ? <NewInvoice /> : <Navigate to="/login" />}
+              />
+              <Route
+                path="/editinvoice/:invoiceId"
+                element={user ? <EditInvoice /> : <Navigate to="/login" />}
+              />
 
-                <Route
-                  path="/profile"
-                  element={user ? <UserProfile /> : <Navigate to="/login" />}
-                />
+              <Route
+                path="/profile"
+                element={user ? <UserProfile /> : <Navigate to="/login" />}
+              />
 
-                <Route
-                  path="/login"
-                  element={!user ? <Login /> : <Navigate to="/" />}
-                />
-                <Route
-                  path="/signup"
-                  element={!user ? <Signup /> : <Navigate to="/" />}
-                />
+              <Route
+                path="/login"
+                element={!user ? <Login /> : <Navigate to="/" />}
+              />
+              <Route
+                path="/signup"
+                element={!user ? <Signup /> : <Navigate to="/" />}
+              />
 
-                <Route path="*" element={<NotFoundPage />} />
-              </Route>
-            </Routes>
-          </BrowserRouter>
-          <div className="noPrint">
-            <ReactQueryDevtools initialIsOpen={false} />
-          </div>
-        </InvoicesContextProvider>
+              <Route path="*" element={<NotFoundPage />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+        <div className="noPrint">
+          <ReactQueryDevtools initialIsOpen={false} />
+        </div>
       </DarkModeContext.Provider>
     </div>
   );
