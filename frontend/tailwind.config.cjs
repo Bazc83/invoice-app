@@ -122,6 +122,7 @@ module.exports = {
         'gray-850': '#2A3340',
       },
       screens: {
+        xs: '300px',
         sm: '425px',
         md: '640px',
         lg: '1024px',

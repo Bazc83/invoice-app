@@ -194,7 +194,7 @@ function NewInvoiceForm({
       </div>
 
       {/* Form Items */}
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-6 ">
         <h2 className="  text-xl">Items:</h2>
 
         {fields.map((field, index) => (

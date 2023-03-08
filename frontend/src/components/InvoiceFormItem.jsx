@@ -1,29 +1,13 @@
-import { useEffect, useState } from 'react';
-import { useWatch } from 'react-hook-form';
 import { FaTrashAlt } from 'react-icons/fa';
 
 import TextInputWithValidation from './TextInputWithValidation';
 
-function InvoiceFormItem({ item, index, register, remove, control, errors }) {
+function InvoiceFormItem({ item, index, register, remove, errors }) {
   const { quantity, price } = item;
 
-  const [itemTotal, setItemTotal] = useState();
-
-  const value = useWatch({
-    control,
-    name: `items[${index}]`,
-    defaultValue: {},
-  });
-
-  useEffect(() => {
-    setItemTotal(
-      parseFloat((+value.price || 0) * (+value.quantity || 0)).toFixed(2)
-    );
-  }, [value.price, value.quantity]);
-
   return (
-    <div>
-      <div className="flex flex-col gap-4 md:flex-row  ">
+    <div >
+      <div className="flex flex-col gap-4 md:flex-row">
         {/* Item name */}
         <TextInputWithValidation
           register={register}
@@ -32,10 +16,10 @@ function InvoiceFormItem({ item, index, register, remove, control, errors }) {
           inputName={`items[${index}].name`}
         />
 
-        <div className="grid grid-cols-[2fr_3fr_3fr_1fr] gap-2 md:gap-2">
+        <div className="flex  flex-col xs:grid xs:grid-cols-[1fr_4fr_1fr]  items-center gap-2">
           {/* Item quantity */}
-          <div className="flex flex-col gap-3 ">
-            <label htmlFor={`items[${index}].quantity`} className="text-center">
+          <div className="flex flex-col gap-2 xs:w-auto  w-full ">
+            <label htmlFor={`items[${index}].quantity`} >
               Qty
             </label>
             <input
@@ -58,13 +42,13 @@ function InvoiceFormItem({ item, index, register, remove, control, errors }) {
               type="number"
               id="quantity"
               defaultValue={quantity || 1}
-              className="inputError text-center"
+              className="inputError xs:px-4 text-center xs:text-start"
             />
           </div>
 
           {/* Item price */}
-          <div className="flex flex-col gap-3">
-            <label htmlFor={`items[${index}].price`} className="text-center">
+          <div className="flex flex-col gap-2 w-full xs:w-auto">
+            <label htmlFor={`items[${index}].price`} >
               Price
             </label>
             <input
@@ -85,36 +69,24 @@ function InvoiceFormItem({ item, index, register, remove, control, errors }) {
               type="text"
               id="price"
               defaultValue={price || '0.00'}
-              className="inputError text-center"
+              className="inputError text-end w-full px-4"
             />
-          </div>
-
-          {/* Item total value */}
-          <div className="flex flex-col gap-3 ">
-            <label htmlFor={`items[${index}].total`} className="text-center">
-              Total
-            </label>
-            <div
-              id={`items[${index}].total`}
-              className="rounded-md  border border-skin-fill bg-skin-fill py-2 text-center text-skin-muted relative after:absolute after:bg-black/40 after:rounded-md after:inset-0 after:w-full after:h-full"
-            >
-              {itemTotal || '0.00'}
-            </div>
           </div>
 
           {/* Delete item button */}
           <button
             type="button"
             onClick={() => remove(index)}
-            className="flex w-full items-end justify-center pb-3"
+            className="flex items-baseline w-full xs:w-auto justify-center pt-6 "
+            // className="flex w-full items-end justify-center pb-3"
           >
-            <FaTrashAlt className="text-xl hover:text-skin-danger " />
+            <FaTrashAlt className="text-2xl hover:text-skin-danger  " />
           </button>
         </div>
       </div>
 
       {/* items errors */}
-      <div className="mt-2 flex flex-col gap-1  py-1">
+      <div className="mt-2 flex flex-col  gap-1  text-center xs:text-start py-2">
         {errors?.items?.[index] &&
           Object.keys(errors?.items?.[index]).map((itemVal) => (
             <span

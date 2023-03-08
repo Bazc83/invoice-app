@@ -19,10 +19,15 @@ export function Invoices() {
 
   const [itemsPerPage, setItemsPerPage] = useState(5);
 
-  const { isLoading, isError, error, data } = usePaginatedInvoices(
-    pageNumber,
-    itemsPerPage
-  );
+  const [payload, setPayload] = useState({
+    page: pageNumber,
+    size: itemsPerPage,
+    quote: false,
+    pending: false,
+    paid: false,
+  });
+
+  const { isLoading, isError, error, data } = usePaginatedInvoices(payload);
 
   const pages = new Array(data?.pages).fill(null).map((v, i) => i);
 
@@ -30,12 +35,26 @@ export function Invoices() {
 
   const goToPreviousPage = () => {
     setPageNumber(Math.max(0, pageNumber - 1));
+    setPayload((prev) => ({ ...prev, page: Math.max(0, pageNumber - 1) }));
   };
 
   const goToNextPage = () => {
     setPageNumber(pageNumber + 1 < data?.pages ? pageNumber + 1 : pageNumber);
+    setPayload((prev) => ({
+      ...prev,
+      page: pageNumber + 1 < data?.pages ? pageNumber + 1 : pageNumber,
+    }));
   };
 
+  const handlePageChange = (e) => {
+    setPageNumber(e.target.value);
+    setPayload((prev) => ({ ...prev, page: e.target.value }));
+  };
+
+  const changeItemsPerPage = (e) => {
+    setItemsPerPage(e.target.value);
+    setPayload((prev) => ({ ...prev, size: e.target.value }));
+  };
   useEffect(() => {
     dispatch({ type: 'filterInvoices', payload: data?.invoices });
   }, [data?.invoices, dispatch, state.filters]);
@@ -44,18 +63,14 @@ export function Invoices() {
     setPageNumber(0);
   }, [itemsPerPage]);
 
-  // useEffect(() => {
-  //   if (state?.filters[0].checked) {
-  //     console.log('quote');
-  //   }
-
-  //   if (state?.filters[1].checked) {
-  //     console.log('pending');
-  //   }
-  //   if (state?.filters[2].checked) {
-  //     console.log('paid');
-  //   }
-  // }, [state?.filters]);
+  useEffect(() => {
+    setPayload((prev) => ({
+      ...prev,
+      quote: state?.filters[0].checked,
+      pending: state?.filters[1].checked,
+      paid: state?.filters[2].checked,
+    }));
+  }, [state?.filters]);
 
   if (isLoading) return <LoadingAnimation />;
   if (isError) return `An error has occurred: ${error.message}`;
@@ -83,7 +98,7 @@ export function Invoices() {
                       id="itemsPerPage"
                       name="itemsPerPage"
                       className="py-1 text-sm"
-                      onChange={(e) => setItemsPerPage(e.target.value)}
+                      onChange={changeItemsPerPage}
                     >
                       <option value="5" defaultValue>
                         5
@@ -100,10 +115,10 @@ export function Invoices() {
               className={` w-full rounded-md border-skin-secondary-darker md:border-2`}
             >
               {/* No invoice component */}
-              {state.filteredInvoices?.length === 0 && <NoInvoices />}
+              {data?.invoices?.length === 0 && <NoInvoices />}
 
               {/* Invoice preview headers md screen and greater */}
-              {state.filteredInvoices?.length > 0 && (
+              {data?.invoices?.length > 0 && (
                 <div className=" relative hidden grid-cols-2  gap-4 rounded-t-md bg-skin-secondary-darker py-2  px-6   text-center text-sm md:grid md:grid-cols-[1fr_2fr_2fr_1fr_100px_50px] md:items-center md:gap-4 md:text-start lg:gap-8">
                   <p className=" text-start">Ref</p>
                   <p className=" text-center">Payment Due</p>
@@ -117,11 +132,11 @@ export function Invoices() {
               )}
 
               {/* Invoice previews  */}
-              {state.filteredInvoices?.length > 0 && (
+              {data?.invoices?.length > 0 && (
                 <div className="flex flex-col gap-4  overflow-auto md:gap-0  ">
                   {/* invoice previews */}
                   {data?.invoices?.length > 0 &&
-                    state.filteredInvoices?.map((invoice) => (
+                    data?.invoices?.map((invoice) => (
                       <InvoicePreview invoice={invoice} key={invoice?.id} />
                     ))}
                 </div>
@@ -149,7 +164,7 @@ export function Invoices() {
                         pageIndex === +pageNumber &&
                         'font-bold text-skin-edit underline underline-offset-4'
                       } relative px-2 py-1 font-semibold  `}
-                      onClick={(e) => setPageNumber(e.target.value)}
+                      onClick={handlePageChange}
                     >
                       {pageIndex + 1}
                     </button>

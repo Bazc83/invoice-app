@@ -86,20 +86,41 @@ const getInvoices = asyncHandler(async (req, res) => {
 // Get paginated invoices
 const getPaginatedInvoices = asyncHandler(async (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
+
   const PAGE_SIZE = parseInt(req.query.size || '5');
   const page_number = parseInt(req.query.page || '0');
 
-  const totalInvoices = await Invoice.find({
-    createdByUser: req.user._id,
-  }).count();
+  const quote = req.query.quote !== 'false';
+  const pending = req.query.pending !== 'false';
+  const paid = req.query.paid !== 'false';
 
-  const invoices = await Invoice.find({ createdByUser: req.user._id })
+  const filterArray = [];
+
+  if (!quote && !pending && !paid) {
+    filterArray.push('quote', 'pending', 'paid');
+  }
+
+  if (quote) {
+    filterArray.push('quote');
+  }
+  if (pending) {
+    filterArray.push('pending');
+  }
+  if (paid) {
+    filterArray.push('paid');
+  }
+
+  const queryPayload = {
+    createdByUser: req.user._id,
+    status: { $in: filterArray },
+  };
+
+  console.log(queryPayload);
+  const totalInvoices = await Invoice.find(queryPayload).count();
+
+  const invoices = await Invoice.find(queryPayload)
     .skip(PAGE_SIZE * page_number)
     .limit(PAGE_SIZE);
-  // const invoices = await Invoice.where('createdByUser')
-  //   .equals(req.user._id)
-  //   .skip(PAGE_SIZE * page_number)
-  //   .limit(PAGE_SIZE);
 
   const totalPages = Math.ceil(totalInvoices / PAGE_SIZE);
 
