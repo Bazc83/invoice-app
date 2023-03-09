@@ -2,10 +2,10 @@ import FilterItemCheckbox from './FilterItemCheckbox';
 
 function Filters({ payload, handleChecked }) {
   return (
-    <div className="flex  flex-col  justify-center gap-2 text-sm  sm:w-auto sm:gap-2   md:flex-row md:items-center md:gap-4">
+    <div className="flex    justify-center gap-2 text-sm  sm:w-auto sm:gap-2    md:items-center md:gap-4  py-4">
       <h1>Filters:</h1>
 
-      <form className="flex   flex-wrap gap-2  md:flex-row md:gap-3">
+      <form className="flex flex-wrap gap-2  md:flex-row md:gap-3">
         {/* Filter modal options */}
 
         <FilterItemCheckbox

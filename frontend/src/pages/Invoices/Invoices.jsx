@@ -82,43 +82,46 @@ export function Invoices() {
             <div className="flex flex-col items-center justify-between gap-4  md:gap-4">
               <h2 className="text-2xl">All Invoices</h2>
 
-              <div className="flex w-full flex-col items-center gap-6 px-5 md:flex-row md:items-center md:justify-between md:gap-4">
+              <div className="flex w-full flex-col items-center gap-6 px-5 md:flex-row md:items-center md:gap-2 flex-wrap md:justify-between">
+
                 <Filters payload={payload} handleChecked={handleChecked} />
 
-                <form className=" self-end ">
-                  <div className="flex items-center gap-2 text-sm ">
-                    <label htmlFor="itemsPerPage">Results per page</label>
-                    <select
-                      id="itemsPerPage"
-                      name="itemsPerPage"
-                      className="py-1 text-sm"
-                      onChange={changeItemsPerPage}
-                    >
-                      <option value="5" defaultValue>
-                        5
-                      </option>
-                      <option value="10">10</option>
-                      <option value="25">25</option>
-                    </select>
-                  </div>
-                </form>
+                <div className='flex gap-4 items-center  w-full md:w-auto  justify-end flex-wrap'>
+                  <form className=" self-end ">
+                    <div className="flex items-center gap-2 text-sm ">
+                      <label htmlFor="itemsPerPage">Results per page</label>
+                      <select
+                        id="itemsPerPage"
+                        name="itemsPerPage"
+                        className="py-1 text-sm"
+                        onChange={changeItemsPerPage}
+                      >
+                        <option value="5" defaultValue>
+                          5
+                        </option>
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                      </select>
+                    </div>
+                  </form>
 
-                <form className=" self-end ">
-                  <div className="flex items-center gap-2 text-sm ">
-                    <label htmlFor="sortBy">Sort by</label>
-                    <select
-                      id="sortBy"
-                      name="sortBy"
-                      className="py-1 text-sm"
-                      onChange={changeSortBy}
-                    >
-                      <option value="dateDesc" defaultValue>
-                        Date desc
-                      </option>
-                      <option value="dateAsc">Date Asc</option>
-                    </select>
-                  </div>
-                </form>
+                  <form className=" self-end ">
+                    <div className="flex items-center gap-2 text-sm ">
+                      <label htmlFor="sortBy">Sort by</label>
+                      <select
+                        id="sortBy"
+                        name="sortBy"
+                        className="py-1 text-sm"
+                        onChange={changeSortBy}
+                      >
+                        <option value="dateDesc" defaultValue>
+                          Date desc
+                        </option>
+                        <option value="dateAsc">Date Asc</option>
+                      </select>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
 
