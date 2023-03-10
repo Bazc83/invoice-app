@@ -1,9 +1,6 @@
-
 import Filters from './Filters';
 
 function InvoicesControlPanel({ state }) {
-
-
   return (
     <div
       className={`  flex h-max  flex-col  items-center justify-between gap-6 rounded-md  bg-skin-secondary  px-6 py-6 text-sm text-skin-base transition-transform duration-700 md:static md:w-auto md:translate-x-0

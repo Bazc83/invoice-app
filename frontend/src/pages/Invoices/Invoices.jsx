@@ -1,5 +1,11 @@
 import { useEffect, useState } from 'react';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import {
+  FaChevronDown,
+  FaChevronLeft,
+  FaChevronRight,
+  FaChevronUp,
+  FaFilter,
+} from 'react-icons/fa';
 
 import ConfirmDeleteModal from '@/components/ConfirmDeleteModal';
 import Container from '@/components/Container';
@@ -8,17 +14,20 @@ import LoadingAnimation from '@/components/LoadingAnimation';
 import { NoInvoices } from '@/components/NoInvoices';
 import useModalStore from '@/context/useModalStore';
 import usePaginatedInvoices from '@/hooks/usePaginatedInvoices';
+import useWindowResize from '@/hooks/useWindowResize';
 import { InvoicePreview } from '@/pages/Invoices/InvoicePreview';
 
 export function Invoices() {
-  const [payload, setPayload] = useState({
+  const initialPayloadState = {
     pageNumber: 0,
     itemsPerPage: 5,
     quote: false,
     pending: false,
     paid: false,
     sortBy: 'dateDescending',
-  });
+  };
+
+  const [payload, setPayload] = useState(initialPayloadState);
 
   const { isLoading, isError, error, data } = usePaginatedInvoices(payload);
 
@@ -26,6 +35,22 @@ export function Invoices() {
 
   const deleteModal = useModalStore((s) => s.deleteModal);
 
+  const [showFilters, setShowFilters] = useState(false);
+
+  const [showFilterByStatus, setShowFilterByStatus] = useState(false);
+
+  const { windowResizing } = useWindowResize();
+
+  const clearFilters = () => {
+    setPayload((prev) => ({
+      ...prev,
+      paid: false,
+      pending: false,
+      quote: false,
+    }));
+
+    setShowFilters(false);
+  };
   const goToPreviousPage = () => {
     setPayload((prev) => ({
       ...prev,
@@ -59,6 +84,13 @@ export function Invoices() {
     setPayload((prev) => ({ ...prev, pageNumber: 0 }));
   }, [payload.itemsPerPage, payload.quote, payload.paid, payload.pending]);
 
+  useEffect(() => {
+    if (showFilters) {
+      setShowFilters(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [windowResizing]);
+
   const handleChecked = (filterVal) => {
     setPayload((prev) => ({
       ...prev,
@@ -79,14 +111,21 @@ export function Invoices() {
           {deleteModal && <ConfirmDeleteModal />}
 
           <div className="flex min-w-full flex-col gap-4 ">
-            <div className="flex flex-col items-center justify-between gap-4  md:gap-4">
+            <div className="flex flex-col items-center justify-between gap-4  md:gap-4 ">
               <h2 className="text-2xl">All Invoices</h2>
 
-              <div className="flex w-full flex-col items-center gap-6 px-5 md:flex-row md:items-center md:gap-2 flex-wrap md:justify-between">
+              <div className="flex w-full flex-col flex-wrap items-center gap-6 px-5 md:flex-row md:items-center md:justify-between md:gap-2">
+                <button
+                  type="button"
+                  onClick={() => setShowFilters((prev) => !prev)}
+                  className="btn flex items-center justify-center gap-1 border-2 border-skin-fill py-1 px-4 text-sm text-skin-muted hover:bg-skin-secondary hover:text-skin-base"
+                >
+                  <FaFilter />
+                  Filters
+                </button>
 
-                <Filters payload={payload} handleChecked={handleChecked} />
-
-                <div className='flex gap-4 items-center  w-full md:w-auto  justify-end flex-wrap'>
+                {/* Results per page and sort by date */}
+                <div className="flex w-full flex-wrap  items-center justify-end  gap-4 md:w-auto">
                   <form className=" self-end ">
                     <div className="flex items-center gap-2 text-sm ">
                       <label htmlFor="itemsPerPage">Results per page</label>
@@ -142,6 +181,56 @@ export function Invoices() {
                   <p className=" text-end ">Total</p>
 
                   <p className=" text-start">Status</p>
+                </div>
+              )}
+
+              {/* fitlers */}
+              {showFilters && (
+                <div className="fixed top-0 left-0 z-50 flex h-full w-full flex-col  justify-between gap-4 border-r-2 border-r-black border-opacity-5 bg-skin-primary px-4 py-8 shadow-md md:w-64">
+                  <div className="flex flex-col gap-4">
+                    <h2 className="border-b-2 border-b-black border-opacity-30 pb-4 text-3xl font-semibold">
+                      Filters
+                    </h2>
+
+                    <div className=" flex flex-col gap-4 border-b-2 border-b-black border-opacity-30 pb-4">
+                      <button
+                        onClick={() => setShowFilterByStatus((prev) => !prev)}
+                        type="button"
+                        className="flex w-full items-center justify-between font-semibold"
+                      >
+                        Filter by status{' '}
+                        {showFilterByStatus ? (
+                          <FaChevronUp />
+                        ) : (
+                          <FaChevronDown />
+                        )}
+                      </button>
+
+                      {showFilterByStatus && (
+                        <Filters
+                          payload={payload}
+                          handleChecked={handleChecked}
+                        />
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col gap-4">
+                    <button
+                      type="button"
+                      className="btn bg-skin-brand py-2 px-4 text-white "
+                      onClick={() => setShowFilters((prev) => !prev)}
+                    >
+                      Filter
+                    </button>
+                    <button
+                      type="button"
+                      className="btn bg-skin-brand-lighter py-2 px-4"
+                      onClick={clearFilters}
+                    >
+                      Clear Filters
+                    </button>
+                  </div>
                 </div>
               )}
 

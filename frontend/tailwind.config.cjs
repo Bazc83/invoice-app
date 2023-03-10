@@ -10,6 +10,7 @@ module.exports = {
           base: {
             DEFAULT: 'var(--color-text-base)',
           },
+          fill: 'var(--color-fill)',
           muted: 'var(--color-text-muted)',
           inverted: 'var(--color-text-inverted)',
           primary: {
@@ -84,6 +85,7 @@ module.exports = {
             DEFAULT: 'var(--color-secondary)',
             darker: 'var(--color-secondary-darker)',
           },
+          muted: 'var(--color-text-muted)',
           brand: {
             DEFAULT: 'var(--color-brand)',
             darker: 'var(--color-brand-darker)',
