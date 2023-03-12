@@ -110,11 +110,11 @@ export function Invoices() {
           {/* Show delete confirmation modal */}
           {deleteModal && <ConfirmDeleteModal />}
 
-          <div className="flex min-w-full flex-col gap-4 ">
+          <div className="flex min-w-full flex-col gap-6">
             <div className="flex flex-col items-center justify-between gap-4  md:gap-4 ">
-              <h2 className="text-2xl">All Invoices</h2>
+              <h2 className="pb-2 text-2xl">All Invoices</h2>
 
-              <div className="flex w-full flex-col flex-wrap items-center gap-6 px-5 md:flex-row md:items-center md:justify-between md:gap-2">
+              <div className="flex w-full  flex-col gap-6  pb-4 md:flex-row md:items-center md:justify-between md:gap-2 md:pb-0">
                 <button
                   type="button"
                   onClick={() => setShowFilters((prev) => !prev)}
@@ -125,14 +125,14 @@ export function Invoices() {
                 </button>
 
                 {/* Results per page and sort by date */}
-                <div className="flex w-full flex-wrap  items-center justify-end  gap-4 md:w-auto">
-                  <form className=" self-end ">
-                    <div className="flex items-center gap-2 text-sm ">
+                <div className="flex  flex-wrap items-center  gap-4 sm:justify-between  md:w-auto md:flex-row  md:justify-end xs:justify-center ">
+                  <form className=" w-full self-end md:w-auto">
+                    <div className="flex flex-wrap gap-2">
                       <label htmlFor="itemsPerPage">Results per page</label>
                       <select
                         id="itemsPerPage"
                         name="itemsPerPage"
-                        className="py-1 text-sm"
+                        className="w-full py-1 text-sm md:w-auto "
                         onChange={changeItemsPerPage}
                       >
                         <option value="5" defaultValue>
@@ -144,13 +144,13 @@ export function Invoices() {
                     </div>
                   </form>
 
-                  <form className=" self-end ">
-                    <div className="flex items-center gap-2 text-sm ">
+                  <form className=" w-full self-end md:w-auto">
+                    <div className="flex flex-wrap gap-2">
                       <label htmlFor="sortBy">Sort by</label>
                       <select
                         id="sortBy"
                         name="sortBy"
-                        className="py-1 text-sm"
+                        className="w-full py-1 text-sm md:w-auto"
                         onChange={changeSortBy}
                       >
                         <option value="dateDesc" defaultValue>
