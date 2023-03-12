@@ -106,11 +106,11 @@ export function Invoices() {
       <div
         className={`mx-auto h-full  max-w-5xl rounded-md  px-4 pb-10 md:px-6 `}
       >
-        <div className=" relative flex h-full flex-col items-center justify-center gap-6  px-4 md:gap-8 md:px-0 lg:flex-row ">
+        <div className=" flex h-full flex-col items-center justify-center gap-6  px-4 md:gap-8 md:px-0 lg:flex-row ">
           {/* Show delete confirmation modal */}
           {deleteModal && <ConfirmDeleteModal />}
 
-          <div className="flex min-w-full flex-col gap-6">
+          <div className=" relative flex min-w-full flex-col gap-6">
             <div className="flex flex-col items-center justify-between gap-4  md:gap-4 ">
               <h2 className="pb-2 text-2xl">All Invoices</h2>
 
@@ -164,15 +164,13 @@ export function Invoices() {
               </div>
             </div>
 
-            <div
-              className={` w-full rounded-md border-skin-secondary-darker md:border-2`}
-            >
+            <div className=" w-full rounded-md border-skin-secondary-darker md:border-2">
               {/* No invoice component */}
               {data?.invoices?.length === 0 && <NoInvoices />}
 
               {/* Invoice preview headers md screen and greater */}
               {data?.invoices?.length > 0 && (
-                <div className=" relative hidden grid-cols-2  gap-4 rounded-t-md bg-skin-secondary-darker py-2  px-6   text-center text-sm md:grid md:grid-cols-[1fr_2fr_2fr_1fr_100px_50px] md:items-center md:gap-4 md:text-start lg:gap-8">
+                <div className="  hidden grid-cols-2  gap-4 rounded-t-md bg-skin-secondary-darker py-2  px-6   text-center text-sm md:grid md:grid-cols-[1fr_2fr_2fr_1fr_100px_50px] md:items-center md:gap-4 md:text-start lg:gap-8">
                   <p className=" text-start">Ref</p>
                   <p className=" text-center">Payment Due</p>
 
@@ -185,54 +183,52 @@ export function Invoices() {
               )}
 
               {/* fitlers */}
-              {showFilters && (
-                <div className="fixed top-0 left-0 z-50 flex h-full w-full flex-col  justify-between gap-4 border-r-2 border-r-black border-opacity-5 bg-skin-primary px-4 py-8 shadow-md md:w-64">
-                  <div className="flex flex-col gap-4">
-                    <h2 className="border-b-2 border-b-black border-opacity-30 pb-4 text-3xl font-semibold">
-                      Filters
-                    </h2>
+              <div
+                className={`${
+                  showFilters && 'translate-x-full md:translate-x-80'
+                } fixed top-0 -left-full z-50 flex h-full w-full min-w-max flex-col justify-between gap-4  border-r-2 border-r-black border-opacity-5 bg-skin-primary px-8 py-8 shadow-md transition-transform duration-300 ease-in-out md:top-[72px] md:-left-80 md:h-[calc(100%_-_72px)] md:w-80`}
+              >
+                <div className="flex flex-col gap-4 ">
+                  <h2 className="border-b-2 border-b-black border-opacity-30 pb-4 text-3xl font-semibold">
+                    Filters
+                  </h2>
 
-                    <div className=" flex flex-col gap-4 border-b-2 border-b-black border-opacity-30 pb-4">
-                      <button
-                        onClick={() => setShowFilterByStatus((prev) => !prev)}
-                        type="button"
-                        className="flex w-full items-center justify-between font-semibold"
-                      >
-                        Filter by status{' '}
-                        {showFilterByStatus ? (
-                          <FaChevronUp />
-                        ) : (
-                          <FaChevronDown />
-                        )}
-                      </button>
-
-                      {showFilterByStatus && (
-                        <Filters
-                          payload={payload}
-                          handleChecked={handleChecked}
-                        />
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col gap-4">
+                  <div className=" flex flex-col gap-4 border-b-2 border-b-black border-opacity-30 pb-4">
                     <button
+                      onClick={() => setShowFilterByStatus((prev) => !prev)}
                       type="button"
-                      className="btn bg-skin-brand py-2 px-4 text-white "
-                      onClick={() => setShowFilters((prev) => !prev)}
+                      className="flex w-full items-center justify-between font-semibold"
                     >
-                      Filter
+                      Filter by status{' '}
+                      {showFilterByStatus ? <FaChevronUp /> : <FaChevronDown />}
                     </button>
-                    <button
-                      type="button"
-                      className="btn bg-skin-brand-lighter py-2 px-4"
-                      onClick={clearFilters}
-                    >
-                      Clear Filters
-                    </button>
+
+                    {showFilterByStatus && (
+                      <Filters
+                        payload={payload}
+                        handleChecked={handleChecked}
+                      />
+                    )}
                   </div>
                 </div>
-              )}
+
+                <div className="flex flex-col gap-4 pb-4">
+                  <button
+                    type="button"
+                    className="btn bg-skin-brand py-2 px-4 text-white "
+                    onClick={() => setShowFilters((prev) => !prev)}
+                  >
+                    Filter
+                  </button>
+                  <button
+                    type="button"
+                    className="btn bg-skin-brand-lighter py-2 px-4"
+                    onClick={clearFilters}
+                  >
+                    Clear Filters
+                  </button>
+                </div>
+              </div>
 
               {/* Invoice previews  */}
               {data?.invoices?.length > 0 && (
