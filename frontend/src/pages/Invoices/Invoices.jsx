@@ -104,7 +104,9 @@ export function Invoices() {
   return (
     <Container>
       <div
-        className={`mx-auto h-full  max-w-5xl rounded-md  px-4 pb-10 md:px-6 `}
+        className={`mx-auto h-full  max-w-5xl rounded-md  px-4 pb-10 after:bg-black/20 md:px-6 ${
+          showFilters ? 'after:fixed' : 'after:hidden'
+        } after:left-0 after:top-[72px] after:z-40 after:h-full after:w-full after:cursor-not-allowed`}
       >
         <div className=" flex h-full flex-col items-center justify-center gap-6  px-4 md:gap-8 md:px-0 lg:flex-row ">
           {/* Show delete confirmation modal */}
@@ -222,7 +224,7 @@ export function Invoices() {
                   </button>
                   <button
                     type="button"
-                    className="btn bg-skin-brand-lighter py-2 px-4"
+                    className="btn bg-skin-brand-lighter py-2 px-4 text-skin-brand-darker"
                     onClick={clearFilters}
                   >
                     Clear Filters
