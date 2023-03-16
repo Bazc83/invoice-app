@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -31,15 +31,17 @@
 
 @layer base {
   :root {
-    --color-text-base: #0d0d0d;
-    --color-text-muted: #808080;
+    --color-text-base: #213a37;
+    --color-text-muted: #213a37;
     --color-text-inverted: #f3f3f3;
     --color-main-bg: hsl(0, 0%, 98%);
     --color-primary: hsl(0, 0%, 98%);
     --color-secondary: hsl(240, 0%, 95%);
     --color-secondary-darker: hsl(0, 0%, 90%);
-    --color-brand: hsl(216, 38%, 37%);
-    --color-brand-darker: hsl(216, 38%, 26%);
+    --color-brand: #8fd9d0;
+    --color-brand-darker: #4a6c68;
+    --color-brand-text: #213a37;
+
     --color-brand-lighter: hsl(216, 30%, 85%);
     --color-fill: #dadbdb;
     --color-edit: #0000ff;
@@ -59,7 +61,9 @@
     --color-paid: #bbe9c8;
     --color-paid-darker: #135c24;
 
-    font-family: 'Open Sans', sans-serif;
+    --color-line: hsla(173, 19%, 36%, 0.201);
+    
+    font-family:  'Poppins', sans-serif;
     font-weight: 500;
   }
 

@@ -31,6 +31,7 @@ module.exports = {
             DEFAULT: 'var(--color-brand)',
             darker: 'var(--color-brand-darker)',
             lighter: 'var(--color-brand-lighter)',
+            text: 'var(--color-brand-text)',
           },
           pending: {DEFAULT: "var(--color-pending)", darker: "var(--color-pending-darker)"},
           quote: {DEFAULT: "var(--color-quote)", darker: "var(--color-quote-darker)"},
@@ -99,6 +100,7 @@ module.exports = {
           pending: {DEFAULT: "var(--color-pending)", darker: "var(--color-pending-darker)"},
           quote: {DEFAULT: "var(--color-quote)", darker: "var(--color-quote-darker)"},
           paid: {DEFAULT: "var(--color-paid)", darker: "var(--color-paid-darker)"},
+          line: 'var(--color-line)',
         },
 
       },
