@@ -52,13 +52,23 @@ export function Navbar() {
       <nav className=" relative mx-auto flex  max-w-5xl   grid-cols-[150px_1fr] items-center justify-between py-4 px-4 md:grid  md:px-6 ">
         <Link to="/" aria-label="Home">
           <div>
-            <img
+            {/* <img
               src="/images/paperlessPay.svg"
               alt="logo"
               className="dark:hidden"
             />
             <img
               src="/images/PaperlessPay-white.svg"
+              alt="logo"
+              className="hidden dark:block"
+            /> */}
+            <img
+              src="'../../public/images/PaperlessPay.svg"
+              alt="logo"
+              className="dark:hidden"
+            />
+            <img
+              src="'../../public/images/PaperlessPay-white.svg"
               alt="logo"
               className="hidden dark:block"
             />
@@ -140,7 +150,7 @@ export function Navbar() {
             {!user && (
               <button
                 type="button"
-                className="   hover flex  min-w-max items-center justify-center gap-2  rounded-full py-2  text-sm hover:text-skin-muted text-skin-brand-text"
+                className="   hover flex  min-w-max items-center justify-center gap-2  rounded-full py-2  text-sm text-skin-brand-text hover:text-skin-muted"
                 onClick={() => navigate('/login')}
               >
                 Login
@@ -152,7 +162,7 @@ export function Navbar() {
             {!user && (
               <button
                 type="button"
-                className="    hover flex  min-w-max items-center justify-center gap-2  rounded-full py-2  text-sm hover:text-skin-muted text-skin-brand-text"
+                className="    hover flex  min-w-max items-center justify-center gap-2  rounded-full py-2  text-sm text-skin-brand-text hover:text-skin-muted"
                 onClick={() => navigate('/login')}
               >
                 Sign up
