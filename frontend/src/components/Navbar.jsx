@@ -53,12 +53,12 @@ export function Navbar() {
         <Link to="/" aria-label="Home">
           <div>
             <img
-              src="../../public/images/PaperlessPay.svg"
+              src="/images/paperlessPay.svg"
               alt="logo"
               className="dark:hidden"
             />
             <img
-              src="../../public/images/PaperlessPay-white.svg"
+              src="/images/PaperlessPay-white.svg"
               alt="logo"
               className="hidden dark:block"
             />
