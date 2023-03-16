@@ -15,6 +15,8 @@ import useModalStore from '@/context/useModalStore';
 import { useLogout } from '@/hooks/useLogout';
 import useWindowResize from '@/hooks/useWindowResize';
 
+import Logo from '../../public/images/PaperlessPay.svg';
+import LighterLogo from '../../public/images/PaperlessPay-white.svg';
 import MobileNav from './MobileNav';
 import NavLinkItem from './NavLinkItem';
 
@@ -62,16 +64,8 @@ export function Navbar() {
               alt="logo"
               className="hidden dark:block"
             /> */}
-            <img
-              src="'../../public/images/PaperlessPay.svg"
-              alt="logo"
-              className="dark:hidden"
-            />
-            <img
-              src="'../../public/images/PaperlessPay-white.svg"
-              alt="logo"
-              className="hidden dark:block"
-            />
+            <img src={Logo} alt="logo" className="dark:hidden" />
+            <img src={LighterLogo} alt="logo" className="hidden dark:block" />
           </div>
         </Link>
 
