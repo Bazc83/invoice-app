@@ -30,29 +30,28 @@ export function InvoicePreview({ invoice }) {
 
   const { paymentStatusColor } = usePaymentStatusColor(status);
 
+
   return (
-    <div className=" relative grid grid-cols-2 gap-4 rounded-md   bg-skin-primary px-6 py-4 last:rounded-b-md odd:bg-skin-secondary md:grid-cols-[1fr_2fr_2fr_1fr_100px_50px] md:items-center  md:gap-4 md:rounded-none md:border-none md:text-start md:odd:bg-skin-primary md:even:bg-skin-secondary lg:gap-8">
+    <div className=" relative grid grid-cols-2 gap-4 rounded-md    border-2 border-black/20 px-4 py-4 last:rounded-b-md  focus:border-transparent md:grid-cols-[1fr_2fr_2fr_1fr_100px_50px] md:items-center md:gap-4 md:rounded-none md:border-none md:text-start md:odd:bg-skin-primary md:even:bg-skin-secondary lg:gap-8 ">
       <button
         type="button"
-        className="absolute z-10 h-full w-full "
+        className="absolute z-50 h-full w-2/3  py-2 px-5 
+        after:absolute after:inset-0 after:z-0 after:flex after:h-full after:w-full after:items-center after:justify-center after:bg-skin-brand after:text-skin-brand-text after:opacity-0 after:transition-opacity after:duration-300  after:ease-in-out after:content-['View'] hover:after:opacity-100 focus:outline-none focus:ring-2 focus:after:opacity-100 active:ring-2 active:after:bg-opacity-100 after:font-semibold after:text-lg" 
         onClick={() => showFullInvoice(invoice.id)}
         aria-label="Show invoice"
       />
 
       {/* Id */}
-      <p className="col-start-1 row-start-1 md:text-start">
-        <span className="text-skin-muted">#</span>
-        {id}
-      </p>
+      <p className="col-start-1 row-start-1 md:text-start">#{id}</p>
 
       {status === 'quote' && (
-        <p className="col-start-2 row-start-1 text-end md:col-start-auto md:row-start-auto md:text-center ">
+        <p className="col-start-1 row-start-3 text-start md:col-start-auto md:row-start-auto md:text-center ">
           N/A
         </p>
       )}
 
       {status !== 'quote' && status === 'paid' && (
-        <p className="col-start-2 row-start-1 text-end md:col-start-auto md:row-start-auto md:text-center ">
+        <p className="col-start-1 row-start-3 text-start md:col-start-auto md:row-start-auto md:text-center ">
           Paid
         </p>
       )}
@@ -60,28 +59,28 @@ export function InvoicePreview({ invoice }) {
       {status !== 'quote' &&
         status !== 'paid' &&
         distanceFromToday !== 'Today' && (
-          <p className="col-start-2 row-start-1 text-end md:col-start-auto md:text-center ">
+          <p className={`col-start-1 row-start-3 text-start md:col-start-auto md:row-start-auto md:text-center ${isOverdue && "text-skin-overdue"}`}>
             <span className="md:hidden">
               {isOverdue ? 'Overdue by ' : 'Due in '}
             </span>
-            <span>{distanceFromToday}</span>
+            <span>{distanceFromToday.split("")[0] === "-"? distanceFromToday.split("-")[1] : distanceFromToday}</span>
           </p>
         )}
 
       {status !== 'quote' &&
         status !== 'paid' &&
         distanceFromToday === 'Today' && (
-          <p className="col-start-2 row-start-1 text-end md:col-start-auto md:text-center ">
+          <p className="col-start-1 row-start-3 text-start md:col-start-auto md:row-start-auto md:text-center ">
             <span className="md:hidden">Due </span>
             <span>{distanceFromToday}</span>
           </p>
         )}
 
-      <p className="col-start-1 row-start-2 truncate capitalize md:col-start-auto md:row-start-auto md:text-start ">
+      <p className="col-start-1 row-start-2 truncate text-xl font-semibold capitalize text-skin-brand-text md:col-start-auto md:row-start-auto md:text-start md:text-base">
         {clientName}
       </p>
 
-      <p className="col-start-1 row-start-3 md:col-start-auto md:row-start-auto md:text-end ">
+      <p className="col-start-2 row-start-2 text-end text-xl font-semibold text-skin-brand-text md:col-start-auto md:row-start-auto md:text-end md:text-base md:font-normal">
         {new Intl.NumberFormat('en', {
           style: 'currency',
           currency: 'GBP',
@@ -89,7 +88,7 @@ export function InvoicePreview({ invoice }) {
       </p>
 
       <p
-        className={` ${paymentStatusColor} col-start-2 row-start-2 w-max justify-self-end rounded-xl px-4 py-1 text-center text-sm font-semibold  capitalize md:col-start-auto md:row-start-auto md:w-auto md:justify-self-auto`}
+        className={` ${paymentStatusColor} col-start-2 row-start-1 w-max justify-self-end rounded-xl px-4 py-1 text-center text-sm font-semibold  capitalize md:col-start-auto md:row-start-auto md:w-auto md:justify-self-auto`}
       >
         {status}
       </p>

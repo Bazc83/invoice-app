@@ -36,6 +36,7 @@ module.exports = {
           pending: {DEFAULT: "var(--color-pending)", darker: "var(--color-pending-darker)"},
           quote: {DEFAULT: "var(--color-quote)", darker: "var(--color-quote-darker)"},
           paid: {DEFAULT: "var(--color-paid)", darker: "var(--color-paid-darker)"},
+          overdue: {DEFAULT: "var(--color-overdue)", bg: "var(--color-overdue-bg)"},
         },
       },
       backgroundColor: {
@@ -69,8 +70,8 @@ module.exports = {
             darker: 'var(--color-button-darker)',
             lighter: 'var(--color-button-lighter)',
           },
-          pending: {DEFAULT: "var(--color-pending)", darker: "var(--color-pending-darker)"},
-          quote: {DEFAULT: "var(--color-quote)", darker: "var(--color-quote-darker)"},
+          pending: {DEFAULT: "var(--color-pending)", darker: "var(--color-pending-darker)", bg: "var(--color-pending-bg)"},
+          quote: {DEFAULT: "var(--color-quote)", darker: "var(--color-quote-darker)", bg: "var(--color-quote-bg)"},
           paid: {DEFAULT: "var(--color-paid)", darker: "var(--color-paid-darker)"},
         },
       },

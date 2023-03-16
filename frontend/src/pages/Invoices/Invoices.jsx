@@ -114,7 +114,7 @@ export function Invoices() {
 
           <div className=" relative flex min-w-full flex-col gap-6">
             <div className="flex flex-col items-center justify-between gap-4  md:gap-4 ">
-              <h2 className="pb-2 text-2xl">All Invoices</h2>
+              <h2 className="pb-2 text-2xl">Invoices</h2>
 
               <div className="flex w-full  flex-col gap-6  pb-4 md:flex-row md:items-center md:justify-between md:gap-2 md:pb-0">
                 <button
