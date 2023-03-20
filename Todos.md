@@ -1,3 +1,5 @@
+remove status from invoice preview and give a color border or something to show status paid quote pending etc
+
 ## create pagenation component
 
 ### has state for page number
