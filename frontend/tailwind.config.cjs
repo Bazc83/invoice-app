@@ -33,10 +33,22 @@ module.exports = {
             lighter: 'var(--color-brand-lighter)',
             text: 'var(--color-brand-text)',
           },
-          pending: {DEFAULT: "var(--color-pending)", darker: "var(--color-pending-darker)"},
-          quote: {DEFAULT: "var(--color-quote)", darker: "var(--color-quote-darker)"},
-          paid: {DEFAULT: "var(--color-paid)", darker: "var(--color-paid-darker)"},
-          overdue: {DEFAULT: "var(--color-overdue)", bg: "var(--color-overdue-bg)"},
+          pending: {
+            DEFAULT: 'var(--color-pending)',
+            darker: 'var(--color-pending-darker)',
+          },
+          quote: {
+            DEFAULT: 'var(--color-quote)',
+            darker: 'var(--color-quote-darker)',
+          },
+          paid: {
+            DEFAULT: 'var(--color-paid)',
+            darker: 'var(--color-paid-darker)',
+          },
+          overdue: {
+            DEFAULT: 'var(--color-overdue)',
+            bg: 'var(--color-overdue-bg)',
+          },
         },
       },
       backgroundColor: {
@@ -70,9 +82,20 @@ module.exports = {
             darker: 'var(--color-button-darker)',
             lighter: 'var(--color-button-lighter)',
           },
-          pending: {DEFAULT: "var(--color-pending)", darker: "var(--color-pending-darker)", bg: "var(--color-pending-bg)"},
-          quote: {DEFAULT: "var(--color-quote)", darker: "var(--color-quote-darker)", bg: "var(--color-quote-bg)"},
-          paid: {DEFAULT: "var(--color-paid)", darker: "var(--color-paid-darker)"},
+          pending: {
+            DEFAULT: 'var(--color-pending)',
+            darker: 'var(--color-pending-darker)',
+            bg: 'var(--color-pending-bg)',
+          },
+          quote: {
+            DEFAULT: 'var(--color-quote)',
+            darker: 'var(--color-quote-darker)',
+            bg: 'var(--color-quote-bg)',
+          },
+          paid: {
+            DEFAULT: 'var(--color-paid)',
+            darker: 'var(--color-paid-darker)',
+          },
         },
       },
       borderColor: {
@@ -98,12 +121,24 @@ module.exports = {
           danger: 'var(--color-danger)',
           success: 'var(--color-success)',
           'btn-default': 'var(--color-button-default)',
-          pending: {DEFAULT: "var(--color-pending)", darker: "var(--color-pending-darker)"},
-          quote: {DEFAULT: "var(--color-quote)", darker: "var(--color-quote-darker)"},
-          paid: {DEFAULT: "var(--color-paid)", darker: "var(--color-paid-darker)"},
+          pending: {
+            DEFAULT: 'var(--color-pending)',
+            darker: 'var(--color-pending-darker)',
+          },
+          quote: {
+            DEFAULT: 'var(--color-quote)',
+            darker: 'var(--color-quote-darker)',
+          },
+          paid: {
+            DEFAULT: 'var(--color-paid)',
+            darker: 'var(--color-paid-darker)',
+          },
+          overdue: {
+            DEFAULT: 'var(--color-overdue)',
+            bg: 'var(--color-overdue-bg)',
+          },
           line: 'var(--color-line)',
         },
-
       },
       ringColor: {
         skin: {

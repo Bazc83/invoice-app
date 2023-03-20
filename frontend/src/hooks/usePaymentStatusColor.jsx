@@ -9,7 +9,7 @@ const usePaymentStatusColor = (status) => {
       case 'paid':
         return {
           ...state,
-          paymentStatusColor: 'text-skin-brand-text bg-skin-brand-lighter',
+          paymentStatusColor: 'text-skin-brand-text bg-skin-brand-lighter ',
         };
       case 'pending':
         return {

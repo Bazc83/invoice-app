@@ -23,7 +23,7 @@ function Overview() {
   return (
     <div className=" w-full  bg-skin-brand md:py-4">
       <div className="flex items-center justify-between border-b-2 border-b-skin-line px-6 py-2 md:hidden">
-        <p className="text-skin-brand-text font-semibold">Overview</p>
+        <p className="text-skin-inverted font-semibold">Overview</p>
 
         <button
           type="button"
@@ -31,14 +31,14 @@ function Overview() {
           className="relative  grid grid-cols-1 grid-rows-1"
         >
           <FaChevronUp
-            className={`text-skin-brand-text col-span-full row-span-full transition-opacity duration-200 ease-in-out ${
+            className={`text-skin-inverted col-span-full row-span-full transition-opacity duration-200 ease-in-out ${
 
               showOverview ? 'opacity-100' : 'opacity-0'
             }`}
           />
 
           <FaChevronDown
-            className={`text-skin-brand-text col-span-full row-span-full transition-opacity duration-200 ease-in-out ${
+            className={`text-skin-inverted col-span-full row-span-full transition-opacity duration-200 ease-in-out ${
               showOverview ? 'opacity-0' : 'opacity-100'
               
             }`}
@@ -56,7 +56,7 @@ function Overview() {
         <div className="flex flex-wrap items-end justify-between gap-2 border-b-2 border-b-skin-line  px-6 py-4   last:border-none  md:flex-col md:items-start md:gap-3 md:border-none md:py-2">
           <div className="flex flex-col gap-2 md:gap-2">
             <h3 className="font-semibold text-skin-brand-darker">Quotes</h3>
-            <p className="text-skin-brand-text  text-2xl font-semibold">
+            <p className="text-skin-inverted  text-2xl font-semibold">
               £{quotesTotal}
             </p>
           </div>
@@ -72,7 +72,7 @@ function Overview() {
         <div className="flex flex-wrap items-end justify-between gap-2 border-b-2 border-b-skin-line  px-6 py-4  last:border-none  md:flex-col md:items-start md:gap-3 md:border-none md:py-2">
           <div className="flex flex-col gap-2 md:gap-2">
             <h3 className="font-semibold text-skin-brand-darker">Pending</h3>
-            <p className="text-skin-brand-text  text-2xl font-semibold">
+            <p className="text-skin-inverted  text-2xl font-semibold">
               £1550.00
             </p>
           </div>
@@ -88,7 +88,7 @@ function Overview() {
         <div className="flex flex-wrap items-end justify-between gap-2 border-b-2 border-b-skin-line  px-6 py-4  last:border-none  md:flex-col md:items-start md:gap-3 md:border-none md:py-2">
           <div className="flex flex-col gap-2 md:gap-2">
             <h3 className="font-semibold text-skin-brand-darker">Overdue</h3>
-            <p className="text-skin-brand-text  text-2xl font-semibold">
+            <p className="text-skin-inverted  text-2xl font-semibold">
               £443.88
             </p>
           </div>
