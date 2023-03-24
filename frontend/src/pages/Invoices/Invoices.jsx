@@ -170,20 +170,6 @@ export function Invoices() {
               {/* No invoice component */}
               {data?.invoices?.length === 0 && <NoInvoices />}
 
-              {/* Invoice preview headers md screen and greater */}
-              {data?.invoices?.length > 0 && (
-                <div className="  hidden grid-cols-2  gap-4 rounded-t-md bg-skin-secondary-darker py-2  px-6   text-center text-sm md:grid md:grid-cols-[1fr_2fr_2fr_1fr_100px_50px] md:items-center md:gap-4 md:text-start lg:gap-8">
-                  <p className=" text-start">Ref</p>
-                  <p className=" text-center">Payment Due</p>
-
-                  <p className=" text-start">Client Name</p>
-
-                  <p className=" text-end ">Total</p>
-
-                  <p className=" text-start">Status</p>
-                </div>
-              )}
-
               {/* fitlers */}
               <div
                 className={`${
@@ -231,6 +217,19 @@ export function Invoices() {
                   </button>
                 </div>
               </div>
+
+              {/* Invoice preview headers md screen and greater */}
+
+              {data?.invoices?.length > 0 && (
+                <div className="  hidden grid-cols-2  gap-4 rounded-t-md border-2 border-black  bg-skin-secondary-darker   py-2 px-6 text-sm md:grid md:grid-cols-[85px_100px_5fr_100px_80px] lg:grid-cols-[100px_200px_5fr_100px_80px] md:gap-4 lg:gap-8">
+                  <p className=" text-start ">Ref</p>
+                  <p className=" text-start ">Payment Due</p>
+
+                  <p className=" text-start ">Client Name</p>
+
+                  <p className=" text-start ">Total</p>
+                </div>
+              )}
 
               {/* Invoice previews  */}
               {data?.invoices?.length > 0 && (

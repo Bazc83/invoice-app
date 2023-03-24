@@ -34,15 +34,15 @@
     --color-text-base: #213a37;
     --color-text-muted: #213a37;
     --color-text-inverted: #213a37;
-    --color-main-bg: hsl(0, 0%, 98%);
+    --color-main-bg: hsl(0, 100%, 100%);
     --color-primary: hsl(0, 0%, 98%);
-    --color-secondary: hsl(240, 0%, 95%);
+    --color-secondary: hsl(0, 0%, 100%);
     --color-secondary-darker: hsl(0, 0%, 90%);
-    --color-brand: #8fd9d0;
-    --color-brand-darker: #4a6c68;
-    --color-brand-text: #213a37;
-    --color-brand-lighter: #ddf3f0;
-    --color-fill: #dadbdb;
+    --color-brand: #14b8a6;
+    --color-brand-darker: #134e4a;
+    --color-brand-text: black;
+    --color-brand-lighter: #5eead4;
+    --color-fill: #e6e6e6;
     --color-edit: #0000ff;
     --color-danger: #ff0000;
     --color-warning: #993300;
@@ -75,7 +75,7 @@
     --color-text-inverted: #213a37;
     --color-main-bg: hsl(206, 61%, 8%);
     --color-primary: hsl(206, 51%, 14%);
-    --color-secondary: hsl(206, 51%, 10%);
+    --color-secondary: hsl(207, 54%, 17%);
     --color-secondary-darker: hsl(206, 51%, 20%);
     --color-fill: #475e70;
     --color-brand-text: #ddf3f0;
@@ -117,7 +117,8 @@
   }
 
   .btn {
-    @apply h-max  cursor-pointer rounded-md py-1 px-3 outline-none transition-colors duration-300 ease-in-out;
+    @apply h-max  cursor-pointer rounded-md py-1 px-3 outline-none transition-colors duration-300 ease-in-out focus:border-transparent focus:outline-none focus:ring-2 focus:ring-skin-base  active:ring-2 active:ring-skin-base 
+    dark:focus:ring-4;
   }
 
   .inputError {
